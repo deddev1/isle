@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import { getLocalizedPath, locales, type LocaleCode } from '../data/i18n';
 import { siteConfig } from '../data/site';
 
 interface Props {
@@ -9,6 +10,7 @@ interface Props {
 	ogImage?: string;
 	noindex?: boolean;
 	type?: 'website' | 'article';
+	locale?: LocaleCode;
 }
 
 const {
@@ -18,6 +20,7 @@ const {
 	ogImage = siteConfig.defaultOgImage,
 	noindex = false,
 	type = 'website',
+	locale = 'en',
 } = Astro.props;
 
 const path = canonicalPath.endsWith('/') || canonicalPath.includes('.') ? canonicalPath : `${canonicalPath}/`;
@@ -25,10 +28,15 @@ const canonicalURL = new URL(path === '//' ? '/' : path, siteConfig.url).href;
 const ogImageURL = new URL(ogImage, siteConfig.url).href;
 const logoURL = new URL(siteConfig.logo, siteConfig.url).href;
 const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
+const ogLocale = locale === 'ru' ? 'ru_RU' : 'en_US';
+const alternateLinks = locales.map((entry) => ({
+	hreflang: entry.hrefLang,
+	href: new URL(getLocalizedPath(path, entry.code), siteConfig.url).href,
+}));
 ---
 
 <!doctype html>
-<html lang={siteConfig.locale}>
+<html lang={locale}>
 	<head>
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
@@ -40,8 +48,12 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview
 		<meta name="keywords" content={siteConfig.keywords} />
 		<meta name="author" content={siteConfig.name} />
 		<link rel="canonical" href={canonicalURL} />
-		<link rel="alternate" hreflang="en" href={canonicalURL} />
-		<link rel="alternate" hreflang="x-default" href={canonicalURL} />
+		{
+			alternateLinks.map((alternate) => (
+				<link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
+			))
+		}
+		<link rel="alternate" hreflang="x-default" href={new URL(getLocalizedPath(path, 'en'), siteConfig.url).href} />
 		<link rel="icon" href="/favicon.ico" sizes="any" />
 		<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
@@ -55,7 +67,7 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview
 		<meta property="og:url" content={canonicalURL} />
 		<meta property="og:image" content={ogImageURL} />
 		<meta property="og:image:alt" content={title} />
-		<meta property="og:locale" content="en_US" />
+		<meta property="og:locale" content={ogLocale} />
 
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta name="twitter:title" content={title} />
@@ -75,7 +87,7 @@ const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview
 							url: siteConfig.url,
 							name: siteConfig.name,
 							description,
-							inLanguage: 'en',
+							inLanguage: locale,
 						},
 						{
 							'@type': 'Organization',

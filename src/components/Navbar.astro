@@ -1,4 +1,5 @@
 ---
+import LanguageSelector from './LanguageSelector.astro';
 import { theIsleImages } from '../data/theisle';
 import { mainNav, siteConfig } from '../data/site';
 
@@ -43,6 +44,7 @@ const currentHash = Astro.url.hash.replace('#', '');
 		</nav>
 
 		<div class="nav__actions">
+			<LanguageSelector />
 			<a href={siteConfig.checkoutUrl} class="nav__buy">buy</a>
 		</div>
 
@@ -355,12 +357,14 @@ const currentHash = Astro.url.hash.replace('#', '');
 		justify-content: flex-end;
 		justify-self: end;
 		flex-shrink: 0;
+		gap: 0.55rem;
 	}
 
 	.nav__link:focus-visible,
 	.nav__buy:focus-visible,
 	.nav__toggle:focus-visible,
-	.nav__brand:focus-visible {
+	.nav__brand:focus-visible,
+	:global(.lang-select__flag:focus-visible) {
 		outline: 2px solid rgba(167, 139, 250, 0.85);
 		outline-offset: 3px;
 	}
