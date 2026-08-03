@@ -1,0 +1,183 @@
+---
+import { defaultLocale, getLocaleFromPath, getLocalizedPath, locales } from '../data/i18n';
+
+const currentPath = Astro.url.pathname;
+const activeLocale = getLocaleFromPath(currentPath);
+---
+
+<div class="lang-select" data-lang-select>
+	<p class="lang-select__label" id="lang-select-label">Language</p>
+	<div
+		class="lang-select__scroll"
+		role="group"
+		aria-labelledby="lang-select-label"
+		tabindex="0"
+	>
+		{
+			locales.map((locale) => {
+				const href = getLocalizedPath(currentPath, locale.code);
+				const isActive = locale.code === activeLocale;
+
+				return (
+					<a
+						href={href}
+						class:list={['lang-select__flag', { 'is-active': isActive }]}
+						aria-label={`${locale.label} (${locale.country})`}
+						aria-current={isActive ? 'true' : undefined}
+						hreflang={locale.hrefLang}
+						lang={locale.code}
+						title={`${locale.label} — ${locale.country}`}
+						data-lang={locale.code}
+					>
+						<span class="lang-select__emoji" aria-hidden="true">
+							{locale.flag}
+						</span>
+						<span class="lang-select__code">{locale.code.toUpperCase()}</span>
+					</a>
+				);
+			})
+		}
+	</div>
+</div>
+
+<script>
+	const scroll = document.querySelector('[data-lang-select] .lang-select__scroll');
+	const active = scroll?.querySelector('.lang-select__flag.is-active');
+
+	if (scroll instanceof HTMLElement && active instanceof HTMLElement) {
+		const centerOffset = active.offsetLeft - (scroll.clientWidth - active.offsetWidth) / 2;
+		scroll.scrollLeft = Math.max(0, centerOffset);
+	}
+</script>
+
+<style>
+	.lang-select {
+		display: flex;
+		flex-direction: column;
+		gap: 0.2rem;
+		min-width: 0;
+		max-width: 9.5rem;
+	}
+
+	.lang-select__label {
+		position: absolute;
+		width: 1px;
+		height: 1px;
+		padding: 0;
+		margin: -1px;
+		overflow: hidden;
+		clip: rect(0, 0, 0, 0);
+		white-space: nowrap;
+		border: 0;
+	}
+
+	.lang-select__scroll {
+		display: flex;
+		align-items: center;
+		gap: 0.35rem;
+		padding: 0.2rem;
+		border-radius: 999px;
+		border: 1px solid rgba(129, 140, 248, 0.2);
+		background: rgba(99, 102, 241, 0.1);
+		overflow-x: auto;
+		overflow-y: hidden;
+		scroll-snap-type: x mandatory;
+		scroll-behavior: smooth;
+		scrollbar-width: none;
+		-ms-overflow-style: none;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.lang-select__scroll::-webkit-scrollbar {
+		display: none;
+		width: 0;
+		height: 0;
+	}
+
+	.lang-select__scroll:focus-visible {
+		outline: 2px solid rgba(167, 139, 250, 0.85);
+		outline-offset: 2px;
+	}
+
+	.lang-select__flag {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.3rem;
+		flex: 0 0 auto;
+		min-width: 3.35rem;
+		padding: 0.28rem 0.55rem;
+		border-radius: 999px;
+		border: 1px solid transparent;
+		color: var(--color-muted);
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		scroll-snap-align: center;
+		transition:
+			color 0.25s ease,
+			background 0.25s ease,
+			border-color 0.25s ease,
+			box-shadow 0.25s ease,
+			transform 0.25s ease;
+	}
+
+	.lang-select__flag:hover {
+		color: #ede9fe;
+		background: rgba(99, 102, 241, 0.16);
+		border-color: rgba(167, 139, 250, 0.28);
+		transform: translateY(-1px);
+	}
+
+	.lang-select__flag.is-active {
+		color: #f5f3ff;
+		background: rgba(76, 29, 149, 0.34);
+		border-color: rgba(192, 132, 252, 0.42);
+		box-shadow:
+			0 0 16px rgba(99, 102, 241, 0.28),
+			inset 0 0 10px rgba(124, 58, 237, 0.14);
+	}
+
+	.lang-select__emoji {
+		font-size: 1rem;
+		line-height: 1;
+	}
+
+	.lang-select__code {
+		line-height: 1;
+	}
+
+	@media (max-width: 980px) {
+		.lang-select {
+			max-width: none;
+			width: 100%;
+		}
+
+		.lang-select__scroll {
+			width: 100%;
+			padding: 0.25rem;
+		}
+
+		.lang-select__flag {
+			flex: 1 1 0;
+			justify-content: center;
+			min-width: 0;
+			padding: 0.55rem 0.75rem;
+			font-size: 0.72rem;
+		}
+
+		.lang-select__emoji {
+			font-size: 1.15rem;
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.lang-select__scroll {
+			scroll-behavior: auto;
+		}
+
+		.lang-select__flag {
+			transition-duration: 0.01ms;
+		}
+	}
+</style>
