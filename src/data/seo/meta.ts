@@ -65,12 +65,12 @@ export const pagePaths: Record<PageSeoKey, string> = {
 
 const en: Record<PageSeoKey, PageSeoMeta> = {
 	home: {
-		title: 'The Isle Cheats — ESP, Hacks & Guide for Windows PC | islecheats.net',
+		title: 'The Isle Cheats — ESP, Hacks & Guides | islecheats',
 		description:
-			'Buy The Isle Cheats with Visuals ESP, World ESP, Cloud-DMA hacks, and survival tools for Windows PC. Compare features, pricing, and guides at islecheats.net.',
-		ogTitle: 'The Isle Cheats — ESP & Hacks for The Isle on Windows',
+			'Buy The Isle Cheats with Visuals ESP, World ESP, and Cloud-DMA for Windows PC. Compare Isle Cheats features, pricing, and guides — explore packages now.',
+		ogTitle: 'The Isle Cheats — ESP & Hacks for The Isle',
 		ogDescription:
-			'Official product hub for The Isle Cheats: ESP overlays, Cloud-DMA packages, cheat features, pricing, and survival guides for dinosaur players.',
+			'Official hub for The Isle Cheats: ESP overlays, Cloud-DMA packages, cheat features, pricing, and survival guides for dinosaur players.',
 		twitterTitle: 'The Isle Cheats — ESP & Hacks',
 		twitterDescription:
 			'Compare The Isle ESP, hacks, Cloud-DMA features, and package pricing for Windows PC players.',
@@ -78,20 +78,20 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 			'The Isle Cheats, Isle Cheats, The Isle ESP, The Isle Hack, Buy The Isle Cheats, The Isle Guide, The Isle Features',
 	},
 	cheats: {
-		title: 'The Isle Cheats — Instant Rotation, Auto-Attack & Hacks | islecheats.net',
+		title: 'The Isle Hack — Combat & Movement Cheats | islecheats',
 		description:
-			'The Isle Cheats combat and movement hacks: Instant Rotation, Auto-Attack, Omnimovement, No Cooldown Attack, and more in the Cloud-DMA package.',
+			'Explore The Isle Hack options: Instant Rotation, Auto-Attack, Omnimovement, and No Cooldown Attack. All included in Cloud-DMA — see the full cheat list today.',
 		ogTitle: 'The Isle Cheats — Combat & Movement Hacks',
 		ogDescription:
 			'Explore The Isle hack options including Instant Rotation, Auto-Attack, Omnimovement, and No Cooldown Attack for Windows PC.',
-		twitterTitle: 'The Isle Cheats — Hacks Overview',
+		twitterTitle: 'The Isle Hack — Cheats Overview',
 		twitterDescription: 'Full list of The Isle cheat features in the Cloud-DMA package.',
 		keywords: 'The Isle Cheats, The Isle Hack, Isle Hacks, The Isle instant rotation, The Isle omnimovement',
 	},
 	theisleEsp: {
-		title: 'The Isle ESP — Visuals ESP & World ESP Overlay | islecheats.net',
+		title: 'The Isle ESP — Visuals & World Overlay | islecheats',
 		description:
-			'The Isle ESP with Visuals ESP for dinosaurs and World ESP for resources, bodies, water, and herbs. Configurable range, colors, and overlay settings.',
+			'The Isle ESP and Isle ESP overlays track dinosaurs, health, growth, and map resources. Configurable range, colors, and snaplines — read the full ESP guide now.',
 		ogTitle: 'The Isle ESP — Visuals & World Overlay',
 		ogDescription:
 			'The Isle ESP guide: entity boxes, health, growth, snaplines, resource tracking, and World ESP for survival awareness.',
@@ -100,9 +100,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle ESP, Isle ESP, The Isle wallhack, The Isle overlay, The Isle visuals ESP, The Isle world ESP',
 	},
 	features: {
-		title: 'The Isle Features — Full ESP, Cheats & Utility List | islecheats.net',
+		title: 'The Isle Features — ESP, Cheats & Utilities | islecheats',
 		description:
-			'Complete The Isle Features list: Visuals ESP, World ESP, Cheats, Radar, FOV Changer, Cloud-DMA options, and optional Aimbot controls.',
+			'Full The Isle Features list: Visuals ESP, World ESP, Cheats, Radar, FOV Changer, and Cloud-DMA options. Compare every package inclusion — view features now.',
 		ogTitle: 'The Isle Features — Complete Package Breakdown',
 		ogDescription:
 			'Compare every The Isle Cheats feature: ESP categories, cheat options, utility hacks, and Cloud-DMA inclusions.',
@@ -111,9 +111,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Features, The Isle ESP features, The Isle cheat features, The Isle menu, The Isle radar',
 	},
 	pricing: {
-		title: 'The Isle Cheat Price — Monthly & Lifetime Plans | islecheats.net',
+		title: 'The Isle Cheat Price — Monthly & Lifetime | islecheats',
 		description:
-			'The Isle Cheat Price and cost comparison: monthly ($35) and lifetime ($150) Cloud-DMA, ESP, and Cheats packages in USD.',
+			'The Isle Cheat Price starts at $35 monthly or $150 lifetime for Cloud-DMA, ESP, and Cheats. Buy The Isle Cheats with clear plan comparison — view pricing today.',
 		ogTitle: 'The Isle Cheat Price — Package Comparison',
 		ogDescription:
 			'Compare The Isle Cheat Cost for monthly and lifetime licenses. Cloud-DMA includes ESP, World ESP, Cheats, and utility hacks.',
@@ -122,9 +122,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Cheat Price, The Isle Cheat Cost, Buy The Isle Cheats, The Isle cheats monthly, The Isle cheats lifetime',
 	},
 	updates: {
-		title: 'The Isle Update Guide — Changelog & Compatibility | islecheats.net',
+		title: 'The Isle Updates — Patches & Compatibility | islecheats',
 		description:
-			'The Isle Update Guide with product changelog, patch compatibility notices, and maintenance releases after game updates.',
+			'Track The Isle Updates, Evrima patch notes, and cheat compatibility maintenance. Stay informed after every game update — check the latest release notes now.',
 		ogTitle: 'The Isle Updates — Product Changelog',
 		ogDescription: 'Track The Isle Cheats updates, compatibility notices, and maintenance releases.',
 		twitterTitle: 'The Isle Update Guide',
@@ -132,9 +132,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Update Guide, The Isle patch notes, The Isle cheats updates, The Isle compatibility',
 	},
 	faq: {
-		title: 'The Isle FAQ — Cheats, ESP, Delivery & Support | islecheats.net',
+		title: 'The Isle FAQ — Cheats, ESP & Support Hub | islecheats',
 		description:
-			'The Isle FAQ with answers about Cloud-DMA, ESP, cheats, digital delivery, refund policy, Windows compatibility, and customer support.',
+			'The Isle FAQ answers questions about Cloud-DMA, ESP overlays, delivery, Windows compatibility, and refunds. Get clear buyer answers — read the FAQ hub now.',
 		ogTitle: 'The Isle FAQ — Common Questions',
 		ogDescription: 'Answers to frequently asked questions about The Isle Cheats, ESP, pricing, and support.',
 		twitterTitle: 'The Isle FAQ',
@@ -142,9 +142,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle FAQ, The Isle Cheats FAQ, The Isle ESP FAQ, The Isle compatibility',
 	},
 	support: {
-		title: 'The Isle Cheats Support — Setup & Billing Help | islecheats.net',
+		title: 'The Isle Cheats Support — Setup & Billing | islecheats',
 		description:
-			'Contact The Isle Cheats support for delivery, setup, billing, and Windows compatibility questions. Email support@islecheats.net.',
+			'Contact The Isle Cheats support for delivery, setup, and billing help on Windows PC. Email support@islecheats.net with your order details — get help today.',
 		ogTitle: 'The Isle Cheats Customer Support',
 		ogDescription: 'Get help with The Isle Cheats delivery, setup, and order issues.',
 		twitterTitle: 'The Isle Cheats Support',
@@ -152,8 +152,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Cheats support, The Isle help, islecheats.net support',
 	},
 	refundPolicy: {
-		title: 'The Isle Cheats Refund Policy | islecheats.net',
-		description: 'Review The Isle Cheats refund eligibility, conditions, and timelines before purchasing ESP or Cloud-DMA packages.',
+		title: 'The Isle Cheats Refund Policy — Terms | islecheats',
+		description:
+			'Review The Isle Cheats refund eligibility, conditions, and timelines before purchasing ESP or Cloud-DMA packages. Understand your options — read the policy now.',
 		ogTitle: 'The Isle Cheats Refund Policy',
 		ogDescription: 'Refund policy for The Isle Cheats digital packages.',
 		twitterTitle: 'The Isle Cheats Refund Policy',
@@ -161,8 +162,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Cheats refund, The Isle refund policy',
 	},
 	privacyPolicy: {
-		title: 'The Isle Cheats Privacy Policy | islecheats.net',
-		description: 'How islecheats.net handles visitor data, cookies, and order-related information for The Isle Cheats customers.',
+		title: 'The Isle Cheats Privacy Policy & Data Use | islecheats',
+		description:
+			'Learn how islecheats.net handles visitor data, cookies, and order information for The Isle Cheats customers. Transparent data practices — read the policy now.',
 		ogTitle: 'The Isle Cheats Privacy Policy',
 		ogDescription: 'Privacy policy for islecheats.net visitors and customers.',
 		twitterTitle: 'The Isle Cheats Privacy Policy',
@@ -170,8 +172,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Cheats privacy, islecheats.net privacy',
 	},
 	terms: {
-		title: 'The Isle Cheats Terms of Use | islecheats.net',
-		description: 'License terms, acceptable use, and purchase conditions for The Isle Cheats packages at islecheats.net.',
+		title: 'The Isle Cheats Terms of Use & License | islecheats',
+		description:
+			'License terms, acceptable use, and purchase conditions for The Isle Cheats packages at islecheats.net. Review before checkout — read the full terms today.',
 		ogTitle: 'The Isle Cheats Terms of Use',
 		ogDescription: 'Terms and conditions for The Isle Cheats purchases.',
 		twitterTitle: 'The Isle Cheats Terms',
@@ -179,9 +182,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Cheats terms, islecheats.net terms',
 	},
 	theIsleCheats: {
-		title: 'The Isle Cheats — Buy ESP & Hacks for Windows PC | islecheats.net',
+		title: 'Buy The Isle Cheats — ESP & Hacks Hub | islecheats',
 		description:
-			'The Isle Cheats hub: Cloud-DMA packages with Visuals ESP, World ESP, combat hacks, and utility tools for dinosaur survival on Windows PC.',
+			'The Isle Cheats and Isle Cheats hub with Cloud-DMA, Visuals ESP, World ESP, and combat hacks for Windows PC. Compare packages — explore the product hub now.',
 		ogTitle: 'The Isle Cheats — Complete Product Hub',
 		ogDescription: 'Everything about The Isle Cheats: ESP, hacks, Cloud-DMA, pricing, and compatibility.',
 		twitterTitle: 'The Isle Cheats Hub',
@@ -189,9 +192,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Cheats, Isle Cheats, Buy The Isle Cheats, The Isle Hack',
 	},
 	theIsleEsp: {
-		title: 'The Isle ESP — How Visuals & World ESP Work | islecheats.net',
+		title: 'The Isle ESP Guide — How Overlays Work | islecheats',
 		description:
-			'The Isle ESP guide: how Visuals ESP tracks dinosaurs and World ESP reveals resources, bodies, water, and herbs on the map.',
+			'Learn how The Isle ESP and Isle ESP overlays track dinosaurs and resources. Visuals ESP and World ESP explained with setup tips — read the complete guide now.',
 		ogTitle: 'The Isle ESP — Complete Overlay Guide',
 		ogDescription: 'Learn how The Isle ESP works: entity tracking, health bars, growth, and resource overlays.',
 		twitterTitle: 'The Isle ESP Guide',
@@ -199,9 +202,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle ESP, The Isle ESP Guide, Isle ESP, The Isle overlay',
 	},
 	theIsleGuide: {
-		title: 'The Isle Guide — Cheats, ESP, Survival & Growth | islecheats.net',
+		title: 'The Isle Guide — Cheats, ESP & Survival | islecheats',
 		description:
-			'The Isle Guide covering cheats, ESP setup, survival tactics, growth paths, performance tips, and package selection for new and veteran players.',
+			'The Isle Guide for cheats, ESP setup, survival tactics, growth paths, and performance tips. Your central player resource — start with the complete guide today.',
 		ogTitle: 'The Isle Guide — Player Resource Hub',
 		ogDescription: 'Comprehensive The Isle guide: cheats, ESP, survival, growth, and settings.',
 		twitterTitle: 'The Isle Guide',
@@ -209,9 +212,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Guide, The Isle Cheats Guide, The Isle survival, The Isle tips',
 	},
 	theIsleFeatures: {
-		title: 'The Isle Features Explained — ESP, Cheats & Utilities | islecheats.net',
+		title: 'The Isle Features Explained — Full List | islecheats',
 		description:
-			'The Isle Features explained: every ESP category, cheat option, radar, FOV changer, crosshair, and Cloud-DMA inclusion detailed.',
+			'The Isle Features explained: ESP categories, cheat options, radar, FOV changer, and Cloud-DMA inclusions. Every tool detailed — browse the full breakdown now.',
 		ogTitle: 'The Isle Features — Detailed Breakdown',
 		ogDescription: 'Every The Isle Cheats feature explained with use cases and package context.',
 		twitterTitle: 'The Isle Features Explained',
@@ -219,9 +222,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Features, The Isle Features Explained, The Isle menu features',
 	},
 	theIsleFaq: {
-		title: 'The Isle FAQ — ESP, Cheats, Price & Compatibility | islecheats.net',
+		title: 'The Isle FAQ — Price, ESP & Compatibility | islecheats',
 		description:
-			'The Isle FAQ hub: common questions about buying cheats, ESP overlays, Cloud-DMA, pricing, Windows compatibility, and support.',
+			'The Isle FAQ hub covers buying cheats, ESP overlays, Cloud-DMA pricing, and Windows PC compatibility. Quick answers for buyers — browse the full FAQ today.',
 		ogTitle: 'The Isle FAQ — Buyer Questions Answered',
 		ogDescription: 'Frequently asked questions about The Isle Cheats, ESP, and packages.',
 		twitterTitle: 'The Isle FAQ Hub',
@@ -229,9 +232,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle FAQ, The Isle Cheats FAQ, The Isle ESP FAQ',
 	},
 	theIsleSettings: {
-		title: 'The Isle Settings — Graphics, ESP & Performance Config | islecheats.net',
+		title: 'The Isle Settings — Graphics & ESP Config | islecheats',
 		description:
-			'The Isle Settings guide: in-game graphics options, ESP font and color config, menu key binds, and config profile management.',
+			'The Isle Settings guide for graphics, ESP colors, menu key binds, and config profiles. Optimize your setup for survival — read the configuration guide now.',
 		ogTitle: 'The Isle Settings — Configuration Guide',
 		ogDescription: 'Optimize The Isle settings for ESP visibility, performance, and gameplay.',
 		twitterTitle: 'The Isle Settings Guide',
@@ -239,9 +242,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Settings, The Isle graphics settings, The Isle ESP config, The Isle menu key',
 	},
 	theIslePerformance: {
-		title: 'The Isle FPS Guide — Performance & Optimization | islecheats.net',
+		title: 'The Isle Performance Guide — FPS Tips | islecheats',
 		description:
-			'The Isle FPS Guide and Performance Guide: graphics settings, shadow toggles, fog removal, and hardware tips for smoother dinosaur survival.',
+			'The Isle Performance Guide and FPS tips: graphics settings, shadow toggles, fog removal, and hardware advice for smoother gameplay — optimize performance today.',
 		ogTitle: 'The Isle Performance Guide — FPS Optimization',
 		ogDescription: 'Improve The Isle FPS with graphics settings, disable shadows, and performance hacks.',
 		twitterTitle: 'The Isle FPS Guide',
@@ -249,9 +252,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle FPS Guide, The Isle Performance Guide, The Isle optimize FPS, The Isle lag fix',
 	},
 	theIsleGrowthGuide: {
-		title: 'The Isle Growth Guide — Fast Growth & Survival Tips | islecheats.net',
+		title: 'The Isle Growth Guide — Fast Development | islecheats',
 		description:
-			'The Isle Growth Guide: growth mechanics, herbivore and carnivore growth paths, nesting tips, and how ESP helps track growth percentage.',
+			'The Isle Growth Guide covers growth mechanics, herbivore and carnivore paths, nesting tips, and ESP growth tracking. Grow faster — read the full guide today.',
 		ogTitle: 'The Isle Growth Guide — Dinosaur Development',
 		ogDescription: 'Master The Isle growth mechanics for faster dinosaur development.',
 		twitterTitle: 'The Isle Growth Guide',
@@ -259,9 +262,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Growth Guide, The Isle dinosaur growth, The Isle growth percentage',
 	},
 	theIsleSurvivalGuide: {
-		title: 'The Isle Survival Guide — Water, Food & Threat Awareness | islecheats.net',
+		title: 'The Isle Survival Guide — Food & Water | islecheats',
 		description:
-			'The Isle Survival Guide: finding water, hunting food, avoiding predators, bleed recovery, and using ESP for threat awareness.',
+			'The Isle Survival Guide: find water, hunt food, avoid predators, and recover from bleed. ESP threat awareness tips included — master survival strategies now.',
 		ogTitle: 'The Isle Survival Guide — Stay Alive Longer',
 		ogDescription: 'Survival tactics for The Isle: resources, threats, and awareness tools.',
 		twitterTitle: 'The Isle Survival Guide',
@@ -269,9 +272,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Survival Guide, The Isle survival tips, The Isle water sources, The Isle nesting',
 	},
 	theIsleUpdates: {
-		title: 'The Isle Updates — Patch Notes & Cheat Compatibility | islecheats.net',
+		title: 'The Isle Updates — Patch & Cheat Tracker | islecheats',
 		description:
-			'The Isle Updates tracker: game patch notes, Evrima updates, and cheat compatibility maintenance releases.',
+			'The Isle Updates tracker with Evrima patch notes and cheat compatibility releases. Stay current after every game patch — check the latest maintenance notes now.',
 		ogTitle: 'The Isle Updates — Patch & Compatibility Tracker',
 		ogDescription: 'Stay current with The Isle game updates and cheat compatibility.',
 		twitterTitle: 'The Isle Updates',
@@ -279,9 +282,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Updates, The Isle patch notes, The Isle Evrima updates',
 	},
 	theIsleDinosaurGuide: {
-		title: 'The Isle Dinosaur Guide — Species, Tiers & Playstyles | islecheats.net',
+		title: 'The Isle Dinosaur Guide — Species & Tiers | islecheats',
 		description:
-			'The Isle Dinosaur Guide: carnivore vs herbivore playstyles, species tiers, bite radius, stamina, and ESP tracking for each dinosaur class.',
+			'The Isle Dinosaur Guide: carnivore vs herbivore playstyles, species tiers, bite radius, and classname ESP tracking. Pick your dino — read the species guide now.',
 		ogTitle: 'The Isle Dinosaur Guide — Species Overview',
 		ogDescription: 'Complete dinosaur guide for The Isle: species, tiers, and survival strategies.',
 		twitterTitle: 'The Isle Dinosaur Guide',
@@ -289,9 +292,9 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Dinosaur Guide, The Isle herbivore guide, The Isle carnivore guide, The Isle dinosaur tiers',
 	},
 	blog: {
-		title: 'The Isle Blog — Cheats, ESP & Survival Guides | islecheats.net',
+		title: 'The Isle Blog — Cheats & Survival Guides | islecheats',
 		description:
-			'The Isle blog with guides on cheats, ESP, survival, growth, performance, compatibility, and product updates for dinosaur players.',
+			'The Isle Blog with articles on cheats, ESP, survival, growth, performance, and compatibility. Fresh guides for dinosaur players — browse all blog posts today.',
 		ogTitle: 'The Isle Blog — Guides & Updates',
 		ogDescription: 'Articles about The Isle cheats, ESP, survival, and game updates.',
 		twitterTitle: 'The Isle Blog',
@@ -299,19 +302,20 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle blog, The Isle guides, The Isle cheats articles',
 	},
 	blogPost: {
-		title: 'The Isle Blog | islecheats.net',
-		description: 'The Isle article from islecheats.net.',
+		title: 'The Isle Blog — Articles & Guides | islecheats',
+		description:
+			'In-depth The Isle article covering cheats, ESP, survival, and gameplay topics for Windows PC players. Read the guide and compare packages — explore more today.',
 		ogTitle: 'The Isle Blog Article',
-		ogDescription: 'The Isle guide article.',
+		ogDescription: 'The Isle guide article for dinosaur survival players.',
 		twitterTitle: 'The Isle Article',
-		twitterDescription: 'The Isle guide article.',
+		twitterDescription: 'The Isle guide article from islecheats.net.',
 		keywords: 'The Isle, The Isle Cheats, The Isle guide',
 	},
 };
 
 const de: Record<PageSeoKey, PageSeoMeta> = {
 	home: {
-		title: 'The Isle Cheats — ESP & Hacks für Windows PC kaufen | islecheats.net',
+		title: 'The Isle Cheats — ESP & Hacks für Windows | islecheats',
 		description:
 			'The Isle Cheats mit Visuals ESP, World ESP und Cloud-DMA Hacks für Windows PC. Funktionen, Preise und Anleitungen auf islecheats.net vergleichen.',
 		ogTitle: 'The Isle Cheats — ESP & Hacks für The Isle',
@@ -325,7 +329,7 @@ const de: Record<PageSeoKey, PageSeoMeta> = {
 	theisleEsp: en.theisleEsp,
 	features: en.features,
 	pricing: {
-		title: 'The Isle Cheat Preis — Monats- & Lifetime-Pakete | islecheats.net',
+		title: 'The Isle Cheat Preis — Monat & Lifetime | islecheats',
 		description:
 			'The Isle Cheat Preis: Monatspaket ($35) und Lifetime ($150) für Cloud-DMA, ESP und Cheats in USD.',
 		ogTitle: 'The Isle Cheat Preis — Paketvergleich',
@@ -336,7 +340,7 @@ const de: Record<PageSeoKey, PageSeoMeta> = {
 	},
 	updates: en.updates,
 	faq: {
-		title: 'The Isle FAQ — Cheats, ESP & Support | islecheats.net',
+		title: 'The Isle FAQ — Cheats, ESP & Support | islecheats',
 		description: 'Häufige Fragen zu The Isle Cheats, Cloud-DMA, ESP, Lieferung und Windows-Kompatibilität.',
 		ogTitle: 'The Isle FAQ — Häufige Fragen',
 		ogDescription: 'Antworten zu The Isle Cheats, ESP und Paketen.',
@@ -351,7 +355,7 @@ const de: Record<PageSeoKey, PageSeoMeta> = {
 	theIsleCheats: en.theIsleCheats,
 	theIsleEsp: en.theIsleEsp,
 	theIsleGuide: {
-		title: 'The Isle Guide — Cheats, ESP & Survival | islecheats.net',
+		title: 'The Isle Guide — Cheats, ESP & Survival | islecheats',
 		description: 'The Isle Anleitung: Cheats, ESP-Einrichtung, Überlebenstaktiken und Wachstumstipps für Dinosaurier-Spieler.',
 		ogTitle: 'The Isle Guide — Spieler-Ressourcen',
 		ogDescription: 'Umfassender The Isle Guide für Cheats, ESP und Survival.',
@@ -362,7 +366,7 @@ const de: Record<PageSeoKey, PageSeoMeta> = {
 	theIsleFeatures: en.theIsleFeatures,
 	theIsleFaq: en.theIsleFaq,
 	theIsleSettings: {
-		title: 'The Isle Einstellungen — Grafik & ESP Config | islecheats.net',
+		title: 'The Isle Einstellungen — Grafik & ESP Config | islecheats',
 		description: 'The Isle Einstellungen: Grafikoptionen, ESP-Farben, Menütasten und Config-Profile verwalten.',
 		ogTitle: 'The Isle Einstellungen — Konfigurationsguide',
 		ogDescription: 'The Isle Einstellungen für ESP-Sichtbarkeit und Performance optimieren.',
@@ -371,7 +375,7 @@ const de: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Einstellungen, The Isle Grafikeinstellungen',
 	},
 	theIslePerformance: {
-		title: 'The Isle FPS Guide — Performance optimieren | islecheats.net',
+		title: 'The Isle FPS Guide — Performance optimieren | islecheats',
 		description: 'The Isle FPS verbessern: Grafikeinstellungen, Schatten deaktivieren und Hardware-Tipps für flüssigeres Gameplay.',
 		ogTitle: 'The Isle Performance Guide',
 		ogDescription: 'FPS-Optimierung für The Isle auf Windows PC.',
@@ -389,7 +393,7 @@ const de: Record<PageSeoKey, PageSeoMeta> = {
 
 const fr: Record<PageSeoKey, PageSeoMeta> = {
 	home: {
-		title: 'The Isle Cheats — ESP & Hacks pour Windows PC | islecheats.net',
+		title: 'The Isle Cheats — ESP & Hacks pour Windows PC | islecheats',
 		description:
 			'Achetez The Isle Cheats avec Visuals ESP, World ESP et hacks Cloud-DMA pour Windows PC. Comparez fonctionnalités et tarifs sur islecheats.net.',
 		ogTitle: 'The Isle Cheats — ESP & Hacks pour The Isle',
@@ -402,7 +406,7 @@ const fr: Record<PageSeoKey, PageSeoMeta> = {
 	theisleEsp: en.theisleEsp,
 	features: en.features,
 	pricing: {
-		title: 'Prix The Isle Cheat — Forfaits mensuel & à vie | islecheats.net',
+		title: 'Prix The Isle Cheat — Mensuel & À Vie | islecheats',
 		description: 'Prix The Isle Cheat : forfait mensuel ($35) et à vie ($150) pour Cloud-DMA, ESP et cheats en USD.',
 		ogTitle: 'Prix The Isle Cheat — Comparaison des forfaits',
 		ogDescription: 'Comparez le coût des licences mensuelles et à vie pour The Isle Cheats.',
@@ -412,7 +416,7 @@ const fr: Record<PageSeoKey, PageSeoMeta> = {
 	},
 	updates: en.updates,
 	faq: {
-		title: 'FAQ The Isle — Cheats, ESP & Support | islecheats.net',
+		title: 'FAQ The Isle — Cheats, ESP & Support | islecheats',
 		description: 'Questions fréquentes sur The Isle Cheats, Cloud-DMA, ESP, livraison et compatibilité Windows.',
 		ogTitle: 'FAQ The Isle — Questions fréquentes',
 		ogDescription: 'Réponses sur The Isle Cheats, ESP et forfaits.',
@@ -427,7 +431,7 @@ const fr: Record<PageSeoKey, PageSeoMeta> = {
 	theIsleCheats: en.theIsleCheats,
 	theIsleEsp: en.theIsleEsp,
 	theIsleGuide: {
-		title: 'Guide The Isle — Cheats, ESP & Survie | islecheats.net',
+		title: 'Guide The Isle — Cheats, ESP & Survie | islecheats',
 		description: 'Guide The Isle : cheats, configuration ESP, tactiques de survie et croissance pour joueurs dinosaures.',
 		ogTitle: 'Guide The Isle — Ressources joueur',
 		ogDescription: 'Guide complet The Isle : cheats, ESP et survie.',
@@ -438,7 +442,7 @@ const fr: Record<PageSeoKey, PageSeoMeta> = {
 	theIsleFeatures: en.theIsleFeatures,
 	theIsleFaq: en.theIsleFaq,
 	theIsleSettings: {
-		title: 'Paramètres The Isle — Graphiques & Config ESP | islecheats.net',
+		title: 'Paramètres The Isle — Graphiques & Config ESP | islecheats',
 		description: 'Paramètres The Isle : options graphiques, couleurs ESP, touches menu et profils de configuration.',
 		ogTitle: 'Paramètres The Isle — Guide de configuration',
 		ogDescription: 'Optimisez les paramètres The Isle pour la visibilité ESP et les performances.',
@@ -447,7 +451,7 @@ const fr: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'paramètres The Isle, réglages graphiques The Isle',
 	},
 	theIslePerformance: {
-		title: 'Guide FPS The Isle — Optimisation performance | islecheats.net',
+		title: 'Guide FPS The Isle — Optimisation performance | islecheats',
 		description: 'Améliorez les FPS The Isle : réglages graphiques, ombres désactivées et conseils matériel.',
 		ogTitle: 'Guide performance The Isle',
 		ogDescription: 'Optimisation FPS pour The Isle sur Windows PC.',
@@ -465,7 +469,7 @@ const fr: Record<PageSeoKey, PageSeoMeta> = {
 
 const es: Record<PageSeoKey, PageSeoMeta> = {
 	home: {
-		title: 'The Isle Cheats — ESP y Hacks para Windows PC | islecheats.net',
+		title: 'The Isle Cheats — ESP y Hacks para Windows PC | islecheats',
 		description:
 			'Compra The Isle Cheats con Visuals ESP, World ESP y hacks Cloud-DMA para Windows PC. Compara funciones y precios en islecheats.net.',
 		ogTitle: 'The Isle Cheats — ESP y Hacks para The Isle',
@@ -478,7 +482,7 @@ const es: Record<PageSeoKey, PageSeoMeta> = {
 	theisleEsp: en.theisleEsp,
 	features: en.features,
 	pricing: {
-		title: 'Precio The Isle Cheat — Planes mensual y de por vida | islecheats.net',
+		title: 'Precio The Isle Cheat — Mensual y Lifetime | islecheats',
 		description: 'Precio The Isle Cheat: plan mensual ($35) y de por vida ($150) para Cloud-DMA, ESP y cheats en USD.',
 		ogTitle: 'Precio The Isle Cheat — Comparación de planes',
 		ogDescription: 'Compara el costo de licencias mensuales y de por vida para The Isle Cheats.',
@@ -488,7 +492,7 @@ const es: Record<PageSeoKey, PageSeoMeta> = {
 	},
 	updates: en.updates,
 	faq: {
-		title: 'FAQ The Isle — Cheats, ESP y Soporte | islecheats.net',
+		title: 'FAQ The Isle — Cheats, ESP y Soporte | islecheats',
 		description: 'Preguntas frecuentes sobre The Isle Cheats, Cloud-DMA, ESP, entrega y compatibilidad Windows.',
 		ogTitle: 'FAQ The Isle — Preguntas frecuentes',
 		ogDescription: 'Respuestas sobre The Isle Cheats, ESP y paquetes.',
@@ -503,7 +507,7 @@ const es: Record<PageSeoKey, PageSeoMeta> = {
 	theIsleCheats: en.theIsleCheats,
 	theIsleEsp: en.theIsleEsp,
 	theIsleGuide: {
-		title: 'Guía The Isle — Cheats, ESP y Supervivencia | islecheats.net',
+		title: 'Guía The Isle — Cheats, ESP y Supervivencia | islecheats',
 		description: 'Guía The Isle: cheats, configuración ESP, tácticas de supervivencia y crecimiento para jugadores dinosaurio.',
 		ogTitle: 'Guía The Isle — Recursos del jugador',
 		ogDescription: 'Guía completa The Isle: cheats, ESP y supervivencia.',
@@ -514,7 +518,7 @@ const es: Record<PageSeoKey, PageSeoMeta> = {
 	theIsleFeatures: en.theIsleFeatures,
 	theIsleFaq: en.theIsleFaq,
 	theIsleSettings: {
-		title: 'Ajustes The Isle — Gráficos y Config ESP | islecheats.net',
+		title: 'Ajustes The Isle — Gráficos y Config ESP | islecheats',
 		description: 'Ajustes The Isle: opciones gráficas, colores ESP, teclas de menú y perfiles de configuración.',
 		ogTitle: 'Ajustes The Isle — Guía de configuración',
 		ogDescription: 'Optimiza ajustes The Isle para visibilidad ESP y rendimiento.',
@@ -523,7 +527,7 @@ const es: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'ajustes The Isle, configuración gráfica The Isle',
 	},
 	theIslePerformance: {
-		title: 'Guía FPS The Isle — Optimización de rendimiento | islecheats.net',
+		title: 'Guía FPS The Isle — Optimización de rendimiento | islecheats',
 		description: 'Mejora los FPS de The Isle: ajustes gráficos, desactivar sombras y consejos de hardware.',
 		ogTitle: 'Guía de rendimiento The Isle',
 		ogDescription: 'Optimización FPS para The Isle en Windows PC.',
@@ -541,7 +545,7 @@ const es: Record<PageSeoKey, PageSeoMeta> = {
 
 const tr: Record<PageSeoKey, PageSeoMeta> = {
 	home: {
-		title: 'The Isle Cheats — Windows PC için ESP ve Hileler | islecheats.net',
+		title: 'The Isle Cheats — Windows PC ESP & Hileler | islecheats',
 		description:
 			'Windows PC için Visuals ESP, World ESP ve Cloud-DMA hileleri içeren The Isle Cheats satın alın. Özellikleri ve fiyatları islecheats.net üzerinde karşılaştırın.',
 		ogTitle: 'The Isle Cheats — The Isle için ESP ve Hileler',
@@ -554,7 +558,7 @@ const tr: Record<PageSeoKey, PageSeoMeta> = {
 	theisleEsp: en.theisleEsp,
 	features: en.features,
 	pricing: {
-		title: 'The Isle Hile Fiyatı — Aylık ve Ömür Boyu Paketler | islecheats.net',
+		title: 'The Isle Hile Fiyatı — Aylık & Lifetime | islecheats',
 		description: 'The Isle Hile Fiyatı: Cloud-DMA, ESP ve hileler için aylık ($35) ve ömür boyu ($150) paketler.',
 		ogTitle: 'The Isle Hile Fiyatı — Paket Karşılaştırması',
 		ogDescription: 'The Isle Cheats için aylık ve ömür boyu lisans maliyetlerini karşılaştırın.',
@@ -564,7 +568,7 @@ const tr: Record<PageSeoKey, PageSeoMeta> = {
 	},
 	updates: en.updates,
 	faq: {
-		title: 'The Isle SSS — Hileler, ESP ve Destek | islecheats.net',
+		title: 'The Isle SSS — Hileler, ESP ve Destek | islecheats',
 		description: 'The Isle Cheats, Cloud-DMA, ESP, teslimat ve Windows uyumluluğu hakkında sık sorulan sorular.',
 		ogTitle: 'The Isle SSS — Sık Sorulan Sorular',
 		ogDescription: 'The Isle Cheats, ESP ve paketler hakkında cevaplar.',
@@ -579,7 +583,7 @@ const tr: Record<PageSeoKey, PageSeoMeta> = {
 	theIsleCheats: en.theIsleCheats,
 	theIsleEsp: en.theIsleEsp,
 	theIsleGuide: {
-		title: 'The Isle Rehberi — Hileler, ESP ve Hayatta Kalma | islecheats.net',
+		title: 'The Isle Rehberi — Hileler, ESP & Hayatta | islecheats',
 		description: 'The Isle Rehberi: hileler, ESP kurulumu, hayatta kalma taktikleri ve büyüme ipuçları.',
 		ogTitle: 'The Isle Rehberi — Oyuncu Kaynakları',
 		ogDescription: 'Kapsamlı The Isle rehberi: hileler, ESP ve hayatta kalma.',
@@ -590,7 +594,7 @@ const tr: Record<PageSeoKey, PageSeoMeta> = {
 	theIsleFeatures: en.theIsleFeatures,
 	theIsleFaq: en.theIsleFaq,
 	theIsleSettings: {
-		title: 'The Isle Ayarları — Grafik ve ESP Yapılandırma | islecheats.net',
+		title: 'The Isle Ayarları — Grafik ve ESP Yapılandırma | islecheats',
 		description: 'The Isle Ayarları: grafik seçenekleri, ESP renkleri, menü tuşları ve yapılandırma profilleri.',
 		ogTitle: 'The Isle Ayarları — Yapılandırma Rehberi',
 		ogDescription: 'ESP görünürlüğü ve performans için The Isle ayarlarını optimize edin.',
@@ -599,7 +603,7 @@ const tr: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle ayarları, The Isle grafik ayarları',
 	},
 	theIslePerformance: {
-		title: 'The Isle FPS Rehberi — Performans Optimizasyonu | islecheats.net',
+		title: 'The Isle FPS Rehberi — Performans Optimizasyonu | islecheats',
 		description: 'The Isle FPS artırma: grafik ayarları, gölge kapatma ve donanım ipuçları.',
 		ogTitle: 'The Isle Performans Rehberi',
 		ogDescription: 'Windows PC için The Isle FPS optimizasyonu.',
@@ -617,7 +621,7 @@ const tr: Record<PageSeoKey, PageSeoMeta> = {
 
 const ar: Record<PageSeoKey, PageSeoMeta> = {
 	home: {
-		title: 'The Isle Cheats — ESP وهاكات لأجهزة Windows | islecheats.net',
+		title: 'The Isle Cheats — ESP وهاكات لأجهزة Windows | islecheats',
 		description:
 			'اشترِ The Isle Cheats مع Visuals ESP وWorld ESP وهاكات Cloud-DMA لأجهزة Windows. قارن الميزات والأسعار على islecheats.net.',
 		ogTitle: 'The Isle Cheats — ESP وهاكات للعبة The Isle',
@@ -630,7 +634,7 @@ const ar: Record<PageSeoKey, PageSeoMeta> = {
 	theisleEsp: en.theisleEsp,
 	features: en.features,
 	pricing: {
-		title: 'سعر The Isle Cheat — باقات شهرية ومدى الحياة | islecheats.net',
+		title: 'سعر The Isle Cheat — باقات شهرية ومدى الحياة | islecheats',
 		description: 'سعر The Isle Cheat: باقة شهرية ($35) ومدى الحياة ($150) لـ Cloud-DMA وESP والهاكات بالدولار.',
 		ogTitle: 'سعر The Isle Cheat — مقارنة الباقات',
 		ogDescription: 'قارن تكلفة التراخيص الشهرية ومدى الحياة لـ The Isle Cheats.',
@@ -640,7 +644,7 @@ const ar: Record<PageSeoKey, PageSeoMeta> = {
 	},
 	updates: en.updates,
 	faq: {
-		title: 'أسئلة The Isle الشائعة — الهاكات وESP والدعم | islecheats.net',
+		title: 'أسئلة The Isle الشائعة — الهاكات وESP والدعم | islecheats',
 		description: 'أسئلة شائعة حول The Isle Cheats وCloud-DMA وESP والتوصيل وتوافق Windows.',
 		ogTitle: 'أسئلة The Isle الشائعة',
 		ogDescription: 'إجابات حول The Isle Cheats وESP والباقات.',
@@ -655,7 +659,7 @@ const ar: Record<PageSeoKey, PageSeoMeta> = {
 	theIsleCheats: en.theIsleCheats,
 	theIsleEsp: en.theIsleEsp,
 	theIsleGuide: {
-		title: 'دليل The Isle — الهاكات وESP والبقاء | islecheats.net',
+		title: 'دليل The Isle — الهاكات وESP والبقاء على قيد | islecheats',
 		description: 'دليل The Isle: الهاكات وإعداد ESP وتكتيكات البقاء ونمو الديناصورات.',
 		ogTitle: 'دليل The Isle — موارد اللاعب',
 		ogDescription: 'دليل شامل لـ The Isle: الهاكات وESP والبقاء.',
@@ -666,7 +670,7 @@ const ar: Record<PageSeoKey, PageSeoMeta> = {
 	theIsleFeatures: en.theIsleFeatures,
 	theIsleFaq: en.theIsleFaq,
 	theIsleSettings: {
-		title: 'إعدادات The Isle — الرسوميات وتكوين ESP | islecheats.net',
+		title: 'إعدادات The Isle — الرسوميات وتكوين ESP | islecheats',
 		description: 'إعدادات The Isle: خيارات الرسوميات وألوان ESP ومفاتيح القائمة وملفات التكوين.',
 		ogTitle: 'إعدادات The Isle — دليل التكوين',
 		ogDescription: 'حسّن إعدادات The Isle لرؤية ESP والأداء.',
@@ -675,7 +679,7 @@ const ar: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'إعدادات The Isle, إعدادات الرسوميات The Isle',
 	},
 	theIslePerformance: {
-		title: 'دليل FPS لـ The Isle — تحسين الأداء | islecheats.net',
+		title: 'دليل FPS The Isle — تحسين الأداء والسرعة | islecheats',
 		description: 'تحسين FPS في The Isle: إعدادات الرسوميات وإيقاف الظلال ونصائح الأجهزة.',
 		ogTitle: 'دليل أداء The Isle',
 		ogDescription: 'تحسين FPS لـ The Isle على Windows PC.',
@@ -693,7 +697,7 @@ const ar: Record<PageSeoKey, PageSeoMeta> = {
 
 const ru: Record<PageSeoKey, PageSeoMeta> = {
 	home: {
-		title: 'The Isle Cheats — ESP и читы для Windows PC | islecheats.net',
+		title: 'The Isle Cheats — ESP и читы для Windows PC | islecheats',
 		description:
 			'Купите The Isle Cheats с Visuals ESP, World ESP и Cloud-DMA читами для Windows PC. Сравните функции и цены на islecheats.net.',
 		ogTitle: 'The Isle Cheats — ESP и читы для The Isle',
@@ -703,7 +707,7 @@ const ru: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Cheats, The Isle ESP, купить The Isle Cheats, гайд The Isle',
 	},
 	cheats: {
-		title: 'The Isle Cheats — Instant Rotation и читы | islecheats.net',
+		title: 'The Isle Cheats — Instant Rotation и читы | islecheats',
 		description: 'Читы The Isle: Instant Rotation, Auto-Attack, Omnimovement и другие хаки в пакете Cloud-DMA.',
 		ogTitle: 'The Isle Cheats — боевые и движковые читы',
 		ogDescription: 'Обзор читов The Isle: Instant Rotation, Auto-Attack и Omnimovement.',
@@ -712,7 +716,7 @@ const ru: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Cheats, The Isle читы, The Isle хаки',
 	},
 	theisleEsp: {
-		title: 'The Isle ESP — Visuals ESP и World ESP | islecheats.net',
+		title: 'The Isle ESP — Visuals ESP и World ESP | islecheats',
 		description: 'The Isle ESP: Visuals ESP для динозавров и World ESP для ресурсов, тел, воды и трав.',
 		ogTitle: 'The Isle ESP — оверлей и функции',
 		ogDescription: 'Гайд по The Isle ESP: отслеживание сущностей, здоровье, рост и ресурсы.',
@@ -721,7 +725,7 @@ const ru: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle ESP, The Isle оверлей, The Isle wallhack',
 	},
 	features: {
-		title: 'The Isle Features — полный список функций | islecheats.net',
+		title: 'The Isle Features — полный список функций | islecheats',
 		description: 'Полный список функций The Isle: Visuals ESP, World ESP, читы, радар, FOV Changer и Cloud-DMA.',
 		ogTitle: 'The Isle Features — разбор пакета',
 		ogDescription: 'Сравните все функции The Isle Cheats: ESP, читы и утилиты.',
@@ -730,7 +734,7 @@ const ru: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Features, функции The Isle Cheats',
 	},
 	pricing: {
-		title: 'Цена The Isle Cheat — месячные и пожизненные планы | islecheats.net',
+		title: 'Цена The Isle Cheat — Месяц и Lifetime | islecheats',
 		description: 'Цена The Isle Cheat: месячный ($35) и пожизненный ($150) пакеты Cloud-DMA, ESP и читов в USD.',
 		ogTitle: 'Цена The Isle Cheat — сравнение пакетов',
 		ogDescription: 'Сравните стоимость месячных и пожизненных лицензий The Isle Cheats.',
@@ -740,7 +744,7 @@ const ru: Record<PageSeoKey, PageSeoMeta> = {
 	},
 	updates: en.updates,
 	faq: {
-		title: 'The Isle FAQ — читы, ESP и поддержка | islecheats.net',
+		title: 'The Isle FAQ — читы, ESP и поддержка | islecheats',
 		description: 'Частые вопросы о The Isle Cheats, Cloud-DMA, ESP, доставке и совместимости с Windows.',
 		ogTitle: 'The Isle FAQ — частые вопросы',
 		ogDescription: 'Ответы о The Isle Cheats, ESP и пакетах.',
@@ -755,7 +759,7 @@ const ru: Record<PageSeoKey, PageSeoMeta> = {
 	theIsleCheats: en.theIsleCheats,
 	theIsleEsp: en.theIsleEsp,
 	theIsleGuide: {
-		title: 'Гайд The Isle — читы, ESP и выживание | islecheats.net',
+		title: 'Гайд The Isle — читы, ESP и выживание | islecheats',
 		description: 'Гайд The Isle: читы, настройка ESP, тактики выживания и рост динозавров.',
 		ogTitle: 'Гайд The Isle — ресурсы игрока',
 		ogDescription: 'Полный гайд The Isle: читы, ESP и выживание.',
@@ -766,7 +770,7 @@ const ru: Record<PageSeoKey, PageSeoMeta> = {
 	theIsleFeatures: en.theIsleFeatures,
 	theIsleFaq: en.theIsleFaq,
 	theIsleSettings: {
-		title: 'Настройки The Isle — графика и конфиг ESP | islecheats.net',
+		title: 'Настройки The Isle — графика и конфиг ESP | islecheats',
 		description: 'Настройки The Isle: графика, цвета ESP, клавиши меню и профили конфигурации.',
 		ogTitle: 'Настройки The Isle — гайд по конфигурации',
 		ogDescription: 'Оптимизация настроек The Isle для видимости ESP и производительности.',
@@ -775,7 +779,7 @@ const ru: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'настройки The Isle, графика The Isle',
 	},
 	theIslePerformance: {
-		title: 'Гайд FPS The Isle — оптимизация производительности | islecheats.net',
+		title: 'Гайд FPS The Isle — Оптимизация игры | islecheats',
 		description: 'Улучшение FPS в The Isle: настройки графики, отключение теней и советы по железу.',
 		ogTitle: 'Гайд производительности The Isle',
 		ogDescription: 'Оптимизация FPS для The Isle на Windows PC.',

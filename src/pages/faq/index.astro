@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
 import { homeFaqs, siteConfig } from '../../data/site';
 import { extendedFaqs } from '../../data/seo/content';
 import { getPageSeo } from '../../data/seo/meta';
@@ -55,4 +56,6 @@ const faqSchema = buildFaqSchema(faqs);
 			<a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>.
 		</p>
 	</section>
+
+	<InternalLinksPanel />
 </PageLayout>

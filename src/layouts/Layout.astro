@@ -16,6 +16,9 @@ interface Props {
 	noindex?: boolean;
 	type?: 'website' | 'article';
 	locale?: LocaleCode;
+	preloadImage?: string;
+	articlePublished?: string;
+	articleModified?: string;
 }
 
 const {
@@ -31,6 +34,9 @@ const {
 	noindex = false,
 	type = 'website',
 	locale = 'en',
+	preloadImage,
+	articlePublished,
+	articleModified,
 } = Astro.props;
 
 const path = canonicalPath.endsWith('/') || canonicalPath.includes('.') ? canonicalPath : `${canonicalPath}/`;
@@ -71,6 +77,10 @@ const xDefaultHref = new URL(getLocalizedPath(path, 'en'), siteConfig.url).href;
 		<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 		<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 		<link rel="sitemap" type="application/xml" title="Sitemap" href="/sitemap.xml" />
+		<link rel="alternate" type="application/rss+xml" title="The Isle Blog RSS" href="/rss.xml" />
+		{preloadImage && (
+			<link rel="preload" as="image" href={new URL(preloadImage, siteConfig.url).href} fetchpriority="high" />
+		)}
 
 		<meta property="og:type" content={type} />
 		<meta property="og:site_name" content={siteConfig.name} />
@@ -80,6 +90,15 @@ const xDefaultHref = new URL(getLocalizedPath(path, 'en'), siteConfig.url).href;
 		<meta property="og:image" content={ogImageURL} />
 		<meta property="og:image:alt" content={ogTitle} />
 		<meta property="og:locale" content={ogLocale} />
+		{type === 'article' && articlePublished && (
+			<meta property="article:published_time" content={articlePublished} />
+		)}
+		{type === 'article' && articleModified && (
+			<meta property="article:modified_time" content={articleModified} />
+		)}
+		{type === 'article' && (
+			<meta property="article:author" content={siteConfig.name} />
+		)}
 		{
 			locales
 				.filter((entry) => entry.code !== locale)

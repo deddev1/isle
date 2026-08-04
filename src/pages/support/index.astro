@@ -1,23 +1,29 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import { productInfo, siteConfig, getPageDescription } from '../../data/site';
+import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
+import { productInfo, siteConfig } from '../../data/site';
+import { getPageSeo } from '../../data/seo/meta';
 import { theIsleImages } from '../../data/theisle';
 
-const title = 'The Isle Cheats Support - Contact & Help';
-const description = getPageDescription('/support/');
+const seo = getPageSeo('support');
 ---
 
 <PageLayout
-	title={title}
-	description={description}
+	title={seo.title}
+	description={seo.description}
 	canonicalPath="/support/"
 	heading="The Isle Cheats Support"
 	intro="Get help with orders, digital delivery, or package setup for The Isle Cheats."
 	heroImage={theIsleImages.product[4].src}
-	heroAlt="The Isle Cheats support visual"
+	heroAlt="The Isle Cheats support team contact page for delivery and setup help"
 	gallery={[theIsleImages.product[4], theIsleImages.product[0], theIsleImages.cover]}
 	ctaPrimary={{ href: `mailto:${siteConfig.supportEmail}`, label: 'Email Support' }}
 	ctaSecondary={{ href: '/faq/', label: 'Browse FAQ' }}
+	keywords={seo.keywords}
+	ogTitle={seo.ogTitle}
+	ogDescription={seo.ogDescription}
+	twitterTitle={seo.twitterTitle}
+	twitterDescription={seo.twitterDescription}
 >
 	<section class="card-panel">
 		<h2>Contact</h2>
@@ -46,4 +52,5 @@ const description = getPageDescription('/support/');
 			<li><a href="/pricing/">Pricing</a></li>
 		</ul>
 	</section>
+	<InternalLinksPanel />
 </PageLayout>

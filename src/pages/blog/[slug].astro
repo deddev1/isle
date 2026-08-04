@@ -1,86 +1,186 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import { getPageSeo } from '../../data/seo/meta';
-import { getBlogIdea, blogIdeas } from '../../data/seo/blog-ideas';
-import { buildArticleSchema } from '../../data/seo/schema';
+import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
+import { getBlogPostSeo } from '../../data/seo/blog-meta';
+import { blogIdeas } from '../../data/seo/blog-ideas';
+import { buildArticleSchema, buildFaqSchema } from '../../data/seo/schema';
+import { estimateReadingTime, formatDate } from '../../data/seo/helpers';
 import { getLocaleFromPath } from '../../data/i18n';
+import { siteConfig } from '../../data/site';
 import { theIsleImages } from '../../data/theisle';
-import { internalLinks } from '../../data/seo/content';
 
 export function getStaticPaths() {
-	return blogIdeas.map((idea) => ({
+	return blogIdeas.map((idea, index) => ({
 		params: { slug: idea.slug },
-		props: { idea },
+		props: { idea, index },
 	}));
 }
 
-const { idea } = Astro.props;
+const { idea, index } = Astro.props;
 const locale = getLocaleFromPath(Astro.url.pathname);
-const seo = getPageSeo('blogPost', locale);
+const seo = getBlogPostSeo(idea);
 const canonicalPath = `/blog/${idea.slug}/`;
 
-const title = `${idea.title} | islecheats.net`;
-const description = `${idea.title} — in-depth article for The Isle players covering ${idea.category} topics at islecheats.net.`;
+const prevPost = index > 0 ? blogIdeas[index - 1] : null;
+const nextPost = index < blogIdeas.length - 1 ? blogIdeas[index + 1] : null;
+
+const relatedPosts = blogIdeas
+	.filter((post) => post.category === idea.category && post.slug !== idea.slug)
+	.slice(0, 4);
+
+const toc = [
+	{ id: 'overview', label: 'Overview' },
+	{ id: 'key-takeaways', label: 'Key takeaways' },
+	{ id: 'faq', label: 'Common questions' },
+	{ id: 'related-articles', label: 'Related articles' },
+];
+
+const overviewText = `This article covers ${idea.title.toLowerCase()} for players researching The Isle cheats, ESP overlays, and survival strategies on Windows PC.`;
+const wordCount = 320 + idea.title.split(/\s+/).length * 8;
+const readingMinutes = estimateReadingTime(wordCount);
+
+const postFaqs = [
+	{
+		question: `Who is this ${idea.category} guide for?`,
+		answer:
+			'This guide is for The Isle players on Windows PC who want clear context on cheats, ESP overlays, survival mechanics, or package options before making a decision.',
+	},
+	{
+		question: 'Where can I compare The Isle Cheats packages?',
+		answer:
+			'Visit the Pricing page for monthly and lifetime plans, the Features page for a full breakdown, and the FAQ hub for delivery and compatibility answers.',
+	},
+];
 
 const articleSchema = buildArticleSchema({
-	title,
-	description,
+	title: seo.ogTitle,
+	description: seo.description,
 	path: canonicalPath,
 	locale,
+	datePublished: seo.published,
+	dateModified: seo.modified,
+	wordCount,
 });
 
-const relatedCluster = internalLinks.hub.concat(internalLinks.guides).slice(0, 5);
+const faqSchema = buildFaqSchema(postFaqs);
 ---
 
 <PageLayout
-	title={title}
-	description={description}
+	title={seo.title}
+	description={seo.description}
 	canonicalPath={canonicalPath}
 	heading={idea.title}
 	intro={`An in-depth ${idea.intent} guide covering ${idea.category} topics for The Isle players on Windows PC.`}
 	heroImage={theIsleImages.hero}
-	heroAlt={idea.title}
+	heroAlt={`${idea.title} — The Isle Cheats blog article illustration`}
 	locale={locale}
-	keywords={`The Isle, ${idea.category}, ${idea.intent}`}
-	ogTitle={title}
-	ogDescription={description}
-	twitterTitle={title}
-	twitterDescription={description}
+	keywords={seo.keywords}
+	ogTitle={seo.ogTitle}
+	ogDescription={seo.ogDescription}
+	twitterTitle={seo.twitterTitle}
+	twitterDescription={seo.twitterDescription}
+	type="article"
+	articlePublished={seo.published}
+	articleModified={seo.modified}
 	ctaPrimary={{ href: '/pricing/', label: 'View Pricing' }}
 	ctaSecondary={{ href: '/the-isle-guide/', label: 'The Isle Guide' }}
 	gallery={[]}
 	breadcrumbLabel={idea.title}
+	preloadHero={true}
 >
 	<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 
 	<section class="card-panel">
-		<h2>Overview</h2>
 		<p>
-			This article covers {idea.title.toLowerCase()} for players researching The Isle cheats, ESP overlays,
-			and survival strategies. Whether you are comparing packages or learning gameplay mechanics, this guide
-			connects product features with practical in-game context.
+			<strong>Author:</strong> {siteConfig.name} Team ·
+			<strong>Published:</strong> {formatDate(seo.published)} ·
+			<strong>Updated:</strong> {formatDate(seo.modified)} ·
+			<strong>Reading time:</strong> {readingMinutes} min
 		</p>
 	</section>
 
-	<section class="card-panel">
+	<nav class="card-panel" aria-label="Table of contents">
+		<h2>Table of contents</h2>
+		<ul>
+			{toc.map((item) => (
+				<li>
+					<a href={`#${item.id}`}>{item.label}</a>
+				</li>
+			))}
+		</ul>
+	</nav>
+
+	<section class="card-panel" id="overview">
+		<h2>Overview</h2>
+		<p>{overviewText}</p>
+		<p>
+			Whether you are comparing packages or learning gameplay mechanics, this guide connects product features
+			with practical in-game context for The Isle and Isle Cheats readers.
+		</p>
+	</section>
+
+	<section class="card-panel" id="key-takeaways">
 		<h2>Key takeaways</h2>
 		<ul>
-			<li>Understand how this topic relates to The Isle Cheats packages</li>
-			<li>Compare features on the dedicated product and guide pages</li>
-			<li>Check the Updates page after game patches for compatibility</li>
-			<li>Contact Support if you need help with delivery or setup</li>
+			<li>Understand how this topic relates to The Isle Cheats and Isle Cheats packages</li>
+			<li>Compare features on the <a href="/the-isle-features/">The Isle Features</a> page</li>
+			<li>Review <a href="/the-isle-faq/">The Isle FAQ</a> for delivery and compatibility answers</li>
+			<li>Check <a href="/the-isle-updates/">The Isle Updates</a> after game patches</li>
+			<li>Contact <a href="/support/">Support</a> if you need help with delivery or setup</li>
 		</ul>
 	</section>
 
-	<section class="card-panel">
-		<h2>Related guides</h2>
+	<section class="card-panel" id="faq">
+		<h2>Common questions</h2>
+		{postFaqs.map((item) => (
+			<>
+				<h3>{item.question}</h3>
+				<p>{item.answer}</p>
+			</>
+		))}
+	</section>
+
+	<section class="card-panel" id="related-articles">
+		<h2>Related articles</h2>
 		<ul>
-			{relatedCluster.map((link) => (
-				<li>
-					<a href={link.href}>{link.label}</a>
-				</li>
-			))}
-			<li><a href="/blog/">All blog articles</a></li>
+			{relatedPosts.length > 0 ? (
+				relatedPosts.map((post) => (
+					<li>
+						<a href={`/blog/${post.slug}/`}>{post.title}</a>
+					</li>
+				))
+			) : (
+				blogIdeas
+					.filter((post) => post.slug !== idea.slug)
+					.slice(0, 4)
+					.map((post) => (
+						<li>
+							<a href={`/blog/${post.slug}/`}>{post.title}</a>
+						</li>
+					))
+			)}
 		</ul>
 	</section>
+
+	<nav class="card-panel" aria-label="Article navigation">
+		<h2>Continue reading</h2>
+		<ul>
+			{prevPost && (
+				<li>
+					← Previous: <a href={`/blog/${prevPost.slug}/`}>{prevPost.title}</a>
+				</li>
+			)}
+			{nextPost && (
+				<li>
+					Next: <a href={`/blog/${nextPost.slug}/`}>{nextPost.title}</a> →
+				</li>
+			)}
+			<li>
+				<a href="/blog/">Back to The Isle Blog</a>
+			</li>
+		</ul>
+	</nav>
+
+	<InternalLinksPanel />
 </PageLayout>

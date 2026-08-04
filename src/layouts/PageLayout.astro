@@ -6,6 +6,7 @@ import { getLocalizedPath, type LocaleCode } from '../data/i18n';
 import { siteConfig } from '../data/site';
 import { theIsleImages } from '../data/theisle';
 import { buildBreadcrumbSchema } from '../data/seo/schema';
+import { buildWebPageSchema } from '../data/seo/schema';
 
 interface Props {
 	title: string;
@@ -26,6 +27,11 @@ interface Props {
 	ctaSecondary?: { href: string; label: string };
 	locale?: LocaleCode;
 	breadcrumbLabel?: string;
+	noindex?: boolean;
+	type?: 'website' | 'article';
+	preloadHero?: boolean;
+	articlePublished?: string;
+	articleModified?: string;
 }
 
 const {
@@ -47,6 +53,11 @@ const {
 	ctaSecondary,
 	locale = 'en',
 	breadcrumbLabel,
+	noindex = false,
+	type = 'website',
+	preloadHero = true,
+	articlePublished,
+	articleModified,
 } = Astro.props;
 
 const homeHref = getLocalizedPath('/', locale);
@@ -57,6 +68,12 @@ const breadcrumbSchema = buildBreadcrumbSchema(
 	],
 	locale,
 );
+const webPageSchema = buildWebPageSchema({
+	title,
+	description,
+	path: canonicalPath,
+	locale,
+});
 ---
 
 <Layout
@@ -70,13 +87,27 @@ const breadcrumbSchema = buildBreadcrumbSchema(
 	twitterDescription={twitterDescription}
 	keywords={keywords}
 	locale={locale}
+	noindex={noindex}
+	type={type}
+	preloadImage={preloadHero ? heroImage : undefined}
+	articlePublished={articlePublished}
+	articleModified={articleModified}
 >
 	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+	<script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
 	<Navbar />
 	<main class="page">
 		<section class="banner">
 			<div class="banner__media">
-				<img src={heroImage} alt={heroAlt} width="1600" height="900" class="banner__img" decoding="async" />
+				<img
+					src={heroImage}
+					alt={heroAlt}
+					width="1600"
+					height="900"
+					class="banner__img"
+					decoding="async"
+					fetchpriority={preloadHero ? 'high' : 'auto'}
+				/>
 				<div class="banner__scrim" aria-hidden="true"></div>
 			</div>
 			<div class="shell banner__content">
@@ -110,7 +141,14 @@ const breadcrumbSchema = buildBreadcrumbSchema(
 		<div class="shell page__wrap">
 			<section class="showcase">
 				<figure class="showcase__frame">
-					<img src={heroImage} alt={heroAlt} width="1400" height="788" decoding="async" />
+					<img
+						src={heroImage}
+						alt={heroAlt}
+						width="1400"
+						height="788"
+						decoding="async"
+						fetchpriority={preloadHero ? 'high' : 'auto'}
+					/>
 				</figure>
 			</section>
 

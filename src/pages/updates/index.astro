@@ -1,31 +1,35 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import { getPageDescription } from '../../data/site';
+import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
+import { getPageSeo } from '../../data/seo/meta';
 import { theIsleImages } from '../../data/theisle';
 
-const title = 'The Isle Cheats Updates - Changelog & Notices';
-const description = getPageDescription('/updates/');
+const seo = getPageSeo('updates');
 ---
 
 <PageLayout
-	title={title}
-	description={description}
+	title={seo.title}
+	description={seo.description}
 	canonicalPath="/updates/"
 	heading="The Isle Cheats Updates"
 	intro="Product maintenance notes for The Isle Cheats. Check here after game patches or when a feature page references a new build."
 	heroImage={theIsleImages.product[1].src}
-	heroAlt="The Isle Cheats updates visual"
+	heroAlt="The Isle Updates changelog and compatibility notices for cheat maintenance"
 	gallery={[theIsleImages.hero, theIsleImages.product[1], theIsleImages.product[2]]}
-	ctaPrimary={{ href: '/features/', label: 'View Features' }}
+	ctaPrimary={{ href: '/the-isle-updates/', label: 'Update Guide' }}
 	ctaSecondary={{ href: '/support/', label: 'Contact Support' }}
+	keywords={seo.keywords}
+	ogTitle={seo.ogTitle}
+	ogDescription={seo.ogDescription}
+	twitterTitle={seo.twitterTitle}
+	twitterDescription={seo.twitterDescription}
 >
 	<section class="card-panel">
 		<h2>Latest notice</h2>
 		<h3>Site and package information refresh</h3>
 		<p>
-			The product pages for The Isle Cheats ESP, Cheats, pricing, and support are organized into dedicated
-			URLs so players can review information by intent. Future build-specific notes will be posted here as they
-			are released.
+			Product pages, feature lists, and SEO content were updated to reflect the current Cloud-DMA, ESP, and
+			Cheats package structure. No gameplay-breaking changes were announced with this refresh.
 		</p>
 	</section>
 
@@ -33,8 +37,10 @@ const description = getPageDescription('/updates/');
 		<h2>How updates are handled</h2>
 		<p>
 			When The Isle receives a patch that affects package behavior, a short note will be added to this page.
-			For feature explanations, use <a href="/features/">Features</a>. For purchase decisions, use
-			<a href="/pricing/">Pricing</a>.
+			For feature explanations, use <a href="/the-isle-features/">The Isle Features</a>. For purchase
+			decisions, use <a href="/pricing/">Pricing</a> or read <a href="/blog/">The Isle Blog</a>.
 		</p>
 	</section>
+
+	<InternalLinksPanel />
 </PageLayout>

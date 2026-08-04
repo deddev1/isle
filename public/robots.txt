@@ -5,3 +5,4 @@ Allow: /images/
 Disallow: /api/
 
 Sitemap: https://islecheats.net/sitemap.xml
+# RSS: https://islecheats.net/rss.xml

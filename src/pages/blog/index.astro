@@ -1,5 +1,6 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
 import { blogIdeas } from '../../data/seo/blog-ideas';
 import { getPageSeo } from '../../data/seo/meta';
 import { getLocaleFromPath } from '../../data/i18n';
@@ -19,7 +20,7 @@ const informational = blogIdeas.filter((p) => p.intent === 'informational');
 	heading="The Isle Blog"
 	intro="Guides, tutorials, and articles about The Isle cheats, ESP, survival, growth, performance, and product updates."
 	heroImage={theIsleImages.hero}
-	heroAlt="The Isle Blog"
+	heroAlt="The Isle Blog — cheats, ESP, survival, and gameplay guides for dinosaur players"
 	locale={locale}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
@@ -63,4 +64,6 @@ const informational = blogIdeas.filter((p) => p.intent === 'informational');
 			<li><a href="/the-isle-performance/">The Isle Performance Guide</a></li>
 		</ul>
 	</section>
+
+	<InternalLinksPanel />
 </PageLayout>

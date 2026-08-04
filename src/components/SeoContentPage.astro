@@ -2,6 +2,7 @@
 import PageLayout from '../layouts/PageLayout.astro';
 import { getPageSeo, type PageSeoKey } from '../data/seo/meta';
 import { buildBreadcrumbSchema, buildFaqSchema } from '../data/seo/schema';
+import InternalLinksPanel from './InternalLinksPanel.astro';
 import { getLocaleFromPath } from '../data/i18n';
 import { theIsleImages } from '../data/theisle';
 
@@ -71,4 +72,5 @@ const faqSchema = faqs.length > 0 ? buildFaqSchema(faqs) : null;
 	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 	{faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
 	<slot />
+	<InternalLinksPanel />
 </PageLayout>

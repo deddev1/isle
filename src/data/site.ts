@@ -174,7 +174,7 @@ export const mainNav = [
 	{ label: 'Features', href: '/#features', section: 'features' },
 	{ label: 'Demo', href: '/#demo', section: 'demo' },
 	{ label: 'Undetected', href: '/#undetected', section: 'undetected' },
-	{ label: 'Blog', href: '/#blog', section: 'blog' },
+	{ label: 'Blog', href: '/blog/', section: 'blog' },
 ] as const;
 
 export const footerNav = [
