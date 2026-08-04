@@ -22,12 +22,14 @@ Without a `www` DNS record, the www hostname cannot redirect and SEO tools will 
 
 Enable **Always Use HTTPS** under SSL/TLS → Edge Certificates.
 
-### 3. Custom domains (Pages)
+### 3. Custom domains (Worker)
 
-Attach **both** hostnames to the Pages project:
+Route **both** hostnames to the `isle` Worker:
 
 - `islecheats.net`
 - `www.islecheats.net`
+
+If a Cloudflare Pages project is also attached to these hostnames, remove or disable it so the Worker deployment is the only origin.
 
 ### 4. Redirect layers in this repo
 

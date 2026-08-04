@@ -1,21 +1,21 @@
 # Cloudflare deployment
 
-This site deploys to **Cloudflare Pages** (project: `isle`).
+This site deploys with **Workers Builds** using a Worker + static assets.
 
 ## Workers Builds settings
 
 | Setting | Value |
 | ------- | ----- |
 | **Build command** | `npm run build` |
-| **Deploy command** | `npm run deploy` |
+| **Deploy command** | `npx wrangler deploy` |
 
-Equivalent direct command:
+`wrangler.toml` configures:
 
-```text
-npx wrangler pages deploy ./dist --project-name=isle --commit-dirty=true
-```
+- **Worker entry:** `public/_worker.js` (canonical redirects + security headers)
+- **Static assets:** `./dist` (Astro build output) via the `ASSETS` binding
+- **`run_worker_first`:** redirects run before static asset serving
 
-Do **not** use `npx wrangler deploy` — that targets Workers, not Pages.
+The postbuild step writes `dist/.assetsignore` so `_worker.js` is not uploaded as a public static file.
 
 ## Manual deploy
 
@@ -25,7 +25,13 @@ npm run build
 npm run deploy
 ```
 
+Equivalent commands:
+
+```sh
+npx wrangler deploy
+```
+
 ## Redirects
 
 HTTP/www → HTTPS apex redirects are handled by `public/_worker.js`
-(Pages advanced mode) and `public/_redirects`.
+and `public/_redirects`.
