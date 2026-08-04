@@ -38,4 +38,4 @@ npx wrangler deploy
 ## Redirects
 
 HTTP/www → HTTPS apex redirects are handled by `public/_worker.js`
-and `public/_redirects`.
+(not `public/_redirects` — Workers Assets only allow relative URLs in `_redirects`).
