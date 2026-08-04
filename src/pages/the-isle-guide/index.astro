@@ -1,0 +1,48 @@
+---
+import SeoContentPage from '../../components/SeoContentPage.astro';
+import { siloFaqs, internalLinks } from '../../data/seo/content';
+import { theIsleImages } from '../../data/theisle';
+---
+
+<SeoContentPage
+	seoKey="theIsleGuide"
+	canonicalPath="/the-isle-guide/"
+	heading="The Isle Guide"
+	intro="Your central resource for The Isle cheats, ESP setup, survival tactics, growth paths, performance tips, and package selection."
+	heroImage={theIsleImages.hero}
+	heroAlt="The Isle Guide banner"
+	faqs={siloFaqs.theIsleGuide}
+	ctaPrimary={{ href: '/the-isle-cheats/', label: 'The Isle Cheats' }}
+	ctaSecondary={{ href: '/pricing/', label: 'View Pricing' }}
+>
+	<section class="card-panel">
+		<h2>Getting started with The Isle</h2>
+		<p>
+			The Isle is a dinosaur survival game by Afterthought LLC with Evrima as the active development branch.
+			Players choose herbivore or carnivore dinosaurs, grow over time, and compete for resources. Whether you
+			use cheats or play vanilla, understanding growth, water, and threat awareness is essential.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Guide topics</h2>
+		<ul>
+			{internalLinks.guides.map((link) => (
+				<li>
+					<a href={link.href}>{link.label}</a>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section class="card-panel">
+		<h2>Product guides</h2>
+		<ul>
+			<li><a href="/the-isle-cheats/">The Isle Cheats — product hub</a></li>
+			<li><a href="/the-isle-esp/">The Isle ESP — overlay guide</a></li>
+			<li><a href="/the-isle-features/">The Isle Features — full breakdown</a></li>
+			<li><a href="/the-isle-faq/">The Isle FAQ — common questions</a></li>
+			<li><a href="/blog/">The Isle Blog — articles and updates</a></li>
+		</ul>
+	</section>
+</SeoContentPage>

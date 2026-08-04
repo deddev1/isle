@@ -1,0 +1,52 @@
+---
+import SeoContentPage from '../../components/SeoContentPage.astro';
+import { internalLinks, productInfo, cloudDmaOption } from '../../data/seo/content';
+import { featureCategories } from '../../data/site';
+import { theIsleImages } from '../../data/theisle';
+---
+
+<SeoContentPage
+	seoKey="theIsleFeatures"
+	canonicalPath="/the-isle-features/"
+	heading="The Isle Features"
+	intro="Every The Isle Features category explained — ESP, cheats, radar, FOV changer, crosshair, and Cloud-DMA inclusions for Windows PC."
+	heroImage={theIsleImages.hero}
+	heroAlt="The Isle Features overview"
+	ctaPrimary={{ href: '/features/', label: 'Full Feature List' }}
+	ctaSecondary={{ href: '/pricing/', label: 'Compare Pricing' }}
+>
+	<section class="card-panel">
+		<h2>Feature categories</h2>
+		<ul>
+			{featureCategories.map((cat) => (
+				<li>
+					<a href={cat.href}>{cat.title}</a>
+					{cat.cloudDmaExcluded ? ' (not in Cloud-DMA)' : ''}
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section class="card-panel">
+		<h2>Cloud-DMA inclusions</h2>
+		<p>{cloudDmaOption.summary}</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Utility features</h2>
+		<ul>
+			{productInfo.features.other.map((item) => <li>{item}</li>)}
+		</ul>
+	</section>
+
+	<section class="card-panel">
+		<h2>Related pages</h2>
+		<ul>
+			{internalLinks.product.map((link) => (
+				<li>
+					<a href={link.href}>{link.label}</a>
+				</li>
+			))}
+		</ul>
+	</section>
+</SeoContentPage>

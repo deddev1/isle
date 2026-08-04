@@ -8,18 +8,19 @@ export const siteConfig = {
 	checkoutUrl: 'https://zadeyo.com/go/QRH?to=%2Fproducts%2Fthe-isle-novaxware',
 	defaultOgImage: '/images/hero.webp',
 	metaDescription:
-		'Compare The Isle Cheats for Windows PC. Survival hacks, Cloud-DMA packages, monthly and lifetime plans, features, and support at islecheats.net.',
+		'Buy The Isle Cheats for Windows PC. Isle Cheats with ESP, Cloud-DMA hacks, monthly and lifetime plans, features, guides, and support at islecheats.net.',
 	keywords:
-		'The Isle Cheats, The Isle cheats, isle cheats, ESP, hacks, instant rotation, the isle, dinosaur survival, islecheats.net',
+		'The Isle Cheats, Isle Cheats, The Isle ESP, The Isle Hack, Buy The Isle Cheats, The Isle Guide, The Isle Features, islecheats.net',
 } as const;
 
 export const homeSeo = {
-	title: 'The Isle Cheats — ESP & Hacks for Windows PC',
+	title: 'The Isle Cheats — ESP, Hacks & Guide for Windows PC | islecheats.net',
 	heroTitle: 'The Isle Cheats',
 	heroSubtitle: 'Dino ESP & Radar',
 	featuresHeading: 'ESP & Hacks Packages',
 	whyUsHeading: 'Why Choose The Isle Cheats',
-	description: siteConfig.metaDescription,
+	description:
+		'Buy The Isle Cheats with Visuals ESP, World ESP, Cloud-DMA hacks, and survival tools for Windows PC. Compare Isle Cheats features, pricing, and guides at islecheats.net.',
 } as const;
 
 export const homeVideo = {
@@ -185,10 +186,14 @@ export const footerNav = [
 ] as const;
 
 export const footerExplore = [
+	{ label: 'The Isle Cheats hub', href: '/the-isle-cheats/' },
+	{ label: 'The Isle ESP guide', href: '/the-isle-esp/' },
+	{ label: 'The Isle Guide', href: '/the-isle-guide/' },
 	{ label: 'Site overview', href: '/' },
 	{ label: 'Visuals ESP page', href: '/theisle-esp/' },
 	{ label: 'Cheats page', href: '/cheats/' },
 	{ label: 'All features and hacks', href: '/features/' },
+	{ label: 'The Isle Blog', href: '/blog/' },
 	{ label: 'Plans and pricing', href: '/pricing/' },
 	{ label: 'Common questions hub', href: '/faq/' },
 ] as const;

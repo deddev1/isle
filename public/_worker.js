@@ -13,6 +13,18 @@ const PATH_REDIRECTS = {
 	'/theisle-exploits/': '/cheats/',
 	'/marauders-esp': '/theisle-esp/',
 	'/marauders-esp/': '/theisle-esp/',
+	'/en': '/',
+	'/en/': '/',
+	'/the-isle-hacks': '/cheats/',
+	'/the-isle-hacks/': '/cheats/',
+	'/the-isle-hack': '/cheats/',
+	'/the-isle-hack/': '/cheats/',
+	'/isle-cheats': '/the-isle-cheats/',
+	'/isle-cheats/': '/the-isle-cheats/',
+	'/theisle-cheats': '/the-isle-cheats/',
+	'/theisle-cheats/': '/the-isle-cheats/',
+	'/theisle-guide': '/the-isle-guide/',
+	'/theisle-guide/': '/the-isle-guide/',
 };
 
 const SECURITY_HEADERS = {
@@ -100,6 +112,20 @@ function withSecurityHeaders(response) {
 	});
 }
 
+function resolvePathRedirect(pathname) {
+	if (PATH_REDIRECTS[pathname]) {
+		return PATH_REDIRECTS[pathname];
+	}
+
+	// /en/* → /* (English at root, not /en/)
+	if (pathname === '/en' || pathname.startsWith('/en/')) {
+		const stripped = pathname.replace(/^\/en/, '') || '/';
+		return stripped.endsWith('/') ? stripped : `${stripped}/`;
+	}
+
+	return null;
+}
+
 /**
  * Cloudflare Pages advanced mode worker.
  * Canonicalizes http/www traffic to https://islecheats.net.
@@ -112,7 +138,7 @@ export default {
 			return redirectToCanonical(url);
 		}
 
-		const pathRedirect = PATH_REDIRECTS[url.pathname];
+		const pathRedirect = resolvePathRedirect(url.pathname);
 		if (pathRedirect) {
 			return redirectToCanonical(new URL(pathRedirect + url.search, CANONICAL_ORIGIN));
 		}

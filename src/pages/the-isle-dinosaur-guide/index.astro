@@ -1,0 +1,47 @@
+---
+import SeoContentPage from '../../components/SeoContentPage.astro';
+import { siloFaqs } from '../../data/seo/content';
+import { theIsleImages } from '../../data/theisle';
+---
+
+<SeoContentPage
+	seoKey="theIsleDinosaurGuide"
+	canonicalPath="/the-isle-dinosaur-guide/"
+	heading="The Isle Dinosaur Guide"
+	intro="Complete dinosaur guide for The Isle — carnivore vs herbivore playstyles, species tiers, bite radius, stamina, and ESP classname tracking."
+	heroImage={theIsleImages.product[5].src}
+	heroAlt="The Isle dinosaur species guide"
+	faqs={siloFaqs.theIsleDinosaurGuide}
+	ctaPrimary={{ href: '/the-isle-growth-guide/', label: 'Growth Guide' }}
+	ctaSecondary={{ href: '/the-isle-survival-guide/', label: 'Survival Guide' }}
+>
+	<section class="card-panel">
+		<h2>Carnivore dinosaurs</h2>
+		<p>
+			Carnivores hunt other dinosaurs for food. Apex predators like Tyrannosaurus dominate late-game but grow
+			slowly. Mid-tier carnivores like Allosaurus and Carnotaurus offer balanced growth and combat. Use Bite
+			Radius ESP to understand attack range.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Herbivore dinosaurs</h2>
+		<p>
+			Herbivores survive by grazing and traveling in groups. Large herbivores like Triceratops and Stegosaurus
+			can defend against mid-tier carnivores. Smaller herbivores like Dryosaurus grow fast but are vulnerable.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>ESP for dinosaur identification</h2>
+		<p>
+			Classname ESP displays the current dinosaur class of each entity. Combined with growth percentage, health,
+			and weight data, you can assess every encounter before engaging.
+		</p>
+		<p>
+			Read the <a href="/the-isle-esp/">ESP guide</a> or visit
+			<a href="/blog/the-isle-herbivore-guide/">herbivore</a> and
+			<a href="/blog/the-isle-carnivore-guide/">carnivore</a> blog articles for deeper strategies.
+		</p>
+	</section>
+</SeoContentPage>

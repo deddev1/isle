@@ -1,15 +1,15 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import { cloudDmaOption, productInfo, getPageDescription } from '../../data/site';
+import { cloudDmaOption, productInfo } from '../../data/site';
+import { getPageSeo } from '../../data/seo/meta';
 import { theIsleImages } from '../../data/theisle';
 
-const title = 'The Isle Cheats Features - Cloud-DMA, ESP & Cheats';
-const description = getPageDescription('/features/');
+const seo = getPageSeo('features');
 ---
 
 <PageLayout
-	title={title}
-	description={description}
+	title={seo.title}
+	description={seo.description}
 	canonicalPath="/features/"
 	heading="The Isle Cheats Features"
 	intro="Compare Cloud-DMA, Visuals ESP, World ESP, Cheats, and Other hacks in one place before choosing a duration on Pricing."
@@ -18,6 +18,11 @@ const description = getPageDescription('/features/');
 	gallery={theIsleImages.gallery.slice(1, 4)}
 	ctaPrimary={{ href: '/pricing/', label: 'Compare Pricing' }}
 	ctaSecondary={{ href: '/faq/', label: 'Read FAQ' }}
+	keywords={seo.keywords}
+	ogTitle={seo.ogTitle}
+	ogDescription={seo.ogDescription}
+	twitterTitle={seo.twitterTitle}
+	twitterDescription={seo.twitterDescription}
 >
 	<section class="card-panel">
 		<h2>{cloudDmaOption.label} option</h2>

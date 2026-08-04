@@ -1,0 +1,38 @@
+---
+import SeoContentPage from '../../components/SeoContentPage.astro';
+import { siloFaqs, productInfo } from '../../data/seo/content';
+import { theIsleImages } from '../../data/theisle';
+---
+
+<SeoContentPage
+	seoKey="theIsleSettings"
+	canonicalPath="/the-isle-settings/"
+	heading="The Isle Settings"
+	intro="Configure The Isle graphics, ESP overlays, menu keys, font settings, and config profiles for optimal gameplay on Windows PC."
+	heroImage={theIsleImages.product[1].src}
+	heroAlt="The Isle Settings configuration"
+	faqs={siloFaqs.theIsleSettings}
+	ctaPrimary={{ href: '/the-isle-performance/', label: 'Performance Guide' }}
+	ctaSecondary={{ href: '/the-isle-esp/', label: 'ESP Guide' }}
+>
+	<section class="card-panel">
+		<h2>In-client settings</h2>
+		<ul>
+			{productInfo.features.other
+				.filter((f) => f.includes('Menu') || f.includes('Font') || f.includes('Config') || f.includes('FOV') || f.includes('Crosshair') || f.includes('Sky') || f.includes('Shadow') || f.includes('Fog'))
+				.map((item) => <li>{item}</li>)}
+		</ul>
+	</section>
+
+	<section class="card-panel">
+		<h2>ESP configuration</h2>
+		<p>
+			Visuals ESP supports custom colors, font size, max distance, box type, and snapline styles. Save profiles
+			with the Configs feature to switch between layouts for different dinosaurs.
+		</p>
+		<p>
+			See <a href="/the-isle-esp/">The Isle ESP guide</a> for overlay details or
+			<a href="/theisle-esp/">Visuals ESP page</a> for feature specifics.
+		</p>
+	</section>
+</SeoContentPage>

@@ -2,13 +2,20 @@
 import Layout from './Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import SiteFooter from '../components/SiteFooter.astro';
+import { getLocalizedPath, type LocaleCode } from '../data/i18n';
 import { siteConfig } from '../data/site';
 import { theIsleImages } from '../data/theisle';
+import { buildBreadcrumbSchema } from '../data/seo/schema';
 
 interface Props {
 	title: string;
 	description: string;
 	canonicalPath?: string;
+	ogTitle?: string;
+	ogDescription?: string;
+	twitterTitle?: string;
+	twitterDescription?: string;
+	keywords?: string;
 	heading: string;
 	intro: string;
 	eyebrow?: string;
@@ -17,12 +24,19 @@ interface Props {
 	gallery?: ReadonlyArray<{ src: string; alt: string }>;
 	ctaPrimary?: { href: string; label: string };
 	ctaSecondary?: { href: string; label: string };
+	locale?: LocaleCode;
+	breadcrumbLabel?: string;
 }
 
 const {
 	title,
 	description,
 	canonicalPath = '/',
+	ogTitle,
+	ogDescription,
+	twitterTitle,
+	twitterDescription,
+	keywords,
 	heading,
 	intro,
 	eyebrow = siteConfig.name,
@@ -31,10 +45,33 @@ const {
 	gallery = theIsleImages.product.slice(0, 3),
 	ctaPrimary,
 	ctaSecondary,
+	locale = 'en',
+	breadcrumbLabel,
 } = Astro.props;
+
+const homeHref = getLocalizedPath('/', locale);
+const breadcrumbSchema = buildBreadcrumbSchema(
+	[
+		{ name: 'Home', path: '/' },
+		{ name: breadcrumbLabel ?? heading, path: canonicalPath },
+	],
+	locale,
+);
 ---
 
-<Layout title={title} description={description} canonicalPath={canonicalPath} ogImage={heroImage}>
+<Layout
+	title={title}
+	description={description}
+	canonicalPath={canonicalPath}
+	ogImage={heroImage}
+	ogTitle={ogTitle}
+	ogDescription={ogDescription}
+	twitterTitle={twitterTitle}
+	twitterDescription={twitterDescription}
+	keywords={keywords}
+	locale={locale}
+>
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 	<Navbar />
 	<main class="page">
 		<section class="banner">
@@ -44,9 +81,9 @@ const {
 			</div>
 			<div class="shell banner__content">
 				<nav class="banner__crumbs" aria-label="Breadcrumb">
-					<a href="/">Home</a>
+					<a href={homeHref}>Home</a>
 					<span aria-hidden="true">/</span>
-					<span aria-current="page">{heading}</span>
+					<span aria-current="page">{breadcrumbLabel ?? heading}</span>
 				</nav>
 				<p class="banner__eyebrow">{eyebrow}</p>
 				<h1 class="banner__title">{heading}</h1>

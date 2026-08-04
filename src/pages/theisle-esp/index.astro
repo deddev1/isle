@@ -1,15 +1,15 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import { productInfo, getPageDescription } from '../../data/site';
+import { productInfo } from '../../data/site';
+import { getPageSeo } from '../../data/seo/meta';
 import { theIsleImages } from '../../data/theisle';
 
-const title = 'The Isle Cheats ESP - Visuals & World ESP';
-const description = getPageDescription('/theisle-esp/');
+const seo = getPageSeo('theisleEsp');
 ---
 
 <PageLayout
-	title={title}
-	description={description}
+	title={seo.title}
+	description={seo.description}
 	canonicalPath="/theisle-esp/"
 	heading="The Isle Cheats ESP"
 	intro="Visuals ESP and World ESP for entity awareness, resource tracking, and environment readouts. Both are included in the Cloud-DMA option."
@@ -18,6 +18,11 @@ const description = getPageDescription('/theisle-esp/');
 	gallery={theIsleImages.product.slice(0, 3)}
 	ctaPrimary={{ href: '/pricing/', label: 'View Pricing' }}
 	ctaSecondary={{ href: '/cheats/', label: 'See Cheats' }}
+	keywords={seo.keywords}
+	ogTitle={seo.ogTitle}
+	ogDescription={seo.ogDescription}
+	twitterTitle={seo.twitterTitle}
+	twitterDescription={seo.twitterDescription}
 >
 	<section class="card-panel">
 		<h2>Visuals ESP (WH)</h2>

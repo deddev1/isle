@@ -1,0 +1,74 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { getPageSeo, type PageSeoKey } from '../data/seo/meta';
+import { buildBreadcrumbSchema, buildFaqSchema } from '../data/seo/schema';
+import { getLocaleFromPath } from '../data/i18n';
+import { theIsleImages } from '../data/theisle';
+
+interface FaqItem {
+	question: string;
+	answer: string;
+}
+
+interface Props {
+	seoKey: PageSeoKey;
+	canonicalPath: string;
+	heading: string;
+	intro: string;
+	heroImage?: string;
+	heroAlt?: string;
+	faqs?: FaqItem[];
+	ctaPrimary?: { href: string; label: string };
+	ctaSecondary?: { href: string; label: string };
+	breadcrumbLabel?: string;
+}
+
+const {
+	seoKey,
+	canonicalPath,
+	heading,
+	intro,
+	heroImage = theIsleImages.hero,
+	heroAlt,
+	faqs = [],
+	ctaPrimary = { href: '/pricing/', label: 'View Pricing' },
+	ctaSecondary = { href: '/the-isle-guide/', label: 'The Isle Guide' },
+	breadcrumbLabel,
+} = Astro.props;
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const seo = getPageSeo(seoKey, locale);
+
+const breadcrumbSchema = buildBreadcrumbSchema(
+	[
+		{ name: 'Home', path: '/' },
+		{ name: breadcrumbLabel ?? heading, path: canonicalPath },
+	],
+	locale,
+);
+
+const faqSchema = faqs.length > 0 ? buildFaqSchema(faqs) : null;
+---
+
+<PageLayout
+	title={seo.title}
+	description={seo.description}
+	canonicalPath={canonicalPath}
+	heading={heading}
+	intro={intro}
+	heroImage={heroImage}
+	heroAlt={heroAlt ?? heading}
+	ctaPrimary={ctaPrimary}
+	ctaSecondary={ctaSecondary}
+	locale={locale}
+	keywords={seo.keywords}
+	ogTitle={seo.ogTitle}
+	ogDescription={seo.ogDescription}
+	twitterTitle={seo.twitterTitle}
+	twitterDescription={seo.twitterDescription}
+	breadcrumbLabel={breadcrumbLabel ?? heading}
+>
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+	{faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
+	<slot />
+</PageLayout>

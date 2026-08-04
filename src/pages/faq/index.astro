@@ -1,47 +1,28 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import { homeFaqs, siteConfig, getPageDescription } from '../../data/site';
+import { homeFaqs, siteConfig } from '../../data/site';
+import { extendedFaqs } from '../../data/seo/content';
+import { getPageSeo } from '../../data/seo/meta';
+import { buildFaqSchema } from '../../data/seo/schema';
 import { theIsleImages } from '../../data/theisle';
 
-const title = 'The Isle Cheats FAQ - Delivery, Features & Support';
-const description = getPageDescription('/faq/');
+const seo = getPageSeo('faq');
 
 const faqs = [
-	...homeFaqs,
-	{
-		question: 'Does the Cloud-DMA option include Aimbot?',
-		answer:
-			'No. Cloud-DMA includes Visuals ESP, World ESP, Cheats, and Other hacks. Aimbot is not part of the Cloud-DMA option. See the Features page for the full breakdown.',
-	},
+	...extendedFaqs,
 	{
 		question: 'Can I get a refund?',
 		answer:
 			'Refund eligibility depends on the conditions published on the Refund Policy page. Review that page before purchasing.',
 	},
-	{
-		question: 'Which platforms are supported?',
-		answer:
-			'Current package information lists Windows PC support. Confirm details on the Features and Pricing pages before checkout.',
-	},
 ];
 
-const faqSchema = {
-	'@context': 'https://schema.org',
-	'@type': 'FAQPage',
-	mainEntity: faqs.map((item) => ({
-		'@type': 'Question',
-		name: item.question,
-		acceptedAnswer: {
-			'@type': 'Answer',
-			text: item.answer,
-		},
-	})),
-};
+const faqSchema = buildFaqSchema(faqs);
 ---
 
 <PageLayout
-	title={title}
-	description={description}
+	title={seo.title}
+	description={seo.description}
 	canonicalPath="/faq/"
 	heading="The Isle Cheats FAQ"
 	intro="Straight answers about The Isle Cheats features, packages, delivery, and support."
@@ -50,6 +31,11 @@ const faqSchema = {
 	gallery={theIsleImages.product.slice(2, 5)}
 	ctaPrimary={{ href: '/support/', label: 'Open Support' }}
 	ctaSecondary={{ href: '/pricing/', label: 'View Pricing' }}
+	keywords={seo.keywords}
+	ogTitle={seo.ogTitle}
+	ogDescription={seo.ogDescription}
+	twitterTitle={seo.twitterTitle}
+	twitterDescription={seo.twitterDescription}
 >
 	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 

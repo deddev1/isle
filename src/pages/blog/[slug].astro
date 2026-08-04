@@ -1,0 +1,86 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import { getPageSeo } from '../../data/seo/meta';
+import { getBlogIdea, blogIdeas } from '../../data/seo/blog-ideas';
+import { buildArticleSchema } from '../../data/seo/schema';
+import { getLocaleFromPath } from '../../data/i18n';
+import { theIsleImages } from '../../data/theisle';
+import { internalLinks } from '../../data/seo/content';
+
+export function getStaticPaths() {
+	return blogIdeas.map((idea) => ({
+		params: { slug: idea.slug },
+		props: { idea },
+	}));
+}
+
+const { idea } = Astro.props;
+const locale = getLocaleFromPath(Astro.url.pathname);
+const seo = getPageSeo('blogPost', locale);
+const canonicalPath = `/blog/${idea.slug}/`;
+
+const title = `${idea.title} | islecheats.net`;
+const description = `${idea.title} — in-depth article for The Isle players covering ${idea.category} topics at islecheats.net.`;
+
+const articleSchema = buildArticleSchema({
+	title,
+	description,
+	path: canonicalPath,
+	locale,
+});
+
+const relatedCluster = internalLinks.hub.concat(internalLinks.guides).slice(0, 5);
+---
+
+<PageLayout
+	title={title}
+	description={description}
+	canonicalPath={canonicalPath}
+	heading={idea.title}
+	intro={`An in-depth ${idea.intent} guide covering ${idea.category} topics for The Isle players on Windows PC.`}
+	heroImage={theIsleImages.hero}
+	heroAlt={idea.title}
+	locale={locale}
+	keywords={`The Isle, ${idea.category}, ${idea.intent}`}
+	ogTitle={title}
+	ogDescription={description}
+	twitterTitle={title}
+	twitterDescription={description}
+	ctaPrimary={{ href: '/pricing/', label: 'View Pricing' }}
+	ctaSecondary={{ href: '/the-isle-guide/', label: 'The Isle Guide' }}
+	gallery={[]}
+	breadcrumbLabel={idea.title}
+>
+	<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+
+	<section class="card-panel">
+		<h2>Overview</h2>
+		<p>
+			This article covers {idea.title.toLowerCase()} for players researching The Isle cheats, ESP overlays,
+			and survival strategies. Whether you are comparing packages or learning gameplay mechanics, this guide
+			connects product features with practical in-game context.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Key takeaways</h2>
+		<ul>
+			<li>Understand how this topic relates to The Isle Cheats packages</li>
+			<li>Compare features on the dedicated product and guide pages</li>
+			<li>Check the Updates page after game patches for compatibility</li>
+			<li>Contact Support if you need help with delivery or setup</li>
+		</ul>
+	</section>
+
+	<section class="card-panel">
+		<h2>Related guides</h2>
+		<ul>
+			{relatedCluster.map((link) => (
+				<li>
+					<a href={link.href}>{link.label}</a>
+				</li>
+			))}
+			<li><a href="/blog/">All blog articles</a></li>
+		</ul>
+	</section>
+</PageLayout>
