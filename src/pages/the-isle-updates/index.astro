@@ -1,0 +1,42 @@
+---
+import SeoContentPage from '../../components/SeoContentPage.astro';
+import { theIsleImages } from '../../data/theisle';
+---
+
+<SeoContentPage
+	seoKey="theIsleUpdates"
+	canonicalPath="/the-isle-updates/"
+	heading="The Isle Updates"
+	intro="Track The Isle game patches, Evrima updates, and cheat compatibility maintenance releases after every major update."
+	heroImage={theIsleImages.product[2].src}
+	heroAlt="The Isle updates tracker"
+	ctaPrimary={{ href: '/updates/', label: 'Product Changelog' }}
+	ctaSecondary={{ href: '/blog/the-isle-update-guide/', label: 'Update Guide' }}
+>
+	<section class="card-panel">
+		<h2>Game update tracking</h2>
+		<p>
+			The Isle receives regular patches from Afterthought LLC on the Evrima branch. Updates can change dinosaur
+			stats, map layouts, and anti-cheat systems. After every patch, check this page and the
+			<a href="/updates/">product changelog</a> for compatibility notices.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Cheat maintenance</h2>
+		<p>
+			The Isle Cheats maintenance releases are published when game patches require updates to ESP offsets,
+			cheat functions, or menu compatibility. Subscribe to the <a href="/blog/">blog</a> for update articles.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Related resources</h2>
+		<ul>
+			<li><a href="/updates/">Product updates log</a></li>
+			<li><a href="/the-isle-guide/">The Isle Guide</a></li>
+			<li><a href="/the-isle-faq/">The Isle FAQ</a></li>
+			<li><a href="/blog/the-isle-patch-notes-tracker/">Patch Notes Tracker</a></li>
+		</ul>
+	</section>
+</SeoContentPage>

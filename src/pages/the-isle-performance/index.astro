@@ -1,0 +1,46 @@
+---
+import SeoContentPage from '../../components/SeoContentPage.astro';
+import { siloFaqs, productInfo } from '../../data/seo/content';
+import { theIsleImages } from '../../data/theisle';
+---
+
+<SeoContentPage
+	seoKey="theIslePerformance"
+	canonicalPath="/the-isle-performance/"
+	heading="The Isle Performance Guide"
+	intro="The Isle FPS Guide — optimize graphics settings, reduce lag, and use utility hacks like Disable Shadows and No Fog for smoother dinosaur survival."
+	heroImage={theIsleImages.product[4].src}
+	heroAlt="The Isle performance optimization"
+	faqs={siloFaqs.theIslePerformance}
+	ctaPrimary={{ href: '/the-isle-settings/', label: 'Settings Guide' }}
+	ctaSecondary={{ href: '/the-isle-guide/', label: 'The Isle Guide' }}
+>
+	<section class="card-panel">
+		<h2>FPS optimization tips</h2>
+		<p>
+			Lower in-game graphics quality, reduce shadow quality, and close background applications. The Isle Evrima
+			can be demanding on mid-range hardware. Monitor your FPS during crowded server sessions.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Performance utility hacks</h2>
+		<ul>
+			<li>Disable Shadows — turn off in-game shadows for FPS boost</li>
+			<li>No Fog — remove fog for clearer visibility and reduced rendering</li>
+			<li>FOV Changer — adjust field of view without performance penalty</li>
+		</ul>
+		<p>
+			These features are part of The Isle Cheats Other category. See
+			<a href="/the-isle-features/">The Isle Features</a> for the full list.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Windows compatibility</h2>
+		<p>
+			The Isle Cheats runs on {productInfo.platforms.join(' and ')}. Ensure your GPU drivers are updated and
+			check <a href="/the-isle-updates/">The Isle Updates</a> after game patches.
+		</p>
+	</section>
+</SeoContentPage>

@@ -1,0 +1,91 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Navbar from '../components/Navbar.astro';
+import Hero from '../components/Hero.astro';
+import HomeVideoPlayer from '../components/HomeVideoPlayer.astro';
+import ProductCard from '../components/ProductCard.astro';
+import Gallery from '../components/Gallery.astro';
+import HomeSeo from '../components/HomeSeo.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import { homeFaqs, productInfo, siteConfig } from '../data/site';
+import { getPageSeo } from '../data/seo/meta';
+import { buildFaqSchema, buildSoftwareApplicationSchema } from '../data/seo/schema';
+import { getLocalizedPath } from '../data/i18n';
+import type { LocaleCode } from '../data/i18n';
+
+interface Props {
+	locale: LocaleCode;
+}
+
+const { locale } = Astro.props;
+const seo = getPageSeo('home', locale);
+const pricingUrl = new URL(getLocalizedPath('/pricing/', locale), siteConfig.url).href;
+
+const productSchema = buildSoftwareApplicationSchema({
+	name: productInfo.name,
+	description: productInfo.summary,
+	pricingUrl,
+	plans: productInfo.plans,
+	currency: productInfo.currency,
+});
+
+const faqSchema = buildFaqSchema(homeFaqs);
+const canonicalPath = getLocalizedPath('/', locale);
+---
+
+<Layout
+	title={seo.title}
+	description={seo.description}
+	canonicalPath={canonicalPath}
+	ogImage="/images/hero.webp"
+	preloadImage="/images/hero.webp"
+	locale={locale}
+	keywords={seo.keywords}
+	ogTitle={seo.ogTitle}
+	ogDescription={seo.ogDescription}
+	twitterTitle={seo.twitterTitle}
+	twitterDescription={seo.twitterDescription}
+>
+	<script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+	<Navbar />
+	<main class="site">
+		<Hero />
+		<section class="site__section" id="features" data-nav-section="features" aria-label="Product packages">
+			<div class="shell">
+				<div class="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-2 lg:gap-8">
+					<HomeVideoPlayer />
+					<ProductCard />
+				</div>
+			</div>
+		</section>
+		<section class="site__section site__section--seo" id="why-us" data-nav-section="why-us">
+			<HomeSeo />
+		</section>
+		<section class="site__section site__section--gallery" id="demo" data-nav-section="demo">
+			<div class="shell">
+				<Gallery />
+			</div>
+		</section>
+		<SiteFooter />
+	</main>
+</Layout>
+
+<style>
+	.site {
+		overflow-x: clip;
+	}
+
+	.site__section {
+		padding-block: var(--section-space);
+	}
+
+	.site__section--seo {
+		padding-top: 0.25rem;
+	}
+
+	.site__section--gallery {
+		padding-top: 0.5rem;
+		padding-bottom: 2rem;
+	}
+</style>

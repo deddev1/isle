@@ -1,0 +1,41 @@
+---
+import SeoContentPage from '../../components/SeoContentPage.astro';
+import { siloFaqs } from '../../data/seo/content';
+import { theIsleImages } from '../../data/theisle';
+---
+
+<SeoContentPage
+	seoKey="theIsleSurvivalGuide"
+	canonicalPath="/the-isle-survival-guide/"
+	heading="The Isle Survival Guide"
+	intro="Essential The Isle survival tactics — finding water and food, avoiding predators, managing bleed and fractures, and using ESP for threat awareness."
+	heroImage={theIsleImages.product[2].src}
+	heroAlt="The Isle survival guide visual"
+	faqs={siloFaqs.theIsleSurvivalGuide}
+	ctaPrimary={{ href: '/the-isle-esp/', label: 'ESP for Survival' }}
+	ctaSecondary={{ href: '/the-isle-growth-guide/', label: 'Growth Guide' }}
+>
+	<section class="card-panel">
+		<h2>Core survival needs</h2>
+		<p>
+			Survival in The Isle requires managing hunger, thirst, stamina, and health. Water sources are marked on
+			the map and highlighted by World ESP. Food varies by diet — herbivores graze, carnivores hunt.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Threat awareness</h2>
+		<p>
+			Visuals ESP shows nearby dinosaurs with health, growth, and distance data. Use this information to avoid
+			larger predators or identify wounded prey. Ignore Team filters allies from ESP overlays.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Injury and recovery</h2>
+		<p>
+			Bleeding and fractures slow growth and reduce combat effectiveness. Rest in safe locations, drink water,
+			and avoid combat while recovering. The No Fractured cheat prevents fractures in The Isle Cheats packages.
+		</p>
+	</section>
+</SeoContentPage>

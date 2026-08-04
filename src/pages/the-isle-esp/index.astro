@@ -1,0 +1,49 @@
+---
+import SeoContentPage from '../../components/SeoContentPage.astro';
+import { siloFaqs, internalLinks, productInfo } from '../../data/seo/content';
+import { theIsleImages } from '../../data/theisle';
+---
+
+<SeoContentPage
+	seoKey="theIsleEsp"
+	canonicalPath="/the-isle-esp/"
+	heading="The Isle ESP"
+	intro="How The Isle ESP works — Visuals ESP for dinosaur tracking and World ESP for resource awareness with configurable overlays on Windows PC."
+	heroImage={theIsleImages.product[3].src}
+	heroAlt="The Isle ESP overlay preview"
+	faqs={siloFaqs.theIsleEsp}
+	ctaPrimary={{ href: '/theisle-esp/', label: 'Visuals ESP Details' }}
+	ctaSecondary={{ href: '/the-isle-cheats/', label: 'The Isle Cheats' }}
+>
+	<section class="card-panel">
+		<h2>Visuals ESP features</h2>
+		<p>
+			Visuals ESP displays entities with boxes, snaplines, health bars, growth percentage, weight, classname,
+			stamina, and blood levels. Max distance reaches up to 2000 meters with custom colors.
+		</p>
+		<ul>
+			{productInfo.features.visualsEsp.map((item) => <li>{item}</li>)}
+		</ul>
+	</section>
+
+	<section class="card-panel">
+		<h2>World ESP features</h2>
+		<p>
+			World ESP reveals environmental objects critical for survival: bodies, meat, fruits, medicinal herbs,
+			mushrooms, and water sources within configurable range.
+		</p>
+		<ul>
+			{productInfo.features.worldEsp.map((item) => <li>{item}</li>)}
+		</ul>
+	</section>
+
+	<section class="card-panel">
+		<h2>Related ESP resources</h2>
+		<ul>
+			<li><a href="/theisle-esp/">The Isle Cheats ESP page</a></li>
+			<li><a href="/the-isle-survival-guide/">The Isle Survival Guide</a></li>
+			<li><a href="/the-isle-settings/">The Isle Settings</a></li>
+			<li><a href="/blog/how-the-isle-esp-works/">How The Isle ESP Works</a></li>
+		</ul>
+	</section>
+</SeoContentPage>

@@ -1,0 +1,21 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import InternalLinksPanel from '../components/InternalLinksPanel.astro';
+import { theIsleImages } from '../data/theisle';
+---
+
+<PageLayout
+	title="Page Not Found | islecheats"
+	description="This page could not be found on islecheats.net. Browse The Isle Cheats, ESP guides, pricing, FAQ, features, and blog articles from the homepage — start exploring now."
+	canonicalPath="/404/"
+	heading="Page not found"
+	intro="The page you requested does not exist or may have moved. Use the links below to find The Isle Cheats guides, pricing, and support."
+	heroImage={theIsleImages.hero}
+	heroAlt="The Isle Cheats — page not found"
+	gallery={[]}
+	noindex={true}
+	ctaPrimary={{ href: '/', label: 'Back to Homepage' }}
+	ctaSecondary={{ href: '/the-isle-guide/', label: 'The Isle Guide' }}
+>
+	<InternalLinksPanel />
+</PageLayout>

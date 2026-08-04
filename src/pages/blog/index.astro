@@ -1,0 +1,69 @@
+---
+import PageLayout from '../../layouts/PageLayout.astro';
+import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
+import { blogIdeas } from '../../data/seo/blog-ideas';
+import { getPageSeo } from '../../data/seo/meta';
+import { getLocaleFromPath } from '../../data/i18n';
+import { theIsleImages } from '../../data/theisle';
+
+const locale = getLocaleFromPath(Astro.url.pathname);
+const seo = getPageSeo('blog', locale);
+
+const commercial = blogIdeas.filter((p) => p.intent === 'commercial' || p.intent === 'transactional');
+const informational = blogIdeas.filter((p) => p.intent === 'informational');
+---
+
+<PageLayout
+	title={seo.title}
+	description={seo.description}
+	canonicalPath="/blog/"
+	heading="The Isle Blog"
+	intro="Guides, tutorials, and articles about The Isle cheats, ESP, survival, growth, performance, and product updates."
+	heroImage={theIsleImages.hero}
+	heroAlt="The Isle Blog — cheats, ESP, survival, and gameplay guides for dinosaur players"
+	locale={locale}
+	keywords={seo.keywords}
+	ogTitle={seo.ogTitle}
+	ogDescription={seo.ogDescription}
+	twitterTitle={seo.twitterTitle}
+	twitterDescription={seo.twitterDescription}
+	ctaPrimary={{ href: '/the-isle-guide/', label: 'The Isle Guide' }}
+	ctaSecondary={{ href: '/pricing/', label: 'View Pricing' }}
+	gallery={[]}
+>
+	<section class="card-panel">
+		<h2>Buying & product guides</h2>
+		<ul>
+			{commercial.map((post) => (
+				<li>
+					<a href={`/blog/${post.slug}/`}>{post.title}</a>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section class="card-panel">
+		<h2>Survival, gameplay & technical guides</h2>
+		<ul>
+			{informational.map((post) => (
+				<li>
+					<a href={`/blog/${post.slug}/`}>{post.title}</a>
+				</li>
+			))}
+		</ul>
+	</section>
+
+	<section class="card-panel">
+		<h2>Topical clusters</h2>
+		<ul>
+			<li><a href="/the-isle-cheats/">The Isle Cheats hub</a></li>
+			<li><a href="/the-isle-esp/">The Isle ESP guide</a></li>
+			<li><a href="/the-isle-survival-guide/">The Isle Survival Guide</a></li>
+			<li><a href="/the-isle-growth-guide/">The Isle Growth Guide</a></li>
+			<li><a href="/the-isle-dinosaur-guide/">The Isle Dinosaur Guide</a></li>
+			<li><a href="/the-isle-performance/">The Isle Performance Guide</a></li>
+		</ul>
+	</section>
+
+	<InternalLinksPanel />
+</PageLayout>

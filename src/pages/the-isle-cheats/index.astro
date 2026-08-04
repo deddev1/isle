@@ -1,0 +1,53 @@
+---
+import SeoContentPage from '../../components/SeoContentPage.astro';
+import { siloFaqs, internalLinks, productInfo, cloudDmaOption } from '../../data/seo/content';
+import { theIsleImages } from '../../data/theisle';
+---
+
+<SeoContentPage
+	seoKey="theIsleCheats"
+	canonicalPath="/the-isle-cheats/"
+	heading="The Isle Cheats"
+	intro="The complete hub for The Isle Cheats — Cloud-DMA packages with Visuals ESP, World ESP, combat hacks, and utility tools for dinosaur survival on Windows PC."
+	heroImage={theIsleImages.product[0].src}
+	heroAlt="The Isle Cheats product preview"
+	faqs={siloFaqs.theIsleCheats}
+	ctaPrimary={{ href: '/pricing/', label: 'Buy The Isle Cheats' }}
+	ctaSecondary={{ href: '/the-isle-esp/', label: 'The Isle ESP' }}
+>
+	<section class="card-panel">
+		<h2>What The Isle Cheats includes</h2>
+		<p>
+			{productInfo.summary} The Cloud-DMA option covers Visuals ESP, World ESP, Cheats, and Other utility
+			hacks without Aimbot. Packages support monthly and lifetime licenses for Windows PC players.
+		</p>
+		<ul>
+			{productInfo.features.cheats.map((item) => <li>{item}</li>)}
+		</ul>
+	</section>
+
+	<section class="card-panel">
+		<h2>Cloud-DMA package</h2>
+		<p>{cloudDmaOption.summary}</p>
+		<p>
+			Compare the full breakdown on <a href="/the-isle-features/">The Isle Features</a> page or read
+			<a href="/the-isle-guide/">The Isle Guide</a> for a player-focused overview.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Related guides and pages</h2>
+		<ul>
+			{internalLinks.hub.map((link) => (
+				<li>
+					<a href={link.href}>{link.label}</a>
+				</li>
+			))}
+			{internalLinks.product.map((link) => (
+				<li>
+					<a href={link.href}>{link.label}</a>
+				</li>
+			))}
+		</ul>
+	</section>
+</SeoContentPage>

@@ -1,0 +1,42 @@
+---
+import SeoContentPage from '../../components/SeoContentPage.astro';
+import { siloFaqs } from '../../data/seo/content';
+import { theIsleImages } from '../../data/theisle';
+---
+
+<SeoContentPage
+	seoKey="theIsleGrowthGuide"
+	canonicalPath="/the-isle-growth-guide/"
+	heading="The Isle Growth Guide"
+	intro="Master The Isle growth mechanics — herbivore and carnivore growth paths, nesting tips, and how ESP growth percentage tracking helps your development."
+	heroImage={theIsleImages.product[5].src}
+	heroAlt="The Isle dinosaur growth guide"
+	faqs={siloFaqs.theIsleGrowthGuide}
+	ctaPrimary={{ href: '/the-isle-survival-guide/', label: 'Survival Guide' }}
+	ctaSecondary={{ href: '/the-isle-dinosaur-guide/', label: 'Dinosaur Guide' }}
+>
+	<section class="card-panel">
+		<h2>Growth mechanics</h2>
+		<p>
+			Every dinosaur in The Isle grows from juvenile to adult by eating and surviving. Growth percentage
+			determines your size, health pool, and combat capability. Visuals ESP displays growth percentage on
+			tracked entities so you can assess threat levels.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Herbivore growth tips</h2>
+		<p>
+			Herbivores grow by consuming plants, fruits, and herbs. Use World ESP to locate food sources efficiently.
+			Travel in herds for protection and nest when you reach sub-adult size for faster growth with family.
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>Carnivore growth tips</h2>
+		<p>
+			Carnivores grow by hunting and scavenging. World ESP reveals bodies and meat pickups. Start with smaller
+			prey and avoid fights with larger adults until your growth percentage supports it.
+		</p>
+	</section>
+</SeoContentPage>

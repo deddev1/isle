@@ -1,4 +1,6 @@
 import { siteConfig } from './site';
+import { prefixedLocales } from './i18n';
+import { blogIdeas } from './seo/blog-ideas';
 
 export type SitemapImage = {
 	url: string;
@@ -11,6 +13,8 @@ export type PageSitemapEntry = {
 	priority: number;
 	changefreq: 'daily' | 'weekly' | 'monthly';
 	images: SitemapImage[];
+	/** Include localized alternates in sitemap */
+	localized?: boolean;
 };
 
 const abs = (path: string) => new URL(path, siteConfig.url).href;
@@ -21,126 +25,181 @@ const img = (path: string, title: string, caption: string): SitemapImage => ({
 	caption,
 });
 
+const defaultImages = [
+	img('/images/hero.webp', 'The Isle Cheats hero', 'Homepage banner for The Isle Cheats'),
+	img('/images/cover.webp', 'The Isle Cheats cover', 'Cover visual used across The Isle Cheats pages'),
+];
+
 /**
- * Canonical page → image map for the public sitemap at /sitemap.xml
+ * Canonical English page → image map for the public sitemap at /sitemap.xml
  */
 export const pageSitemapEntries: PageSitemapEntry[] = [
 	{
 		path: '/',
 		priority: 1,
 		changefreq: 'daily',
+		localized: true,
 		images: [
-			img('/images/hero.webp', 'The Isle Cheats hero', 'Homepage banner for The Isle Cheats Cloud-DMA, ESP, and Cheats'),
-			img('/images/product-2.webp', 'The Isle Cheats product preview', 'Primary product visual on The Isle Cheats homepage'),
-			img('/images/product-3.webp', 'The Isle combat preview', 'Gameplay context image on The Isle Cheats homepage'),
-			img('/images/product-4.webp', 'The Isle environment preview', 'Environment visual used in the homepage product gallery'),
-			img('/images/product-1.webp', 'The Isle gameplay preview', 'Additional product gallery image on the homepage'),
-			img('/images/product-6.webp', 'The Isle dinosaur encounter preview', 'Homepage gallery image showing The Isle dinosaur combat'),
-			img('/images/cover.webp', 'The Isle Cheats cover', 'Cover visual used across The Isle Cheats pages'),
+			...defaultImages,
+			img('/images/product-2.webp', 'The Isle Cheats product preview', 'Primary product visual'),
+			img('/images/product-3.webp', 'The Isle combat preview', 'Gameplay context image'),
 		],
+	},
+	{
+		path: '/the-isle-cheats/',
+		priority: 0.95,
+		changefreq: 'weekly',
+		images: [img('/images/product-2.webp', 'The Isle Cheats hub', 'The Isle Cheats product hub page')],
+	},
+	{
+		path: '/the-isle-esp/',
+		priority: 0.95,
+		changefreq: 'weekly',
+		images: [img('/images/product-4.webp', 'The Isle ESP guide', 'The Isle ESP overlay guide')],
+	},
+	{
+		path: '/the-isle-guide/',
+		priority: 0.9,
+		changefreq: 'weekly',
+		images: defaultImages,
+	},
+	{
+		path: '/the-isle-features/',
+		priority: 0.9,
+		changefreq: 'weekly',
+		images: defaultImages,
+	},
+	{
+		path: '/the-isle-faq/',
+		priority: 0.85,
+		changefreq: 'monthly',
+		images: defaultImages,
+	},
+	{
+		path: '/the-isle-settings/',
+		priority: 0.8,
+		changefreq: 'monthly',
+		images: defaultImages,
+	},
+	{
+		path: '/the-isle-performance/',
+		priority: 0.8,
+		changefreq: 'monthly',
+		images: defaultImages,
+	},
+	{
+		path: '/the-isle-growth-guide/',
+		priority: 0.8,
+		changefreq: 'monthly',
+		images: defaultImages,
+	},
+	{
+		path: '/the-isle-survival-guide/',
+		priority: 0.8,
+		changefreq: 'monthly',
+		images: defaultImages,
+	},
+	{
+		path: '/the-isle-updates/',
+		priority: 0.75,
+		changefreq: 'weekly',
+		images: defaultImages,
+	},
+	{
+		path: '/the-isle-dinosaur-guide/',
+		priority: 0.8,
+		changefreq: 'monthly',
+		images: defaultImages,
 	},
 	{
 		path: '/cheats/',
 		priority: 0.9,
 		changefreq: 'weekly',
-		images: [
-			img('/images/product-2.webp', 'The Isle Cheats preview', 'Main visual for The Isle Cheats page'),
-			img('/images/product-3.webp', 'The Isle Cheats combat scene', 'Combat reference image on The Isle Cheats page'),
-			img('/images/product-6.webp', 'The Isle Cheats gallery image', 'Supporting visual for The Isle Cheats'),
-		],
+		images: [img('/images/product-2.webp', 'The Isle Cheats preview', 'Main visual for cheats page')],
 	},
 	{
 		path: '/theisle-esp/',
 		priority: 0.9,
 		changefreq: 'weekly',
-		images: [
-			img('/images/product-4.webp', 'The Isle Cheats ESP preview', 'Main visual for The Isle Cheats ESP page'),
-			img('/images/product-2.webp', 'The Isle Cheats ESP player visibility', 'Supporting ESP page visual'),
-			img('/images/product-3.webp', 'The Isle Cheats ESP dinosaur context', 'Gallery image for The Isle Cheats ESP page'),
-		],
+		images: [img('/images/product-4.webp', 'The Isle ESP preview', 'Main visual for ESP page')],
 	},
 	{
 		path: '/features/',
 		priority: 0.85,
 		changefreq: 'weekly',
-		images: [
-			img('/images/hero.webp', 'The Isle Cheats features banner', 'Hero image for the features overview page'),
-			img('/images/product-2.webp', 'Features gallery image 1', 'Feature page visual reference'),
-			img('/images/product-3.webp', 'Features gallery image 2', 'Feature page visual reference'),
-			img('/images/product-4.webp', 'Features gallery image 3', 'Feature page visual reference'),
-		],
+		images: defaultImages,
 	},
 	{
 		path: '/pricing/',
 		priority: 0.9,
 		changefreq: 'weekly',
-		images: [
-			img('/images/cover.webp', 'The Isle Cheats pricing visual', 'Main image for the pricing page'),
-			img('/images/product-3.webp', 'Pricing page gallery image', 'Supporting visual on pricing'),
-			img('/images/product-1.webp', 'Pricing page package visual', 'Supporting visual on pricing'),
-			img('/images/product-5.webp', 'The Isle Cheats pricing package context', 'Additional The Isle Cheats pricing page visual'),
-		],
+		images: [img('/images/cover.webp', 'The Isle Cheats pricing', 'Pricing page visual')],
 	},
 	{
 		path: '/updates/',
 		priority: 0.7,
 		changefreq: 'weekly',
-		images: [
-			img('/images/product-3.webp', 'The Isle Cheats updates visual', 'Main image for the updates page'),
-			img('/images/hero.webp', 'Updates page gallery image', 'Supporting visual for updates'),
-			img('/images/product-4.webp', 'Updates maintenance visual', 'Supporting visual for updates'),
-		],
+		images: defaultImages,
 	},
 	{
 		path: '/faq/',
 		priority: 0.75,
 		changefreq: 'monthly',
-		images: [
-			img('/images/product-1.webp', 'The Isle Cheats FAQ visual', 'Main image for the FAQ page'),
-			img('/images/product-4.webp', 'FAQ gallery image', 'Supporting FAQ page visual'),
-			img('/images/product-6.webp', 'FAQ support context image', 'Supporting FAQ page visual'),
-		],
+		images: defaultImages,
 	},
 	{
 		path: '/support/',
 		priority: 0.75,
 		changefreq: 'monthly',
-		images: [
-			img('/images/product-6.webp', 'The Isle Cheats support visual', 'Main image for the support page'),
-			img('/images/product-2.webp', 'Support page gallery image', 'Supporting support page visual'),
-			img('/images/cover.webp', 'Support page cover image', 'Cover visual on the support page'),
-		],
+		images: defaultImages,
+	},
+	{
+		path: '/blog/',
+		priority: 0.8,
+		changefreq: 'weekly',
+		images: defaultImages,
 	},
 	{
 		path: '/refund-policy/',
 		priority: 0.4,
 		changefreq: 'monthly',
-		images: [
-			img('/images/cover.webp', 'The Isle Cheats refund policy visual', 'Main image for The Isle Cheats refund policy page'),
-			img('/images/product-1.webp', 'The Isle Cheats refund policy gallery image', 'Supporting refund policy visual'),
-		],
+		images: defaultImages,
 	},
 	{
 		path: '/privacy-policy/',
 		priority: 0.4,
 		changefreq: 'monthly',
-		images: [
-			img('/images/product-2.webp', 'The Isle Cheats privacy policy visual', 'Main image for The Isle Cheats privacy policy page'),
-			img('/images/hero.webp', 'The Isle Cheats privacy policy gallery image', 'Supporting privacy policy visual'),
-		],
+		images: defaultImages,
 	},
 	{
 		path: '/terms/',
 		priority: 0.4,
 		changefreq: 'monthly',
-		images: [
-			img('/images/product-3.webp', 'The Isle Cheats terms of use visual', 'Main image for The Isle Cheats terms page'),
-			img('/images/product-6.webp', 'The Isle Cheats terms page gallery image', 'Supporting terms page visual'),
-			img('/images/cover.webp', 'The Isle Cheats terms page cover image', 'Cover visual on The Isle Cheats terms page'),
-		],
+		images: defaultImages,
 	},
+	...blogIdeas.map(
+		(idea): PageSitemapEntry => ({
+			path: `/blog/${idea.slug}/`,
+			priority: 0.65,
+			changefreq: 'monthly',
+			images: defaultImages,
+		}),
+	),
 ];
+
+/** Localized homepage paths for sitemap */
+export const localizedHomePaths = prefixedLocales.map((locale) => `/${locale}/`);
 
 export function absolutePageUrl(path: string): string {
 	return abs(path);
+}
+
+export function getLocalizedSitemapPaths(entry: PageSitemapEntry): string[] {
+	const paths = [entry.path];
+	if (entry.localized) {
+		for (const locale of prefixedLocales) {
+			paths.push(`/${locale}/`);
+		}
+	}
+	return paths;
 }

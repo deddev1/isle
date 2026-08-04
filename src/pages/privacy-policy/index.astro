@@ -1,24 +1,30 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
-import { siteConfig, getPageDescription } from '../../data/site';
+import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
+import { siteConfig } from '../../data/site';
+import { getPageSeo } from '../../data/seo/meta';
 import { theIsleImages } from '../../data/theisle';
 
-const title = 'Privacy Policy - The Isle Cheats';
-const description = getPageDescription('/privacy-policy/');
+const seo = getPageSeo('privacyPolicy');
 ---
 
 <PageLayout
-	title={title}
-	description={description}
+	title={seo.title}
+	description={seo.description}
 	canonicalPath="/privacy-policy/"
 	heading="Privacy Policy"
 	intro="How information is handled when you browse islecheats.net or contact support."
 	eyebrow="Legal"
 	heroImage={theIsleImages.product[0].src}
-	heroAlt="The Isle Cheats privacy policy visual"
+	heroAlt="The Isle Cheats privacy policy and visitor data handling overview"
 	gallery={[theIsleImages.product[0], theIsleImages.product[2], theIsleImages.hero]}
 	ctaPrimary={{ href: `mailto:${siteConfig.supportEmail}`, label: 'Email Us' }}
 	ctaSecondary={{ href: '/terms/', label: 'Terms of Use' }}
+	keywords={seo.keywords}
+	ogTitle={seo.ogTitle}
+	ogDescription={seo.ogDescription}
+	twitterTitle={seo.twitterTitle}
+	twitterDescription={seo.twitterDescription}
 >
 	<section class="card-panel">
 		<h2>Information we may collect</h2>
@@ -44,4 +50,6 @@ const description = getPageDescription('/privacy-policy/');
 			<a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>.
 		</p>
 	</section>
+
+	<InternalLinksPanel />
 </PageLayout>
