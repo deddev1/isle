@@ -1,6 +1,6 @@
 ---
 import { cloudDmaOption, footerExplore, footerNav, productInfo, siteConfig } from '../data/site';
-import { getRelatedSearchTerms } from '../data/i18n/search-terms';
+import RelatedSearches from './RelatedSearches.astro';
 import type { LocaleCode } from '../data/i18n';
 
 interface Props {
@@ -8,7 +8,6 @@ interface Props {
 }
 
 const { locale = 'en' } = Astro.props;
-const searchTerms = getRelatedSearchTerms(locale);
 ---
 
 <footer class="footer" id="support-footer">
@@ -41,13 +40,9 @@ const searchTerms = getRelatedSearchTerms(locale);
 			</div>
 		</nav>
 	</div>
-	<nav class="footer__searches shell" aria-label="Popular Isle Cheats searches">
-		<ul>
-			{searchTerms.slice(0, 18).map((term) => (
-				<li><a href={term.href}>{term.label}</a></li>
-			))}
-		</ul>
-	</nav>
+	<div class="shell">
+		<RelatedSearches locale={locale} variant="footer" limit={18} />
+	</div>
 </footer>
 
 <style>
@@ -109,31 +104,6 @@ const searchTerms = getRelatedSearchTerms(locale);
 
 	.footer a:hover {
 		color: var(--color-ink);
-	}
-
-	.footer__searches {
-		margin-top: 1.25rem;
-		padding-top: 1rem;
-		border-top: 1px solid rgba(168, 85, 247, 0.08);
-	}
-
-	.footer__searches ul {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.35rem 0.55rem;
-		margin: 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	.footer__searches a {
-		font-size: 0.7rem;
-		font-weight: 600;
-		color: rgba(148, 163, 184, 0.55);
-	}
-
-	.footer__searches a:hover {
-		color: var(--color-muted);
 	}
 
 	@media (max-width: 760px) {

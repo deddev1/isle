@@ -1,7 +1,7 @@
 ---
 import { cloudDmaOption, productInfo, siteConfig } from '../data/site';
 import { getHomeContent } from '../data/i18n/home-content';
-import { getRelatedSearchTerms } from '../data/i18n/search-terms';
+import RelatedSearches from './RelatedSearches.astro';
 import { getLocalizedPath, type LocaleCode } from '../data/i18n';
 
 interface Props {
@@ -10,7 +10,6 @@ interface Props {
 
 const { locale = 'en' } = Astro.props;
 const content = getHomeContent(locale);
-const searchTerms = getRelatedSearchTerms(locale);
 const pricingHref = getLocalizedPath('/pricing/', locale);
 const packageIntro = content.packageIntro.replace('{cloudDma}', cloudDmaOption.label);
 const shareUrl = encodeURIComponent(siteConfig.url + getLocalizedPath('/', locale));
@@ -113,18 +112,7 @@ const shareText = encodeURIComponent('The Isle Cheats - ESP and hacks for The Is
 		</div>
 	</section>
 
-	<nav class="home-seo__searches" aria-label={content.relatedSearchesLabel}>
-		<p class="home-seo__searches-label">{content.relatedSearchesLabel}</p>
-		<ul class="home-seo__searches-list">
-			{
-				searchTerms.map((term) => (
-					<li>
-						<a href={term.href}>{term.label}</a>
-					</li>
-				))
-			}
-		</ul>
-	</nav>
+	<RelatedSearches locale={locale} variant="inline" />
 </section>
 
 <style>
@@ -283,47 +271,6 @@ const shareText = encodeURIComponent('The Isle Cheats - ESP and hacks for The Is
 	.share-link:hover {
 		border-color: rgba(192, 132, 252, 0.5);
 		background: rgba(48, 36, 72, 0.9);
-	}
-
-	.home-seo__searches {
-		padding: 0.85rem 0 0.25rem;
-		border-top: 1px solid rgba(168, 85, 247, 0.08);
-	}
-
-	.home-seo__searches-label {
-		margin: 0;
-		font-size: 0.68rem;
-		font-weight: 700;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: rgba(148, 163, 184, 0.55);
-	}
-
-	.home-seo__searches-list {
-		display: flex;
-		flex-wrap: wrap;
-		gap: 0.35rem 0.5rem;
-		margin: 0.55rem 0 0;
-		padding: 0;
-		list-style: none;
-	}
-
-	.home-seo__searches-list a {
-		display: inline-flex;
-		align-items: center;
-		padding: 0.2rem 0.55rem;
-		border-radius: 999px;
-		border: 1px solid rgba(168, 85, 247, 0.08);
-		background: rgba(10, 6, 18, 0.25);
-		color: rgba(148, 163, 184, 0.72);
-		font-size: 0.72rem;
-		font-weight: 600;
-		line-height: 1.35;
-	}
-
-	.home-seo__searches-list a:hover {
-		color: var(--color-muted);
-		border-color: rgba(168, 85, 247, 0.2);
 	}
 
 	@media (max-width: 720px) {
