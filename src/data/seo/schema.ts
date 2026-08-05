@@ -98,17 +98,38 @@ export function buildWebPageSchema(opts: {
 	};
 }
 
+export function buildRelatedSearchesSchema(
+	terms: ReadonlyArray<{ label: string; href: string }>,
+	locale: LocaleCode = 'en',
+) {
+	return {
+		'@context': 'https://schema.org',
+		'@type': 'ItemList',
+		name: 'Related searches for The Isle Cheats',
+		itemListElement: terms.map((term, index) => ({
+			'@type': 'ListItem',
+			position: index + 1,
+			name: term.label,
+			url: new URL(getLocalizedPath(term.href, locale), siteConfig.url).href,
+		})),
+	};
+}
+
 export function buildSoftwareApplicationSchema(opts: {
 	name: string;
 	description: string;
 	pricingUrl: string;
 	plans: ReadonlyArray<{ label: string; price: number }>;
 	currency: string;
+	alternateName?: ReadonlyArray<string>;
+	keywords?: string;
 }) {
 	return {
 		'@context': 'https://schema.org',
 		'@type': 'SoftwareApplication',
 		name: opts.name,
+		...(opts.alternateName?.length ? { alternateName: [...opts.alternateName] } : {}),
+		...(opts.keywords ? { keywords: opts.keywords } : {}),
 		applicationCategory: 'GameApplication',
 		operatingSystem: 'Windows',
 		description: opts.description,

@@ -9,7 +9,8 @@ import HomeSeo from '../components/HomeSeo.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { homeFaqs, productInfo, siteConfig } from '../data/site';
 import { getPageSeo } from '../data/seo/meta';
-import { buildFaqSchema, buildSoftwareApplicationSchema } from '../data/seo/schema';
+import { homeMetaKeywords, organizationAlternateNames, relatedSearchTerms } from '../data/seo/keywords';
+import { buildFaqSchema, buildRelatedSearchesSchema, buildSoftwareApplicationSchema } from '../data/seo/schema';
 import { getLocalizedPath } from '../data/i18n';
 import type { LocaleCode } from '../data/i18n';
 
@@ -27,9 +28,12 @@ const productSchema = buildSoftwareApplicationSchema({
 	pricingUrl,
 	plans: productInfo.plans,
 	currency: productInfo.currency,
+	alternateName: [...organizationAlternateNames],
+	keywords: homeMetaKeywords,
 });
 
 const faqSchema = buildFaqSchema(homeFaqs);
+const relatedSearchesSchema = buildRelatedSearchesSchema(relatedSearchTerms, locale);
 const canonicalPath = getLocalizedPath('/', locale);
 ---
 
@@ -37,8 +41,8 @@ const canonicalPath = getLocalizedPath('/', locale);
 	title={seo.title}
 	description={seo.description}
 	canonicalPath={canonicalPath}
-	ogImage="/images/hero.webp"
-	preloadImage="/images/hero.webp"
+	ogImage="/images/the-isle-hero-dinosaur-survival.webp"
+	preloadImage="/images/the-isle-hero-dinosaur-survival.webp"
 	locale={locale}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
@@ -48,6 +52,7 @@ const canonicalPath = getLocalizedPath('/', locale);
 >
 	<script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
 	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+	<script type="application/ld+json" set:html={JSON.stringify(relatedSearchesSchema)} />
 	<Navbar />
 	<main class="site">
 		<Hero />

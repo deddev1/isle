@@ -33,11 +33,10 @@ If a Cloudflare Pages project is also attached to these hostnames, remove or dis
 
 ### 4. Redirect layers in this repo
 
-Redirects are configured in three places so SEO tools always see one canonical host:
+Redirects are configured in two places:
 
-1. `public/_redirects` — Cloudflare Pages host + path 301 rules
-2. `public/_worker.js` — Pages advanced mode worker (http/www → apex HTTPS)
-3. `cloudflare/bulk-redirects.csv` — optional dashboard Bulk Redirect backup
+1. `public/_worker.js` — host canonicalization (http/www → apex HTTPS) and path 301 rules
+2. `public/_redirects` — relative path 301 rules only (Workers Assets rejects absolute URLs)
 
 ### 5. Bulk Redirects (recommended backup)
 

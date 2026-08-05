@@ -1,8 +1,5 @@
-# Canonical host: HTTPS apex (https://islecheats.net)
-# Host-level 301 redirects (work even when _worker.js is unavailable)
-http://islecheats.net/* https://islecheats.net/:splat 301
-http://www.islecheats.net/* https://islecheats.net/:splat 301
-https://www.islecheats.net/* https://islecheats.net/:splat 301
+# Host-level redirects (http/www → https://islecheats.net) are handled by
+# public/_worker.js. Workers Static Assets only allow relative URLs here.
 
 # English locale: root only (no /en/ prefix)
 /en / 301
