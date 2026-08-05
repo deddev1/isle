@@ -1,7 +1,9 @@
 ---
 import SeoContentPage from '../../components/SeoContentPage.astro';
 import { siloFaqs, internalLinks, productInfo } from '../../data/seo/content';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero } from '../../data/theisle';
+
+const pageHero = getPageHero('theIsleEsp');
 ---
 
 <SeoContentPage
@@ -9,8 +11,8 @@ import { theIsleImages } from '../../data/theisle';
 	canonicalPath="/the-isle-esp/"
 	heading="The Isle ESP"
 	intro="How The Isle ESP works — Visuals ESP for dinosaur tracking and World ESP for resource awareness with configurable overlays on Windows PC."
-	heroImage={theIsleImages.product[3].src}
-	heroAlt="The Isle ESP overlay preview"
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
 	faqs={siloFaqs.theIsleEsp}
 	ctaPrimary={{ href: '/theisle-esp/', label: 'Visuals ESP Details' }}
 	ctaSecondary={{ href: '/the-isle-cheats/', label: 'The Isle Cheats' }}

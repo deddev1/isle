@@ -2,9 +2,10 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import { productInfo } from '../../data/site';
 import { getPageSeo } from '../../data/seo/meta';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero, getPageGallery } from '../../data/theisle';
 
 const seo = getPageSeo('theisleEsp');
+const pageHero = getPageHero('theisleEsp');
 ---
 
 <PageLayout
@@ -13,9 +14,9 @@ const seo = getPageSeo('theisleEsp');
 	canonicalPath="/theisle-esp/"
 	heading="The Isle Cheats ESP"
 	intro="Visuals ESP and World ESP for entity awareness, resource tracking, and environment readouts. Both are included in the Cloud-DMA option."
-	heroImage={theIsleImages.product[2].src}
-	heroAlt="The Isle Cheats ESP visibility preview"
-	gallery={theIsleImages.product.slice(0, 3)}
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
+	gallery={getPageGallery('tyrannosaurForest', 'predatorStalk', 'swampEnvironment')}
 	ctaPrimary={{ href: '/pricing/', label: 'View Pricing' }}
 	ctaSecondary={{ href: '/cheats/', label: 'See Cheats' }}
 	keywords={seo.keywords}

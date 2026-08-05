@@ -4,13 +4,14 @@ import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
 import { blogIdeas } from '../../data/seo/blog-ideas';
 import { getPageSeo } from '../../data/seo/meta';
 import { getLocaleFromPath } from '../../data/i18n';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero } from '../../data/theisle';
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const seo = getPageSeo('blog', locale);
 
 const commercial = blogIdeas.filter((p) => p.intent === 'commercial' || p.intent === 'transactional');
 const informational = blogIdeas.filter((p) => p.intent === 'informational');
+const pageHero = getPageHero('blog');
 ---
 
 <PageLayout
@@ -19,8 +20,8 @@ const informational = blogIdeas.filter((p) => p.intent === 'informational');
 	canonicalPath="/blog/"
 	heading="The Isle Blog"
 	intro="Guides, tutorials, and articles about The Isle cheats, ESP, survival, growth, performance, and product updates."
-	heroImage={theIsleImages.hero}
-	heroAlt="The Isle Blog — cheats, ESP, survival, and gameplay guides for dinosaur players"
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
 	locale={locale}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
@@ -29,7 +30,6 @@ const informational = blogIdeas.filter((p) => p.intent === 'informational');
 	twitterDescription={seo.twitterDescription}
 	ctaPrimary={{ href: '/the-isle-guide/', label: 'The Isle Guide' }}
 	ctaSecondary={{ href: '/pricing/', label: 'View Pricing' }}
-	gallery={[]}
 >
 	<section class="card-panel">
 		<h2>Buying & product guides</h2>

@@ -1,7 +1,9 @@
 ---
 import SeoContentPage from '../../components/SeoContentPage.astro';
 import { siloFaqs } from '../../data/seo/content';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero } from '../../data/theisle';
+
+const pageHero = getPageHero('theIsleDinosaurGuide');
 ---
 
 <SeoContentPage
@@ -9,8 +11,8 @@ import { theIsleImages } from '../../data/theisle';
 	canonicalPath="/the-isle-dinosaur-guide/"
 	heading="The Isle Dinosaur Guide"
 	intro="Complete dinosaur guide for The Isle — carnivore vs herbivore playstyles, species tiers, bite radius, stamina, and ESP classname tracking."
-	heroImage={theIsleImages.product[5].src}
-	heroAlt="The Isle dinosaur species guide"
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
 	faqs={siloFaqs.theIsleDinosaurGuide}
 	ctaPrimary={{ href: '/the-isle-growth-guide/', label: 'Growth Guide' }}
 	ctaSecondary={{ href: '/the-isle-survival-guide/', label: 'Survival Guide' }}

@@ -2,9 +2,11 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
 import { getPageSeo } from '../../data/seo/meta';
-import { theIsleImages } from '../../data/theisle';
+import { siteConfig } from '../../data/site';
+import { getPageHero, getPageGallery } from '../../data/theisle';
 
 const seo = getPageSeo('updates');
+const pageHero = getPageHero('updates');
 ---
 
 <PageLayout
@@ -13,11 +15,11 @@ const seo = getPageSeo('updates');
 	canonicalPath="/updates/"
 	heading="The Isle Cheats Updates"
 	intro="Product maintenance notes for The Isle Cheats. Check here after game patches or when a feature page references a new build."
-	heroImage={theIsleImages.product[1].src}
-	heroAlt="The Isle Updates changelog and compatibility notices for cheat maintenance"
-	gallery={[theIsleImages.hero, theIsleImages.product[1], theIsleImages.product[2]]}
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
+	gallery={getPageGallery('packEncounter', 'nightHunt', 'aerialLandscape')}
 	ctaPrimary={{ href: '/the-isle-updates/', label: 'Update Guide' }}
-	ctaSecondary={{ href: '/support/', label: 'Contact Support' }}
+	ctaSecondary={{ href: siteConfig.supportUrl, label: 'Contact Support' }}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
 	ogDescription={seo.ogDescription}

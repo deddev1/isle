@@ -1,0 +1,117 @@
+---
+import { getRelatedSearchTerms } from '../data/i18n/search-terms';
+import { getHomeContent } from '../data/i18n/home-content';
+import type { LocaleCode } from '../data/i18n';
+
+interface Props {
+	locale?: LocaleCode;
+	limit?: number;
+	variant?: 'inline' | 'footer';
+}
+
+const { locale = 'en', limit, variant = 'inline' } = Astro.props;
+const terms = limit ? getRelatedSearchTerms(locale).slice(0, limit) : getRelatedSearchTerms(locale);
+const label = getHomeContent(locale).relatedSearchesLabel;
+---
+
+<details class:list={['related-searches', `related-searches--${variant}`]}>
+	<summary class="related-searches__toggle">{label}</summary>
+	<nav class="related-searches__panel" aria-label={label}>
+		<ul class="related-searches__list">
+			{
+				terms.map((term) => (
+					<li>
+						<a href={term.href}>{term.label}</a>
+					</li>
+				))
+			}
+		</ul>
+	</nav>
+</details>
+
+<style>
+	.related-searches {
+		border-top: 1px solid rgba(168, 85, 247, 0.08);
+	}
+
+	.related-searches__toggle {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.35rem;
+		margin: 0;
+		padding: 0.55rem 0;
+		list-style: none;
+		cursor: pointer;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: rgba(148, 163, 184, 0.55);
+		user-select: none;
+		transition: color 0.2s ease;
+	}
+
+	.related-searches__toggle::-webkit-details-marker {
+		display: none;
+	}
+
+	.related-searches__toggle::after {
+		content: '+';
+		font-size: 0.85rem;
+		font-weight: 800;
+		color: rgba(168, 85, 247, 0.45);
+		transition: transform 0.2s ease;
+	}
+
+	.related-searches[open] .related-searches__toggle::after {
+		content: '−';
+	}
+
+	.related-searches__toggle:hover {
+		color: var(--color-muted);
+	}
+
+	.related-searches__panel {
+		padding: 0.15rem 0 0.35rem;
+	}
+
+	.related-searches__list {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.35rem 0.5rem;
+		margin: 0.45rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.related-searches__list a {
+		display: inline-flex;
+		align-items: center;
+		padding: 0.2rem 0.55rem;
+		border-radius: 999px;
+		border: 1px solid rgba(168, 85, 247, 0.08);
+		background: rgba(10, 6, 18, 0.25);
+		color: rgba(148, 163, 184, 0.72);
+		font-size: 0.72rem;
+		font-weight: 600;
+		line-height: 1.35;
+		text-decoration: none;
+		transition:
+			color 0.2s ease,
+			border-color 0.2s ease;
+	}
+
+	.related-searches__list a:hover {
+		color: var(--color-muted);
+		border-color: rgba(168, 85, 247, 0.2);
+	}
+
+	.related-searches--inline {
+		padding: 0.85rem 0 0.25rem;
+	}
+
+	.related-searches--footer {
+		margin-top: 1rem;
+		padding-top: 0.85rem;
+	}
+</style>

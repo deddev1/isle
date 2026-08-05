@@ -2,7 +2,9 @@
 import SeoContentPage from '../../components/SeoContentPage.astro';
 import { internalLinks, productInfo, cloudDmaOption } from '../../data/seo/content';
 import { featureCategories } from '../../data/site';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero } from '../../data/theisle';
+
+const pageHero = getPageHero('theIsleFeatures');
 ---
 
 <SeoContentPage
@@ -10,8 +12,8 @@ import { theIsleImages } from '../../data/theisle';
 	canonicalPath="/the-isle-features/"
 	heading="The Isle Features"
 	intro="Every The Isle Features category explained — ESP, cheats, radar, FOV changer, crosshair, and Cloud-DMA inclusions for Windows PC."
-	heroImage={theIsleImages.hero}
-	heroAlt="The Isle Features overview"
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
 	ctaPrimary={{ href: '/features/', label: 'Full Feature List' }}
 	ctaSecondary={{ href: '/pricing/', label: 'Compare Pricing' }}
 >

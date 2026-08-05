@@ -26,9 +26,22 @@ const img = (path: string, title: string, caption: string): SitemapImage => ({
 });
 
 const defaultImages = [
-	img('/images/hero.webp', 'The Isle Cheats hero', 'Homepage banner for The Isle Cheats'),
-	img('/images/cover.webp', 'The Isle Cheats cover', 'Cover visual used across The Isle Cheats pages'),
+	img('/images/the-isle-hero-dinosaur-survival.webp', 'The Isle Cheats hero', 'Homepage banner for The Isle Cheats'),
+	img('/images/the-isle-herd-open-plains.webp', 'The Isle Cheats cover', 'Cover visual used across The Isle Cheats pages'),
 ];
+
+const scene = {
+	hero: img('/images/the-isle-hero-dinosaur-survival.webp', 'The Isle survival hero', 'Dinosaur survival landscape banner'),
+	tyrannosaur: img('/images/the-isle-tyrannosaur-forest.webp', 'The Isle tyrannosaur forest', 'Forest stalking scene for ESP guides'),
+	combat: img('/images/the-isle-carnivore-combat.webp', 'The Isle carnivore combat', 'Combat encounter for cheat guides'),
+	herd: img('/images/the-isle-herd-open-plains.webp', 'The Isle dinosaur herd', 'Herd on open plains for pricing pages'),
+	swamp: img('/images/the-isle-swamp-environment.webp', 'The Isle swamp environment', 'Swamp biome for World ESP guides'),
+	night: img('/images/the-isle-night-hunt.webp', 'The Isle night hunt', 'Night hunt scene for radar and FAQ pages'),
+	river: img('/images/the-isle-riverside-drink.webp', 'The Isle riverside survival', 'Riverside drinking scene for survival guides'),
+	pack: img('/images/the-isle-pack-encounter.webp', 'The Isle pack encounter', 'Pack encounter for updates and combat pages'),
+	aerial: img('/images/the-isle-aerial-landscape.webp', 'The Isle aerial landscape', 'Aerial landscape for performance guides'),
+	stalk: img('/images/the-isle-predator-stalk.webp', 'The Isle predator stalk', 'Predator stalking scene for ESP targeting'),
+};
 
 /**
  * Canonical English page → image map for the public sitemap at /sitemap.xml
@@ -40,149 +53,151 @@ export const pageSitemapEntries: PageSitemapEntry[] = [
 		changefreq: 'daily',
 		localized: true,
 		images: [
-			...defaultImages,
-			img('/images/product-2.webp', 'The Isle Cheats product preview', 'Primary product visual'),
-			img('/images/product-3.webp', 'The Isle combat preview', 'Gameplay context image'),
+			scene.hero,
+			scene.herd,
+			scene.combat,
+			scene.tyrannosaur,
 		],
 	},
 	{
 		path: '/the-isle-cheats/',
 		priority: 0.95,
 		changefreq: 'weekly',
-		images: [img('/images/product-2.webp', 'The Isle Cheats hub', 'The Isle Cheats product hub page')],
+		images: [scene.herd, scene.combat],
 	},
 	{
 		path: '/the-isle-esp/',
 		priority: 0.95,
 		changefreq: 'weekly',
-		images: [img('/images/product-4.webp', 'The Isle ESP guide', 'The Isle ESP overlay guide')],
+		images: [scene.stalk, scene.tyrannosaur, scene.swamp],
 	},
 	{
 		path: '/the-isle-guide/',
 		priority: 0.9,
 		changefreq: 'weekly',
-		images: defaultImages,
+		images: [scene.river, scene.hero],
 	},
 	{
 		path: '/the-isle-features/',
 		priority: 0.9,
 		changefreq: 'weekly',
-		images: defaultImages,
+		images: [scene.hero, scene.swamp, scene.combat],
 	},
 	{
 		path: '/the-isle-faq/',
 		priority: 0.85,
 		changefreq: 'monthly',
-		images: defaultImages,
+		images: [scene.night, scene.stalk],
 	},
 	{
 		path: '/the-isle-settings/',
 		priority: 0.8,
 		changefreq: 'monthly',
-		images: defaultImages,
+		images: [scene.aerial, scene.swamp],
 	},
 	{
 		path: '/the-isle-performance/',
 		priority: 0.8,
 		changefreq: 'monthly',
-		images: defaultImages,
+		images: [scene.aerial, scene.hero],
 	},
 	{
 		path: '/the-isle-growth-guide/',
 		priority: 0.8,
 		changefreq: 'monthly',
-		images: defaultImages,
+		images: [scene.herd, scene.river],
 	},
 	{
 		path: '/the-isle-survival-guide/',
 		priority: 0.8,
 		changefreq: 'monthly',
-		images: defaultImages,
+		images: [scene.river, scene.swamp],
 	},
 	{
 		path: '/the-isle-updates/',
 		priority: 0.75,
 		changefreq: 'weekly',
-		images: defaultImages,
+		images: [scene.pack, scene.night],
 	},
 	{
 		path: '/the-isle-dinosaur-guide/',
 		priority: 0.8,
 		changefreq: 'monthly',
-		images: defaultImages,
+		images: [scene.tyrannosaur, scene.herd],
 	},
 	{
 		path: '/cheats/',
 		priority: 0.9,
 		changefreq: 'weekly',
-		images: [img('/images/product-2.webp', 'The Isle Cheats preview', 'Main visual for cheats page')],
+		images: [scene.combat, scene.pack, scene.stalk],
 	},
 	{
 		path: '/theisle-esp/',
 		priority: 0.9,
 		changefreq: 'weekly',
-		images: [img('/images/product-4.webp', 'The Isle ESP preview', 'Main visual for ESP page')],
+		images: [scene.tyrannosaur, scene.stalk, scene.swamp],
 	},
 	{
 		path: '/features/',
 		priority: 0.85,
 		changefreq: 'weekly',
-		images: defaultImages,
+		images: [scene.swamp, scene.hero, scene.combat],
 	},
 	{
 		path: '/pricing/',
 		priority: 0.9,
 		changefreq: 'weekly',
-		images: [img('/images/cover.webp', 'The Isle Cheats pricing', 'Pricing page visual')],
+		localized: true,
+		images: [scene.herd, scene.combat, scene.pack],
 	},
 	{
 		path: '/updates/',
 		priority: 0.7,
 		changefreq: 'weekly',
-		images: defaultImages,
+		images: [scene.pack, scene.night, scene.aerial],
 	},
 	{
 		path: '/faq/',
 		priority: 0.75,
 		changefreq: 'monthly',
-		images: defaultImages,
+		images: [scene.night, scene.stalk, scene.tyrannosaur],
 	},
 	{
 		path: '/support/',
 		priority: 0.75,
 		changefreq: 'monthly',
-		images: defaultImages,
+		images: [scene.river, scene.herd],
 	},
 	{
 		path: '/blog/',
 		priority: 0.8,
 		changefreq: 'weekly',
-		images: defaultImages,
+		images: [scene.tyrannosaur, scene.combat, scene.swamp],
 	},
 	{
 		path: '/refund-policy/',
 		priority: 0.4,
 		changefreq: 'monthly',
-		images: defaultImages,
+		images: [scene.herd, scene.pack],
 	},
 	{
 		path: '/privacy-policy/',
 		priority: 0.4,
 		changefreq: 'monthly',
-		images: defaultImages,
+		images: [scene.swamp, scene.river],
 	},
 	{
 		path: '/terms/',
 		priority: 0.4,
 		changefreq: 'monthly',
-		images: defaultImages,
+		images: [scene.aerial, scene.herd],
 	},
 	...blogIdeas.map(
-		(idea): PageSitemapEntry => ({
+		(idea, index): PageSitemapEntry => ({
 			path: `/blog/${idea.slug}/`,
 			priority: 0.65,
 			changefreq: 'monthly',
-			images: defaultImages,
+			images: [Object.values(scene)[index % Object.values(scene).length]],
 		}),
 	),
 ];
@@ -198,7 +213,7 @@ export function getLocalizedSitemapPaths(entry: PageSitemapEntry): string[] {
 	const paths = [entry.path];
 	if (entry.localized) {
 		for (const locale of prefixedLocales) {
-			paths.push(`/${locale}/`);
+			paths.push(locale === entry.path ? `/${locale}/` : `/${locale}${entry.path}`);
 		}
 	}
 	return paths;

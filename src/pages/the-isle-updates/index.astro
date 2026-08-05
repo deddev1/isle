@@ -1,6 +1,8 @@
 ---
 import SeoContentPage from '../../components/SeoContentPage.astro';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero } from '../../data/theisle';
+
+const pageHero = getPageHero('theIsleUpdates');
 ---
 
 <SeoContentPage
@@ -8,8 +10,8 @@ import { theIsleImages } from '../../data/theisle';
 	canonicalPath="/the-isle-updates/"
 	heading="The Isle Updates"
 	intro="Track The Isle game patches, Evrima updates, and cheat compatibility maintenance releases after every major update."
-	heroImage={theIsleImages.product[2].src}
-	heroAlt="The Isle updates tracker"
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
 	ctaPrimary={{ href: '/updates/', label: 'Product Changelog' }}
 	ctaSecondary={{ href: '/blog/the-isle-update-guide/', label: 'Update Guide' }}
 >

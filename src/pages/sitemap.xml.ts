@@ -1,7 +1,6 @@
 import type { APIRoute } from 'astro';
 import { absolutePageUrl, getLocalizedSitemapPaths, pageSitemapEntries } from '../data/page-sitemap';
-import { getLocalizedPath } from '../data/i18n';
-import { locales } from '../data/i18n';
+import { getHreflangAlternates, getXDefaultPath } from '../data/i18n';
 
 function escapeXml(value: string): string {
 	return value
@@ -32,14 +31,14 @@ export const GET: APIRoute = () => {
 					)
 					.join('\n');
 
-				const alternates = locales
-					.map((locale) => {
-						const href = absolutePageUrl(getLocalizedPath(path, locale.code));
-						return `    <xhtml:link rel="alternate" hreflang="${locale.hrefLang}" href="${escapeXml(href)}" />`;
+				const alternates = getHreflangAlternates(path)
+					.map((entry) => {
+						const href = absolutePageUrl(entry.href);
+						return `    <xhtml:link rel="alternate" hreflang="${entry.hrefLang}" href="${escapeXml(href)}" />`;
 					})
 					.join('\n');
 
-				const xDefault = absolutePageUrl(getLocalizedPath(path, 'en'));
+				const xDefault = absolutePageUrl(getXDefaultPath(path));
 
 				return `  <url>
     <loc>${escapeXml(absolutePageUrl(path))}</loc>

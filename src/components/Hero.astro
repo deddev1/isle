@@ -1,6 +1,16 @@
 ---
+import { getLocalizedPath, type LocaleCode } from '../data/i18n';
+import { getHomeContent } from '../data/i18n/home-content';
 import { theIsleImages } from '../data/theisle';
-import { homeSeo, siteConfig } from '../data/site';
+
+interface Props {
+	locale?: LocaleCode;
+}
+
+const { locale = 'en' } = Astro.props;
+const content = getHomeContent(locale);
+const pricingHref = getLocalizedPath('/pricing/', locale);
+const featuresHref = '/features/';
 ---
 
 <section class="hero" id="home" data-nav-section="home" aria-label="Hero">
@@ -20,12 +30,13 @@ import { homeSeo, siteConfig } from '../data/site';
 
 	<div class="hero__inner">
 		<div class="hero__copy">
-			<p class="hero__eyebrow">{siteConfig.name}</p>
-			<h1 class="hero__title">{homeSeo.heroTitle}</h1>
-			<h2 class="hero__subtitle text-gradient">{homeSeo.heroSubtitle}</h2>
+			<p class="hero__eyebrow">{content.heroEyebrow}</p>
+			<h1 class="hero__title">{content.heroTitle}</h1>
+			<p class="hero__subtitle text-gradient">{content.heroSubtitle}</p>
+			<p class="hero__description">{content.heroDescription}</p>
 			<div class="hero__cta">
-				<a href="/pricing/" class="hero__btn hero__btn--primary bg-brand">Compare packages</a>
-				<a href="/features/" class="hero__btn hero__btn--ghost">Explore features</a>
+				<a href={pricingHref} class="hero__btn hero__btn--primary bg-brand">{content.heroCtaPrimary}</a>
+				<a href={featuresHref} class="hero__btn hero__btn--ghost">{content.heroCtaSecondary}</a>
 			</div>
 		</div>
 	</div>
@@ -98,9 +109,10 @@ import { homeSeo, siteConfig } from '../data/site';
 
 	.hero__eyebrow {
 		margin: 0 0 0.85rem;
+		font-family: var(--font-display);
 		font-size: 0.78rem;
-		font-weight: 700;
-		letter-spacing: 0.14em;
+		font-weight: 600;
+		letter-spacing: 0.16em;
 		text-transform: uppercase;
 		color: var(--color-orchid);
 	}
@@ -109,9 +121,10 @@ import { homeSeo, siteConfig } from '../data/site';
 		margin: 0;
 		font-family: var(--font-display);
 		font-size: clamp(1.85rem, 4.6vw, 3.75rem);
-		font-weight: 800;
-		line-height: 1.15;
-		letter-spacing: -0.03em;
+		font-weight: 700;
+		line-height: 1.12;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
 		text-shadow: 0 8px 32px rgba(10, 6, 18, 0.65);
 		text-wrap: balance;
 		overflow-wrap: break-word;
@@ -122,15 +135,29 @@ import { homeSeo, siteConfig } from '../data/site';
 	.hero__subtitle {
 		margin: 0.35em 0 0;
 		font-family: var(--font-display);
-		font-size: clamp(1.35rem, 3.2vw, 2.35rem);
-		font-weight: 800;
-		line-height: 1.2;
-		letter-spacing: -0.02em;
+		font-size: clamp(1.2rem, 2.8vw, 2rem);
+		font-weight: 600;
+		line-height: 1.25;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
 		background-size: 200% 100%;
 		animation:
 			rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both,
 			shimmer 4s ease-in-out infinite;
 		text-wrap: balance;
+	}
+
+	.hero__description {
+		margin: 1rem 0 0;
+		max-width: 38rem;
+		font-family: var(--font-sans);
+		font-size: clamp(0.98rem, 1.8vw, 1.1rem);
+		font-weight: 400;
+		line-height: 1.7;
+		letter-spacing: 0.01em;
+		color: rgba(245, 243, 255, 0.88);
+		text-wrap: pretty;
+		animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
 	}
 
 	.hero__cta {
@@ -224,6 +251,7 @@ import { homeSeo, siteConfig } from '../data/site';
 		.hero__splash,
 		.hero__copy,
 		.hero__subtitle,
+		.hero__description,
 		.hero__cta,
 		.hero__accent {
 			animation: none;
@@ -273,6 +301,12 @@ import { homeSeo, siteConfig } from '../data/site';
 			margin-top: 0.4rem;
 			font-size: clamp(1.15rem, 5.5vw, 1.65rem);
 			line-height: 1.22;
+		}
+
+		.hero__description {
+			margin-top: 0.85rem;
+			font-size: 0.92rem;
+			line-height: 1.6;
 		}
 
 		.hero__cta {

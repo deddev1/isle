@@ -3,9 +3,10 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
 import { productInfo, siteConfig } from '../../data/site';
 import { getPageSeo } from '../../data/seo/meta';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero, getPageGallery } from '../../data/theisle';
 
 const seo = getPageSeo('support');
+const pageHero = getPageHero('support');
 ---
 
 <PageLayout
@@ -14,10 +15,10 @@ const seo = getPageSeo('support');
 	canonicalPath="/support/"
 	heading="The Isle Cheats Support"
 	intro="Get help with orders, digital delivery, or package setup for The Isle Cheats."
-	heroImage={theIsleImages.product[4].src}
-	heroAlt="The Isle Cheats support team contact page for delivery and setup help"
-	gallery={[theIsleImages.product[4], theIsleImages.product[0], theIsleImages.cover]}
-	ctaPrimary={{ href: `mailto:${siteConfig.supportEmail}`, label: 'Email Support' }}
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
+	gallery={getPageGallery('riversideDrink', 'herdPlains', 'hero')}
+	ctaPrimary={{ href: siteConfig.supportUrl, label: 'Open Support' }}
 	ctaSecondary={{ href: '/faq/', label: 'Browse FAQ' }}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
@@ -28,7 +29,7 @@ const seo = getPageSeo('support');
 	<section class="card-panel">
 		<h2>Contact</h2>
 		<p>
-			Email: <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>
+			Support portal: <a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">{siteConfig.supportUrl}</a>
 		</p>
 		<p>{productInfo.supportHours}.</p>
 	</section>

@@ -2,7 +2,9 @@
 import SeoContentPage from '../../components/SeoContentPage.astro';
 import { extendedFaqs } from '../../data/seo/content';
 import { siteConfig } from '../../data/site';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero } from '../../data/theisle';
+
+const pageHero = getPageHero('theIsleFaq');
 ---
 
 <SeoContentPage
@@ -10,10 +12,10 @@ import { theIsleImages } from '../../data/theisle';
 	canonicalPath="/the-isle-faq/"
 	heading="The Isle FAQ"
 	intro="Answers to the most common questions about The Isle Cheats, ESP overlays, Cloud-DMA, pricing, Windows compatibility, and support."
-	heroImage={theIsleImages.product[3].src}
-	heroAlt="The Isle FAQ visual"
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
 	faqs={extendedFaqs}
-	ctaPrimary={{ href: '/support/', label: 'Contact Support' }}
+	ctaPrimary={{ href: siteConfig.supportUrl, label: 'Contact Support' }}
 	ctaSecondary={{ href: '/faq/', label: 'Full FAQ Hub' }}
 >
 	{
@@ -28,8 +30,7 @@ import { theIsleImages } from '../../data/theisle';
 	<section class="card-panel">
 		<h2>Still need help?</h2>
 		<p>
-			Visit <a href="/support/">Support</a> or email
-			<a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>.
+			Visit <a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">Support</a> for delivery, setup, and billing help.
 		</p>
 	</section>
 </SeoContentPage>

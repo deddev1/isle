@@ -1,7 +1,9 @@
 ---
 import SeoContentPage from '../../components/SeoContentPage.astro';
 import { siloFaqs, internalLinks, productInfo, cloudDmaOption } from '../../data/seo/content';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero } from '../../data/theisle';
+
+const pageHero = getPageHero('theIsleCheats');
 ---
 
 <SeoContentPage
@@ -9,8 +11,8 @@ import { theIsleImages } from '../../data/theisle';
 	canonicalPath="/the-isle-cheats/"
 	heading="The Isle Cheats"
 	intro="The complete hub for The Isle Cheats — Cloud-DMA packages with Visuals ESP, World ESP, combat hacks, and utility tools for dinosaur survival on Windows PC."
-	heroImage={theIsleImages.product[0].src}
-	heroAlt="The Isle Cheats product preview"
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
 	faqs={siloFaqs.theIsleCheats}
 	ctaPrimary={{ href: '/pricing/', label: 'Buy The Isle Cheats' }}
 	ctaSecondary={{ href: '/the-isle-esp/', label: 'The Isle ESP' }}
