@@ -12,11 +12,13 @@ interface Plan {
 interface Props {
 	plans?: Plan[];
 	defaultPlan?: string;
+	variant?: 'default' | 'showcase';
 }
 
 const {
 	plans = productInfo.plans.map((plan) => ({ ...plan, stock: 'Available' })),
 	defaultPlan = 'monthly',
+	variant = 'default',
 } = Astro.props;
 
 const images = theIsleImages.product;
@@ -24,7 +26,7 @@ const main = images[0];
 const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 ---
 
-<section class="product surface-card" id="product" data-product aria-label="Product details">
+<section class:list={['product surface-card', { 'product--showcase': variant === 'showcase' }]} id="product" data-product aria-label="Product details">
 	<div class="product__media">
 		<figure class="product__figure media-frame">
 			<img
@@ -242,7 +244,7 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 
 	.product__figure {
 		margin: 0;
-		aspect-ratio: 16 / 10;
+		aspect-ratio: 16 / 9;
 		border: 1px solid rgba(192, 132, 252, 0.28);
 		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
 	}
@@ -282,7 +284,7 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 
 	.product__thumb {
 		padding: 0;
-		aspect-ratio: 16 / 10;
+		aspect-ratio: 16 / 9;
 		width: 100%;
 		border: 2px solid transparent;
 		border-radius: 0.75rem;
@@ -532,6 +534,19 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 	.product__details {
 		min-width: 0;
 		padding-top: 0.15rem;
+	}
+
+	.product--showcase {
+		grid-template-columns: 1fr;
+		height: 100%;
+	}
+
+	.product--showcase .product__media {
+		width: 100%;
+	}
+
+	.product--showcase .product__details {
+		padding-top: 0;
 	}
 
 	@media (max-width: 900px) {
