@@ -1,4 +1,5 @@
 import type { LocaleCode } from '../i18n';
+import { homeMetaKeywords } from './keywords';
 
 export type PageSeoKey =
 	| 'home'
@@ -67,15 +68,14 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 	home: {
 		title: 'The Isle Cheats — ESP, Hacks & Guides | islecheats',
 		description:
-			'Buy The Isle Cheats with Visuals ESP, World ESP, and Cloud-DMA for Windows PC. Compare Isle Cheats features, pricing, and guides — explore packages now.',
-		ogTitle: 'The Isle Cheats — ESP & Hacks for The Isle',
+			'Compare Visuals ESP, World ESP, and Cloud-DMA hacks for Windows PC. Review features, pricing, and survival guides at islecheats.net.',
+		ogTitle: 'The Isle Cheats — ESP, Cloud-DMA & Survival Hacks',
 		ogDescription:
-			'Official hub for The Isle Cheats: ESP overlays, Cloud-DMA packages, cheat features, pricing, and survival guides for dinosaur players.',
+			'Official hub for ESP overlays, combat hacks, package pricing, and dinosaur survival guides on Windows PC.',
 		twitterTitle: 'The Isle Cheats — ESP & Hacks',
 		twitterDescription:
-			'Compare The Isle ESP, hacks, Cloud-DMA features, and package pricing for Windows PC players.',
-		keywords:
-			'The Isle Cheats, Isle Cheats, The Isle ESP, The Isle Hack, Buy The Isle Cheats, The Isle Guide, The Isle Features',
+			'Compare The Isle ESP, Cloud-DMA hacks, cheat features, and monthly or lifetime package pricing for Windows PC players.',
+		keywords: homeMetaKeywords,
 	},
 	cheats: {
 		title: 'The Isle Hack — Combat & Movement Cheats | islecheats',

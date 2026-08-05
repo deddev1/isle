@@ -4,28 +4,42 @@ export const siteConfig = {
 	locale: 'en',
 	market: 'Worldwide',
 	supportEmail: 'support@islecheats.net',
+	supportUrl: 'https://zadeyo.com/support',
 	logo: '/images/zadeyo-logo.webp',
 	checkoutUrl: 'https://zadeyo.com/go/QRH?to=%2Fproducts%2Fthe-isle-novaxware',
-	defaultOgImage: '/images/hero.webp',
+	defaultOgImage: '/images/the-isle-hero-dinosaur-survival.webp',
 	metaDescription:
 		'Buy The Isle Cheats for Windows PC. Isle Cheats with ESP, Cloud-DMA hacks, monthly and lifetime plans, features, guides, and support at islecheats.net.',
 	keywords:
-		'The Isle Cheats, Isle Cheats, The Isle ESP, The Isle Hack, Buy The Isle Cheats, The Isle Guide, The Isle Features, islecheats.net',
+		'The Isle Cheats, Isle Cheats, The Isle Hacks, Isle Hacks, The Isle ESP, Isle ESP, The Isle growth, The Isle Hack, Buy The Isle Cheats, The Isle Guide, The Isle Features, The Isle survival, The Isle Cloud-DMA, islecheats.net',
 } as const;
 
 export const homeSeo = {
-	title: 'The Isle Cheats — ESP, Hacks & Guide for Windows PC | islecheats.net',
+	title: 'The Isle Cheats — ESP, Hacks & Guides | islecheats',
+	heroEyebrow: 'Windows PC · Cloud-DMA',
 	heroTitle: 'The Isle Cheats',
-	heroSubtitle: 'Dino ESP & Radar',
-	featuresHeading: 'ESP & Hacks Packages',
-	whyUsHeading: 'Why Choose The Isle Cheats',
+	heroSubtitle: 'ESP, World ESP & Dino Radar',
+	heroDescription:
+		'Compare Visuals ESP, World ESP, and combat hacks in one Cloud-DMA package. Review monthly and lifetime plans, feature lists, and setup guides before you buy.',
+	featuresHeading: 'Compare Packages',
+	whyUsHeading: 'Why choose Isle Cheats',
+	whyUsIntro:
+		'A Cloud-DMA package built for dinosaur survival on Windows PC — with ESP overlays, combat hacks, and utility tools in one license.',
+	whyUsPoints: [
+		'Isle Cheats and The Isle Cheats in one Windows PC package with Visuals ESP and World ESP',
+		'Isle hacks for combat — Instant Rotation, Auto-Attack, and Omnimovement',
+		'Track The Isle growth, health, stamina, and map resources through ESP overlays',
+		'Cloud-DMA includes ESP and hacks without Aimbot in the base package',
+		'Monthly or lifetime licenses with clear pricing before checkout',
+		'Guides for The Isle survival, growth, dinosaurs, settings, and performance',
+	],
 	description:
-		'Buy The Isle Cheats with Visuals ESP, World ESP, Cloud-DMA hacks, and survival tools for Windows PC. Compare Isle Cheats features, pricing, and guides at islecheats.net.',
+		'Buy The Isle Cheats with Visuals ESP, World ESP, and Cloud-DMA for Windows PC. Compare features, pricing, and guides at islecheats.net.',
 } as const;
 
 export const homeVideo = {
 	src: 'https://ooszazcwzmwhitdxwtom.supabase.co/storage/v1/object/public/ef/0605.mp4',
-	thumbnail: '/images/hero.webp',
+	thumbnail: '/images/the-isle-hero-dinosaur-survival.webp',
 	thumbnailAlt: 'The Isle Cheats demo video thumbnail',
 	title: 'The Isle Cheats demo video',
 } as const;
@@ -45,7 +59,7 @@ export const pageDescriptions = {
 	'/faq/':
 		'The Isle Cheats FAQ — answers about Cloud-DMA, ESP, Cheats, digital delivery, refund policy, and customer support.',
 	'/support/':
-		'Contact The Isle Cheats support for delivery, setup, and billing help. Email support@islecheats.net with your order details.',
+		'Contact The Isle Cheats support for delivery, setup, and billing help. Open https://zadeyo.com/support with your order details.',
 	'/refund-policy/':
 		'The Isle Cheats refund policy — review eligibility, conditions, and timelines before purchasing Cloud-DMA or ESP packages.',
 	'/privacy-policy/':
@@ -179,7 +193,7 @@ export const mainNav = [
 
 export const footerNav = [
 	{ label: 'Product updates log', href: '/updates/' },
-	{ label: 'Contact support team', href: '/support/' },
+	{ label: 'Contact support team', href: 'https://zadeyo.com/support' },
 	{ label: 'Refund policy details', href: '/refund-policy/' },
 	{ label: 'Privacy policy details', href: '/privacy-policy/' },
 	{ label: 'Terms of use', href: '/terms/' },
@@ -222,6 +236,6 @@ export const homeFaqs = [
 	{
 		question: 'How do I contact support?',
 		answer:
-			'Use the Support page to reach the team by email. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
+			'Open the support portal at https://zadeyo.com/support for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
 	},
 ] as const;

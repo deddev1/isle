@@ -2,6 +2,7 @@
 import '../styles/global.css';
 import { getLocalizedPath, getOgLocale, getLocaleDir, locales, type LocaleCode } from '../data/i18n';
 import { siteConfig } from '../data/site';
+import { organizationAlternateNames, organizationKnowsAbout } from '../data/seo/keywords';
 
 interface Props {
 	title: string;
@@ -136,6 +137,8 @@ const xDefaultHref = new URL(getLocalizedPath(path, 'en'), siteConfig.url).href;
 							'@type': 'Organization',
 							'@id': `${siteConfig.url}/#organization`,
 							name: siteConfig.name,
+							alternateName: [...organizationAlternateNames],
+							knowsAbout: [...organizationKnowsAbout],
 							url: siteConfig.url,
 							email: siteConfig.supportEmail,
 							logo: {
