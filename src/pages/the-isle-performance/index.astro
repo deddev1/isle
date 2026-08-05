@@ -1,7 +1,9 @@
 ---
 import SeoContentPage from '../../components/SeoContentPage.astro';
 import { siloFaqs, productInfo } from '../../data/seo/content';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero } from '../../data/theisle';
+
+const pageHero = getPageHero('theIslePerformance');
 ---
 
 <SeoContentPage
@@ -9,8 +11,8 @@ import { theIsleImages } from '../../data/theisle';
 	canonicalPath="/the-isle-performance/"
 	heading="The Isle Performance Guide"
 	intro="The Isle FPS Guide — optimize graphics settings, reduce lag, and use utility hacks like Disable Shadows and No Fog for smoother dinosaur survival."
-	heroImage={theIsleImages.product[4].src}
-	heroAlt="The Isle performance optimization"
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
 	faqs={siloFaqs.theIslePerformance}
 	ctaPrimary={{ href: '/the-isle-settings/', label: 'Settings Guide' }}
 	ctaSecondary={{ href: '/the-isle-guide/', label: 'The Isle Guide' }}

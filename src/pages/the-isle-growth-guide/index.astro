@@ -1,7 +1,9 @@
 ---
 import SeoContentPage from '../../components/SeoContentPage.astro';
 import { siloFaqs } from '../../data/seo/content';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero } from '../../data/theisle';
+
+const pageHero = getPageHero('theIsleGrowthGuide');
 ---
 
 <SeoContentPage
@@ -9,8 +11,8 @@ import { theIsleImages } from '../../data/theisle';
 	canonicalPath="/the-isle-growth-guide/"
 	heading="The Isle Growth Guide"
 	intro="Master The Isle growth mechanics — herbivore and carnivore growth paths, nesting tips, and how ESP growth percentage tracking helps your development."
-	heroImage={theIsleImages.product[5].src}
-	heroAlt="The Isle dinosaur growth guide"
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
 	faqs={siloFaqs.theIsleGrowthGuide}
 	ctaPrimary={{ href: '/the-isle-survival-guide/', label: 'Survival Guide' }}
 	ctaSecondary={{ href: '/the-isle-dinosaur-guide/', label: 'Dinosaur Guide' }}

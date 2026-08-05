@@ -5,7 +5,7 @@ import { homeFaqs, siteConfig } from '../../data/site';
 import { extendedFaqs } from '../../data/seo/content';
 import { getPageSeo } from '../../data/seo/meta';
 import { buildFaqSchema } from '../../data/seo/schema';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero, getPageGallery } from '../../data/theisle';
 
 const seo = getPageSeo('faq');
 
@@ -19,6 +19,7 @@ const faqs = [
 ];
 
 const faqSchema = buildFaqSchema(faqs);
+const pageHero = getPageHero('faq');
 ---
 
 <PageLayout
@@ -27,10 +28,10 @@ const faqSchema = buildFaqSchema(faqs);
 	canonicalPath="/faq/"
 	heading="The Isle Cheats FAQ"
 	intro="Straight answers about The Isle Cheats features, packages, delivery, and support."
-	heroImage={theIsleImages.product[3].src}
-	heroAlt="The Isle Cheats FAQ visual"
-	gallery={theIsleImages.product.slice(2, 5)}
-	ctaPrimary={{ href: '/support/', label: 'Open Support' }}
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
+	gallery={getPageGallery('nightHunt', 'predatorStalk', 'tyrannosaurForest')}
+	ctaPrimary={{ href: siteConfig.supportUrl, label: 'Open Support' }}
 	ctaSecondary={{ href: '/pricing/', label: 'View Pricing' }}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
@@ -52,8 +53,7 @@ const faqSchema = buildFaqSchema(faqs);
 	<section class="card-panel">
 		<h2>Still need help?</h2>
 		<p>
-			Visit <a href="/support/">Support</a> or email
-			<a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>.
+			Visit <a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">Support</a> for delivery, setup, and billing help.
 		</p>
 	</section>
 

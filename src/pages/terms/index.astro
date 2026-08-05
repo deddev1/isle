@@ -3,9 +3,10 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
 import { siteConfig } from '../../data/site';
 import { getPageSeo } from '../../data/seo/meta';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero, getPageGallery } from '../../data/theisle';
 
 const seo = getPageSeo('terms');
+const pageHero = getPageHero('terms');
 ---
 
 <PageLayout
@@ -15,9 +16,9 @@ const seo = getPageSeo('terms');
 	heading="Terms of Use"
 	intro="Terms covering use of islecheats.net and purchases related to The Isle Cheats packages."
 	eyebrow="Legal"
-	heroImage={theIsleImages.product[1].src}
-	heroAlt="The Isle Cheats terms of use and license agreement overview"
-	gallery={[theIsleImages.product[1], theIsleImages.product[4], theIsleImages.cover]}
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
+	gallery={getPageGallery('aerialLandscape', 'swampEnvironment', 'herdPlains')}
 	ctaPrimary={{ href: '/pricing/', label: 'View Pricing' }}
 	ctaSecondary={{ href: '/privacy-policy/', label: 'Privacy Policy' }}
 	keywords={seo.keywords}
@@ -47,7 +48,7 @@ const seo = getPageSeo('terms');
 		<h2>Contact</h2>
 		<p>
 			Questions about these terms can be sent to
-			<a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>.
+			<a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">Open support</a>.
 		</p>
 	</section>
 

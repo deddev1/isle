@@ -1,7 +1,9 @@
 ---
 import SeoContentPage from '../../components/SeoContentPage.astro';
 import { siloFaqs, internalLinks } from '../../data/seo/content';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero } from '../../data/theisle';
+
+const pageHero = getPageHero('theIsleGuide');
 ---
 
 <SeoContentPage
@@ -9,8 +11,8 @@ import { theIsleImages } from '../../data/theisle';
 	canonicalPath="/the-isle-guide/"
 	heading="The Isle Guide"
 	intro="Your central resource for The Isle cheats, ESP setup, survival tactics, growth paths, performance tips, and package selection."
-	heroImage={theIsleImages.hero}
-	heroAlt="The Isle Guide banner"
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
 	faqs={siloFaqs.theIsleGuide}
 	ctaPrimary={{ href: '/the-isle-cheats/', label: 'The Isle Cheats' }}
 	ctaSecondary={{ href: '/pricing/', label: 'View Pricing' }}

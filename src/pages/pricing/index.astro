@@ -2,9 +2,10 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import { productInfo, siteConfig } from '../../data/site';
 import { getPageSeo } from '../../data/seo/meta';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero, getPageGallery } from '../../data/theisle';
 
 const seo = getPageSeo('pricing');
+const pageHero = getPageHero('pricing');
 ---
 
 <PageLayout
@@ -13,9 +14,9 @@ const seo = getPageSeo('pricing');
 	canonicalPath="/pricing/"
 	heading="The Isle Cheats Pricing"
 	intro="Packages are sold in USD and include The Isle Cheats Cloud-DMA, ESP, and Cheats product line."
-	heroImage={theIsleImages.cover}
-	heroAlt="The Isle Cheats pricing visual"
-	gallery={[theIsleImages.product[1], theIsleImages.product[3], theIsleImages.product[5]]}
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
+	gallery={getPageGallery('herdPlains', 'carnivoreCombat', 'packEncounter')}
 	ctaPrimary={{ href: '/#product', label: 'Open Product Card' }}
 	ctaSecondary={{ href: '/features/', label: 'See Features' }}
 	keywords={seo.keywords}
@@ -55,7 +56,7 @@ const seo = getPageSeo('pricing');
 			<li><a href="/terms/">Review the terms</a></li>
 			<li><a href="/updates/">Check the latest updates</a></li>
 			<li>
-				<a href={`mailto:${siteConfig.supportEmail}`}>Email support</a> if you need order help
+				<a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">Open support</a> if you need order help
 			</li>
 		</ul>
 	</section>

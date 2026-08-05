@@ -1,7 +1,9 @@
 ---
 import SeoContentPage from '../../components/SeoContentPage.astro';
 import { siloFaqs } from '../../data/seo/content';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero } from '../../data/theisle';
+
+const pageHero = getPageHero('theIsleSurvivalGuide');
 ---
 
 <SeoContentPage
@@ -9,8 +11,8 @@ import { theIsleImages } from '../../data/theisle';
 	canonicalPath="/the-isle-survival-guide/"
 	heading="The Isle Survival Guide"
 	intro="Essential The Isle survival tactics — finding water and food, avoiding predators, managing bleed and fractures, and using ESP for threat awareness."
-	heroImage={theIsleImages.product[2].src}
-	heroAlt="The Isle survival guide visual"
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
 	faqs={siloFaqs.theIsleSurvivalGuide}
 	ctaPrimary={{ href: '/the-isle-esp/', label: 'ESP for Survival' }}
 	ctaSecondary={{ href: '/the-isle-growth-guide/', label: 'Growth Guide' }}

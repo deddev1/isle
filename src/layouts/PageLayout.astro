@@ -123,12 +123,20 @@ const webPageSchema = buildWebPageSchema({
 					(ctaPrimary || ctaSecondary) && (
 						<div class="banner__actions">
 							{ctaPrimary && (
-								<a class="btn btn--primary" href={ctaPrimary.href}>
+								<a
+									class="btn btn--primary"
+									href={ctaPrimary.href}
+									{...(ctaPrimary.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+								>
 									{ctaPrimary.label}
 								</a>
 							)}
 							{ctaSecondary && (
-								<a class="btn btn--ghost" href={ctaSecondary.href}>
+								<a
+									class="btn btn--ghost"
+									href={ctaSecondary.href}
+									{...(ctaSecondary.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+								>
 									{ctaSecondary.label}
 								</a>
 							)}

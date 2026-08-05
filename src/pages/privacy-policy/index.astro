@@ -3,9 +3,10 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
 import { siteConfig } from '../../data/site';
 import { getPageSeo } from '../../data/seo/meta';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero, getPageGallery } from '../../data/theisle';
 
 const seo = getPageSeo('privacyPolicy');
+const pageHero = getPageHero('privacyPolicy');
 ---
 
 <PageLayout
@@ -15,10 +16,10 @@ const seo = getPageSeo('privacyPolicy');
 	heading="Privacy Policy"
 	intro="How information is handled when you browse islecheats.net or contact support."
 	eyebrow="Legal"
-	heroImage={theIsleImages.product[0].src}
-	heroAlt="The Isle Cheats privacy policy and visitor data handling overview"
-	gallery={[theIsleImages.product[0], theIsleImages.product[2], theIsleImages.hero]}
-	ctaPrimary={{ href: `mailto:${siteConfig.supportEmail}`, label: 'Email Us' }}
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
+	gallery={getPageGallery('swampEnvironment', 'riversideDrink', 'hero')}
+	ctaPrimary={{ href: siteConfig.supportUrl, label: 'Contact Support' }}
 	ctaSecondary={{ href: '/terms/', label: 'Terms of Use' }}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
@@ -47,7 +48,7 @@ const seo = getPageSeo('privacyPolicy');
 		<h2>Contact</h2>
 		<p>
 			Privacy questions can be sent to
-			<a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>.
+			<a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">Open support</a>.
 		</p>
 	</section>
 

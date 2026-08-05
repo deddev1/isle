@@ -7,7 +7,7 @@ import { buildArticleSchema, buildFaqSchema } from '../../data/seo/schema';
 import { estimateReadingTime, formatDate } from '../../data/seo/helpers';
 import { getLocaleFromPath } from '../../data/i18n';
 import { siteConfig } from '../../data/site';
-import { theIsleImages } from '../../data/theisle';
+import { isleSceneImages } from '../../data/theisle';
 
 export function getStaticPaths() {
 	return blogIdeas.map((idea, index) => ({
@@ -17,6 +17,8 @@ export function getStaticPaths() {
 }
 
 const { idea, index } = Astro.props;
+const sceneKeys = Object.keys(isleSceneImages) as Array<keyof typeof isleSceneImages>;
+const postHero = isleSceneImages[sceneKeys[index % sceneKeys.length]];
 const locale = getLocaleFromPath(Astro.url.pathname);
 const seo = getBlogPostSeo(idea);
 const canonicalPath = `/blog/${idea.slug}/`;
@@ -71,8 +73,8 @@ const faqSchema = buildFaqSchema(postFaqs);
 	canonicalPath={canonicalPath}
 	heading={idea.title}
 	intro={`An in-depth ${idea.intent} guide covering ${idea.category} topics for The Isle players on Windows PC.`}
-	heroImage={theIsleImages.hero}
-	heroAlt={`${idea.title} — The Isle Cheats blog article illustration`}
+	heroImage={postHero.src}
+	heroAlt={`${idea.title} — ${postHero.alt}`}
 	locale={locale}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
@@ -127,7 +129,7 @@ const faqSchema = buildFaqSchema(postFaqs);
 			<li>Compare features on the <a href="/the-isle-features/">The Isle Features</a> page</li>
 			<li>Review <a href="/the-isle-faq/">The Isle FAQ</a> for delivery and compatibility answers</li>
 			<li>Check <a href="/the-isle-updates/">The Isle Updates</a> after game patches</li>
-			<li>Contact <a href="/support/">Support</a> if you need help with delivery or setup</li>
+			<li>Contact <a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">Support</a> if you need help with delivery or setup</li>
 		</ul>
 	</section>
 

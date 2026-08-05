@@ -1,7 +1,8 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import InternalLinksPanel from '../components/InternalLinksPanel.astro';
-import { theIsleImages } from '../data/theisle';
+import { getPageHero } from '../data/theisle';
+const pageHero = getPageHero('notFound');
 ---
 
 <PageLayout
@@ -10,9 +11,8 @@ import { theIsleImages } from '../data/theisle';
 	canonicalPath="/404/"
 	heading="Page not found"
 	intro="The page you requested does not exist or may have moved. Use the links below to find The Isle Cheats guides, pricing, and support."
-	heroImage={theIsleImages.hero}
-	heroAlt="The Isle Cheats — page not found"
-	gallery={[]}
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
 	noindex={true}
 	ctaPrimary={{ href: '/', label: 'Back to Homepage' }}
 	ctaSecondary={{ href: '/the-isle-guide/', label: 'The Isle Guide' }}

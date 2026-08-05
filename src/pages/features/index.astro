@@ -2,9 +2,10 @@
 import PageLayout from '../../layouts/PageLayout.astro';
 import { cloudDmaOption, productInfo } from '../../data/site';
 import { getPageSeo } from '../../data/seo/meta';
-import { theIsleImages } from '../../data/theisle';
+import { getPageHero, getPageGallery } from '../../data/theisle';
 
 const seo = getPageSeo('features');
+const pageHero = getPageHero('features');
 ---
 
 <PageLayout
@@ -13,9 +14,9 @@ const seo = getPageSeo('features');
 	canonicalPath="/features/"
 	heading="The Isle Cheats Features"
 	intro="Compare Cloud-DMA, Visuals ESP, World ESP, Cheats, and Other hacks in one place before choosing a duration on Pricing."
-	heroImage={theIsleImages.hero}
-	heroAlt="The Isle Cheats features overview visual"
-	gallery={theIsleImages.gallery.slice(1, 4)}
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
+	gallery={getPageGallery('swampEnvironment', 'hero', 'tyrannosaurForest')}
 	ctaPrimary={{ href: '/pricing/', label: 'Compare Pricing' }}
 	ctaSecondary={{ href: '/faq/', label: 'Read FAQ' }}
 	keywords={seo.keywords}
