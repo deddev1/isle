@@ -12,7 +12,7 @@ interface Plan {
 interface Props {
 	plans?: Plan[];
 	defaultPlan?: string;
-	variant?: 'default' | 'showcase';
+	variant?: 'default' | 'gallery' | 'pricing';
 }
 
 const {
@@ -21,44 +21,62 @@ const {
 	variant = 'default',
 } = Astro.props;
 
+const showGallery = variant === 'default' || variant === 'gallery';
+const showPricing = variant === 'default' || variant === 'pricing';
+
 const images = theIsleImages.product;
 const main = images[0];
 const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 ---
 
-<section class:list={['product surface-card', { 'product--showcase': variant === 'showcase' }]} id="product" data-product aria-label="Product details">
-	<div class="product__media">
-		<figure class="product__figure media-frame">
-			<img
-				src={main.src}
-				alt={main.alt}
-				width="1280"
-				height="720"
-				class="product__image"
-				data-main-image
-				decoding="async"
-			/>
-			<span class="product__credit">Preview</span>
-		</figure>
-		<div class="product__thumbs" role="list">
-			{
-				images.map((image, index) => (
-					<button
-						type="button"
-						class:list={['product__thumb media-frame', { 'is-active': index === 0 }]}
-						aria-label={`Show ${image.alt}`}
-						aria-pressed={index === 0 ? 'true' : 'false'}
-						data-thumb
-						data-src={image.src}
-						data-alt={image.alt}
-					>
-						<img src={image.src} alt={image.alt} width="320" height="200" loading="lazy" decoding="async" />
-					</button>
-				))
-			}
+<section
+	class:list={[
+		'product surface-card',
+		{
+			'product--gallery': variant === 'gallery',
+			'product--pricing': variant === 'pricing',
+		},
+	]}
+	id={variant === 'default' || variant === 'pricing' ? 'product' : undefined}
+	data-product={variant === 'default' || variant === 'pricing' ? '' : undefined}
+	data-product-gallery={variant === 'gallery' ? '' : undefined}
+	aria-label={variant === 'gallery' ? 'Product gallery' : 'Product details'}
+>
+	{showGallery && (
+		<div class="product__media">
+			<figure class="product__figure media-frame">
+				<img
+					src={main.src}
+					alt={main.alt}
+					width="1280"
+					height="720"
+					class="product__image"
+					data-main-image
+					decoding="async"
+				/>
+				<span class="product__credit">Preview</span>
+			</figure>
+			<div class="product__thumbs" role="list">
+				{
+					images.map((image, index) => (
+						<button
+							type="button"
+							class:list={['product__thumb media-frame', { 'is-active': index === 0 }]}
+							aria-label={`Show ${image.alt}`}
+							aria-pressed={index === 0 ? 'true' : 'false'}
+							data-thumb
+							data-src={image.src}
+							data-alt={image.alt}
+						>
+							<img src={image.src} alt={image.alt} width="320" height="180" loading="lazy" decoding="async" />
+						</button>
+					))
+				}
+			</div>
 		</div>
-	</div>
+	)}
 
+	{showPricing && (
 	<div class="product__details">
 		<h2 class="product__title">{homeSeo.featuresHeading}</h2>
 
@@ -164,14 +182,14 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 			</div>
 		</div>
 	</div>
+	)}
 </section>
 
 <script>
-	const root = document.querySelector('[data-product]');
-	if (root) {
+	document.querySelectorAll('[data-product], [data-product-gallery]').forEach((root) => {
 		const priceEl = root.querySelector('[data-price]');
 		const qtyValue = root.querySelector('[data-qty-value]');
-		const mainImage = root.querySelector('[data-main-image]') as HTMLImageElement | null;
+		const mainImage = root.querySelector('[data-main-image]');
 		const planButtons = root.querySelectorAll('[data-plan]');
 		const thumbs = root.querySelectorAll('[data-thumb]');
 		let qty = 1;
@@ -180,7 +198,7 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 			thumb.addEventListener('click', () => {
 				const src = thumb.getAttribute('data-src');
 				const alt = thumb.getAttribute('data-alt');
-				if (mainImage && src) {
+				if (mainImage instanceof HTMLImageElement && src) {
 					mainImage.style.opacity = '0';
 					window.setTimeout(() => {
 						mainImage.src = src;
@@ -219,7 +237,7 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 				if (priceEl && next) priceEl.textContent = next;
 			});
 		});
-	}
+	});
 </script>
 
 <style>
@@ -536,17 +554,50 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 		padding-top: 0.15rem;
 	}
 
-	.product--showcase {
-		grid-template-columns: 1fr;
+	.product--gallery {
+		display: flex;
+		flex-direction: column;
+		grid-template-columns: unset;
+		padding: clamp(1rem, 2vw, 1.35rem);
+		margin: 0;
 		height: 100%;
+		animation: none;
 	}
 
-	.product--showcase .product__media {
-		width: 100%;
+	.product--gallery .product__media {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		gap: 0.65rem;
+		min-height: 0;
 	}
 
-	.product--showcase .product__details {
+	.product--gallery .product__figure {
+		flex: 1;
+		min-height: 0;
+	}
+
+	.product--pricing {
+		display: block;
+		grid-template-columns: unset;
+		padding: clamp(1.15rem, 2.5vw, 1.65rem);
+		margin: 0;
+		animation: none;
+	}
+
+	.product--pricing .product__details {
 		padding-top: 0;
+	}
+
+	.product--pricing .plans {
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+	}
+
+	@media (min-width: 900px) {
+		.product--pricing .buy-also__row {
+			display: grid;
+			grid-template-columns: repeat(2, minmax(0, 1fr));
+		}
 	}
 
 	@media (max-width: 900px) {

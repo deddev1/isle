@@ -2,8 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
-import HomeVideoPlayer from '../components/HomeVideoPlayer.astro';
-import ProductCard from '../components/ProductCard.astro';
+import ProductShowcase from '../components/ProductShowcase.astro';
 import Gallery from '../components/Gallery.astro';
 import HomeSeo from '../components/HomeSeo.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -61,14 +60,7 @@ const canonicalPath = getLocalizedPath('/', locale);
 		<Hero locale={locale} />
 		<section class="site__section" id="features" data-nav-section="features" aria-label="Product packages">
 			<div class="shell">
-				<div class="product-showcase">
-					<div class="product-showcase__video">
-						<HomeVideoPlayer />
-					</div>
-					<div class="product-showcase__product">
-						<ProductCard variant="showcase" />
-					</div>
-				</div>
+				<ProductShowcase />
 			</div>
 		</section>
 		<section class="site__section site__section--seo" id="why-us" data-nav-section="why-us">
@@ -99,43 +91,5 @@ const canonicalPath = getLocalizedPath('/', locale);
 	.site__section--gallery {
 		padding-top: 0.5rem;
 		padding-bottom: 2rem;
-	}
-
-	.product-showcase {
-		display: grid;
-		grid-template-columns: 1fr;
-		gap: 1.25rem;
-		align-items: stretch;
-	}
-
-	.product-showcase__video,
-	.product-showcase__product {
-		display: flex;
-		min-width: 0;
-		min-height: 0;
-	}
-
-	.product-showcase__video :global(article),
-	.product-showcase__product :global(.product) {
-		width: 100%;
-	}
-
-	@media (min-width: 1024px) {
-		.product-showcase {
-			grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-			gap: 1.75rem;
-			min-height: clamp(520px, 42vw, 680px);
-		}
-
-		.product-showcase__video,
-		.product-showcase__product {
-			height: 100%;
-		}
-	}
-
-	@media (max-width: 640px) {
-		.product-showcase {
-			gap: 1rem;
-		}
 	}
 </style>
