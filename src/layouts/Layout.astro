@@ -1,6 +1,6 @@
 ---
 import '../styles/global.css';
-import { getLocalizedPath, getOgLocale, getLocaleDir, locales, type LocaleCode } from '../data/i18n';
+import { getLocalizedPath, getOgLocale, getLocaleDir, getHreflangAlternates, getXDefaultPath, locales, type LocaleCode } from '../data/i18n';
 import { siteConfig } from '../data/site';
 import { organizationAlternateNames, organizationKnowsAbout } from '../data/seo/keywords';
 
@@ -47,11 +47,12 @@ const logoURL = new URL(siteConfig.logo, siteConfig.url).href;
 const robots = noindex ? 'noindex, nofollow' : 'index, follow, max-image-preview:large';
 const ogLocale = getOgLocale(locale);
 const dir = getLocaleDir(locale);
-const alternateLinks = locales.map((entry) => ({
+const alternateLinks = getHreflangAlternates(path).map((entry) => ({
 	hreflang: entry.hrefLang,
-	href: new URL(getLocalizedPath(path, entry.code), siteConfig.url).href,
+	href: new URL(entry.href, siteConfig.url).href,
 }));
-const xDefaultHref = new URL(getLocalizedPath(path, 'en'), siteConfig.url).href;
+const xDefaultHref = new URL(getXDefaultPath(path), siteConfig.url).href;
+const websiteLanguages = locales.map((entry) => entry.code);
 ---
 
 <!doctype html>
@@ -126,7 +127,7 @@ const xDefaultHref = new URL(getLocalizedPath(path, 'en'), siteConfig.url).href;
 							url: siteConfig.url,
 							name: siteConfig.name,
 							description,
-							inLanguage: locale,
+							inLanguage: websiteLanguages,
 							potentialAction: {
 								'@type': 'SearchAction',
 								target: `${siteConfig.url}/blog/?q={search_term_string}`,
@@ -139,6 +140,10 @@ const xDefaultHref = new URL(getLocalizedPath(path, 'en'), siteConfig.url).href;
 							name: siteConfig.name,
 							alternateName: [...organizationAlternateNames],
 							knowsAbout: [...organizationKnowsAbout],
+							areaServed: {
+								'@type': 'Place',
+								name: 'Worldwide',
+							},
 							url: siteConfig.url,
 							email: siteConfig.supportEmail,
 							logo: {

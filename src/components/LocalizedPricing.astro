@@ -1,0 +1,96 @@
+---
+import PageLayout from '../layouts/PageLayout.astro';
+import { productInfo, siteConfig } from '../data/site';
+import { getPageSeo } from '../data/seo/meta';
+import { getPricingContent } from '../data/i18n/pricing-content';
+import { getPageHero, getPageGallery } from '../data/theisle';
+import { getLocalizedPath, type LocaleCode } from '../data/i18n';
+
+interface Props {
+	locale: LocaleCode;
+}
+
+const { locale } = Astro.props;
+const seo = getPageSeo('pricing', locale);
+const content = getPricingContent(locale);
+const canonicalPath = getLocalizedPath('/pricing/', locale);
+const pageHero = getPageHero('pricing');
+const beforeBuyItems = content.beforeBuyItems.map((item) =>
+	item.href === '#'
+		? { ...item, href: siteConfig.supportUrl, external: true }
+		: { ...item, external: false },
+);
+---
+
+<PageLayout
+	title={seo.title}
+	description={seo.description}
+	canonicalPath={canonicalPath}
+	heading={content.heading}
+	intro={content.intro}
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
+	gallery={getPageGallery('herdPlains', 'carnivoreCombat', 'packEncounter')}
+	ctaPrimary={content.ctaPrimary}
+	ctaSecondary={content.ctaSecondary}
+	keywords={seo.keywords}
+	ogTitle={seo.ogTitle}
+	ogDescription={seo.ogDescription}
+	twitterTitle={seo.twitterTitle}
+	twitterDescription={seo.twitterDescription}
+	locale={locale}
+	breadcrumbLabel={content.breadcrumbLabel}
+>
+	<section class="card-panel">
+		<h2>{content.packagesHeading}</h2>
+		<div class="price-grid">
+			{
+				productInfo.plans.map((plan) => (
+					<article class:list={['price-card', { 'is-featured': plan.id === 'lifetime' }]}>
+						<span class="price-card__label">{plan.label}</span>
+						<span class="price-card__price">${plan.price}</span>
+						<span class="price-card__meta">{productInfo.currency} · Cloud-DMA · ESP</span>
+					</article>
+				))
+			}
+		</div>
+	</section>
+
+	<section class="card-panel">
+		<h2>{content.includesHeading}</h2>
+		<p>
+			{
+				(() => {
+					const match = content.includesBody.match(/^(.*)\s+(\S+)\s+\(\/features\/\)\s*(.*)$/s);
+					if (!match) return content.includesBody;
+					const [, before, linkLabel, after] = match;
+					return (
+						<>
+							{before}{' '}
+							<a href="/features/">{linkLabel}</a>
+							{after}
+						</>
+					);
+				})()
+			}
+		</p>
+	</section>
+
+	<section class="card-panel">
+		<h2>{content.beforeBuyHeading}</h2>
+		<ul>
+			{
+				beforeBuyItems.map((item) => (
+					<li>
+						<a
+							href={item.href}
+							{...(item.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+						>
+							{item.label}
+						</a>
+					</li>
+				))
+			}
+		</ul>
+	</section>
+</PageLayout>

@@ -135,47 +135,14 @@ export type RelatedSearchTerm = {
 	href: string;
 };
 
-/** Crawlable homepage search terms — linked to the most relevant internal page. */
-export const relatedSearchTerms: RelatedSearchTerm[] = [
-	{ label: 'Isle Cheats', href: '/the-isle-cheats/' },
-	{ label: 'The Isle Cheats', href: '/the-isle-cheats/' },
-	{ label: 'Isle Cheat', href: '/the-isle-cheats/' },
-	{ label: 'The Isle Cheat', href: '/the-isle-cheats/' },
-	{ label: 'Buy Isle Cheats', href: '/pricing/' },
-	{ label: 'Buy The Isle Cheats', href: '/pricing/' },
-	{ label: 'Isle Hacks', href: '/cheats/' },
-	{ label: 'The Isle Hacks', href: '/cheats/' },
-	{ label: 'Isle Hack', href: '/cheats/' },
-	{ label: 'The Isle Hack', href: '/cheats/' },
-	{ label: 'Isle ESP', href: '/theisle-esp/' },
-	{ label: 'The Isle ESP', href: '/the-isle-esp/' },
-	{ label: 'The Isle wallhack', href: '/the-isle-esp/' },
-	{ label: 'The Isle overlay', href: '/theisle-esp/' },
-	{ label: 'The Isle growth', href: '/the-isle-growth-guide/' },
-	{ label: 'The Isle growth guide', href: '/the-isle-growth-guide/' },
-	{ label: 'The Isle dinosaur growth', href: '/the-isle-growth-guide/' },
-	{ label: 'The Isle survival', href: '/the-isle-survival-guide/' },
-	{ label: 'The Isle survival guide', href: '/the-isle-survival-guide/' },
-	{ label: 'The Isle guide', href: '/the-isle-guide/' },
-	{ label: 'The Isle features', href: '/the-isle-features/' },
-	{ label: 'The Isle Cloud-DMA', href: '/features/' },
-	{ label: 'The Isle DMA', href: '/features/' },
-	{ label: 'The Isle radar hack', href: '/features/' },
-	{ label: 'The Isle instant rotation', href: '/cheats/' },
-	{ label: 'The Isle omnimovement', href: '/cheats/' },
-	{ label: 'The Isle cheat price', href: '/pricing/' },
-	{ label: 'The Isle cheats monthly', href: '/pricing/' },
-	{ label: 'The Isle cheats lifetime', href: '/pricing/' },
-	{ label: 'The Isle dinosaur guide', href: '/the-isle-dinosaur-guide/' },
-	{ label: 'The Isle settings', href: '/the-isle-settings/' },
-	{ label: 'The Isle performance', href: '/the-isle-performance/' },
-	{ label: 'The Isle updates', href: '/the-isle-updates/' },
-	{ label: 'The Isle FAQ', href: '/the-isle-faq/' },
-	{ label: 'The Isle undetected cheats', href: '/the-isle-cheats/' },
-	{ label: 'islecheats.net', href: '/' },
-];
+import { getRelatedSearchTerms as getLocaleSearchTerms, getHomeMetaKeywords } from '../i18n/search-terms';
 
-export const homeMetaKeywords = relatedSearchTerms.map((term) => term.label).join(', ');
+/** English default related search terms (use getRelatedSearchTerms(locale) for localized lists). */
+export const relatedSearchTerms = getLocaleSearchTerms('en');
+
+export const homeMetaKeywords = getHomeMetaKeywords('en');
+
+export { getHomeMetaKeywords, getRelatedSearchTerms } from '../i18n/search-terms';
 
 export const organizationAlternateNames = [
 	'Isle Cheats',

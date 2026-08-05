@@ -7,10 +7,12 @@ import ProductCard from '../components/ProductCard.astro';
 import Gallery from '../components/Gallery.astro';
 import HomeSeo from '../components/HomeSeo.astro';
 import SiteFooter from '../components/SiteFooter.astro';
-import { homeFaqs, productInfo, siteConfig } from '../data/site';
+import { productInfo, siteConfig } from '../data/site';
 import { getPageSeo } from '../data/seo/meta';
-import { homeMetaKeywords, organizationAlternateNames, relatedSearchTerms } from '../data/seo/keywords';
+import { getHomeMetaKeywords, getRelatedSearchTerms } from '../data/i18n/search-terms';
+import { organizationAlternateNames } from '../data/seo/keywords';
 import { buildFaqSchema, buildRelatedSearchesSchema, buildSoftwareApplicationSchema } from '../data/seo/schema';
+import { getHomeContent } from '../data/i18n/home-content';
 import { getLocalizedPath } from '../data/i18n';
 import type { LocaleCode } from '../data/i18n';
 
@@ -20,6 +22,7 @@ interface Props {
 
 const { locale } = Astro.props;
 const seo = getPageSeo('home', locale);
+const homeContent = getHomeContent(locale);
 const pricingUrl = new URL(getLocalizedPath('/pricing/', locale), siteConfig.url).href;
 
 const productSchema = buildSoftwareApplicationSchema({
@@ -29,11 +32,11 @@ const productSchema = buildSoftwareApplicationSchema({
 	plans: productInfo.plans,
 	currency: productInfo.currency,
 	alternateName: [...organizationAlternateNames],
-	keywords: homeMetaKeywords,
+	keywords: getHomeMetaKeywords(locale),
 });
 
-const faqSchema = buildFaqSchema(homeFaqs);
-const relatedSearchesSchema = buildRelatedSearchesSchema(relatedSearchTerms, locale);
+const faqSchema = buildFaqSchema(homeContent.faqs);
+const relatedSearchesSchema = buildRelatedSearchesSchema(getRelatedSearchTerms(locale), locale);
 const canonicalPath = getLocalizedPath('/', locale);
 ---
 
@@ -44,7 +47,7 @@ const canonicalPath = getLocalizedPath('/', locale);
 	ogImage="/images/the-isle-hero-dinosaur-survival.webp"
 	preloadImage="/images/the-isle-hero-dinosaur-survival.webp"
 	locale={locale}
-	keywords={seo.keywords}
+	keywords={getHomeMetaKeywords(locale)}
 	ogTitle={seo.ogTitle}
 	ogDescription={seo.ogDescription}
 	twitterTitle={seo.twitterTitle}
@@ -55,7 +58,7 @@ const canonicalPath = getLocalizedPath('/', locale);
 	<script type="application/ld+json" set:html={JSON.stringify(relatedSearchesSchema)} />
 	<Navbar />
 	<main class="site">
-		<Hero />
+		<Hero locale={locale} />
 		<section class="site__section" id="features" data-nav-section="features" aria-label="Product packages">
 			<div class="shell">
 				<div class="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-2 lg:gap-8">
@@ -65,14 +68,14 @@ const canonicalPath = getLocalizedPath('/', locale);
 			</div>
 		</section>
 		<section class="site__section site__section--seo" id="why-us" data-nav-section="why-us">
-			<HomeSeo />
+			<HomeSeo locale={locale} />
 		</section>
 		<section class="site__section site__section--gallery" id="demo" data-nav-section="demo">
 			<div class="shell">
 				<Gallery />
 			</div>
 		</section>
-		<SiteFooter />
+		<SiteFooter locale={locale} />
 	</main>
 </Layout>
 

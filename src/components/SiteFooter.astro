@@ -1,6 +1,14 @@
 ---
 import { cloudDmaOption, footerExplore, footerNav, productInfo, siteConfig } from '../data/site';
-import { relatedSearchTerms } from '../data/seo/keywords';
+import { getRelatedSearchTerms } from '../data/i18n/search-terms';
+import type { LocaleCode } from '../data/i18n';
+
+interface Props {
+	locale?: LocaleCode;
+}
+
+const { locale = 'en' } = Astro.props;
+const searchTerms = getRelatedSearchTerms(locale);
 ---
 
 <footer class="footer" id="support-footer">
@@ -35,7 +43,7 @@ import { relatedSearchTerms } from '../data/seo/keywords';
 	</div>
 	<nav class="footer__searches shell" aria-label="Popular Isle Cheats searches">
 		<ul>
-			{relatedSearchTerms.slice(0, 18).map((term) => (
+			{searchTerms.slice(0, 18).map((term) => (
 				<li><a href={term.href}>{term.label}</a></li>
 			))}
 		</ul>

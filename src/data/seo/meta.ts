@@ -1,5 +1,5 @@
 import type { LocaleCode } from '../i18n';
-import { homeMetaKeywords } from './keywords';
+import { getHomeMetaKeywords, getRelatedSearchTerms } from '../i18n/search-terms';
 
 export type PageSeoKey =
 	| 'home'
@@ -75,7 +75,7 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		twitterTitle: 'The Isle Cheats — ESP & Hacks',
 		twitterDescription:
 			'Compare The Isle ESP, Cloud-DMA hacks, cheat features, and monthly or lifetime package pricing for Windows PC players.',
-		keywords: homeMetaKeywords,
+		keywords: getHomeMetaKeywords('en'),
 	},
 	cheats: {
 		title: 'The Isle Hack — Combat & Movement Cheats | islecheats',
