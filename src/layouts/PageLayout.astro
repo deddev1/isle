@@ -28,6 +28,7 @@ interface Props {
 	locale?: LocaleCode;
 	breadcrumbLabel?: string;
 	noindex?: boolean;
+	includeCanonical?: boolean;
 	type?: 'website' | 'article';
 	preloadHero?: boolean;
 	articlePublished?: string;
@@ -54,6 +55,7 @@ const {
 	locale = 'en',
 	breadcrumbLabel,
 	noindex = false,
+	includeCanonical = true,
 	type = 'website',
 	preloadHero = true,
 	articlePublished,
@@ -88,6 +90,7 @@ const webPageSchema = buildWebPageSchema({
 	keywords={keywords}
 	locale={locale}
 	noindex={noindex}
+	includeCanonical={includeCanonical}
 	type={type}
 	preloadImage={preloadHero ? heroImage : undefined}
 	articlePublished={articlePublished}

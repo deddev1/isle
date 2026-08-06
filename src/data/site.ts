@@ -22,9 +22,9 @@ export const homeSeo = {
 	heroDescription:
 		'Compare Visuals ESP, World ESP, and combat hacks in one Cloud-DMA package. Review monthly and lifetime plans, feature lists, and setup guides before you buy.',
 	featuresHeading: 'Compare Packages',
-	whyUsHeading: 'Why choose Isle Cheats',
+	whyUsHeading: 'Why Choose Cloud-DMA for The Isle?',
 	whyUsIntro:
-		'A Cloud-DMA package built for dinosaur survival on Windows PC — with ESP overlays, combat hacks, and utility tools in one license.',
+		'Complete ESP & Combat Toolkit for dinosaur survival on Windows PC — hardware-based DMA with ESP overlays and combat automation tools.',
 	whyUsPoints: [
 		'Isle Cheats and The Isle Cheats in one Windows PC package with Visuals ESP and World ESP',
 		'Isle hacks for combat — Instant Rotation, Auto-Attack, and Omnimovement',

@@ -5,6 +5,7 @@ import Hero from '../components/Hero.astro';
 import ProductShowcase from '../components/ProductShowcase.astro';
 import Gallery from '../components/Gallery.astro';
 import HomeSeo from '../components/HomeSeo.astro';
+import WhyUsSection from '../components/WhyUsSection.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { productInfo, siteConfig } from '../data/site';
 import { getPageSeo } from '../data/seo/meta';
@@ -63,7 +64,10 @@ const canonicalPath = getLocalizedPath('/', locale);
 				<ProductShowcase />
 			</div>
 		</section>
-		<section class="site__section site__section--seo" id="why-us" data-nav-section="why-us">
+		<section class="site__section site__section--seo" id="why-us" data-nav-section="why-us" aria-labelledby="home-seo-title">
+			<WhyUsSection locale={locale} />
+		</section>
+		<section class="site__section site__section--seo" aria-label="Package details and FAQ">
 			<HomeSeo locale={locale} />
 		</section>
 		<section class="site__section site__section--gallery" id="demo" data-nav-section="demo">

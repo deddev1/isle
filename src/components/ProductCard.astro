@@ -44,7 +44,17 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 >
 	{showGallery && (
 		<div class="product__media">
-			<figure class="product__figure media-frame">
+			<figure
+				class="product__figure media-frame"
+				{...(variant === 'gallery'
+					? {
+							'data-main-figure': true,
+							tabindex: '0',
+							role: 'button',
+							'aria-label': 'Cycle product preview images',
+						}
+					: {})}
+			>
 				<img
 					src={main.src}
 					alt={main.alt}
@@ -253,6 +263,23 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 				thumb.classList.add('is-active');
 				thumb.setAttribute('aria-pressed', 'true');
 			});
+		});
+
+		const mainFigure = root.querySelector('[data-main-figure]');
+		const cyclePreview = () => {
+			const thumbList = Array.from(thumbs);
+			if (thumbList.length === 0) return;
+			const activeIndex = thumbList.findIndex((thumb) => thumb.classList.contains('is-active'));
+			const nextThumb = thumbList[(activeIndex + 1) % thumbList.length];
+			nextThumb?.dispatchEvent(new Event('click'));
+		};
+
+		mainFigure?.addEventListener('click', cyclePreview);
+		mainFigure?.addEventListener('keydown', (event) => {
+			if (event instanceof KeyboardEvent && (event.key === 'Enter' || event.key === ' ')) {
+				event.preventDefault();
+				cyclePreview();
+			}
 		});
 
 		root.querySelector('[data-qty-minus]')?.addEventListener('click', () => {
@@ -718,7 +745,7 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 		display: flex;
 		flex-direction: column;
 		grid-template-columns: unset;
-		padding: clamp(1rem, 2vw, 1.35rem);
+		padding: clamp(1rem, 2vw, 1.25rem);
 		margin: 0;
 		height: 100%;
 		animation: none;
@@ -728,21 +755,48 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 		display: flex;
 		flex: 1;
 		flex-direction: column;
-		gap: 0.65rem;
+		gap: 0.55rem;
 		min-height: 0;
 	}
 
 	.product--gallery .product__figure {
-		flex: 1;
+		flex: 1 1 auto;
 		min-height: 0;
+		aspect-ratio: 16 / 9;
+		cursor: pointer;
+	}
+
+	.product--gallery .product__figure:focus-visible {
+		outline: 2px solid rgba(167, 139, 250, 0.85);
+		outline-offset: 3px;
+	}
+
+	.product--gallery .product__image {
+		height: 100%;
 	}
 
 	.product--gallery .product__thumbs {
-		grid-template-columns: repeat(3, minmax(0, 1fr));
+		flex-shrink: 0;
+		display: grid;
+		grid-template-columns: repeat(6, minmax(0, 1fr));
+		gap: 0.45rem;
+		width: 100%;
 	}
 
-	.product--gallery .product__figure {
-		aspect-ratio: 16 / 9;
+	.product--gallery .product__thumb {
+		cursor: pointer;
+	}
+
+	@media (min-width: 960px) {
+		.product--gallery .product__figure {
+			aspect-ratio: unset;
+		}
+	}
+
+	@media (max-width: 959px) {
+		.product--gallery .product__thumbs {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
 	}
 
 	.product--pricing {

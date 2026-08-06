@@ -1,0 +1,195 @@
+---
+import { getWhyUsContent } from '../data/i18n/why-us-content';
+import { getLocalizedPath, type LocaleCode } from '../data/i18n';
+
+interface Props {
+	locale?: LocaleCode;
+}
+
+const { locale = 'en' } = Astro.props;
+const whyUs = getWhyUsContent(locale);
+const pricingHref = getLocalizedPath('/pricing/', locale);
+const featuresHref = getLocalizedPath('/features/', locale);
+
+const resolveCtaHref = (href: string) => {
+	if (href === '/pricing/') return pricingHref;
+	if (href === '/features/') return featuresHref;
+	return href;
+};
+---
+
+<div class="home-seo shell home-seo--why-us" aria-labelledby="home-seo-title">
+	<div class="home-seo__panel card-surface">
+		<h2 id="home-seo-title">{whyUs.heading}</h2>
+		<p class="home-seo__subheading">{whyUs.subheading}</p>
+		{whyUs.intro.map((paragraph) => <p>{paragraph}</p>)}
+		<p>{whyUs.bridge}</p>
+
+		{
+			whyUs.sections.map((section) => (
+				<div class="home-seo__section">
+					<h3>{section.heading}</h3>
+					{section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+					{section.subsections?.map((subsection) => (
+						<div class="home-seo__subsection">
+							<h4>{subsection.heading}</h4>
+							{subsection.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
+							{subsection.bullets && subsection.bullets.length > 0 && (
+								<ul class="home-seo__bullets">
+									{subsection.bullets.map((item) => (
+										<li>{item}</li>
+									))}
+								</ul>
+							)}
+						</div>
+					))}
+					{section.bullets && section.bullets.length > 0 && (
+						<ul class="home-seo__bullets">
+							{section.bullets.map((item) => (
+								<li>{item}</li>
+							))}
+						</ul>
+					)}
+					{section.afterParagraphs?.map((paragraph) => <p>{paragraph}</p>)}
+				</div>
+			))
+		}
+
+		<div class="home-seo__share-row home-seo__cta-row">
+			{
+				whyUs.ctas.map((cta) => (
+					<a
+						class="share-link"
+						href={resolveCtaHref(cta.href)}
+						{...(cta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+					>
+						{cta.label}
+					</a>
+				))
+			}
+		</div>
+		<p class="home-seo__footnote">{whyUs.footnote}</p>
+	</div>
+</div>
+
+<style>
+	.home-seo--why-us {
+		padding-bottom: 0;
+	}
+
+	.card-surface {
+		padding: clamp(1.25rem, 3vw, 1.75rem);
+		border-radius: var(--radius-card);
+		border: 1px solid rgba(168, 85, 247, 0.16);
+		background: rgba(26, 22, 38, 0.72);
+	}
+
+	.home-seo--why-us h2 {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+		font-weight: 800;
+	}
+
+	.home-seo__subheading {
+		margin: 0.45rem 0 0;
+		color: var(--color-orchid);
+		font-size: 0.92rem;
+		font-weight: 700;
+		letter-spacing: 0.04em;
+		text-transform: uppercase;
+	}
+
+	.home-seo--why-us h3 {
+		margin: 1.35rem 0 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.05rem, 2vw, 1.2rem);
+		font-weight: 800;
+		letter-spacing: -0.02em;
+		color: var(--color-ink);
+	}
+
+	.home-seo--why-us h4 {
+		margin: 0.85rem 0 0;
+		font-size: 0.98rem;
+		font-weight: 700;
+		color: var(--color-ink);
+	}
+
+	.home-seo__section:first-of-type h3 {
+		margin-top: 1rem;
+	}
+
+	.home-seo--why-us p {
+		margin: 0.85rem 0 0;
+		color: var(--color-muted);
+		line-height: 1.65;
+	}
+
+	.home-seo__bullets {
+		margin: 1rem 0 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	.home-seo__bullets li {
+		position: relative;
+		padding: 0.55rem 0.75rem 0.55rem 1.85rem;
+		border-radius: 0.65rem;
+		border: 1px solid rgba(168, 85, 247, 0.1);
+		background: rgba(10, 6, 18, 0.35);
+		color: #d4cae6;
+		font-size: 0.94rem;
+		line-height: 1.5;
+	}
+
+	.home-seo__bullets li::before {
+		content: '';
+		position: absolute;
+		left: 0.75rem;
+		top: 50%;
+		width: 0.35rem;
+		height: 0.35rem;
+		border-radius: 999px;
+		background: var(--color-orchid);
+		transform: translateY(-50%);
+	}
+
+	.home-seo__footnote {
+		margin: 1rem 0 0;
+		font-size: 0.88rem;
+		color: var(--color-faint);
+	}
+
+	.home-seo__cta-row {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0.65rem;
+		margin-top: 1.35rem;
+	}
+
+	.share-link {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		min-height: 2.5rem;
+		padding: 0.55rem 0.95rem;
+		border-radius: 0.7rem;
+		border: 1px solid rgba(192, 132, 252, 0.25);
+		background: rgba(34, 28, 48, 0.85);
+		color: var(--color-ink);
+		font-size: 0.88rem;
+		font-weight: 700;
+		transition:
+			border-color 0.2s ease,
+			background 0.2s ease;
+	}
+
+	.share-link:hover {
+		border-color: rgba(192, 132, 252, 0.5);
+		background: rgba(48, 36, 72, 0.9);
+		color: var(--color-ink);
+	}
+</style>

@@ -1,11 +1,15 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
 import { cloudDmaOption, productInfo } from '../../data/site';
 import { getPageSeo } from '../../data/seo/meta';
+import { featuresFaqs } from '../../data/seo/features-content';
+import { buildFaqSchema } from '../../data/seo/schema';
 import { getPageHero, getPageGallery } from '../../data/theisle';
 
 const seo = getPageSeo('features');
 const pageHero = getPageHero('features');
+const faqSchema = buildFaqSchema(featuresFaqs);
 ---
 
 <PageLayout
@@ -25,6 +29,8 @@ const pageHero = getPageHero('features');
 	twitterTitle={seo.twitterTitle}
 	twitterDescription={seo.twitterDescription}
 >
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
 	<section class="card-panel">
 		<h2>{cloudDmaOption.label} option</h2>
 		<p>{cloudDmaOption.summary}</p>
@@ -85,4 +91,18 @@ const pageHero = getPageHero('features');
 			{productInfo.features.general.map((item) => <li>{item}</li>)}
 		</ul>
 	</section>
+
+	<section class="card-panel">
+		<h2>Features FAQ</h2>
+		{
+			featuresFaqs.map((item) => (
+				<>
+					<h3>{item.question}</h3>
+					<p>{item.answer}</p>
+				</>
+			))
+		}
+	</section>
+
+	<InternalLinksPanel />
 </PageLayout>

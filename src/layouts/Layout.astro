@@ -15,6 +15,7 @@ interface Props {
 	twitterDescription?: string;
 	keywords?: string;
 	noindex?: boolean;
+	includeCanonical?: boolean;
 	type?: 'website' | 'article';
 	locale?: LocaleCode;
 	preloadImage?: string;
@@ -33,6 +34,7 @@ const {
 	twitterDescription = description,
 	keywords = siteConfig.keywords,
 	noindex = false,
+	includeCanonical = true,
 	type = 'website',
 	locale = 'en',
 	preloadImage,
@@ -67,7 +69,7 @@ const websiteLanguages = locales.map((entry) => entry.code);
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
 		<meta name="author" content={siteConfig.name} />
-		<link rel="canonical" href={canonicalURL} />
+		{includeCanonical && <link rel="canonical" href={canonicalURL} />}
 		{
 			alternateLinks.map((alternate) => (
 				<link rel="alternate" hreflang={alternate.hreflang} href={alternate.href} />
