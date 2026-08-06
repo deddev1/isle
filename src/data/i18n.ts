@@ -88,6 +88,26 @@ export function getXDefaultPath(pathname: string): string {
 	return getLocalizedPath(base, defaultLocale);
 }
 
+/**
+ * Localize only paths that have full translations (home + pricing).
+ * All other internal paths stay on the canonical English URL.
+ */
+export function resolveLocalizedHref(pathname: string, locale: LocaleCode): string {
+	if (!pathname.startsWith('/')) {
+		return pathname;
+	}
+
+	const [pathOnly, hash = ''] = pathname.split('#');
+	const normalized = pathOnly.endsWith('/') || pathOnly.includes('.') ? pathOnly : `${pathOnly}/`;
+	const base = stripLocalePrefix(normalized);
+
+	if (localizedBasePaths.includes(base as LocalizedBasePath)) {
+		return `${getLocalizedPath(base, locale)}${hash ? `#${hash}` : ''}`;
+	}
+
+	return `${base}${hash ? `#${hash}` : ''}`;
+}
+
 /** Language switcher: stay on localized page when a translation exists, otherwise open the locale homepage. */
 export function getLanguageSwitchHref(currentPath: string, targetLocale: LocaleCode): string {
 	const base = stripLocalePrefix(currentPath);

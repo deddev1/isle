@@ -1,6 +1,6 @@
 import { siteConfig } from '../site';
 import type { LocaleCode } from '../i18n';
-import { getLocalizedPath } from '../i18n';
+import { resolveLocalizedHref } from '../i18n';
 
 export type BreadcrumbItem = {
 	name: string;
@@ -15,7 +15,7 @@ export function buildBreadcrumbSchema(items: BreadcrumbItem[], locale: LocaleCod
 			'@type': 'ListItem',
 			position: index + 1,
 			name: item.name,
-			item: new URL(getLocalizedPath(item.path, locale), siteConfig.url).href,
+			item: new URL(resolveLocalizedHref(item.path, locale), siteConfig.url).href,
 		})),
 	};
 }
@@ -45,7 +45,7 @@ export function buildArticleSchema(opts: {
 	wordCount?: number;
 }) {
 	const { title, description, path, locale = 'en', datePublished, dateModified, wordCount } = opts;
-	const url = new URL(getLocalizedPath(path, locale), siteConfig.url).href;
+	const url = new URL(resolveLocalizedHref(path, locale), siteConfig.url).href;
 	return {
 		'@context': 'https://schema.org',
 		'@type': 'Article',
@@ -84,7 +84,7 @@ export function buildWebPageSchema(opts: {
 	locale?: LocaleCode;
 }) {
 	const { title, description, path, locale = 'en' } = opts;
-	const url = new URL(getLocalizedPath(path, locale), siteConfig.url).href;
+	const url = new URL(resolveLocalizedHref(path, locale), siteConfig.url).href;
 	return {
 		'@context': 'https://schema.org',
 		'@type': 'WebPage',
@@ -110,7 +110,7 @@ export function buildRelatedSearchesSchema(
 			'@type': 'ListItem',
 			position: index + 1,
 			name: term.label,
-			url: new URL(getLocalizedPath(term.href, locale), siteConfig.url).href,
+			url: new URL(resolveLocalizedHref(term.href, locale), siteConfig.url).href,
 		})),
 	};
 }

@@ -1,6 +1,6 @@
 ---
 import { getWhyUsContent } from '../data/i18n/why-us-content';
-import { getLocalizedPath, type LocaleCode } from '../data/i18n';
+import { resolveLocalizedHref, type LocaleCode } from '../data/i18n';
 
 interface Props {
 	locale?: LocaleCode;
@@ -8,19 +8,15 @@ interface Props {
 
 const { locale = 'en' } = Astro.props;
 const whyUs = getWhyUsContent(locale);
-const pricingHref = getLocalizedPath('/pricing/', locale);
-const featuresHref = getLocalizedPath('/features/', locale);
-
 const resolveCtaHref = (href: string) => {
-	if (href === '/pricing/') return pricingHref;
-	if (href === '/features/') return featuresHref;
+	if (href.startsWith('/')) return resolveLocalizedHref(href, locale);
 	return href;
 };
 ---
 
-<div class="home-seo shell home-seo--why-us" aria-labelledby="home-seo-title">
+<div class="home-seo shell home-seo--why-us" aria-labelledby="why-us-title">
 	<div class="home-seo__panel card-surface">
-		<h2 id="home-seo-title">{whyUs.heading}</h2>
+		<h2 id="why-us-title">{whyUs.heading}</h2>
 		<p class="home-seo__subheading">{whyUs.subheading}</p>
 		{whyUs.intro.map((paragraph) => <p>{paragraph}</p>)}
 		<p>{whyUs.bridge}</p>

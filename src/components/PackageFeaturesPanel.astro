@@ -1,6 +1,6 @@
 ---
 import { packageFeatureCategories } from '../data/package-features';
-import { getLocalizedPath, type LocaleCode } from '../data/i18n';
+import { resolveLocalizedHref, type LocaleCode } from '../data/i18n';
 
 interface Props {
 	heading: string;
@@ -12,8 +12,7 @@ interface Props {
 const { heading, intro, outro, locale = 'en' } = Astro.props;
 
 const resolveHref = (href: string) => {
-	if (href === '/pricing/') return getLocalizedPath('/pricing/', locale);
-	if (href.startsWith('/') && !href.includes('#')) return getLocalizedPath(href, locale);
+	if (href.startsWith('/')) return resolveLocalizedHref(href, locale);
 	return href;
 };
 
