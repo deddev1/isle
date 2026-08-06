@@ -1,0 +1,74 @@
+---
+import HomeVideoPlayer from './HomeVideoPlayer.astro';
+import ProductCard from './ProductCard.astro';
+---
+
+<div class="showcase">
+	<div class="showcase__media">
+		<div class="showcase__gallery">
+			<ProductCard variant="gallery" />
+		</div>
+		<div class="showcase__video">
+			<HomeVideoPlayer compact />
+		</div>
+	</div>
+	<aside class="showcase__pricing">
+		<ProductCard variant="pricing" />
+	</aside>
+</div>
+
+<style>
+	.showcase {
+		display: grid;
+		grid-template-columns: 1fr;
+		gap: 1rem;
+		align-items: start;
+	}
+
+	.showcase__media,
+	.showcase__pricing {
+		min-width: 0;
+	}
+
+	.showcase__media {
+		display: grid;
+		gap: 0.85rem;
+	}
+
+	.showcase__gallery :global(.product),
+	.showcase__video :global(.home-video) {
+		width: 100%;
+	}
+
+	@media (min-width: 960px) {
+		.showcase {
+			grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+			gap: 1.35rem;
+			align-items: stretch;
+		}
+
+		.showcase__media {
+			grid-template-rows: auto auto;
+			align-content: start;
+			height: 100%;
+		}
+
+		.showcase__pricing {
+			height: 100%;
+		}
+
+		.showcase__pricing :global(.product--pricing) {
+			height: 100%;
+		}
+	}
+
+	@media (max-width: 959px) {
+		.showcase__media {
+			order: 1;
+		}
+
+		.showcase__pricing {
+			order: 2;
+		}
+	}
+</style>

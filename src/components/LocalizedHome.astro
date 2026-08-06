@@ -2,8 +2,7 @@
 import Layout from '../layouts/Layout.astro';
 import Navbar from '../components/Navbar.astro';
 import Hero from '../components/Hero.astro';
-import HomeVideoPlayer from '../components/HomeVideoPlayer.astro';
-import ProductCard from '../components/ProductCard.astro';
+import ProductShowcase from '../components/ProductShowcase.astro';
 import Gallery from '../components/Gallery.astro';
 import HomeSeo from '../components/HomeSeo.astro';
 import SiteFooter from '../components/SiteFooter.astro';
@@ -61,10 +60,7 @@ const canonicalPath = getLocalizedPath('/', locale);
 		<Hero locale={locale} />
 		<section class="site__section" id="features" data-nav-section="features" aria-label="Product packages">
 			<div class="shell">
-				<div class="grid grid-cols-1 items-stretch gap-5 lg:grid-cols-2 lg:gap-8">
-					<HomeVideoPlayer />
-					<ProductCard />
-				</div>
+				<ProductShowcase />
 			</div>
 		</section>
 		<section class="site__section site__section--seo" id="why-us" data-nav-section="why-us">

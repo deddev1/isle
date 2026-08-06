@@ -12,53 +12,74 @@ interface Plan {
 interface Props {
 	plans?: Plan[];
 	defaultPlan?: string;
+	variant?: 'default' | 'gallery' | 'pricing';
 }
 
 const {
 	plans = productInfo.plans.map((plan) => ({ ...plan, stock: 'Available' })),
 	defaultPlan = 'monthly',
+	variant = 'default',
 } = Astro.props;
+
+const showGallery = variant === 'default' || variant === 'gallery';
+const showPricing = variant === 'default' || variant === 'pricing';
 
 const images = theIsleImages.product;
 const main = images[0];
 const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 ---
 
-<section class="product surface-card" id="product" data-product aria-label="Product details">
-	<div class="product__media">
-		<figure class="product__figure media-frame">
-			<img
-				src={main.src}
-				alt={main.alt}
-				width="1280"
-				height="720"
-				class="product__image"
-				data-main-image
-				decoding="async"
-			/>
-			<span class="product__credit">Preview</span>
-		</figure>
-		<div class="product__thumbs" role="list">
-			{
-				images.map((image, index) => (
-					<button
-						type="button"
-						class:list={['product__thumb media-frame', { 'is-active': index === 0 }]}
-						aria-label={`Show ${image.alt}`}
-						aria-pressed={index === 0 ? 'true' : 'false'}
-						data-thumb
-						data-src={image.src}
-						data-alt={image.alt}
-					>
-						<img src={image.src} alt={image.alt} width="320" height="200" loading="lazy" decoding="async" />
-					</button>
-				))
-			}
+<section
+	class:list={[
+		'product surface-card',
+		{
+			'product--gallery': variant === 'gallery',
+			'product--pricing': variant === 'pricing',
+		},
+	]}
+	id={variant === 'default' || variant === 'pricing' ? 'product' : undefined}
+	data-product={variant === 'default' || variant === 'pricing' ? '' : undefined}
+	data-product-gallery={variant === 'gallery' ? '' : undefined}
+	aria-label={variant === 'gallery' ? 'Product gallery' : 'Product details'}
+>
+	{showGallery && (
+		<div class="product__media">
+			<figure class="product__figure media-frame">
+				<img
+					src={main.src}
+					alt={main.alt}
+					width="1280"
+					height="720"
+					class="product__image"
+					data-main-image
+					decoding="async"
+				/>
+				<span class="product__credit">Preview</span>
+			</figure>
+			<div class="product__thumbs" role="list">
+				{
+					images.map((image, index) => (
+						<button
+							type="button"
+							class:list={['product__thumb media-frame', { 'is-active': index === 0 }]}
+							aria-label={`Show ${image.alt}`}
+							aria-pressed={index === 0 ? 'true' : 'false'}
+							data-thumb
+							data-src={image.src}
+							data-alt={image.alt}
+						>
+							<img src={image.src} alt={image.alt} width="320" height="180" loading="lazy" decoding="async" />
+						</button>
+					))
+				}
+			</div>
 		</div>
-	</div>
+	)}
 
+	{showPricing && (
 	<div class="product__details">
 		<h2 class="product__title">{homeSeo.featuresHeading}</h2>
+		<p class="product__intro">Cloud-DMA package with ESP, World ESP, and combat hacks for Windows PC.</p>
 
 		<div class="product__badges">
 			<span class="badge">
@@ -85,34 +106,73 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 			</span>
 		</div>
 
+		{variant === 'pricing' ? (
+			<>
+				<div class="price-chart" aria-label="Package comparison">
+					<div class="price-chart__head">
+						<span>Package</span>
+						<span>Price</span>
+						<span>Includes</span>
+					</div>
+					{
+						plans.map((plan) => (
+							<button
+								type="button"
+								class:list={['price-chart__row', { 'is-active': plan.id === active.id }]}
+								role="radio"
+								aria-checked={plan.id === active.id}
+								data-plan={plan.id}
+								data-plan-price={plan.price}
+							>
+								<span class="price-chart__plan">
+									<strong>{plan.label}</strong>
+									<small>{plan.stock}</small>
+								</span>
+								<span class="price-chart__amount">${plan.price}</span>
+								<span class="price-chart__includes">ESP · Hacks · Cloud-DMA</span>
+							</button>
+						))
+					}
+				</div>
+
+				<ul class="price-chart__features" aria-label="Included features">
+					<li>Visuals ESP & World ESP</li>
+					<li>Instant Rotation & Omnimovement</li>
+					<li>Radar, FOV Changer & Configs</li>
+					<li>Monthly or lifetime license</li>
+				</ul>
+			</>
+		) : (
+			<div class="plans" role="radiogroup" aria-label="Subscription length">
+				{
+					plans.map((plan) => (
+						<button
+							type="button"
+							class:list={['plan', { 'is-active': plan.id === active.id }]}
+							role="radio"
+							aria-checked={plan.id === active.id}
+							data-plan={plan.id}
+							data-plan-price={plan.price}
+						>
+							<span class="plan__label">{plan.label}</span>
+							<span class="plan__price">${plan.price}</span>
+							<span class="plan__stock">{plan.stock}</span>
+						</button>
+					))
+				}
+			</div>
+		)}
+
 		<div class="product__price-row">
 			<p class="product__price">
 				$<span data-price>{active.price}</span>
+				<span class="product__price-note">USD</span>
 			</p>
 			<div class="qty" data-qty>
 				<button type="button" class="qty__btn" data-qty-minus aria-label="Decrease quantity">−</button>
 				<span class="qty__value" data-qty-value aria-live="polite">1</span>
 				<button type="button" class="qty__btn" data-qty-plus aria-label="Increase quantity">+</button>
 			</div>
-		</div>
-
-		<div class="plans" role="radiogroup" aria-label="Subscription length">
-			{
-				plans.map((plan) => (
-					<button
-						type="button"
-						class:list={['plan', { 'is-active': plan.id === active.id }]}
-						role="radio"
-						aria-checked={plan.id === active.id}
-						data-plan={plan.id}
-						data-plan-price={plan.price}
-					>
-						<span class="plan__label">{plan.label}</span>
-						<span class="plan__price">${plan.price}</span>
-						<span class="plan__stock">{plan.stock}</span>
-					</button>
-				))
-			}
 		</div>
 
 		<a href={siteConfig.checkoutUrl} class="cart-btn bg-brand">
@@ -162,14 +222,14 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 			</div>
 		</div>
 	</div>
+	)}
 </section>
 
 <script>
-	const root = document.querySelector('[data-product]');
-	if (root) {
+	document.querySelectorAll('[data-product], [data-product-gallery]').forEach((root) => {
 		const priceEl = root.querySelector('[data-price]');
 		const qtyValue = root.querySelector('[data-qty-value]');
-		const mainImage = root.querySelector('[data-main-image]') as HTMLImageElement | null;
+		const mainImage = root.querySelector('[data-main-image]');
 		const planButtons = root.querySelectorAll('[data-plan]');
 		const thumbs = root.querySelectorAll('[data-thumb]');
 		let qty = 1;
@@ -178,7 +238,7 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 			thumb.addEventListener('click', () => {
 				const src = thumb.getAttribute('data-src');
 				const alt = thumb.getAttribute('data-alt');
-				if (mainImage && src) {
+				if (mainImage instanceof HTMLImageElement && src) {
 					mainImage.style.opacity = '0';
 					window.setTimeout(() => {
 						mainImage.src = src;
@@ -207,17 +267,19 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 
 		planButtons.forEach((btn) => {
 			btn.addEventListener('click', () => {
-				planButtons.forEach((other) => {
-					other.classList.remove('is-active');
-					other.setAttribute('aria-checked', 'false');
-				});
-				btn.classList.add('is-active');
-				btn.setAttribute('aria-checked', 'true');
+				const planId = btn.getAttribute('data-plan');
 				const next = btn.getAttribute('data-plan-price');
+
+				planButtons.forEach((other) => {
+					const isActive = other.getAttribute('data-plan') === planId;
+					other.classList.toggle('is-active', isActive);
+					other.setAttribute('aria-checked', isActive ? 'true' : 'false');
+				});
+
 				if (priceEl && next) priceEl.textContent = next;
 			});
 		});
-	}
+	});
 </script>
 
 <style>
@@ -242,7 +304,7 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 
 	.product__figure {
 		margin: 0;
-		aspect-ratio: 16 / 10;
+		aspect-ratio: 16 / 9;
 		border: 1px solid rgba(192, 132, 252, 0.28);
 		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
 	}
@@ -282,7 +344,7 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 
 	.product__thumb {
 		padding: 0;
-		aspect-ratio: 16 / 10;
+		aspect-ratio: 16 / 9;
 		width: 100%;
 		border: 2px solid transparent;
 		border-radius: 0.75rem;
@@ -534,6 +596,180 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 		padding-top: 0.15rem;
 	}
 
+	.product__intro {
+		margin: 0.45rem 0 0;
+		color: var(--color-muted);
+		font-size: 0.92rem;
+		line-height: 1.55;
+	}
+
+	.price-chart {
+		margin-top: 1rem;
+		border-radius: 0.9rem;
+		border: 1px solid rgba(168, 85, 247, 0.18);
+		overflow: hidden;
+		background: rgba(10, 6, 18, 0.45);
+	}
+
+	.price-chart__head,
+	.price-chart__row {
+		display: grid;
+		grid-template-columns: 1.1fr 0.7fr 1.2fr;
+		gap: 0.5rem;
+		align-items: center;
+		padding: 0.7rem 0.85rem;
+		text-align: left;
+	}
+
+	.price-chart__head {
+		font-size: 0.68rem;
+		font-weight: 700;
+		letter-spacing: 0.08em;
+		text-transform: uppercase;
+		color: var(--color-orchid);
+		background: rgba(76, 29, 149, 0.18);
+		border-bottom: 1px solid rgba(168, 85, 247, 0.14);
+	}
+
+	.price-chart__row {
+		width: 100%;
+		border: 0;
+		border-top: 1px solid rgba(168, 85, 247, 0.1);
+		background: transparent;
+		color: var(--color-ink);
+		cursor: pointer;
+		transition:
+			background 0.2s ease,
+			box-shadow 0.2s ease;
+	}
+
+	.price-chart__row:hover {
+		background: rgba(99, 102, 241, 0.1);
+	}
+
+	.price-chart__row.is-active {
+		background: linear-gradient(90deg, rgba(76, 29, 149, 0.35), rgba(124, 58, 237, 0.22));
+		box-shadow: inset 3px 0 0 var(--color-orchid);
+	}
+
+	.price-chart__plan {
+		display: grid;
+		gap: 0.15rem;
+	}
+
+	.price-chart__plan strong {
+		font-size: 0.92rem;
+		font-weight: 800;
+		text-transform: uppercase;
+		letter-spacing: 0.04em;
+	}
+
+	.price-chart__plan small {
+		font-size: 0.68rem;
+		color: var(--color-mint);
+		font-weight: 700;
+		text-transform: uppercase;
+	}
+
+	.price-chart__amount {
+		font-family: var(--font-display);
+		font-size: 1.15rem;
+		font-weight: 800;
+	}
+
+	.price-chart__includes {
+		font-size: 0.72rem;
+		color: var(--color-muted);
+		line-height: 1.35;
+	}
+
+	.price-chart__features {
+		display: grid;
+		gap: 0.4rem;
+		margin: 0.85rem 0 0;
+		padding: 0;
+		list-style: none;
+	}
+
+	.price-chart__features li {
+		position: relative;
+		padding-left: 1.25rem;
+		font-size: 0.82rem;
+		color: var(--color-muted);
+		line-height: 1.4;
+	}
+
+	.price-chart__features li::before {
+		content: '✓';
+		position: absolute;
+		left: 0;
+		color: var(--color-mint);
+		font-weight: 800;
+	}
+
+	.product__price-note {
+		margin-left: 0.35rem;
+		font-size: 0.82rem;
+		font-weight: 600;
+		color: var(--color-faint);
+	}
+
+	.product--gallery {
+		display: flex;
+		flex-direction: column;
+		grid-template-columns: unset;
+		padding: clamp(1rem, 2vw, 1.35rem);
+		margin: 0;
+		height: 100%;
+		animation: none;
+	}
+
+	.product--gallery .product__media {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		gap: 0.65rem;
+		min-height: 0;
+	}
+
+	.product--gallery .product__figure {
+		flex: 1;
+		min-height: 0;
+	}
+
+	.product--gallery .product__thumbs {
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+	}
+
+	.product--gallery .product__figure {
+		aspect-ratio: 16 / 9;
+	}
+
+	.product--pricing {
+		display: flex;
+		flex-direction: column;
+		grid-template-columns: unset;
+		padding: clamp(1.15rem, 2.5vw, 1.5rem);
+		margin: 0;
+		height: 100%;
+		animation: none;
+	}
+
+	.product--pricing .product__details {
+		display: flex;
+		flex: 1;
+		flex-direction: column;
+		padding-top: 0;
+	}
+
+	.product--pricing .cart-btn {
+		margin-top: auto;
+	}
+
+	.product--pricing .buy-also {
+		margin-top: 1rem;
+	}
+
 	@media (max-width: 900px) {
 		.product {
 			grid-template-columns: 1fr;
@@ -541,6 +777,32 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 	}
 
 	@media (max-width: 560px) {
+		.price-chart__head {
+			display: none;
+		}
+
+		.price-chart__row {
+			grid-template-columns: 1fr auto;
+			grid-template-areas:
+				'plan amount'
+				'includes includes';
+			gap: 0.35rem 0.75rem;
+			padding: 0.85rem;
+		}
+
+		.price-chart__plan {
+			grid-area: plan;
+		}
+
+		.price-chart__amount {
+			grid-area: amount;
+			text-align: right;
+		}
+
+		.price-chart__includes {
+			grid-area: includes;
+		}
+
 		.plans {
 			grid-template-columns: 1fr;
 		}
