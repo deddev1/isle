@@ -1,14 +1,20 @@
 ---
 import { homeVideo } from '../data/site';
+
+interface Props {
+	compact?: boolean;
+}
+
+const { compact = false } = Astro.props;
 ---
 
 <article
-	class="home-video group relative overflow-hidden rounded-[var(--radius-card)] border border-violet-500/20 bg-gradient-to-b from-[rgba(34,28,48,0.95)] to-[rgba(18,16,26,0.98)] shadow-[0_10px_28px_rgba(0,0,0,0.28)]"
+	class:list={['home-video group relative overflow-hidden rounded-[var(--radius-card)] border border-violet-500/20 bg-gradient-to-b from-[rgba(34,28,48,0.95)] to-[rgba(18,16,26,0.98)] shadow-[0_10px_28px_rgba(0,0,0,0.28)]', { 'home-video--compact': compact }]}
 	data-home-video
 >
 	<button
 		type="button"
-		class="home-video__trigger relative block aspect-video w-full overflow-hidden bg-[#0a0612] p-0 transition-opacity hover:opacity-[0.98] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[var(--color-orchid)] data-[hidden=true]:hidden"
+		class="home-video__trigger relative block w-full overflow-hidden bg-[#0a0612] p-0 transition-all hover:opacity-[0.98] hover:border-violet-400/30 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-3 focus-visible:outline-[var(--color-orchid)] data-[hidden=true]:hidden"
 		data-video-trigger
 		aria-label={`Play ${homeVideo.title}`}
 	>
@@ -17,31 +23,29 @@ import { homeVideo } from '../data/site';
 			alt={homeVideo.thumbnailAlt}
 			width="1280"
 			height="720"
-			class="absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
+			class="home-video__thumb absolute inset-0 h-full w-full object-cover object-center transition-transform duration-500 group-hover:scale-[1.03]"
 			loading="lazy"
 			decoding="async"
 		/>
 		<span
-			class="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,6,18,0.15)_0%,rgba(10,6,18,0.55)_100%),radial-gradient(circle_at_center,rgba(124,58,237,0.18),transparent_65%)]"
+			class="absolute inset-0 bg-[linear-gradient(180deg,rgba(10,6,18,0.12)_0%,rgba(10,6,18,0.62)_100%),radial-gradient(circle_at_center,rgba(124,58,237,0.2),transparent_68%)]"
 			aria-hidden="true"
 		></span>
 		<span
-			class="absolute left-1/2 top-1/2 z-10 inline-flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-gradient-to-br from-violet-600 to-fuchsia-500 text-white shadow-[0_12px_32px_rgba(0,0,0,0.35),0_0_28px_rgba(168,85,247,0.45)] transition-transform duration-300 group-hover:scale-105 sm:h-16 sm:w-16"
+			class="home-video__play absolute left-1/2 top-1/2 z-10 inline-flex -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full border border-white/30 bg-gradient-to-br from-violet-600 to-fuchsia-500 text-white shadow-[0_12px_32px_rgba(0,0,0,0.35),0_0_28px_rgba(168,85,247,0.45)] transition-transform duration-300 group-hover:scale-105"
 			aria-hidden="true"
 		>
-			<svg class="ml-0.5 h-7 w-7 sm:h-8 sm:w-8" viewBox="0 0 24 24" fill="currentColor">
+			<svg class="ml-0.5 h-6 w-6 sm:h-7 sm:w-7" viewBox="0 0 24 24" fill="currentColor">
 				<path d="M8 5.14v13.72L19 12 8 5.14z"></path>
 			</svg>
 		</span>
-		<span
-			class="absolute bottom-3 left-3 z-10 rounded-full border border-violet-300/25 bg-[rgba(10,6,18,0.72)] px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-[0.06em] text-[#d8c9ef] backdrop-blur-sm"
-		>
-			Watch demo
+		<span class="home-video__label absolute bottom-3 left-3 z-10 rounded-full border border-violet-300/25 bg-[rgba(10,6,18,0.78)] px-2.5 py-1 text-[0.68rem] font-bold uppercase tracking-[0.06em] text-[#d8c9ef] backdrop-blur-sm">
+			Click to play demo
 		</span>
 	</button>
 
 	<video
-		class="home-video__player hidden aspect-video w-full bg-black object-contain data-[active=true]:block"
+		class="home-video__player hidden w-full bg-black object-contain data-[active=true]:block"
 		data-video-player
 		controls
 		playsinline
@@ -72,3 +76,43 @@ import { homeVideo } from '../data/site';
 		});
 	});
 </script>
+
+<style>
+	.home-video__trigger {
+		aspect-ratio: 16 / 9;
+		min-height: 11rem;
+		cursor: pointer;
+	}
+
+	.home-video__play {
+		width: 3.25rem;
+		height: 3.25rem;
+	}
+
+	.home-video--compact .home-video__trigger {
+		aspect-ratio: 21 / 9;
+		min-height: 9.5rem;
+	}
+
+	.home-video--compact .home-video__play {
+		width: 2.85rem;
+		height: 2.85rem;
+	}
+
+	.home-video__player {
+		aspect-ratio: 16 / 9;
+		min-height: 11rem;
+	}
+
+	.home-video--compact .home-video__player {
+		aspect-ratio: 21 / 9;
+		min-height: 9.5rem;
+	}
+
+	@media (min-width: 960px) {
+		.home-video--compact .home-video__trigger,
+		.home-video--compact .home-video__player {
+			min-height: 10.5rem;
+		}
+	}
+</style>
