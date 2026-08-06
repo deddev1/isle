@@ -45,11 +45,12 @@ export function getBlogPostDates(slug: string): { published: string; modified: s
 
 export function getBlogPostSeo(idea: BlogIdea): PageSeoMeta & { published: string; modified: string } {
 	const keyword = categoryKeywords[idea.category] ?? 'The Isle Cheats';
-	const shortTitle = idea.title.replace(/ — .+$/, '').slice(0, 42);
+	const topic = idea.title.replace(/ — .+$/, '').trim();
+	const shortTitle = topic.slice(0, 42);
 	const title = withBrand(shortTitle);
+	const intent = intentPhrases[idea.intent].charAt(0).toLowerCase() + intentPhrases[idea.intent].slice(1);
 	const description = clampDescription(
-		`${intentPhrases[idea.intent]} in this ${keyword.toLowerCase()} article for Windows PC players. ` +
-			`Covers ${idea.category} topics with clear steps — read the guide and compare options today.`,
+		`${topic}: ${intent}. ${keyword} guide for The Isle on Windows PC with ${idea.category} tips and comparisons.`,
 	);
 	const dates = getBlogPostDates(idea.slug);
 
