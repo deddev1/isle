@@ -193,7 +193,7 @@ export const mainNav = [
 
 export const footerNav = [
 	{ label: 'Product updates log', href: '/updates/' },
-	{ label: 'Contact support team', href: '/support/' },
+	{ label: 'Contact support team', href: siteConfig.supportUrl },
 	{ label: 'Refund policy details', href: '/refund-policy/' },
 	{ label: 'Privacy policy details', href: '/privacy-policy/' },
 	{ label: 'Terms of use', href: '/terms/' },
@@ -237,6 +237,6 @@ export const homeFaqs = [
 	{
 		question: 'How do I contact support?',
 		answer:
-			'Visit the Support page at islecheats.net/support/ for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
+			'Open the support portal at https://zadeyo.com/support for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
 	},
 ] as const;

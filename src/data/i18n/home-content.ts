@@ -1,4 +1,5 @@
 import type { LocaleCode } from '../i18n';
+import { siteConfig } from '../site';
 
 export type HomeContent = {
 	heroEyebrow: string;
@@ -80,7 +81,7 @@ const en: HomeContent = {
 		},
 		{
 			title: 'Customer support',
-			href: '/support/',
+			href: siteConfig.supportUrl,
 			description:
 				'Delivery, setup, billing, and license help for monthly and lifetime The Isle Cheats packages.',
 		},
@@ -121,7 +122,7 @@ const en: HomeContent = {
 		{
 			question: 'How do I contact support?',
 			answer:
-				'Visit the Support page at islecheats.net/support/ for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
+				'Open the support portal at https://zadeyo.com/support for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
 		},
 	],
 	faqMore:

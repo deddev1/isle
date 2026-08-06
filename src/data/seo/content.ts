@@ -130,7 +130,7 @@ export const internalLinks = {
 		{ href: '/theisle-esp/', label: 'Visuals ESP page' },
 		{ href: '/features/', label: 'Features overview' },
 		{ href: '/pricing/', label: 'Pricing and plans' },
-		{ href: '/support/', label: 'Customer support' },
+		{ href: 'https://zadeyo.com/support', label: 'Customer support' },
 		{ href: '/faq/', label: 'FAQ hub' },
 		{ href: '/blog/', label: 'The Isle Blog' },
 	],

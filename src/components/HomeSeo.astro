@@ -31,7 +31,12 @@ const shareText = encodeURIComponent('The Isle Cheats - ESP and hacks for The Is
 				content.gridLinks.map((link) => (
 					<article>
 						<h3>
-							<a href={link.href === '/pricing/' ? pricingHref : link.href}>{link.title}</a>
+							<a
+								href={link.href === '/pricing/' ? pricingHref : link.href}
+								{...(link.href.startsWith('http') ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
+							>
+								{link.title}
+							</a>
 						</h3>
 						<p>{link.description}</p>
 					</article>
