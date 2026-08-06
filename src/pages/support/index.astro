@@ -3,10 +3,13 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
 import { productInfo, siteConfig } from '../../data/site';
 import { getPageSeo } from '../../data/seo/meta';
+import { supportFaqs, supportSections } from '../../data/seo/support-content';
+import { buildFaqSchema } from '../../data/seo/schema';
 import { getPageHero, getPageGallery } from '../../data/theisle';
 
 const seo = getPageSeo('support');
 const pageHero = getPageHero('support');
+const faqSchema = buildFaqSchema(supportFaqs);
 ---
 
 <PageLayout
@@ -18,7 +21,7 @@ const pageHero = getPageHero('support');
 	heroImage={pageHero.src}
 	heroAlt={pageHero.alt}
 	gallery={getPageGallery('riversideDrink', 'herdPlains', 'hero')}
-	ctaPrimary={{ href: siteConfig.supportUrl, label: 'Open Support' }}
+	ctaPrimary={{ href: siteConfig.supportUrl, label: 'Open Support Portal' }}
 	ctaSecondary={{ href: '/faq/', label: 'Browse FAQ' }}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
@@ -26,32 +29,60 @@ const pageHero = getPageHero('support');
 	twitterTitle={seo.twitterTitle}
 	twitterDescription={seo.twitterDescription}
 >
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+
 	<section class="card-panel">
 		<h2>Contact</h2>
 		<p>
 			Support portal: <a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">{siteConfig.supportUrl}</a>
 		</p>
+		<p>
+			Email: <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>
+		</p>
 		<p>{productInfo.supportHours}.</p>
 	</section>
 
+	{
+		supportSections.map((section) => (
+			<section class="card-panel" id={section.id}>
+				<h2>{section.heading}</h2>
+				{section.paragraphs.map((paragraph) => (
+					<p>{paragraph}</p>
+				))}
+				{section.bullets && (
+					<ul>
+						{section.bullets.map((item) => (
+							<li>{item}</li>
+						))}
+					</ul>
+				)}
+			</section>
+		))
+	}
+
 	<section class="card-panel">
-		<h2>Include these details</h2>
-		<ul>
-			<li>Order ID or payment reference</li>
-			<li>Package duration purchased</li>
-			<li>Clear description of the issue</li>
-			<li>Screenshots when they help explain the problem</li>
-		</ul>
+		<h2>Support FAQ</h2>
+		{
+			supportFaqs.map((item) => (
+				<>
+					<h3>{item.question}</h3>
+					<p>{item.answer}</p>
+				</>
+			))
+		}
 	</section>
 
 	<section class="card-panel">
 		<h2>Useful links</h2>
 		<ul>
 			<li><a href="/faq/">FAQ</a></li>
+			<li><a href="/pricing/">Pricing</a></li>
 			<li><a href="/updates/">Updates</a></li>
 			<li><a href="/refund-policy/">Refund Policy</a></li>
-			<li><a href="/pricing/">Pricing</a></li>
+			<li><a href="/blog/the-isle-support-guide/">The Isle support guide</a></li>
+			<li><a href="/blog/the-isle-delivery-process/">License delivery process</a></li>
 		</ul>
 	</section>
+
 	<InternalLinksPanel />
 </PageLayout>

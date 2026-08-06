@@ -1,11 +1,24 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
+import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
 import { productInfo, siteConfig } from '../../data/site';
 import { getPageSeo } from '../../data/seo/meta';
+import { pricingFaqs, pricingSections } from '../../data/seo/pricing-content';
+import { buildFaqSchema, buildSoftwareApplicationSchema } from '../../data/seo/schema';
 import { getPageHero, getPageGallery } from '../../data/theisle';
 
 const seo = getPageSeo('pricing');
 const pageHero = getPageHero('pricing');
+const faqSchema = buildFaqSchema(pricingFaqs);
+const productSchema = buildSoftwareApplicationSchema({
+	name: productInfo.name,
+	description: productInfo.summary,
+	pricingUrl: new URL('/pricing/', siteConfig.url).href,
+	plans: productInfo.plans.map((plan) => ({ label: plan.label, price: plan.price })),
+	currency: productInfo.currency,
+	alternateName: ['Isle Cheats', 'The Isle Hack'],
+	keywords: seo.keywords,
+});
 ---
 
 <PageLayout
@@ -25,6 +38,9 @@ const pageHero = getPageHero('pricing');
 	twitterTitle={seo.twitterTitle}
 	twitterDescription={seo.twitterDescription}
 >
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+	<script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
+
 	<section class="card-panel">
 		<h2>Current packages</h2>
 		<div class="price-grid">
@@ -40,13 +56,34 @@ const pageHero = getPageHero('pricing');
 		</div>
 	</section>
 
+	{
+		pricingSections.map((section) => (
+			<section class="card-panel" id={section.id}>
+				<h2>{section.heading}</h2>
+				{section.paragraphs.map((paragraph) => (
+					<p>{paragraph}</p>
+				))}
+				{section.bullets && (
+					<ul>
+						{section.bullets.map((item) => (
+							<li>{item}</li>
+						))}
+					</ul>
+				)}
+			</section>
+		))
+	}
+
 	<section class="card-panel">
-		<h2>What each package includes</h2>
-		<p>
-			Each package includes access to The Isle Cheats feature set described on
-			<a href="/features/">Features</a>, including Cloud-DMA, Visuals ESP, World ESP, and Cheats. Delivery method:
-			{productInfo.delivery}.
-		</p>
+		<h2>Pricing FAQ</h2>
+		{
+			pricingFaqs.map((item) => (
+				<>
+					<h3>{item.question}</h3>
+					<p>{item.answer}</p>
+				</>
+			))
+		}
 	</section>
 
 	<section class="card-panel">
@@ -55,9 +92,11 @@ const pageHero = getPageHero('pricing');
 			<li><a href="/refund-policy/">Read the refund policy</a></li>
 			<li><a href="/terms/">Review the terms</a></li>
 			<li><a href="/updates/">Check the latest updates</a></li>
-			<li>
-				<a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">Open support</a> if you need order help
-			</li>
+			<li><a href="/support/">Contact support</a> if you need order help</li>
+			<li><a href="/blog/the-isle-cheat-price-guide/">Read the cheat price guide</a></li>
+			<li><a href="/blog/the-isle-monthly-vs-lifetime/">Compare monthly vs lifetime</a></li>
 		</ul>
 	</section>
+
+	<InternalLinksPanel />
 </PageLayout>

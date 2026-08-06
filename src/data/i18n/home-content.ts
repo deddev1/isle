@@ -78,6 +78,12 @@ const en: HomeContent = {
 			description:
 				'Compare monthly and lifetime plans. Cloud-DMA includes ESP, World ESP, combat hacks, and utility tools.',
 		},
+		{
+			title: 'Customer support',
+			href: '/support/',
+			description:
+				'Delivery, setup, billing, and license help for monthly and lifetime The Isle Cheats packages.',
+		},
 	],
 	packageHeading: "What's in the package",
 	packageIntro:
@@ -115,7 +121,7 @@ const en: HomeContent = {
 		{
 			question: 'How do I contact support?',
 			answer:
-				'Open the support portal at https://zadeyo.com/support for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
+				'Visit the Support page at islecheats.net/support/ for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
 		},
 	],
 	faqMore:
