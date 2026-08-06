@@ -1,0 +1,366 @@
+---
+import { packageFeatureCategories } from '../data/package-features';
+import { getLocalizedPath, type LocaleCode } from '../data/i18n';
+
+interface Props {
+	heading: string;
+	intro: string;
+	outro: string;
+	locale?: LocaleCode;
+}
+
+const { heading, intro, outro, locale = 'en' } = Astro.props;
+
+const resolveHref = (href: string) => {
+	if (href === '/pricing/') return getLocalizedPath('/pricing/', locale);
+	if (href.startsWith('/') && !href.includes('#')) return getLocalizedPath(href, locale);
+	return href;
+};
+
+const categories = packageFeatureCategories.map((category) => ({
+	...category,
+	href: resolveHref(category.href),
+}));
+
+const active = categories[0];
+---
+
+<div class="package-showcase" data-package-showcase>
+	<h2>{heading}</h2>
+	<p class="package-showcase__intro">{intro}</p>
+
+	<div class="package-showcase__layout">
+		<figure class="package-showcase__preview media-frame">
+			<img
+				src={active.image.src}
+				alt={active.image.alt}
+				width="1280"
+				height="720"
+				class="package-showcase__image"
+				data-package-preview
+				decoding="async"
+				loading="lazy"
+			/>
+			<figcaption class="package-showcase__caption" data-package-caption>{active.title}</figcaption>
+		</figure>
+
+		<div class="package-showcase__sidebar">
+			<div class="package-showcase__tabs" role="tablist" aria-label="Package feature categories">
+				{
+					categories.map((category, index) => (
+						<button
+							type="button"
+							class:list={['package-showcase__tab', { 'is-active': index === 0 }]}
+							role="tab"
+							aria-selected={index === 0}
+							aria-controls="package-feature-panel"
+							id={`package-tab-${category.id}`}
+							data-package-tab
+							data-category={category.id}
+							data-src={category.image.src}
+							data-alt={category.image.alt}
+							data-title={category.title}
+							data-summary={category.summary}
+							data-href={category.href}
+						>
+							<span class="package-showcase__tab-thumb media-frame">
+								<img src={category.image.src} alt="" width="160" height="90" loading="lazy" decoding="async" />
+							</span>
+							<span class="package-showcase__tab-text">
+								<strong>{category.title}</strong>
+								<small>{category.summary}</small>
+							</span>
+						</button>
+					))
+				}
+			</div>
+
+			<div
+				class="package-showcase__panel"
+				id="package-feature-panel"
+				role="tabpanel"
+				aria-labelledby={`package-tab-${active.id}`}
+				data-package-panel
+			>
+				<p class="package-showcase__summary" data-package-summary>{active.summary}</p>
+				<ul class="package-showcase__features" data-package-features>
+					{active.features.map((feature) => <li>{feature}</li>)}
+				</ul>
+				<a class="package-showcase__link" href={active.href} data-package-link>
+					Explore {active.title}
+				</a>
+			</div>
+		</div>
+	</div>
+
+	<p class="package-showcase__outro">{outro}</p>
+</div>
+
+<script define:vars={{ categories }}>
+	const roots = document.querySelectorAll('[data-package-showcase]');
+
+	roots.forEach((root) => {
+		const preview = root.querySelector('[data-package-preview]');
+		const caption = root.querySelector('[data-package-caption]');
+		const summary = root.querySelector('[data-package-summary]');
+		const features = root.querySelector('[data-package-features]');
+		const link = root.querySelector('[data-package-link]');
+		const panel = root.querySelector('[data-package-panel]');
+		const tabs = root.querySelectorAll('[data-package-tab]');
+
+		const categoryMap = Object.fromEntries(categories.map((category) => [category.id, category]));
+
+		tabs.forEach((tab) => {
+			tab.addEventListener('click', () => {
+				const id = tab.getAttribute('data-category');
+				const category = id ? categoryMap[id] : null;
+				if (!category) return;
+
+				tabs.forEach((other) => {
+					const isActive = other === tab;
+					other.classList.toggle('is-active', isActive);
+					other.setAttribute('aria-selected', isActive ? 'true' : 'false');
+				});
+
+				if (preview instanceof HTMLImageElement) {
+					preview.style.opacity = '0';
+					window.setTimeout(() => {
+						preview.src = category.image.src;
+						preview.alt = category.image.alt;
+						preview.style.opacity = '1';
+					}, 120);
+				}
+
+				if (caption) caption.textContent = category.title;
+				if (summary) summary.textContent = category.summary;
+				if (link instanceof HTMLAnchorElement) {
+					link.href = category.href;
+					link.textContent = `Explore ${category.title}`;
+				}
+				if (panel instanceof HTMLElement) {
+					panel.setAttribute('aria-labelledby', tab.id);
+				}
+
+				if (features) {
+					features.replaceChildren();
+					category.features.forEach((feature) => {
+						const item = document.createElement('li');
+						item.textContent = feature;
+						features.append(item);
+					});
+				}
+			});
+
+			tab.addEventListener('keydown', (event) => {
+				if (!(event instanceof KeyboardEvent)) return;
+				const list = Array.from(tabs);
+				const index = list.indexOf(tab);
+				if (index < 0) return;
+
+				if (event.key === 'ArrowRight' || event.key === 'ArrowDown') {
+					event.preventDefault();
+					list[(index + 1) % list.length]?.dispatchEvent(new Event('click'));
+					list[(index + 1) % list.length]?.focus();
+				}
+
+				if (event.key === 'ArrowLeft' || event.key === 'ArrowUp') {
+					event.preventDefault();
+					list[(index - 1 + list.length) % list.length]?.dispatchEvent(new Event('click'));
+					list[(index - 1 + list.length) % list.length]?.focus();
+				}
+			});
+		});
+	});
+</script>
+
+<style>
+	.package-showcase h2 {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.35rem, 2.5vw, 1.75rem);
+		font-weight: 800;
+	}
+
+	.package-showcase__intro,
+	.package-showcase__outro {
+		margin: 0.85rem 0 0;
+		color: var(--color-muted);
+		line-height: 1.65;
+	}
+
+	.package-showcase__layout {
+		display: grid;
+		grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+		gap: 1rem;
+		margin-top: 1.15rem;
+	}
+
+	.package-showcase__preview {
+		margin: 0;
+		aspect-ratio: 16 / 9;
+		border: 1px solid rgba(192, 132, 252, 0.28);
+		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+	}
+
+	.package-showcase__image {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		transition: opacity 0.14s ease;
+	}
+
+	.package-showcase__caption {
+		position: absolute;
+		left: 0.75rem;
+		bottom: 0.75rem;
+		z-index: 2;
+		padding: 0.35rem 0.65rem;
+		border-radius: 999px;
+		background: rgba(10, 6, 18, 0.78);
+		border: 1px solid rgba(192, 132, 252, 0.25);
+		color: #d8c9ef;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+	}
+
+	.package-showcase__sidebar {
+		display: grid;
+		gap: 0.75rem;
+		min-width: 0;
+	}
+
+	.package-showcase__tabs {
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	.package-showcase__tab {
+		display: grid;
+		grid-template-columns: 4.5rem minmax(0, 1fr);
+		gap: 0.65rem;
+		align-items: center;
+		width: 100%;
+		padding: 0.5rem;
+		border-radius: 0.75rem;
+		border: 1px solid rgba(168, 85, 247, 0.14);
+		background: rgba(10, 6, 18, 0.35);
+		color: var(--color-ink);
+		text-align: left;
+		cursor: pointer;
+		transition:
+			border-color 0.2s ease,
+			background 0.2s ease,
+			transform 0.2s ease;
+	}
+
+	.package-showcase__tab:hover,
+	.package-showcase__tab.is-active {
+		border-color: rgba(192, 132, 252, 0.45);
+		background: rgba(48, 36, 72, 0.55);
+		transform: translateY(-1px);
+	}
+
+	.package-showcase__tab.is-active {
+		box-shadow: inset 3px 0 0 var(--color-orchid);
+	}
+
+	.package-showcase__tab-thumb {
+		aspect-ratio: 16 / 9;
+		overflow: hidden;
+		border-radius: 0.55rem;
+	}
+
+	.package-showcase__tab-thumb img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.package-showcase__tab-text {
+		display: grid;
+		gap: 0.2rem;
+		min-width: 0;
+	}
+
+	.package-showcase__tab-text strong {
+		font-size: 0.86rem;
+		font-weight: 800;
+	}
+
+	.package-showcase__tab-text small {
+		color: var(--color-muted);
+		font-size: 0.72rem;
+		line-height: 1.35;
+	}
+
+	.package-showcase__panel {
+		padding: 0.9rem 1rem;
+		border-radius: 0.85rem;
+		border: 1px solid rgba(168, 85, 247, 0.14);
+		background: rgba(10, 6, 18, 0.35);
+	}
+
+	.package-showcase__summary {
+		margin: 0;
+		color: var(--color-muted);
+		font-size: 0.9rem;
+		line-height: 1.5;
+	}
+
+	.package-showcase__features {
+		margin: 0.75rem 0 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.4rem;
+		max-height: 11rem;
+		overflow: auto;
+	}
+
+	.package-showcase__features li {
+		position: relative;
+		padding: 0.45rem 0.65rem 0.45rem 1.65rem;
+		border-radius: 0.55rem;
+		border: 1px solid rgba(168, 85, 247, 0.1);
+		background: rgba(26, 22, 38, 0.65);
+		color: #d4cae6;
+		font-size: 0.82rem;
+		line-height: 1.4;
+	}
+
+	.package-showcase__features li::before {
+		content: '';
+		position: absolute;
+		left: 0.65rem;
+		top: 50%;
+		width: 0.35rem;
+		height: 0.35rem;
+		border-radius: 999px;
+		background: var(--color-orchid);
+		transform: translateY(-50%);
+	}
+
+	.package-showcase__link {
+		display: inline-flex;
+		margin-top: 0.8rem;
+		color: var(--color-orchid);
+		font-size: 0.86rem;
+		font-weight: 700;
+	}
+
+	.package-showcase__link:hover {
+		color: var(--color-ink);
+	}
+
+	@media (max-width: 900px) {
+		.package-showcase__layout {
+			grid-template-columns: 1fr;
+		}
+
+		.package-showcase__features {
+			max-height: none;
+		}
+	}
+</style>

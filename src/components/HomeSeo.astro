@@ -1,6 +1,7 @@
 ---
-import { cloudDmaOption, productInfo, siteConfig } from '../data/site';
+import { cloudDmaOption, siteConfig } from '../data/site';
 import { getHomeContent } from '../data/i18n/home-content';
+import PackageFeaturesPanel from './PackageFeaturesPanel.astro';
 import RelatedSearches from './RelatedSearches.astro';
 import { getLocalizedPath, type LocaleCode } from '../data/i18n';
 
@@ -17,14 +18,12 @@ const shareText = encodeURIComponent('The Isle Cheats - ESP and hacks for The Is
 
 <section class="home-seo shell" aria-label="Product information and FAQ">
 	<div class="home-seo__panel card-surface">
-		<h2>{content.packageHeading}</h2>
-		<p>{packageIntro}</p>
-		<ul>
-			{productInfo.features.visualsEsp.slice(0, 6).map((item) => <li>{item}</li>)}
-			{productInfo.features.cheats.map((item) => <li>{item}</li>)}
-			{productInfo.features.general.map((item) => <li>{item}</li>)}
-		</ul>
-		<p>{content.packageOutro}</p>
+		<PackageFeaturesPanel
+			locale={locale}
+			heading={content.packageHeading}
+			intro={packageIntro}
+			outro={content.packageOutro}
+		/>
 	</div>
 
 	<section class="home-seo__panel card-surface" id="undetected" data-nav-section="undetected">
