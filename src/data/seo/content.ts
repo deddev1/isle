@@ -1,4 +1,4 @@
-import { cloudDmaOption, homeFaqs, productInfo } from '../site';
+import { cloudDmaOption, homeFaqs, productInfo, siteConfig } from '../site';
 
 export const siloFaqs = {
 	theIsleCheats: [
@@ -130,7 +130,7 @@ export const internalLinks = {
 		{ href: '/theisle-esp/', label: 'Visuals ESP page' },
 		{ href: '/features/', label: 'Features overview' },
 		{ href: '/pricing/', label: 'Pricing and plans' },
-		{ href: 'https://zadeyo.com/support', label: 'Customer support' },
+		{ href: siteConfig.supportUrl, label: 'Customer support' },
 		{ href: '/faq/', label: 'FAQ hub' },
 		{ href: '/blog/', label: 'The Isle Blog' },
 	],

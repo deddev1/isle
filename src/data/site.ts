@@ -4,9 +4,9 @@ export const siteConfig = {
 	locale: 'en',
 	market: 'Worldwide',
 	supportEmail: 'support@islecheats.net',
-	supportUrl: 'https://zadeyo.com/support',
-	logo: '/images/zadeyo-logo.webp',
-	checkoutUrl: 'https://zadeyo.com/go/QRH?to=%2Fproducts%2Fthe-isle-novaxware',
+	supportUrl: '/go/support/',
+	logo: '/product-zeus.svg',
+	checkoutUrl: '/go/checkout/',
 	defaultOgImage: '/images/the-isle-hero-dinosaur-survival.webp',
 	metaDescription:
 		'Buy The Isle Cheats for Windows PC. Isle Cheats with ESP, Cloud-DMA hacks, monthly and lifetime plans, features, guides, and support at islecheats.net.',
@@ -59,7 +59,7 @@ export const pageDescriptions = {
 	'/faq/':
 		'The Isle Cheats FAQ — answers about Cloud-DMA, ESP, Cheats, digital delivery, refund policy, and customer support.',
 	'/support/':
-		'Contact The Isle Cheats support for delivery, setup, and billing help. Open https://zadeyo.com/support with your order details.',
+		'Contact The Isle Cheats support for delivery, setup, and billing help. Open the customer support portal with your order details.',
 	'/refund-policy/':
 		'The Isle Cheats refund policy — review eligibility, conditions, and timelines before purchasing Cloud-DMA or ESP packages.',
 	'/privacy-policy/':
@@ -237,6 +237,6 @@ export const homeFaqs = [
 	{
 		question: 'How do I contact support?',
 		answer:
-			'Open the support portal at https://zadeyo.com/support for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
+			'Open the customer support portal for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
 	},
 ] as const;

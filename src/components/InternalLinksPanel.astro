@@ -1,5 +1,5 @@
 ---
-/** Standard internal linking block for topical authority — uses existing card-panel styles. */
+import { siteConfig } from '../data/site';
 ---
 
 <section class="card-panel">
@@ -7,7 +7,7 @@
 	<ul>
 		<li><a href="/">The Isle Cheats homepage</a></li>
 		<li><a href="/pricing/">The Isle Cheat Price and packages</a></li>
-		<li><a href="https://zadeyo.com/support" target="_blank" rel="noopener noreferrer">The Isle Cheats support</a></li>
+		<li><a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">The Isle Cheats support</a></li>
 		<li><a href="/the-isle-faq/">The Isle FAQ</a></li>
 		<li><a href="/the-isle-features/">The Isle Features</a></li>
 		<li><a href="/blog/">The Isle Blog — guides and articles</a></li>

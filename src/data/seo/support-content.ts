@@ -21,7 +21,7 @@ export const supportSections: SupportSection[] = [
 		id: 'contact',
 		heading: 'Contact the support team',
 		paragraphs: [
-			`Open the support portal at ${siteConfig.supportUrl} when you are ready to submit a ticket. You can also email ${siteConfig.supportEmail} if that is more convenient. ${productInfo.supportHours}.`,
+			`Open the customer support portal when you are ready to submit a ticket. You can also email ${siteConfig.supportEmail} if that is more convenient. ${productInfo.supportHours}.`,
 			'Include your order ID or payment reference in the first message. Without it, support may need extra time to locate your purchase across payment processors. A clear subject line such as "License delivery — Order #12345" speeds up routing.',
 			'If your issue is about refund eligibility, delivery timing, or terms of use, read the Refund Policy, Terms, and Privacy Policy pages first. Support can clarify order status, but policy answers are published on those dedicated pages.',
 		],
@@ -79,7 +79,7 @@ export const supportSections: SupportSection[] = [
 export const supportFaqs = [
 	{
 		question: 'How do I contact The Isle Cheats support?',
-		answer: `Visit ${siteConfig.supportUrl} or email ${siteConfig.supportEmail}. Include your order ID and a clear description of the issue.`,
+		answer: `Open the customer support portal or email ${siteConfig.supportEmail}. Include your order ID and a clear description of the issue.`,
 	},
 	{
 		question: 'How long does support take to respond?',

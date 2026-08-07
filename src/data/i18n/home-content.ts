@@ -122,7 +122,7 @@ const en: HomeContent = {
 		{
 			question: 'How do I contact support?',
 			answer:
-				'Open the support portal at https://zadeyo.com/support for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
+				'Open the customer support portal for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
 		},
 	],
 	faqMore:
@@ -223,7 +223,7 @@ const de: HomeContent = {
 		{
 			question: 'Wie kontaktiere ich den Support?',
 			answer:
-				'Öffne das Support-Portal unter https://zadeyo.com/support für Hilfe bei Lieferung, Setup und Abrechnung. Gib Bestelldetails und eine klare Problembeschreibung an, damit Antworten schneller kommen. Für Richtlinien-Fragen vor dem Kauf zuerst die Seiten zu Rückerstattung, Datenschutz und Nutzungsbedingungen lesen.',
+				'Öffne das Kunden-Support-Portal für Hilfe bei Lieferung, Setup und Abrechnung. Gib Bestelldetails und eine klare Problembeschreibung an, damit Antworten schneller kommen. Für Richtlinien-Fragen vor dem Kauf zuerst die Seiten zu Rückerstattung, Datenschutz und Nutzungsbedingungen lesen.',
 		},
 	],
 	faqMore:
@@ -324,7 +324,7 @@ const fr: HomeContent = {
 		{
 			question: 'Comment contacter le support ?',
 			answer:
-				'Ouvrez le portail support sur https://zadeyo.com/support pour l\'aide à la livraison, l\'installation et la facturation. Incluez vos détails de commande et une description claire du problème pour des réponses plus rapides. Pour les questions de politique avant l\'achat, consultez d\'abord les pages remboursement, confidentialité et conditions d\'utilisation.',
+				'Ouvrez le portail de support client pour l\'aide à la livraison, l\'installation et la facturation. Incluez vos détails de commande et une description claire du problème pour des réponses plus rapides. Pour les questions de politique avant l\'achat, consultez d\'abord les pages remboursement, confidentialité et conditions d\'utilisation.',
 		},
 	],
 	faqMore:
@@ -425,7 +425,7 @@ const es: HomeContent = {
 		{
 			question: '¿Cómo contacto con soporte?',
 			answer:
-				'Abre el portal de soporte en https://zadeyo.com/support para ayuda con entrega, configuración y facturación. Incluye los datos del pedido y una descripción clara del problema para respuestas más rápidas. Para preguntas de política antes de comprar, revisa primero las páginas de reembolso, privacidad y términos de uso.',
+				'Abre el portal de soporte al cliente para ayuda con entrega, configuración y facturación. Incluye los datos del pedido y una descripción clara del problema para respuestas más rápidas. Para preguntas de política antes de comprar, revisa primero las páginas de reembolso, privacidad y términos de uso.',
 		},
 	],
 	faqMore:
@@ -526,7 +526,7 @@ const tr: HomeContent = {
 		{
 			question: 'Destekle nasıl iletişime geçerim?',
 			answer:
-				'Teslimat, kurulum ve faturalandırma yardımı için https://zadeyo.com/support destek portalını aç. Daha hızlı yanıt için sipariş bilgilerini ve sorunun net bir açıklamasını ekle. Satın almadan önce politika soruları için önce iade, gizlilik ve kullanım şartları sayfalarını incele.',
+				'Teslimat, kurulum ve faturalandırma yardımı için müşteri destek portalını aç. Daha hızlı yanıt için sipariş bilgilerini ve sorunun net bir açıklamasını ekle. Satın almadan önce politika soruları için önce iade, gizlilik ve kullanım şartları sayfalarını incele.',
 		},
 	],
 	faqMore:
@@ -627,7 +627,7 @@ const ar: HomeContent = {
 		{
 			question: 'كيف أتواصل مع الدعم؟',
 			answer:
-				'افتح بوابة الدعم على https://zadeyo.com/support للمساعدة في التسليم والإعداد والفوترة. أرفق تفاصيل الطلب ووصفًا واضحًا للمشكلة لتسريع الرد. لأسئلة السياسات قبل الشراء، راجع صفحات الاسترداد والخصوصية وشروط الاستخدام أولًا.',
+				'افتح بوابة دعم العملاء للمساعدة في التسليم والإعداد والفوترة. أرفق تفاصيل الطلب ووصفًا واضحًا للمشكلة لتسريع الرد. لأسئلة السياسات قبل الشراء، راجع صفحات الاسترداد والخصوصية وشروط الاستخدام أولًا.',
 		},
 	],
 	faqMore:
@@ -728,7 +728,7 @@ const ru: HomeContent = {
 		{
 			question: 'Как связаться с поддержкой?',
 			answer:
-				'Откройте портал поддержки на https://zadeyo.com/support для помощи с доставкой, настройкой и оплатой. Укажите данные заказа и чёткое описание проблемы для более быстрого ответа. По вопросам политик до покупки сначала изучите страницы возврата, конфиденциальности и условий использования.',
+				'Откройте портал поддержки клиентов для помощи с доставкой, настройкой и оплатой. Укажите данные заказа и чёткое описание проблемы для более быстрого ответа. По вопросам политик до покупки сначала изучите страницы возврата, конфиденциальности и условий использования.',
 		},
 	],
 	faqMore:
