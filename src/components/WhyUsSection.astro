@@ -18,38 +18,25 @@ const resolveCtaHref = (href: string) => {
 	<div class="home-seo__panel card-surface">
 		<h2 id="why-us-title">{whyUs.heading}</h2>
 		<p class="home-seo__subheading">{whyUs.subheading}</p>
-		{whyUs.intro.map((paragraph) => <p>{paragraph}</p>)}
-		<p>{whyUs.bridge}</p>
+		<p class="home-seo__intro">{whyUs.intro}</p>
 
-		{
-			whyUs.sections.map((section) => (
-				<div class="home-seo__section">
-					<h3>{section.heading}</h3>
-					{section.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
-					{section.subsections?.map((subsection) => (
-						<div class="home-seo__subsection">
-							<h4>{subsection.heading}</h4>
-							{subsection.paragraphs?.map((paragraph) => <p>{paragraph}</p>)}
-							{subsection.bullets && subsection.bullets.length > 0 && (
-								<ul class="home-seo__bullets">
-									{subsection.bullets.map((item) => (
-										<li>{item}</li>
-									))}
-								</ul>
-							)}
-						</div>
-					))}
-					{section.bullets && section.bullets.length > 0 && (
+		<div class="why-us__grid">
+			{
+				whyUs.highlights.map((item) => (
+					<article class="why-us__card">
+						<h3>{item.title}</h3>
+						<p class="why-us__lead">{item.lead}</p>
 						<ul class="home-seo__bullets">
-							{section.bullets.map((item) => (
-								<li>{item}</li>
+							{item.bullets.map((bullet) => (
+								<li>{bullet}</li>
 							))}
 						</ul>
-					)}
-					{section.afterParagraphs?.map((paragraph) => <p>{paragraph}</p>)}
-				</div>
-			))
-		}
+					</article>
+				))
+			}
+		</div>
+
+		<p class="why-us__closing">{whyUs.closing}</p>
 
 		<div class="home-seo__share-row home-seo__cta-row">
 			{
@@ -96,58 +83,70 @@ const resolveCtaHref = (href: string) => {
 		text-transform: uppercase;
 	}
 
-	.home-seo--why-us h3 {
-		margin: 1.35rem 0 0;
-		font-family: var(--font-display);
-		font-size: clamp(1.05rem, 2vw, 1.2rem);
-		font-weight: 800;
-		letter-spacing: -0.02em;
-		color: var(--color-ink);
-	}
-
-	.home-seo--why-us h4 {
-		margin: 0.85rem 0 0;
-		font-size: 0.98rem;
-		font-weight: 700;
-		color: var(--color-ink);
-	}
-
-	.home-seo__section:first-of-type h3 {
-		margin-top: 1rem;
-	}
-
-	.home-seo--why-us p {
+	.home-seo__intro,
+	.why-us__closing {
 		margin: 0.85rem 0 0;
 		color: var(--color-muted);
 		line-height: 1.65;
+		max-width: 52rem;
+	}
+
+	.why-us__grid {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.75rem;
+		margin-top: 1.15rem;
+	}
+
+	.why-us__card {
+		padding: 0.95rem 1rem;
+		border-radius: 0.85rem;
+		border: 1px solid rgba(168, 85, 247, 0.14);
+		background: rgba(10, 6, 18, 0.35);
+	}
+
+	.why-us__card h3 {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: 1rem;
+		font-weight: 800;
+		line-height: 1.3;
+		color: var(--color-ink);
+	}
+
+	.why-us__lead {
+		margin: 0.45rem 0 0;
+		color: var(--color-muted);
+		font-size: 0.9rem;
+		line-height: 1.5;
 	}
 
 	.home-seo__bullets {
-		margin: 1rem 0 0;
+		margin: 0.7rem 0 0;
 		padding: 0;
 		list-style: none;
 		display: grid;
-		gap: 0.45rem;
+		gap: 0.4rem;
 	}
 
 	.home-seo__bullets li {
 		position: relative;
-		padding: 0.55rem 0.75rem 0.55rem 1.85rem;
-		border-radius: 0.65rem;
-		border: 1px solid rgba(168, 85, 247, 0.1);
-		background: rgba(10, 6, 18, 0.35);
+		padding: 0.45rem 0.65rem 0.45rem 1.55rem;
+		border-radius: 0.55rem;
+		border: 1px solid rgba(168, 85, 247, 0.08);
+		background: rgba(26, 22, 38, 0.55);
 		color: #d4cae6;
-		font-size: 0.94rem;
-		line-height: 1.5;
+		font-size: 0.84rem;
+		line-height: 1.45;
 	}
 
 	.home-seo__bullets li::before {
 		content: '';
 		position: absolute;
-		left: 0.75rem;
+		left: 0.6rem;
 		top: 50%;
-		width: 0.35rem;
-		height: 0.35rem;
+		width: 0.32rem;
+		height: 0.32rem;
 		border-radius: 999px;
 		background: var(--color-orchid);
 		transform: translateY(-50%);
@@ -155,15 +154,16 @@ const resolveCtaHref = (href: string) => {
 
 	.home-seo__footnote {
 		margin: 1rem 0 0;
-		font-size: 0.88rem;
+		font-size: 0.82rem;
 		color: var(--color-faint);
+		line-height: 1.5;
 	}
 
 	.home-seo__cta-row {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0.65rem;
-		margin-top: 1.35rem;
+		margin-top: 1.15rem;
 	}
 
 	.share-link {
@@ -187,5 +187,11 @@ const resolveCtaHref = (href: string) => {
 		border-color: rgba(192, 132, 252, 0.5);
 		background: rgba(48, 36, 72, 0.9);
 		color: var(--color-ink);
+	}
+
+	@media (max-width: 760px) {
+		.why-us__grid {
+			grid-template-columns: 1fr;
+		}
 	}
 </style>
