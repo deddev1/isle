@@ -55,13 +55,12 @@ export const pricingSections: PricingSection[] = [
 		heading: 'Compare plans before checkout',
 		paragraphs: [
 			'Use the homepage product card for a quick side-by-side view, then return here for written context on plan length and USD pricing. The blog also publishes pricing-focused articles such as the monthly vs lifetime guide and cheat price breakdown for players who want a narrative comparison.',
-			'If you still have questions about compatibility, delivery, or what happens after a game patch, read the FAQ hub first. For order-specific help, visit Support with your order ID, package duration, and a short description of the issue.',
+			'If you still have questions about compatibility, delivery, or what happens after a game patch, read the FAQ hub first. For order-specific help, email support with your order ID, package duration, and a short description of the issue.',
 		],
 		bullets: [
 			'Review Features for the complete Cloud-DMA checklist',
 			'Check Updates after The Isle patches for maintenance notices',
 			'Read the Refund Policy before disputing a charge',
-			'Contact Support for delivery or setup questions',
 		],
 	},
 ];
