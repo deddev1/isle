@@ -15,11 +15,7 @@ const seo = getPageSeo('pricing', locale);
 const content = getPricingContent(locale);
 const canonicalPath = getLocalizedPath('/pricing/', locale);
 const pageHero = getPageHero('pricing');
-const beforeBuyItems = content.beforeBuyItems.map((item) =>
-	item.href === '#'
-		? { ...item, href: siteConfig.supportUrl, external: true }
-		: { ...item, external: false },
-);
+const beforeBuyItems = content.beforeBuyItems;
 ---
 
 <PageLayout

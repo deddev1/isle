@@ -193,7 +193,6 @@ export const mainNav = [
 
 export const footerNav = [
 	{ label: 'Product updates log', href: '/updates/' },
-	{ label: 'Contact support team', href: siteConfig.supportUrl },
 	{ label: 'Refund policy details', href: '/refund-policy/' },
 	{ label: 'Privacy policy details', href: '/privacy-policy/' },
 	{ label: 'Terms of use', href: '/terms/' },
@@ -229,14 +228,9 @@ export const homeFaqs = [
 		answer:
 			'After payment is confirmed, license details are delivered digitally. Delivery timing can vary by payment method and order review. Keep your order confirmation available when contacting support so the team can locate your purchase quickly.',
 	},
-	{
-		question: 'Where can I check product updates?',
-		answer:
-			'Product maintenance notes are published on the Updates page whenever a new build or compatibility notice is available. Checking that page after The Isle patches is the fastest way to confirm whether a maintenance release has been posted.',
-	},
-	{
-		question: 'How do I contact support?',
-		answer:
-			'Open the customer support portal for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
-	},
+		{
+			question: 'Where can I check product updates?',
+			answer:
+				'Product maintenance notes are published on the Updates page whenever a new build or compatibility notice is available. Checking that page after The Isle patches is the fastest way to confirm whether a maintenance release has been posted.',
+		},
 ] as const;

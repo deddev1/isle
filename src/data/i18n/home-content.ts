@@ -79,12 +79,6 @@ const en: HomeContent = {
 			description:
 				'Compare monthly and lifetime plans. Cloud-DMA includes ESP, World ESP, combat hacks, and utility tools.',
 		},
-		{
-			title: 'Customer support',
-			href: siteConfig.supportUrl,
-			description:
-				'Delivery, setup, billing, and license help for monthly and lifetime The Isle Cheats packages.',
-		},
 	],
 	packageHeading: "What's in the package",
 	packageIntro:
@@ -118,11 +112,6 @@ const en: HomeContent = {
 			question: 'Where can I check product updates?',
 			answer:
 				'Product maintenance notes are published on the Updates page whenever a new build or compatibility notice is available. Checking that page after The Isle patches is the fastest way to confirm whether a maintenance release has been posted.',
-		},
-		{
-			question: 'How do I contact support?',
-			answer:
-				'Open the customer support portal for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
 		},
 	],
 	faqMore:
@@ -220,11 +209,6 @@ const de: HomeContent = {
 			answer:
 				'Wartungshinweise werden auf der Updates-Seite veröffentlicht, sobald ein neuer Build oder ein Kompatibilitätshinweis verfügbar ist. Nach The Isle-Patches ist das der schnellste Weg zu prüfen, ob ein Wartungsrelease veröffentlicht wurde.',
 		},
-		{
-			question: 'Wie kontaktiere ich den Support?',
-			answer:
-				'Öffne das Kunden-Support-Portal für Hilfe bei Lieferung, Setup und Abrechnung. Gib Bestelldetails und eine klare Problembeschreibung an, damit Antworten schneller kommen. Für Richtlinien-Fragen vor dem Kauf zuerst die Seiten zu Rückerstattung, Datenschutz und Nutzungsbedingungen lesen.',
-		},
 	],
 	faqMore:
 		'Weitere Antworten findest du in The Isle FAQ und im vollständigen FAQ-Hub. Entdecke The Isle Survival Guide, Growth Guide und The Isle Blog. Richtlinien-Details stehen in unserer Rückerstattungsrichtlinie, Datenschutzrichtlinie und den Nutzungsbedingungen.',
@@ -320,11 +304,6 @@ const fr: HomeContent = {
 			question: 'Où consulter les mises à jour produit ?',
 			answer:
 				'Les notes de maintenance sont publiées sur la page Updates dès qu\'un nouveau build ou un avis de compatibilité est disponible. Après les patchs de The Isle, c\'est le moyen le plus rapide de vérifier si une version de maintenance a été publiée.',
-		},
-		{
-			question: 'Comment contacter le support ?',
-			answer:
-				'Ouvrez le portail de support client pour l\'aide à la livraison, l\'installation et la facturation. Incluez vos détails de commande et une description claire du problème pour des réponses plus rapides. Pour les questions de politique avant l\'achat, consultez d\'abord les pages remboursement, confidentialité et conditions d\'utilisation.',
 		},
 	],
 	faqMore:
@@ -422,11 +401,6 @@ const es: HomeContent = {
 			answer:
 				'Las notas de mantenimiento se publican en la página Updates cuando hay un nuevo build o aviso de compatibilidad. Tras los parches de The Isle, es la forma más rápida de confirmar si se ha publicado una versión de mantenimiento.',
 		},
-		{
-			question: '¿Cómo contacto con soporte?',
-			answer:
-				'Abre el portal de soporte al cliente para ayuda con entrega, configuración y facturación. Incluye los datos del pedido y una descripción clara del problema para respuestas más rápidas. Para preguntas de política antes de comprar, revisa primero las páginas de reembolso, privacidad y términos de uso.',
-		},
 	],
 	faqMore:
 		'Más respuestas en The Isle FAQ y el hub FAQ completo. Explora The Isle Survival Guide, Growth Guide y The Isle Blog. Los detalles de políticas están en nuestra política de reembolso, política de privacidad y términos de uso.',
@@ -522,11 +496,6 @@ const tr: HomeContent = {
 			question: 'Ürün güncellemelerini nereden kontrol ederim?',
 			answer:
 				'Ürün bakım notları yeni bir build veya uyumluluk duyurusu olduğunda Updates sayfasında yayınlanır. The Isle yamalarından sonra bir bakım sürümünün yayınlanıp yayınlanmadığını doğrulamanın en hızlı yolu budur.',
-		},
-		{
-			question: 'Destekle nasıl iletişime geçerim?',
-			answer:
-				'Teslimat, kurulum ve faturalandırma yardımı için müşteri destek portalını aç. Daha hızlı yanıt için sipariş bilgilerini ve sorunun net bir açıklamasını ekle. Satın almadan önce politika soruları için önce iade, gizlilik ve kullanım şartları sayfalarını incele.',
 		},
 	],
 	faqMore:
@@ -624,11 +593,6 @@ const ar: HomeContent = {
 			answer:
 				'تُنشر ملاحظات الصيانة في صفحة Updates عند توفر إصدار جديد أو إشعار توافق. بعد تصحيحات The Isle، هذه أسرع طريقة للتأكد من نشر إصدار صيانة.',
 		},
-		{
-			question: 'كيف أتواصل مع الدعم؟',
-			answer:
-				'افتح بوابة دعم العملاء للمساعدة في التسليم والإعداد والفوترة. أرفق تفاصيل الطلب ووصفًا واضحًا للمشكلة لتسريع الرد. لأسئلة السياسات قبل الشراء، راجع صفحات الاسترداد والخصوصية وشروط الاستخدام أولًا.',
-		},
 	],
 	faqMore:
 		'مزيد من الإجابات في The Isle FAQ ومركز FAQ الكامل. استكشف The Isle Survival Guide و Growth Guide و The Isle Blog. تفاصيل السياسات في سياسة الاسترداد وسياسة الخصوصية وشروط الاستخدام.',
@@ -724,11 +688,6 @@ const ru: HomeContent = {
 			question: 'Где смотреть обновления продукта?',
 			answer:
 				'Заметки о техобслуживании публикуются на странице Updates при появлении новой сборки или уведомления о совместимости. После патчей The Isle это самый быстрый способ узнать, вышло ли обслуживающее обновление.',
-		},
-		{
-			question: 'Как связаться с поддержкой?',
-			answer:
-				'Откройте портал поддержки клиентов для помощи с доставкой, настройкой и оплатой. Укажите данные заказа и чёткое описание проблемы для более быстрого ответа. По вопросам политик до покупки сначала изучите страницы возврата, конфиденциальности и условий использования.',
 		},
 	],
 	faqMore:

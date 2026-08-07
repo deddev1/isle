@@ -1,7 +1,5 @@
 import type { LocaleCode } from '../i18n';
 
-const supportPlaceholderHref = '#';
-
 export type PricingContent = {
 	heading: string;
 	intro: string;
@@ -27,7 +25,6 @@ const en: PricingContent = {
 		{ href: '/refund-policy/', label: 'Read the refund policy' },
 		{ href: '/terms/', label: 'Review the terms' },
 		{ href: '/updates/', label: 'Check the latest updates' },
-		{ href: supportPlaceholderHref, label: 'Open support' },
 	],
 	ctaPrimary: { href: '/#product', label: 'Open Product Card' },
 	ctaSecondary: { href: '/features/', label: 'See Features' },
@@ -46,7 +43,6 @@ const de: PricingContent = {
 		{ href: '/refund-policy/', label: 'Rückerstattungsrichtlinie lesen' },
 		{ href: '/terms/', label: 'Nutzungsbedingungen prüfen' },
 		{ href: '/updates/', label: 'Aktuelle Updates ansehen' },
-		{ href: supportPlaceholderHref, label: 'Support öffnen' },
 	],
 	ctaPrimary: { href: '/#product', label: 'Produktkarte öffnen' },
 	ctaSecondary: { href: '/features/', label: 'Funktionen ansehen' },
@@ -65,7 +61,6 @@ const fr: PricingContent = {
 		{ href: '/refund-policy/', label: 'Lire la politique de remboursement' },
 		{ href: '/terms/', label: 'Consulter les conditions' },
 		{ href: '/updates/', label: 'Voir les dernières mises à jour' },
-		{ href: supportPlaceholderHref, label: 'Ouvrir le support' },
 	],
 	ctaPrimary: { href: '/#product', label: 'Ouvrir la fiche produit' },
 	ctaSecondary: { href: '/features/', label: 'Voir les fonctionnalités' },
@@ -84,7 +79,6 @@ const es: PricingContent = {
 		{ href: '/refund-policy/', label: 'Leer la política de reembolso' },
 		{ href: '/terms/', label: 'Revisar los términos' },
 		{ href: '/updates/', label: 'Consultar las últimas actualizaciones' },
-		{ href: supportPlaceholderHref, label: 'Abrir soporte' },
 	],
 	ctaPrimary: { href: '/#product', label: 'Abrir ficha de producto' },
 	ctaSecondary: { href: '/features/', label: 'Ver funciones' },
@@ -103,7 +97,6 @@ const tr: PricingContent = {
 		{ href: '/refund-policy/', label: 'İade politikasını okuyun' },
 		{ href: '/terms/', label: 'Şartları inceleyin' },
 		{ href: '/updates/', label: 'Son güncellemeleri kontrol edin' },
-		{ href: supportPlaceholderHref, label: 'Desteği açın' },
 	],
 	ctaPrimary: { href: '/#product', label: 'Ürün kartını aç' },
 	ctaSecondary: { href: '/features/', label: 'Özellikleri gör' },
@@ -122,7 +115,6 @@ const ar: PricingContent = {
 		{ href: '/refund-policy/', label: 'اقرأ سياسة الاسترداد' },
 		{ href: '/terms/', label: 'راجع الشروط' },
 		{ href: '/updates/', label: 'اطلع على آخر التحديثات' },
-		{ href: supportPlaceholderHref, label: 'افتح الدعم' },
 	],
 	ctaPrimary: { href: '/#product', label: 'افتح بطاقة المنتج' },
 	ctaSecondary: { href: '/features/', label: 'عرض الميزات' },
@@ -141,7 +133,6 @@ const ru: PricingContent = {
 		{ href: '/refund-policy/', label: 'Прочитать политику возврата' },
 		{ href: '/terms/', label: 'Ознакомиться с условиями' },
 		{ href: '/updates/', label: 'Проверить последние обновления' },
-		{ href: supportPlaceholderHref, label: 'Открыть поддержку' },
 	],
 	ctaPrimary: { href: '/#product', label: 'Открыть карточку продукта' },
 	ctaSecondary: { href: '/features/', label: 'Смотреть функции' },

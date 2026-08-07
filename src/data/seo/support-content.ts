@@ -78,10 +78,6 @@ export const supportSections: SupportSection[] = [
 
 export const supportFaqs = [
 	{
-		question: 'How do I contact The Isle Cheats support?',
-		answer: `Open the customer support portal or email ${siteConfig.supportEmail}. Include your order ID and a clear description of the issue.`,
-	},
-	{
 		question: 'How long does support take to respond?',
 		answer: `${productInfo.supportHours}. Complex delivery or billing cases may need additional verification time.`,
 	},

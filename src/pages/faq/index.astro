@@ -1,8 +1,7 @@
 ---
 import PageLayout from '../../layouts/PageLayout.astro';
 import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
-import { homeFaqs, siteConfig } from '../../data/site';
-import { extendedFaqs } from '../../data/seo/content';
+import { homeFaqs, extendedFaqs } from '../../data/seo/content';
 import { getPageSeo } from '../../data/seo/meta';
 import { buildFaqSchema } from '../../data/seo/schema';
 import { getPageHero, getPageGallery } from '../../data/theisle';
@@ -31,8 +30,8 @@ const pageHero = getPageHero('faq');
 	heroImage={pageHero.src}
 	heroAlt={pageHero.alt}
 	gallery={getPageGallery('nightHunt', 'predatorStalk', 'tyrannosaurForest')}
-	ctaPrimary={{ href: siteConfig.supportUrl, label: 'Open Support' }}
-	ctaSecondary={{ href: '/pricing/', label: 'View Pricing' }}
+	ctaPrimary={{ href: '/pricing/', label: 'View Pricing' }}
+	ctaSecondary={{ href: '/features/', label: 'See Features' }}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
 	ogDescription={seo.ogDescription}
@@ -49,13 +48,6 @@ const pageHero = getPageHero('faq');
 			</section>
 		))
 	}
-
-	<section class="card-panel">
-		<h2>Still need help?</h2>
-		<p>
-			Visit <a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">Support</a> for delivery, setup, and billing help. See also the <a href="/support/">support hub</a> on this site.
-		</p>
-	</section>
 
 	<InternalLinksPanel />
 </PageLayout>

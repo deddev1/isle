@@ -21,7 +21,6 @@ const faqSchema = buildFaqSchema(supportFaqs);
 	heroImage={pageHero.src}
 	heroAlt={pageHero.alt}
 	gallery={getPageGallery('riversideDrink', 'herdPlains', 'hero')}
-	ctaPrimary={{ href: siteConfig.supportUrl, label: 'Open Support Portal' }}
 	ctaSecondary={{ href: '/faq/', label: 'Browse FAQ' }}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
@@ -33,12 +32,7 @@ const faqSchema = buildFaqSchema(supportFaqs);
 
 	<section class="card-panel">
 		<h2>Contact</h2>
-		<p>
-			<a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">Open the support portal</a>
-		</p>
-		<p>
-			Email: <a href={`mailto:${siteConfig.supportEmail}`}>{siteConfig.supportEmail}</a>
-		</p>
+		<p>Email: {siteConfig.supportEmail}</p>
 		<p>{productInfo.supportHours}.</p>
 	</section>
 

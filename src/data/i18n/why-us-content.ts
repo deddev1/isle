@@ -1,5 +1,4 @@
 import type { LocaleCode } from '../i18n';
-import { siteConfig } from '../site';
 
 export type WhyUsSubsection = {
 	heading: string;
@@ -134,7 +133,6 @@ const en: WhyUsContent = {
 	ctas: [
 		{ label: 'Explore Full Features', href: '/features/' },
 		{ label: 'Compare License Options', href: '/pricing/' },
-		{ label: 'Contact Support', href: siteConfig.supportUrl, external: true },
 	],
 	footnote:
 		'Available worldwide for Windows PC. Cloud-DMA package includes ESP overlays, combat hacks, and survival utilities.',
