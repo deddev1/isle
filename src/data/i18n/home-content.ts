@@ -31,7 +31,7 @@ const en: HomeContent = {
 	heroSubtitle: 'ESP, World ESP & Dino Radar',
 	heroDescription:
 		'Compare Visuals ESP, World ESP, and combat hacks in one Cloud-DMA package. Review monthly and lifetime plans, feature lists, and setup guides before you buy.',
-	heroCtaPrimary: 'Compare packages',
+	heroCtaPrimary: 'Buy',
 	heroCtaSecondary: 'Explore features',
 	whyUsHeading: 'Why Choose Cloud-DMA for The Isle?',
 	whyUsIntro:
@@ -138,7 +138,7 @@ const de: HomeContent = {
 	heroSubtitle: 'ESP, World ESP & Dino Radar',
 	heroDescription:
 		'Vergleiche Visuals ESP, World ESP und Combat-Hacks in einem Cloud-DMA-Paket. Prüfe Monats- und Lifetime-Pläne, Feature-Listen und Setup-Guides, bevor du kaufst.',
-	heroCtaPrimary: 'Pakete vergleichen',
+	heroCtaPrimary: 'Kaufen',
 	heroCtaSecondary: 'Features entdecken',
 	whyUsHeading: 'Warum Isle Cheats',
 	whyUsIntro:
@@ -239,7 +239,7 @@ const fr: HomeContent = {
 	heroSubtitle: 'ESP, World ESP & Dino Radar',
 	heroDescription:
 		'Comparez Visuals ESP, World ESP et les hacks de combat dans un seul pack Cloud-DMA. Consultez les formules mensuelles et à vie, les listes de fonctionnalités et les guides d\'installation avant d\'acheter.',
-	heroCtaPrimary: 'Comparer les packs',
+	heroCtaPrimary: 'Acheter',
 	heroCtaSecondary: 'Explorer les fonctionnalités',
 	whyUsHeading: 'Pourquoi choisir Isle Cheats',
 	whyUsIntro:
@@ -340,7 +340,7 @@ const es: HomeContent = {
 	heroSubtitle: 'ESP, World ESP & Dino Radar',
 	heroDescription:
 		'Compara Visuals ESP, World ESP y hacks de combate en un solo paquete Cloud-DMA. Revisa planes mensuales y de por vida, listas de funciones y guías de configuración antes de comprar.',
-	heroCtaPrimary: 'Comparar paquetes',
+	heroCtaPrimary: 'Comprar',
 	heroCtaSecondary: 'Explorar funciones',
 	whyUsHeading: 'Por qué elegir Isle Cheats',
 	whyUsIntro:
@@ -441,7 +441,7 @@ const tr: HomeContent = {
 	heroSubtitle: 'ESP, World ESP & Dino Radar',
 	heroDescription:
 		'Visuals ESP, World ESP ve combat hack\'lerini tek bir Cloud-DMA paketinde karşılaştır. Satın almadan önce aylık ve ömür boyu planları, özellik listelerini ve kurulum rehberlerini incele.',
-	heroCtaPrimary: 'Paketleri karşılaştır',
+	heroCtaPrimary: 'Satın al',
 	heroCtaSecondary: 'Özellikleri keşfet',
 	whyUsHeading: 'Neden Isle Cheats',
 	whyUsIntro:
@@ -542,7 +542,7 @@ const ar: HomeContent = {
 	heroSubtitle: 'ESP و World ESP و Dino Radar',
 	heroDescription:
 		'قارن Visuals ESP و World ESP وهاكات القتال في حزمة Cloud-DMA واحدة. راجع الخطط الشهرية ومدى الحياة وقوائم الميزات وأدلة الإعداد قبل الشراء.',
-	heroCtaPrimary: 'مقارنة الحزم',
+	heroCtaPrimary: 'شراء',
 	heroCtaSecondary: 'استكشاف الميزات',
 	whyUsHeading: 'لماذا Isle Cheats',
 	whyUsIntro:
@@ -643,7 +643,7 @@ const ru: HomeContent = {
 	heroSubtitle: 'ESP, World ESP и Dino Radar',
 	heroDescription:
 		'Сравните Visuals ESP, World ESP и боевые читы в одном пакете Cloud-DMA. Изучите месячные и пожизненные планы, списки функций и гайды по настройке перед покупкой.',
-	heroCtaPrimary: 'Сравнить пакеты',
+	heroCtaPrimary: 'Купить',
 	heroCtaSecondary: 'Изучить функции',
 	whyUsHeading: 'Почему Isle Cheats',
 	whyUsIntro:

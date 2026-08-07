@@ -133,6 +133,10 @@ export function buildSoftwareApplicationSchema(opts: {
 		applicationCategory: 'GameApplication',
 		operatingSystem: 'Windows',
 		description: opts.description,
+		areaServed: {
+			'@type': 'Place',
+			name: 'Worldwide',
+		},
 		offers: opts.plans.map((plan) => ({
 			'@type': 'Offer',
 			name: `${opts.name} ${plan.label}`,
@@ -140,6 +144,14 @@ export function buildSoftwareApplicationSchema(opts: {
 			priceCurrency: opts.currency,
 			availability: 'https://schema.org/InStock',
 			url: opts.pricingUrl,
+			areaServed: {
+				'@type': 'Place',
+				name: 'Worldwide',
+			},
+			eligibleRegion: {
+				'@type': 'Place',
+				name: 'Worldwide',
+			},
 		})),
 	};
 }

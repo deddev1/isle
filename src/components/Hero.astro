@@ -1,6 +1,7 @@
 ---
-import { getLocalizedPath, type LocaleCode } from '../data/i18n';
+import type { LocaleCode } from '../data/i18n';
 import { getHomeContent } from '../data/i18n/home-content';
+import { siteConfig } from '../data/site';
 import { theIsleImages } from '../data/theisle';
 
 interface Props {
@@ -9,7 +10,7 @@ interface Props {
 
 const { locale = 'en' } = Astro.props;
 const content = getHomeContent(locale);
-const pricingHref = getLocalizedPath('/pricing/', locale);
+const buyHref = siteConfig.checkoutUrl;
 const featuresHref = '/features/';
 ---
 
@@ -35,7 +36,7 @@ const featuresHref = '/features/';
 			<p class="hero__subtitle text-gradient">{content.heroSubtitle}</p>
 			<p class="hero__description">{content.heroDescription}</p>
 			<div class="hero__cta">
-				<a href={pricingHref} class="hero__btn hero__btn--primary bg-brand">{content.heroCtaPrimary}</a>
+				<a href={buyHref} class="hero__btn hero__btn--primary bg-brand">{content.heroCtaPrimary}</a>
 				<a href={featuresHref} class="hero__btn hero__btn--ghost">{content.heroCtaSecondary}</a>
 			</div>
 		</div>
