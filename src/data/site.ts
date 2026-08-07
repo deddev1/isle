@@ -5,7 +5,7 @@ export const siteConfig = {
 	market: 'Worldwide',
 	supportEmail: 'support@islecheats.net',
 	supportUrl: '/go/support/',
-	logo: '/product-zeus.svg',
+	logo: '/images/navbar-logo.png',
 	checkoutUrl: '/go/checkout/',
 	defaultOgImage: '/images/the-isle-hero-dinosaur-survival.webp',
 	metaDescription:
