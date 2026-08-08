@@ -187,7 +187,7 @@ export const mainNav = [
 	{ label: 'Why Us', href: '/#why-us', section: 'why-us' },
 	{ label: 'Features', href: '/#features', section: 'features' },
 	{ label: 'Demo', href: '/#demo', section: 'demo' },
-	{ label: 'Undetected', href: '/#undetected', section: 'undetected' },
+	{ label: 'FAQ', href: '/faq/', section: 'faq' },
 	{ label: 'Blog', href: '/blog/', section: 'blog' },
 ] as const;
 
