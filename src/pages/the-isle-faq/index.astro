@@ -1,7 +1,6 @@
 ---
 import SeoContentPage from '../../components/SeoContentPage.astro';
 import { extendedFaqs } from '../../data/seo/content';
-import { siteConfig } from '../../data/site';
 import { getPageHero } from '../../data/theisle';
 
 const pageHero = getPageHero('theIsleFaq');
@@ -15,7 +14,7 @@ const pageHero = getPageHero('theIsleFaq');
 	heroImage={pageHero.src}
 	heroAlt={pageHero.alt}
 	faqs={extendedFaqs}
-	ctaPrimary={{ href: siteConfig.supportUrl, label: 'Contact Support' }}
+	ctaPrimary={{ href: '/pricing/', label: 'View Pricing' }}
 	ctaSecondary={{ href: '/faq/', label: 'Full FAQ Hub' }}
 >
 	{
@@ -27,10 +26,4 @@ const pageHero = getPageHero('theIsleFaq');
 		))
 	}
 
-	<section class="card-panel">
-		<h2>Still need help?</h2>
-		<p>
-			Visit <a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">Support</a> for delivery, setup, and billing help.
-		</p>
-	</section>
 </SeoContentPage>

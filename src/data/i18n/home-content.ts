@@ -31,7 +31,7 @@ const en: HomeContent = {
 	heroSubtitle: 'ESP, World ESP & Dino Radar',
 	heroDescription:
 		'Compare Visuals ESP, World ESP, and combat hacks in one Cloud-DMA package. Review monthly and lifetime plans, feature lists, and setup guides before you buy.',
-	heroCtaPrimary: 'Compare packages',
+	heroCtaPrimary: 'Buy',
 	heroCtaSecondary: 'Explore features',
 	whyUsHeading: 'Why Choose Cloud-DMA for The Isle?',
 	whyUsIntro:
@@ -79,12 +79,6 @@ const en: HomeContent = {
 			description:
 				'Compare monthly and lifetime plans. Cloud-DMA includes ESP, World ESP, combat hacks, and utility tools.',
 		},
-		{
-			title: 'Customer support',
-			href: siteConfig.supportUrl,
-			description:
-				'Delivery, setup, billing, and license help for monthly and lifetime The Isle Cheats packages.',
-		},
 	],
 	packageHeading: "What's in the package",
 	packageIntro:
@@ -119,11 +113,6 @@ const en: HomeContent = {
 			answer:
 				'Product maintenance notes are published on the Updates page whenever a new build or compatibility notice is available. Checking that page after The Isle patches is the fastest way to confirm whether a maintenance release has been posted.',
 		},
-		{
-			question: 'How do I contact support?',
-			answer:
-				'Open the support portal at https://zadeyo.com/support for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
-		},
 	],
 	faqMore:
 		'More answers are on the The Isle FAQ and full FAQ hub. Explore The Isle Survival Guide, Growth Guide, and The Isle Blog. Policy details are in our refund policy, privacy policy, and terms of use.',
@@ -138,7 +127,7 @@ const de: HomeContent = {
 	heroSubtitle: 'ESP, World ESP & Dino Radar',
 	heroDescription:
 		'Vergleiche Visuals ESP, World ESP und Combat-Hacks in einem Cloud-DMA-Paket. Prüfe Monats- und Lifetime-Pläne, Feature-Listen und Setup-Guides, bevor du kaufst.',
-	heroCtaPrimary: 'Pakete vergleichen',
+	heroCtaPrimary: 'Kaufen',
 	heroCtaSecondary: 'Features entdecken',
 	whyUsHeading: 'Warum Isle Cheats',
 	whyUsIntro:
@@ -220,11 +209,6 @@ const de: HomeContent = {
 			answer:
 				'Wartungshinweise werden auf der Updates-Seite veröffentlicht, sobald ein neuer Build oder ein Kompatibilitätshinweis verfügbar ist. Nach The Isle-Patches ist das der schnellste Weg zu prüfen, ob ein Wartungsrelease veröffentlicht wurde.',
 		},
-		{
-			question: 'Wie kontaktiere ich den Support?',
-			answer:
-				'Öffne das Support-Portal unter https://zadeyo.com/support für Hilfe bei Lieferung, Setup und Abrechnung. Gib Bestelldetails und eine klare Problembeschreibung an, damit Antworten schneller kommen. Für Richtlinien-Fragen vor dem Kauf zuerst die Seiten zu Rückerstattung, Datenschutz und Nutzungsbedingungen lesen.',
-		},
 	],
 	faqMore:
 		'Weitere Antworten findest du in The Isle FAQ und im vollständigen FAQ-Hub. Entdecke The Isle Survival Guide, Growth Guide und The Isle Blog. Richtlinien-Details stehen in unserer Rückerstattungsrichtlinie, Datenschutzrichtlinie und den Nutzungsbedingungen.',
@@ -239,7 +223,7 @@ const fr: HomeContent = {
 	heroSubtitle: 'ESP, World ESP & Dino Radar',
 	heroDescription:
 		'Comparez Visuals ESP, World ESP et les hacks de combat dans un seul pack Cloud-DMA. Consultez les formules mensuelles et à vie, les listes de fonctionnalités et les guides d\'installation avant d\'acheter.',
-	heroCtaPrimary: 'Comparer les packs',
+	heroCtaPrimary: 'Acheter',
 	heroCtaSecondary: 'Explorer les fonctionnalités',
 	whyUsHeading: 'Pourquoi choisir Isle Cheats',
 	whyUsIntro:
@@ -321,11 +305,6 @@ const fr: HomeContent = {
 			answer:
 				'Les notes de maintenance sont publiées sur la page Updates dès qu\'un nouveau build ou un avis de compatibilité est disponible. Après les patchs de The Isle, c\'est le moyen le plus rapide de vérifier si une version de maintenance a été publiée.',
 		},
-		{
-			question: 'Comment contacter le support ?',
-			answer:
-				'Ouvrez le portail support sur https://zadeyo.com/support pour l\'aide à la livraison, l\'installation et la facturation. Incluez vos détails de commande et une description claire du problème pour des réponses plus rapides. Pour les questions de politique avant l\'achat, consultez d\'abord les pages remboursement, confidentialité et conditions d\'utilisation.',
-		},
 	],
 	faqMore:
 		'D\'autres réponses sont sur The Isle FAQ et le hub FAQ complet. Explorez The Isle Survival Guide, Growth Guide et The Isle Blog. Les détails des politiques figurent dans notre politique de remboursement, politique de confidentialité et conditions d\'utilisation.',
@@ -340,7 +319,7 @@ const es: HomeContent = {
 	heroSubtitle: 'ESP, World ESP & Dino Radar',
 	heroDescription:
 		'Compara Visuals ESP, World ESP y hacks de combate en un solo paquete Cloud-DMA. Revisa planes mensuales y de por vida, listas de funciones y guías de configuración antes de comprar.',
-	heroCtaPrimary: 'Comparar paquetes',
+	heroCtaPrimary: 'Comprar',
 	heroCtaSecondary: 'Explorar funciones',
 	whyUsHeading: 'Por qué elegir Isle Cheats',
 	whyUsIntro:
@@ -422,11 +401,6 @@ const es: HomeContent = {
 			answer:
 				'Las notas de mantenimiento se publican en la página Updates cuando hay un nuevo build o aviso de compatibilidad. Tras los parches de The Isle, es la forma más rápida de confirmar si se ha publicado una versión de mantenimiento.',
 		},
-		{
-			question: '¿Cómo contacto con soporte?',
-			answer:
-				'Abre el portal de soporte en https://zadeyo.com/support para ayuda con entrega, configuración y facturación. Incluye los datos del pedido y una descripción clara del problema para respuestas más rápidas. Para preguntas de política antes de comprar, revisa primero las páginas de reembolso, privacidad y términos de uso.',
-		},
 	],
 	faqMore:
 		'Más respuestas en The Isle FAQ y el hub FAQ completo. Explora The Isle Survival Guide, Growth Guide y The Isle Blog. Los detalles de políticas están en nuestra política de reembolso, política de privacidad y términos de uso.',
@@ -441,7 +415,7 @@ const tr: HomeContent = {
 	heroSubtitle: 'ESP, World ESP & Dino Radar',
 	heroDescription:
 		'Visuals ESP, World ESP ve combat hack\'lerini tek bir Cloud-DMA paketinde karşılaştır. Satın almadan önce aylık ve ömür boyu planları, özellik listelerini ve kurulum rehberlerini incele.',
-	heroCtaPrimary: 'Paketleri karşılaştır',
+	heroCtaPrimary: 'Satın al',
 	heroCtaSecondary: 'Özellikleri keşfet',
 	whyUsHeading: 'Neden Isle Cheats',
 	whyUsIntro:
@@ -523,11 +497,6 @@ const tr: HomeContent = {
 			answer:
 				'Ürün bakım notları yeni bir build veya uyumluluk duyurusu olduğunda Updates sayfasında yayınlanır. The Isle yamalarından sonra bir bakım sürümünün yayınlanıp yayınlanmadığını doğrulamanın en hızlı yolu budur.',
 		},
-		{
-			question: 'Destekle nasıl iletişime geçerim?',
-			answer:
-				'Teslimat, kurulum ve faturalandırma yardımı için https://zadeyo.com/support destek portalını aç. Daha hızlı yanıt için sipariş bilgilerini ve sorunun net bir açıklamasını ekle. Satın almadan önce politika soruları için önce iade, gizlilik ve kullanım şartları sayfalarını incele.',
-		},
 	],
 	faqMore:
 		'Daha fazla yanıt The Isle FAQ ve tam FAQ merkezinde. The Isle Survival Guide, Growth Guide ve The Isle Blog\'u keşfet. Politika detayları iade politikamız, gizlilik politikamız ve kullanım şartlarında.',
@@ -542,7 +511,7 @@ const ar: HomeContent = {
 	heroSubtitle: 'ESP و World ESP و Dino Radar',
 	heroDescription:
 		'قارن Visuals ESP و World ESP وهاكات القتال في حزمة Cloud-DMA واحدة. راجع الخطط الشهرية ومدى الحياة وقوائم الميزات وأدلة الإعداد قبل الشراء.',
-	heroCtaPrimary: 'مقارنة الحزم',
+	heroCtaPrimary: 'شراء',
 	heroCtaSecondary: 'استكشاف الميزات',
 	whyUsHeading: 'لماذا Isle Cheats',
 	whyUsIntro:
@@ -624,11 +593,6 @@ const ar: HomeContent = {
 			answer:
 				'تُنشر ملاحظات الصيانة في صفحة Updates عند توفر إصدار جديد أو إشعار توافق. بعد تصحيحات The Isle، هذه أسرع طريقة للتأكد من نشر إصدار صيانة.',
 		},
-		{
-			question: 'كيف أتواصل مع الدعم؟',
-			answer:
-				'افتح بوابة الدعم على https://zadeyo.com/support للمساعدة في التسليم والإعداد والفوترة. أرفق تفاصيل الطلب ووصفًا واضحًا للمشكلة لتسريع الرد. لأسئلة السياسات قبل الشراء، راجع صفحات الاسترداد والخصوصية وشروط الاستخدام أولًا.',
-		},
 	],
 	faqMore:
 		'مزيد من الإجابات في The Isle FAQ ومركز FAQ الكامل. استكشف The Isle Survival Guide و Growth Guide و The Isle Blog. تفاصيل السياسات في سياسة الاسترداد وسياسة الخصوصية وشروط الاستخدام.',
@@ -643,7 +607,7 @@ const ru: HomeContent = {
 	heroSubtitle: 'ESP, World ESP и Dino Radar',
 	heroDescription:
 		'Сравните Visuals ESP, World ESP и боевые читы в одном пакете Cloud-DMA. Изучите месячные и пожизненные планы, списки функций и гайды по настройке перед покупкой.',
-	heroCtaPrimary: 'Сравнить пакеты',
+	heroCtaPrimary: 'Купить',
 	heroCtaSecondary: 'Изучить функции',
 	whyUsHeading: 'Почему Isle Cheats',
 	whyUsIntro:
@@ -724,11 +688,6 @@ const ru: HomeContent = {
 			question: 'Где смотреть обновления продукта?',
 			answer:
 				'Заметки о техобслуживании публикуются на странице Updates при появлении новой сборки или уведомления о совместимости. После патчей The Isle это самый быстрый способ узнать, вышло ли обслуживающее обновление.',
-		},
-		{
-			question: 'Как связаться с поддержкой?',
-			answer:
-				'Откройте портал поддержки на https://zadeyo.com/support для помощи с доставкой, настройкой и оплатой. Укажите данные заказа и чёткое описание проблемы для более быстрого ответа. По вопросам политик до покупки сначала изучите страницы возврата, конфиденциальности и условий использования.',
 		},
 	],
 	faqMore:

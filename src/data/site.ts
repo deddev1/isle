@@ -4,9 +4,9 @@ export const siteConfig = {
 	locale: 'en',
 	market: 'Worldwide',
 	supportEmail: 'support@islecheats.net',
-	supportUrl: 'https://zadeyo.com/support',
-	logo: '/images/zadeyo-logo.webp',
-	checkoutUrl: 'https://zadeyo.com/go/QRH?to=%2Fproducts%2Fthe-isle-novaxware',
+	supportUrl: '/go/support/',
+	logo: '/images/navbar-logo.png',
+	checkoutUrl: '/go/checkout/',
 	defaultOgImage: '/images/the-isle-hero-dinosaur-survival.webp',
 	metaDescription:
 		'Buy The Isle Cheats for Windows PC. Isle Cheats with ESP, Cloud-DMA hacks, monthly and lifetime plans, features, guides, and support at islecheats.net.',
@@ -59,7 +59,7 @@ export const pageDescriptions = {
 	'/faq/':
 		'The Isle Cheats FAQ — answers about Cloud-DMA, ESP, Cheats, digital delivery, refund policy, and customer support.',
 	'/support/':
-		'Contact The Isle Cheats support for delivery, setup, and billing help. Open https://zadeyo.com/support with your order details.',
+		'Contact The Isle Cheats support for delivery, setup, and billing help. Open the customer support portal with your order details.',
 	'/refund-policy/':
 		'The Isle Cheats refund policy — review eligibility, conditions, and timelines before purchasing Cloud-DMA or ESP packages.',
 	'/privacy-policy/':
@@ -187,13 +187,12 @@ export const mainNav = [
 	{ label: 'Why Us', href: '/#why-us', section: 'why-us' },
 	{ label: 'Features', href: '/#features', section: 'features' },
 	{ label: 'Demo', href: '/#demo', section: 'demo' },
-	{ label: 'Undetected', href: '/#undetected', section: 'undetected' },
+	{ label: 'FAQ', href: '/faq/', section: 'faq' },
 	{ label: 'Blog', href: '/blog/', section: 'blog' },
 ] as const;
 
 export const footerNav = [
 	{ label: 'Product updates log', href: '/updates/' },
-	{ label: 'Contact support team', href: siteConfig.supportUrl },
 	{ label: 'Refund policy details', href: '/refund-policy/' },
 	{ label: 'Privacy policy details', href: '/privacy-policy/' },
 	{ label: 'Terms of use', href: '/terms/' },
@@ -229,14 +228,9 @@ export const homeFaqs = [
 		answer:
 			'After payment is confirmed, license details are delivered digitally. Delivery timing can vary by payment method and order review. Keep your order confirmation available when contacting support so the team can locate your purchase quickly.',
 	},
-	{
-		question: 'Where can I check product updates?',
-		answer:
-			'Product maintenance notes are published on the Updates page whenever a new build or compatibility notice is available. Checking that page after The Isle patches is the fastest way to confirm whether a maintenance release has been posted.',
-	},
-	{
-		question: 'How do I contact support?',
-		answer:
-			'Open the support portal at https://zadeyo.com/support for delivery, setup, and billing help. Include your order details and a clear description of the issue so replies can be faster. For policy questions before buying, review the refund, privacy, and terms pages first.',
-	},
+		{
+			question: 'Where can I check product updates?',
+			answer:
+				'Product maintenance notes are published on the Updates page whenever a new build or compatibility notice is available. Checking that page after The Isle patches is the fastest way to confirm whether a maintenance release has been posted.',
+		},
 ] as const;

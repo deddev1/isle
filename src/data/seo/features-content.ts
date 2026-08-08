@@ -22,6 +22,6 @@ export const featuresFaqs = [
 	{
 		question: 'How do I get help with feature setup?',
 		answer:
-			'Open the Support page or contact https://zadeyo.com/support for delivery, menu key binding, ESP range tuning, and config profile questions.',
+			'Open the Support page or contact customer support for delivery, menu key binding, ESP range tuning, and config profile questions.',
 	},
 ] as const;

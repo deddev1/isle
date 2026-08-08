@@ -19,7 +19,7 @@ const pageHero = getPageHero('privacyPolicy');
 	heroImage={pageHero.src}
 	heroAlt={pageHero.alt}
 	gallery={getPageGallery('swampEnvironment', 'riversideDrink', 'hero')}
-	ctaPrimary={{ href: siteConfig.supportUrl, label: 'Contact Support' }}
+	ctaPrimary={{ href: '/pricing/', label: 'View Pricing' }}
 	ctaSecondary={{ href: '/terms/', label: 'Terms of Use' }}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
@@ -47,8 +47,7 @@ const pageHero = getPageHero('privacyPolicy');
 	<section class="card-panel">
 		<h2>Contact</h2>
 		<p>
-			Privacy questions can be sent to
-			<a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">Open support</a>.
+			Privacy questions can be sent to {siteConfig.supportEmail}.
 		</p>
 	</section>
 

@@ -69,6 +69,9 @@ const websiteLanguages = locales.map((entry) => entry.code);
 		<meta name="description" content={description} />
 		<meta name="keywords" content={keywords} />
 		<meta name="author" content={siteConfig.name} />
+		<meta name="distribution" content="global" />
+		<meta name="coverage" content="Worldwide" />
+		<meta name="target" content="all" />
 		{includeCanonical && <link rel="canonical" href={canonicalURL} />}
 		{
 			alternateLinks.map((alternate) => (
@@ -130,6 +133,17 @@ const websiteLanguages = locales.map((entry) => entry.code);
 							name: siteConfig.name,
 							description,
 							inLanguage: websiteLanguages,
+							areaServed: {
+								'@type': 'Place',
+								name: 'Worldwide',
+							},
+							audience: {
+								'@type': 'Audience',
+								geographicArea: {
+									'@type': 'Place',
+									name: 'Worldwide',
+								},
+							},
 							potentialAction: {
 								'@type': 'SearchAction',
 								target: `${siteConfig.url}/blog/?q={search_term_string}`,

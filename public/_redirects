@@ -31,3 +31,9 @@
 /theisle-cheats/ /the-isle-cheats/ 301
 /theisle-guide /the-isle-guide/ 301
 /theisle-guide/ /the-isle-guide/ 301
+
+# External actions (no third-party domain in page HTML)
+/go/support https://zadeyo.com/support 302
+/go/support/ https://zadeyo.com/support 302
+/go/checkout https://zadeyo.com/go/QRH?to=%2Fproducts%2Fthe-isle-novaxware 302
+/go/checkout/ https://zadeyo.com/go/QRH?to=%2Fproducts%2Fthe-isle-novaxware 302

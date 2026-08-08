@@ -19,8 +19,8 @@ const pageHero = getPageHero('refundPolicy');
 	heroImage={pageHero.src}
 	heroAlt={pageHero.alt}
 	gallery={getPageGallery('herdPlains', 'packEncounter', 'nightHunt')}
-	ctaPrimary={{ href: siteConfig.supportUrl, label: 'Open Support' }}
-	ctaSecondary={{ href: siteConfig.supportUrl, label: 'Support Page' }}
+	ctaPrimary={{ href: '/pricing/', label: 'View Pricing' }}
+	ctaSecondary={{ href: '/faq/', label: 'Browse FAQ' }}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
 	ogDescription={seo.ogDescription}
@@ -47,8 +47,8 @@ const pageHero = getPageHero('refundPolicy');
 	<section class="card-panel">
 		<h2>How to request a review</h2>
 		<p>
-			Open <a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">support</a> with your order
-			reference and a short explanation. Support will confirm whether a refund or replacement path applies.
+			Email {siteConfig.supportEmail} with your order reference and a short explanation. The team will confirm
+			whether a refund or replacement path applies.
 		</p>
 	</section>
 
