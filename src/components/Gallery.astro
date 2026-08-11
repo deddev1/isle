@@ -31,65 +31,61 @@ const cheatHighlights = [
 		</p>
 	</header>
 
-	<div class="gallery__layout">
-		<div class="gallery__summary">
-			<p class="gallery__lead">
-				Cloud-DMA combines Visuals ESP, World ESP, and combat hacks in one configurable package.
-			</p>
+	<p class="gallery__lead">
+		Cloud-DMA combines Visuals ESP, World ESP, and combat hacks in one configurable package.
+	</p>
 
-			<div class="gallery__highlights">
-				{
-					cheatHighlights.map((item) => (
-						<article class="gallery__info-card">
-							<h3>{item.title}</h3>
-							<p>{item.copy}</p>
-						</article>
-					))
-				}
-			</div>
-		</div>
+	<div class="gallery__highlights" role="list">
+		{
+			cheatHighlights.map((item) => (
+				<article class="gallery__info-card" role="listitem">
+					<h3>{item.title}</h3>
+					<p>{item.copy}</p>
+				</article>
+			))
+		}
+	</div>
 
-		<div class="gallery__media">
-			<figure class="gallery__featured media-frame">
-				<img
-					src={featured.src}
-					alt={featured.alt}
-					width="1400"
-					height="788"
-					loading="lazy"
-					decoding="async"
-				/>
-				<figcaption>{featured.alt}</figcaption>
-			</figure>
+	<figure class="gallery__featured media-frame">
+		<img
+			src={featured.src}
+			alt={featured.alt}
+			width="1400"
+			height="788"
+			loading="lazy"
+			decoding="async"
+		/>
+		<figcaption>{featured.alt}</figcaption>
+	</figure>
 
-			<div class="gallery__grid">
-				{
-					tiles.map((image) => (
-						<figure class="gallery__item media-frame">
-							<img src={image.src} alt={image.alt} width="1280" height="720" loading="lazy" decoding="async" />
-							<figcaption>{image.alt}</figcaption>
-						</figure>
-					))
-				}
-			</div>
-		</div>
+	<div class="gallery__grid">
+		{
+			tiles.map((image) => (
+				<figure class="gallery__item media-frame">
+					<img src={image.src} alt={image.alt} width="1280" height="720" loading="lazy" decoding="async" />
+					<figcaption>{image.alt}</figcaption>
+				</figure>
+			))
+		}
 	</div>
 </section>
 
 <style>
 	.gallery {
-		--gallery-gap: 0.45rem;
-		--gallery-pad: 0.55rem;
+		--gallery-gap: 0.65rem;
 		width: 100%;
+		display: grid;
+		gap: var(--gallery-gap);
 	}
 
 	.gallery__head {
-		margin-bottom: 0.5rem;
+		display: grid;
+		gap: 0.35rem;
 	}
 
 	.gallery__eyebrow {
-		margin: 0 0 0.2rem;
-		font-size: 0.68rem;
+		margin: 0;
+		font-size: 0.7rem;
 		font-weight: 700;
 		letter-spacing: 0.14em;
 		text-transform: uppercase;
@@ -99,69 +95,46 @@ const cheatHighlights = [
 	.gallery__title {
 		margin: 0;
 		font-family: var(--font-display);
-		font-size: clamp(1.3rem, 2.2vw, 1.75rem);
+		font-size: clamp(1.45rem, 2.6vw, 2rem);
 		font-weight: 800;
 		letter-spacing: -0.03em;
 		line-height: 1.1;
 	}
 
 	.gallery__sub {
-		margin: 0.3rem 0 0;
+		margin: 0;
 		color: var(--color-muted);
-		max-width: 34rem;
-		font-size: 0.88rem;
-		line-height: 1.4;
-	}
-
-	.gallery__layout {
-		display: grid;
-		grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.32fr);
-		align-items: start;
-		gap: var(--gallery-gap);
-		padding: var(--gallery-pad);
-		border: 1px solid rgba(168, 85, 247, 0.12);
-		border-radius: 0.7rem;
-		background: rgba(18, 16, 26, 0.46);
-	}
-
-	.gallery__summary {
-		display: grid;
-		gap: 0;
-		padding: 0.5rem 0.6rem;
-		border-radius: 0.55rem;
-		border: 1px solid rgba(168, 85, 247, 0.14);
-		background: rgba(10, 6, 18, 0.34);
+		max-width: 40rem;
+		font-size: 0.92rem;
+		line-height: 1.45;
 	}
 
 	.gallery__lead {
 		margin: 0;
-		padding: 0 0 0.45rem;
-		border-bottom: 1px solid rgba(168, 85, 247, 0.14);
 		color: #e2d9ef;
-		font-size: 0.84rem;
-		line-height: 1.35;
+		font-size: 0.9rem;
+		line-height: 1.45;
+		max-width: 44rem;
 	}
 
 	.gallery__highlights {
 		display: grid;
-		gap: 0;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		gap: var(--gallery-gap);
 	}
 
 	.gallery__info-card {
 		display: grid;
-		gap: 0.15rem;
-		padding: 0.4rem 0;
-		border-bottom: 1px solid rgba(168, 85, 247, 0.1);
-	}
-
-	.gallery__info-card:last-child {
-		border-bottom: 0;
-		padding-bottom: 0.1rem;
+		gap: 0.3rem;
+		padding: 0.75rem 0.85rem;
+		border-radius: 0.65rem;
+		border: 1px solid rgba(168, 85, 247, 0.14);
+		background: rgba(18, 16, 26, 0.5);
 	}
 
 	.gallery__info-card h3 {
 		margin: 0;
-		font-size: 0.84rem;
+		font-size: 0.9rem;
 		font-weight: 750;
 		line-height: 1.2;
 		color: var(--color-ink);
@@ -170,15 +143,8 @@ const cheatHighlights = [
 	.gallery__info-card p {
 		margin: 0;
 		color: var(--color-muted);
-		font-size: 0.76rem;
-		line-height: 1.35;
-	}
-
-	.gallery__media {
-		display: grid;
-		grid-template-rows: auto auto;
-		gap: var(--gallery-gap);
-		min-height: 0;
+		font-size: 0.8rem;
+		line-height: 1.4;
 	}
 
 	.gallery__featured,
@@ -188,13 +154,13 @@ const cheatHighlights = [
 	}
 
 	.gallery__featured {
-		aspect-ratio: 16 / 10;
-		border: 1px solid rgba(192, 132, 252, 0.2);
+		aspect-ratio: 21 / 9;
+		border: 1px solid rgba(192, 132, 252, 0.18);
 	}
 
 	.gallery__grid {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
+		grid-template-columns: repeat(4, minmax(0, 1fr));
 		gap: var(--gallery-gap);
 	}
 
@@ -220,10 +186,10 @@ const cheatHighlights = [
 		position: absolute;
 		inset: auto 0 0;
 		z-index: 2;
-		padding: 1.1rem 0.65rem 0.5rem;
+		padding: 1.2rem 0.75rem 0.55rem;
 		background: linear-gradient(transparent, rgba(10, 6, 18, 0.92));
 		color: #ddd4ec;
-		font-size: 0.68rem;
+		font-size: 0.7rem;
 		font-weight: 600;
 		line-height: 1.25;
 		opacity: 0;
@@ -240,51 +206,35 @@ const cheatHighlights = [
 	}
 
 	@media (max-width: 900px) {
-		.gallery__layout {
-			grid-template-columns: 1fr;
+		.gallery__featured {
+			aspect-ratio: 16 / 9;
 		}
 
-		.gallery__highlights {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
-			gap: 0.45rem;
-		}
-
-		.gallery__info-card {
-			padding: 0;
-			border-bottom: 0;
-		}
-
-		.gallery__info-card:last-child {
-			padding-bottom: 0;
+		.gallery__grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 	}
 
 	@media (max-width: 640px) {
 		.gallery {
-			--gallery-gap: 0.4rem;
-			--gallery-pad: 0.45rem;
+			--gallery-gap: 0.5rem;
 		}
 
 		.gallery__highlights {
 			grid-template-columns: 1fr;
 		}
 
-		.gallery__info-card {
-			padding: 0.35rem 0;
-			border-bottom: 1px solid rgba(168, 85, 247, 0.1);
-		}
-
-		.gallery__info-card:last-child {
-			border-bottom: 0;
-			padding-bottom: 0;
-		}
-
 		.gallery__title {
-			font-size: 1.25rem;
+			font-size: 1.35rem;
 		}
 
-		.gallery__sub {
-			font-size: 0.84rem;
+		.gallery__sub,
+		.gallery__lead {
+			font-size: 0.86rem;
+		}
+
+		.gallery__featured {
+			aspect-ratio: 16 / 10;
 		}
 	}
 </style>
