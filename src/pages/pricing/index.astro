@@ -66,26 +66,27 @@ const webPageSchema = buildWebPageSchema({
 
 		<section class="shell pricing-layout" aria-label="Pricing and product preview">
 			<aside class="pricing-layout__prices">
-				<h2 class="pricing-layout__heading">Choose your plan</h2>
-				<div class="price-pair">
+				<h2 class="pricing-layout__heading">Plans</h2>
+				<div class="price-pair" role="list">
 					{
 						plans.map((plan) => (
-							<article class:list={['price-tile', { 'is-featured': plan.id === 'lifetime' }]}>
-								<span class="price-tile__label">{plan.label}</span>
-								<span class="price-tile__price">${plan.price}</span>
-								<span class="price-tile__meta">{productInfo.currency} · Cloud-DMA</span>
-								<a class="price-tile__cta" href={siteConfig.checkoutUrl}>
-									Get Access
-								</a>
-							</article>
+							<a
+								class:list={['price-option', { 'is-featured': plan.id === 'lifetime' }]}
+								href={siteConfig.checkoutUrl}
+								role="listitem"
+							>
+								<span class="price-option__label">{plan.label}</span>
+								<span class="price-option__price">${plan.price}</span>
+								<span class="price-option__meta">{productInfo.currency}</span>
+							</a>
 						))
 					}
 				</div>
+				<a class="pricing-layout__buy" href={siteConfig.checkoutUrl}>Get Access</a>
 				<p class="pricing-layout__note">
-					Both plans include Visuals ESP, World ESP, combat hacks, and utility tools. Aimbot is optional and
-					not in the Cloud-DMA base package.
+					Same Cloud-DMA package on both plans — ESP, combat hacks, and utilities.
 				</p>
-				<a class="pricing-layout__features" href="/features/">See full feature list</a>
+				<a class="pricing-layout__features" href="/features/">See features</a>
 			</aside>
 
 			<div class="pricing-layout__media">
@@ -297,70 +298,81 @@ const webPageSchema = buildWebPageSchema({
 	.price-pair {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.5rem;
-	}
-
-	.price-tile {
-		display: grid;
-		gap: 0.2rem;
-		justify-items: center;
-		padding: 0.7rem 0.55rem 0.65rem;
+		gap: 0;
+		border: 1px solid rgba(168, 85, 247, 0.2);
 		border-radius: 0.75rem;
-		border: 1px solid rgba(168, 85, 247, 0.18);
-		background: rgba(22, 18, 32, 0.92);
-		text-align: center;
+		overflow: hidden;
+		background: rgba(18, 16, 26, 0.85);
 	}
 
-	.price-tile.is-featured {
-		border-color: rgba(192, 132, 252, 0.4);
-		background: linear-gradient(180deg, rgba(76, 29, 149, 0.35) 0%, rgba(22, 18, 32, 0.95) 100%);
+	.price-option {
+		display: grid;
+		gap: 0.15rem;
+		justify-items: start;
+		padding: 0.85rem 0.95rem;
+		color: var(--color-ink);
+		text-decoration: none;
+		border-right: 1px solid rgba(168, 85, 247, 0.16);
+		transition: background 0.15s ease;
 	}
 
-	.price-tile__label {
-		font-size: 0.65rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--color-orchid);
+	.price-option:last-child {
+		border-right: 0;
 	}
 
-	.price-tile__price {
-		font-family: var(--font-display);
-		font-size: clamp(1.25rem, 2.2vw, 1.55rem);
-		font-weight: 800;
-		line-height: 1;
+	.price-option:hover {
+		background: rgba(124, 58, 237, 0.12);
 		color: var(--color-ink);
 	}
 
-	.price-tile__meta {
-		font-size: 0.7rem;
+	.price-option.is-featured {
+		background: rgba(124, 58, 237, 0.14);
+	}
+
+	.price-option__label {
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
 		color: var(--color-muted);
 	}
 
-	.price-tile__cta {
+	.price-option.is-featured .price-option__label {
+		color: var(--color-orchid);
+	}
+
+	.price-option__price {
+		font-family: var(--font-display);
+		font-size: 1.55rem;
+		font-weight: 800;
+		line-height: 1.1;
+	}
+
+	.price-option__meta {
+		font-size: 0.72rem;
+		color: var(--color-faint);
+	}
+
+	.pricing-layout__buy {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		min-height: 2.15rem;
-		margin-top: 0.4rem;
-		padding: 0.4rem 0.55rem;
-		border-radius: 0.6rem;
+		min-height: 2.4rem;
+		margin-top: 0.7rem;
+		padding: 0.55rem 0.85rem;
+		border-radius: 0.65rem;
 		background: #7c3aed;
 		color: #fff;
-		font-size: 0.78rem;
+		font-size: 0.88rem;
 		font-weight: 800;
-		letter-spacing: 0.04em;
+		letter-spacing: 0.03em;
 		transition: background 0.2s ease;
 	}
 
-	.price-tile__cta:hover {
+	.pricing-layout__buy:hover {
 		background: #8b5cf6;
 		color: #fff;
-	}
-
-	.price-tile.is-featured .price-tile__cta {
-		background: linear-gradient(135deg, #7c3aed, #c026d3);
 	}
 
 	.pricing-layout__note {
@@ -585,6 +597,15 @@ const webPageSchema = buildWebPageSchema({
 	@media (max-width: 640px) {
 		.price-pair {
 			grid-template-columns: 1fr;
+		}
+
+		.price-option {
+			border-right: 0;
+			border-bottom: 1px solid rgba(168, 85, 247, 0.16);
+		}
+
+		.price-option:last-child {
+			border-bottom: 0;
 		}
 
 		.pricing-extra {
