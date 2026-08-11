@@ -37,6 +37,7 @@ const productSchema = buildSoftwareApplicationSchema({
 	ogDescription={seo.ogDescription}
 	twitterTitle={seo.twitterTitle}
 	twitterDescription={seo.twitterDescription}
+	compact
 >
 	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
 	<script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
