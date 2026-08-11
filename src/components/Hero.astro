@@ -1,6 +1,17 @@
 ---
+import type { LocaleCode } from '../data/i18n';
+import { getHomeContent } from '../data/i18n/home-content';
+import { siteConfig } from '../data/site';
 import { theIsleImages } from '../data/theisle';
-import { homeSeo, siteConfig } from '../data/site';
+
+interface Props {
+	locale?: LocaleCode;
+}
+
+const { locale = 'en' } = Astro.props;
+const content = getHomeContent(locale);
+const primaryHref = '/pricing/';
+const featuresHref = '/features/';
 ---
 
 <section class="hero" id="home" data-nav-section="home" aria-label="Hero">
@@ -20,13 +31,13 @@ import { homeSeo, siteConfig } from '../data/site';
 
 	<div class="hero__inner">
 		<div class="hero__copy">
-			<p class="hero__eyebrow">{siteConfig.name}</p>
-			<h1 class="hero__title">{homeSeo.heroTitle}</h1>
-			<p class="hero__subtitle text-gradient">{homeSeo.heroSubtitle}</p>
-			<p class="hero__desc">{homeSeo.heroDescription}</p>
+			<p class="hero__eyebrow">{content.heroEyebrow}</p>
+			<h1 class="hero__title">{content.heroTitle}</h1>
+			<p class="hero__subtitle text-gradient">{content.heroSubtitle}</p>
+			<p class="hero__desc">{content.heroDescription}</p>
 			<div class="hero__cta">
-				<a href="/pricing/" class="hero__btn hero__btn--primary bg-brand">Get Access</a>
-				<a href="/features/" class="hero__btn hero__btn--ghost">Explore features</a>
+				<a href={primaryHref} class="hero__btn hero__btn--primary bg-brand">{content.heroCtaPrimary}</a>
+				<a href={featuresHref} class="hero__btn hero__btn--ghost">{content.heroCtaSecondary}</a>
 			</div>
 		</div>
 	</div>
@@ -154,6 +165,8 @@ import { homeSeo, siteConfig } from '../data/site';
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
+		min-width: 10.5rem;
+		min-height: 2.85rem;
 		padding: 0.85rem 1.25rem;
 		border-radius: 0.8rem;
 		font-size: 0.95rem;

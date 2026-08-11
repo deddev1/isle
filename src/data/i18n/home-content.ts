@@ -29,9 +29,8 @@ const en: HomeContent = {
 	heroEyebrow: 'Windows PC · Cloud-DMA',
 	heroTitle: 'The Isle Cheats',
 	heroSubtitle: 'ESP, World ESP & Dino Radar',
-	heroDescription:
-		'Compare Visuals ESP, World ESP, and combat hacks in one Cloud-DMA package. Review monthly and lifetime plans, feature lists, and setup guides before you buy.',
-	heroCtaPrimary: 'Buy',
+	heroDescription: 'Cheats available — ESP, Aimbot & Wallhack for The Isle.',
+	heroCtaPrimary: 'Get Access',
 	heroCtaSecondary: 'Explore features',
 	whyUsHeading: 'Why Choose Cloud-DMA for The Isle?',
 	whyUsIntro:
