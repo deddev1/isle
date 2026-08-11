@@ -1,729 +1,101 @@
 ---
-import Layout from '../../layouts/Layout.astro';
-import Navbar from '../../components/Navbar.astro';
-import SiteFooter from '../../components/SiteFooter.astro';
-import { homeVideo, productInfo, siteConfig } from '../../data/site';
+import PageLayout from '../../layouts/PageLayout.astro';
+import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
+import { productInfo, siteConfig } from '../../data/site';
 import { getPageSeo } from '../../data/seo/meta';
-import { theIsleImages } from '../../data/theisle';
-import { buildBreadcrumbSchema, buildWebPageSchema } from '../../data/seo/schema';
+import { pricingFaqs, pricingSections } from '../../data/seo/pricing-content';
+import { buildFaqSchema, buildSoftwareApplicationSchema } from '../../data/seo/schema';
+import { getPageHero, getPageGallery } from '../../data/theisle';
 
 const seo = getPageSeo('pricing');
-const plans = productInfo.plans;
-const images = theIsleImages.product;
-const breadcrumbSchema = buildBreadcrumbSchema([
-	{ name: 'Home', path: '/' },
-	{ name: 'Pricing', path: '/pricing/' },
-]);
-const webPageSchema = buildWebPageSchema({
-	title: seo.title,
-	description: seo.description,
-	path: '/pricing/',
+const pageHero = getPageHero('pricing');
+const faqSchema = buildFaqSchema(pricingFaqs);
+const productSchema = buildSoftwareApplicationSchema({
+	name: productInfo.name,
+	description: productInfo.summary,
+	pricingUrl: new URL('/pricing/', siteConfig.url).href,
+	plans: productInfo.plans.map((plan) => ({ label: plan.label, price: plan.price })),
+	currency: productInfo.currency,
+	alternateName: ['Isle Cheats', 'The Isle Hack'],
+	keywords: seo.keywords,
 });
 ---
 
-<Layout
+<PageLayout
 	title={seo.title}
 	description={seo.description}
 	canonicalPath="/pricing/"
-	ogImage={theIsleImages.cover}
+	heading="The Isle Cheats Pricing"
+	intro="Packages are sold in USD and include The Isle Cheats Cloud-DMA, ESP, and Cheats product line."
+	heroImage={pageHero.src}
+	heroAlt={pageHero.alt}
+	gallery={getPageGallery('herdPlains', 'carnivoreCombat', 'packEncounter')}
+	ctaPrimary={{ href: '/#product', label: 'Open Product Card' }}
+	ctaSecondary={{ href: '/features/', label: 'See Features' }}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
 	ogDescription={seo.ogDescription}
 	twitterTitle={seo.twitterTitle}
 	twitterDescription={seo.twitterDescription}
-	preloadImage={theIsleImages.cover}
 >
-	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
-	<script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
-	<Navbar />
-	<main class="pricing-page">
-		<section class="pricing-banner">
-			<div class="pricing-banner__media" aria-hidden="true">
-				<img
-					src={theIsleImages.cover}
-					alt=""
-					width="1600"
-					height="900"
-					class="pricing-banner__img"
-					decoding="async"
-					fetchpriority="high"
-				/>
-				<div class="pricing-banner__scrim"></div>
-			</div>
-			<div class="shell pricing-banner__content">
-				<nav class="pricing-banner__crumbs" aria-label="Breadcrumb">
-					<a href="/">Home</a>
-					<span aria-hidden="true">/</span>
-					<span aria-current="page">Pricing</span>
-				</nav>
-				<p class="pricing-banner__eyebrow">{siteConfig.name}</p>
-				<h1 class="pricing-banner__title">The Isle Cheats Pricing</h1>
-				<p class="pricing-banner__intro">
-					Monthly or lifetime Cloud-DMA — ESP, combat hacks, and utilities for Windows PC.
-				</p>
-			</div>
-		</section>
+	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+	<script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
 
-		<section class="shell pricing-layout" aria-label="Pricing and product preview" data-pricing-media>
-			<aside class="pricing-layout__prices">
-				<h2 class="pricing-layout__heading">Plans</h2>
-				<div class="price-pair" role="list">
-					{
-						plans.map((plan) => (
-							<div
-								class:list={['price-option', { 'is-featured': plan.id === 'lifetime' }]}
-								role="listitem"
-							>
-								<span class="price-option__label">{plan.label}</span>
-								<span class="price-option__price">${plan.price}</span>
-								<span class="price-option__meta">{productInfo.currency}</span>
-							</div>
-						))
-					}
-				</div>
-				<a class="pricing-layout__buy" href={siteConfig.checkoutUrl}>Get Access</a>
-				<p class="pricing-layout__note">
-					Same package on both plans — Visuals ESP, World ESP, combat hacks, and utilities.
-				</p>
-				<a class="pricing-layout__features" href="/features/">See features</a>
-			</aside>
-
-			<div class="pricing-layout__media">
-				<div class="media-stage">
-					{/* Default: video */}
-					<div class="media-stage__panel is-active" data-stage="video">
-						<button
-							type="button"
-							class="media-stage__video-trigger"
-							data-video-trigger
-							aria-label={`Play ${homeVideo.title}`}
-						>
-							<img
-								src={homeVideo.thumbnail}
-								alt={homeVideo.thumbnailAlt}
-								width="1280"
-								height="720"
-								class="media-stage__poster"
-								loading="eager"
-								decoding="async"
-							/>
-							<span class="media-stage__veil" aria-hidden="true"></span>
-							<span class="media-stage__play" aria-hidden="true">
-								<svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
-									<path d="M8 5.14v13.72L19 12 8 5.14z"></path>
-								</svg>
-							</span>
-							<span class="media-stage__badge">Watch demo</span>
-						</button>
-						<video
-							class="media-stage__player"
-							data-video-player
-							controls
-							playsinline
-							preload="none"
-							aria-label={homeVideo.title}
-							hidden
-						></video>
-					</div>
-
-					{/* Image view (swapped in when a thumb is clicked) */}
-					<figure class="media-stage__panel media-stage__image" data-stage="image" hidden>
-						<img
-							src={images[0].src}
-							alt={images[0].alt}
-							width="1280"
-							height="720"
-							data-stage-image
-							decoding="async"
-						/>
-					</figure>
-				</div>
-
-				<div class="media-scroller" aria-label="Preview gallery">
-					<div class="media-scroller__track">
-						<button
-							type="button"
-							class="media-scroller__item is-active"
-							data-thumb="video"
-							aria-label="Show demo video"
-							aria-pressed="true"
-						>
-							<img
-								src={homeVideo.thumbnail}
-								alt=""
-								width="320"
-								height="180"
-								loading="lazy"
-								decoding="async"
-							/>
-							<span class="media-scroller__play" aria-hidden="true">
-								<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
-									<path d="M8 5.14v13.72L19 12 8 5.14z"></path>
-								</svg>
-							</span>
-						</button>
-						{
-							images.map((image, index) => (
-								<button
-									type="button"
-									class="media-scroller__item"
-									data-thumb="image"
-									data-src={image.src}
-									data-alt={image.alt}
-									aria-label={`Show preview ${index + 1}`}
-									aria-pressed="false"
-								>
-									<img
-										src={image.src}
-										alt=""
-										width="320"
-										height="180"
-										loading="lazy"
-										decoding="async"
-									/>
-								</button>
-							))
-						}
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="shell pricing-extra">
-			<article class="pricing-extra__card">
-				<h2>What each package includes</h2>
-				<p>
-					Cloud-DMA with Visuals ESP, World ESP, combat hacks, and utility tools. Delivery:
-					{productInfo.delivery}. See the full list on <a href="/features/">Features</a>.
-				</p>
-			</article>
-			<article class="pricing-extra__card">
-				<h2>Before you buy</h2>
-				<ul>
-					<li><a href="/refund-policy/">Refund policy</a></li>
-					<li><a href="/terms/">Terms of use</a></li>
-					<li><a href="/updates/">Latest updates</a></li>
-					<li>
-						<a href={`mailto:${siteConfig.supportEmail}`}>Email support</a>
-					</li>
-				</ul>
-			</article>
-		</section>
-	</main>
-	<SiteFooter />
-</Layout>
-
-<script define:vars={{ videoSrc: homeVideo.src }}>
-	document.querySelectorAll('[data-pricing-media]').forEach((root) => {
-		const videoPanel = root.querySelector('[data-stage="video"]');
-		const imagePanel = root.querySelector('[data-stage="image"]');
-		const stageImage = root.querySelector('[data-stage-image]');
-		const trigger = root.querySelector('[data-video-trigger]');
-		const player = root.querySelector('[data-video-player]');
-		const thumbs = Array.from(root.querySelectorAll('[data-thumb]'));
-
-		const pauseVideo = () => {
-			if (player instanceof HTMLVideoElement && !player.hidden) {
-				player.pause();
+	<section class="card-panel">
+		<h2>Current packages</h2>
+		<div class="price-grid">
+			{
+				productInfo.plans.map((plan) => (
+					<article class:list={['price-card', { 'is-featured': plan.id === 'lifetime' }]}>
+						<span class="price-card__label">{plan.label}</span>
+						<span class="price-card__price">${plan.price}</span>
+						<span class="price-card__meta">{productInfo.currency} · Cloud-DMA · ESP</span>
+					</article>
+				))
 			}
-		};
+		</div>
+	</section>
 
-		const showVideo = () => {
-			if (!(videoPanel instanceof HTMLElement) || !(imagePanel instanceof HTMLElement)) return;
-			imagePanel.hidden = true;
-			videoPanel.hidden = false;
-			videoPanel.classList.add('is-active');
-			thumbs.forEach((thumb) => {
-				const isVideo = thumb.getAttribute('data-thumb') === 'video';
-				thumb.classList.toggle('is-active', isVideo);
-				thumb.setAttribute('aria-pressed', String(isVideo));
-			});
-		};
-
-		const showImage = (src: string, alt: string, activeThumb: Element) => {
-			if (
-				!(videoPanel instanceof HTMLElement) ||
-				!(imagePanel instanceof HTMLElement) ||
-				!(stageImage instanceof HTMLImageElement)
-			) {
-				return;
-			}
-
-			pauseVideo();
-			if (player instanceof HTMLVideoElement) {
-				player.hidden = true;
-			}
-			if (trigger instanceof HTMLElement) {
-				trigger.hidden = false;
-			}
-			videoPanel.classList.remove('is-playing');
-			videoPanel.hidden = true;
-			videoPanel.classList.remove('is-active');
-
-			stageImage.src = src;
-			stageImage.alt = alt;
-			imagePanel.hidden = false;
-
-			thumbs.forEach((thumb) => {
-				const active = thumb === activeThumb;
-				thumb.classList.toggle('is-active', active);
-				thumb.setAttribute('aria-pressed', String(active));
-			});
-		};
-
-		trigger?.addEventListener('click', () => {
-			if (!(player instanceof HTMLVideoElement) || !(trigger instanceof HTMLElement)) return;
-			player.src = videoSrc;
-			player.hidden = false;
-			trigger.hidden = true;
-			videoPanel?.classList.add('is-playing');
-			const playPromise = player.play();
-			if (playPromise) {
-				playPromise.catch(() => {
-					player.controls = true;
-				});
-			}
-		});
-
-		thumbs.forEach((thumb) => {
-			thumb.addEventListener('click', () => {
-				const kind = thumb.getAttribute('data-thumb');
-				if (kind === 'video') {
-					showVideo();
-					return;
-				}
-				const src = thumb.getAttribute('data-src') || '';
-				const alt = thumb.getAttribute('data-alt') || '';
-				if (src) showImage(src, alt, thumb);
-			});
-		});
-	});
-</script>
-
-<style>
-	.pricing-page {
-		overflow-x: clip;
-		padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+	{
+		pricingSections.map((section) => (
+			<section class="card-panel" id={section.id}>
+				<h2>{section.heading}</h2>
+				{section.paragraphs.map((paragraph) => (
+					<p>{paragraph}</p>
+				))}
+				{section.bullets && (
+					<ul>
+						{section.bullets.map((item) => (
+							<li>{item}</li>
+						))}
+					</ul>
+				)}
+			</section>
+		))
 	}
 
-	.pricing-banner {
-		position: relative;
-		isolation: isolate;
-		border-bottom: 1px solid rgba(168, 85, 247, 0.12);
-		margin-bottom: 1.15rem;
-	}
-
-	.pricing-banner__media {
-		position: absolute;
-		inset: 0;
-		z-index: 0;
-	}
-
-	.pricing-banner__img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		object-position: center 30%;
-	}
-
-	.pricing-banner__scrim {
-		position: absolute;
-		inset: 0;
-		background:
-			linear-gradient(180deg, rgba(10, 6, 18, 0.75) 0%, rgba(10, 6, 18, 0.92) 100%),
-			linear-gradient(90deg, rgba(10, 6, 18, 0.55), rgba(10, 6, 18, 0.35) 50%, rgba(10, 6, 18, 0.55));
-	}
-
-	.pricing-banner__content {
-		position: relative;
-		z-index: 1;
-		padding-block: 1.2rem 1.05rem;
-		text-align: center;
-	}
-
-	.pricing-banner__crumbs {
-		display: inline-flex;
-		align-items: center;
-		gap: 0.4rem;
-		margin-bottom: 0.5rem;
-		color: var(--color-faint);
-		font-size: 0.75rem;
-		font-weight: 600;
-	}
-
-	.pricing-banner__crumbs a:hover {
-		color: var(--color-ink);
-	}
-
-	.pricing-banner__eyebrow {
-		margin: 0;
-		font-size: 0.68rem;
-		font-weight: 700;
-		letter-spacing: 0.12em;
-		text-transform: uppercase;
-		color: var(--color-orchid);
-	}
-
-	.pricing-banner__title {
-		margin: 0.3rem 0 0;
-		font-family: var(--font-display);
-		font-size: clamp(1.25rem, 2.8vw, 1.7rem);
-		font-weight: 800;
-		letter-spacing: -0.03em;
-	}
-
-	.pricing-banner__intro {
-		margin: 0.45rem auto 0;
-		max-width: 28rem;
-		color: #cfc3e3;
-		font-size: 0.86rem;
-		line-height: 1.5;
-	}
-
-	.pricing-layout {
-		display: grid;
-		grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.2fr);
-		gap: 1rem;
-		align-items: start;
-		width: min(100%, 960px);
-		margin-inline: auto;
-	}
-
-	.pricing-layout__prices,
-	.pricing-layout__media {
-		min-width: 0;
-	}
-
-	.pricing-layout__heading {
-		margin: 0 0 0.55rem;
-		font-family: var(--font-display);
-		font-size: 0.95rem;
-		font-weight: 800;
-	}
-
-	.price-pair {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		border: 1px solid rgba(168, 85, 247, 0.22);
-		border-radius: 0.75rem;
-		overflow: hidden;
-		background: rgba(18, 16, 26, 0.9);
-	}
-
-	.price-option {
-		display: grid;
-		gap: 0.12rem;
-		padding: 0.9rem 1rem;
-		border-right: 1px solid rgba(168, 85, 247, 0.16);
-	}
-
-	.price-option:last-child {
-		border-right: 0;
-	}
-
-	.price-option.is-featured {
-		background: rgba(124, 58, 237, 0.14);
-	}
-
-	.price-option__label {
-		font-size: 0.7rem;
-		font-weight: 700;
-		letter-spacing: 0.08em;
-		text-transform: uppercase;
-		color: var(--color-muted);
-	}
-
-	.price-option.is-featured .price-option__label {
-		color: var(--color-orchid);
-	}
-
-	.price-option__price {
-		font-family: var(--font-display);
-		font-size: 1.65rem;
-		font-weight: 800;
-		line-height: 1.1;
-		color: var(--color-ink);
-	}
-
-	.price-option__meta {
-		font-size: 0.72rem;
-		color: var(--color-faint);
-	}
-
-	.pricing-layout__buy {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		width: 100%;
-		min-height: 2.5rem;
-		margin-top: 0.75rem;
-		padding: 0.55rem 0.85rem;
-		border-radius: 0.65rem;
-		background: #7c3aed;
-		color: #fff;
-		font-size: 0.9rem;
-		font-weight: 800;
-		transition: background 0.2s ease;
-	}
-
-	.pricing-layout__buy:hover {
-		background: #8b5cf6;
-		color: #fff;
-	}
-
-	.pricing-layout__note {
-		margin: 0.7rem 0 0;
-		color: var(--color-muted);
-		font-size: 0.8rem;
-		line-height: 1.5;
-	}
-
-	.pricing-layout__features {
-		display: inline-flex;
-		margin-top: 0.5rem;
-		color: var(--color-orchid);
-		font-size: 0.8rem;
-		font-weight: 700;
-	}
-
-	.pricing-layout__features:hover {
-		color: var(--color-ink);
-	}
-
-	.pricing-layout__media {
-		display: grid;
-		gap: 0.55rem;
-	}
-
-	.media-stage {
-		position: relative;
-		overflow: hidden;
-		border-radius: 0.85rem;
-		border: 1px solid rgba(168, 85, 247, 0.18);
-		background: #0a0612;
-		box-shadow: 0 10px 22px rgba(0, 0, 0, 0.26);
-		aspect-ratio: 16 / 9;
-		max-height: 280px;
-	}
-
-	.media-stage__panel {
-		position: absolute;
-		inset: 0;
-		margin: 0;
-	}
-
-	.media-stage__video-trigger {
-		position: relative;
-		display: grid;
-		place-items: center;
-		width: 100%;
-		height: 100%;
-		padding: 0;
-		border: 0;
-		cursor: pointer;
-		background: #0a0612;
-	}
-
-	.media-stage__poster,
-	.media-stage__image img,
-	.media-stage__player {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	.media-stage__player {
-		display: block;
-		background: #000;
-		object-fit: contain;
-	}
-
-	.media-stage__veil {
-		position: absolute;
-		inset: 0;
-		background:
-			linear-gradient(180deg, rgba(10, 6, 18, 0.1) 0%, rgba(10, 6, 18, 0.5) 100%),
-			radial-gradient(circle at center, rgba(124, 58, 237, 0.16), transparent 65%);
-	}
-
-	.media-stage__play {
-		position: relative;
-		z-index: 1;
-		display: grid;
-		place-items: center;
-		width: 2.75rem;
-		height: 2.75rem;
-		border-radius: 999px;
-		border: 1px solid rgba(255, 255, 255, 0.28);
-		background: rgba(124, 58, 237, 0.94);
-		color: #fff;
-		box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
-		transition:
-			transform 0.2s ease,
-			background 0.2s ease;
-	}
-
-	.media-stage__video-trigger:hover .media-stage__play {
-		transform: scale(1.05);
-		background: #8b5cf6;
-	}
-
-	.media-stage__badge {
-		position: absolute;
-		left: 0.65rem;
-		bottom: 0.65rem;
-		z-index: 1;
-		padding: 0.28rem 0.55rem;
-		border-radius: 999px;
-		border: 1px solid rgba(192, 132, 252, 0.25);
-		background: rgba(10, 6, 18, 0.72);
-		color: #d8c9ef;
-		font-size: 0.65rem;
-		font-weight: 700;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-	}
-
-	.media-scroller {
-		overflow: hidden;
-		border-radius: 0.7rem;
-		border: 1px solid rgba(168, 85, 247, 0.14);
-		background: rgba(18, 16, 26, 0.8);
-	}
-
-	.media-scroller__track {
-		display: flex;
-		gap: 0.45rem;
-		padding: 0.45rem;
-		overflow-x: auto;
-		overscroll-behavior-x: contain;
-		scroll-snap-type: x mandatory;
-		scrollbar-width: thin;
-		-webkit-overflow-scrolling: touch;
-	}
-
-	.media-scroller__item {
-		position: relative;
-		flex: 0 0 5.75rem;
-		aspect-ratio: 16 / 10;
-		margin: 0;
-		padding: 0;
-		overflow: hidden;
-		border-radius: 0.5rem;
-		border: 2px solid transparent;
-		background: #12081f;
-		cursor: pointer;
-		scroll-snap-align: start;
-		transition: border-color 0.15s ease;
-	}
-
-	.media-scroller__item img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		display: block;
-	}
-
-	.media-scroller__item:hover {
-		border-color: rgba(192, 132, 252, 0.35);
-	}
-
-	.media-scroller__item.is-active {
-		border-color: var(--color-orchid);
-		box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.25);
-	}
-
-	.media-scroller__play {
-		position: absolute;
-		inset: 0;
-		display: grid;
-		place-items: center;
-		background: rgba(10, 6, 18, 0.35);
-		color: #fff;
-	}
-
-	.pricing-extra {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.75rem;
-		width: min(100%, 960px);
-		margin: 1rem auto 0;
-	}
-
-	.pricing-extra__card {
-		padding: 0.9rem 1rem;
-		border-radius: 0.8rem;
-		border: 1px solid rgba(168, 85, 247, 0.14);
-		background: rgba(22, 18, 32, 0.9);
-	}
-
-	.pricing-extra__card h2 {
-		margin: 0 0 0.4rem;
-		font-family: var(--font-display);
-		font-size: 0.95rem;
-		font-weight: 800;
-	}
-
-	.pricing-extra__card p,
-	.pricing-extra__card li {
-		margin: 0;
-		color: var(--color-muted);
-		font-size: 0.84rem;
-		line-height: 1.5;
-	}
-
-	.pricing-extra__card ul {
-		margin: 0;
-		padding: 0;
-		list-style: none;
-		display: grid;
-		gap: 0.35rem;
-	}
-
-	.pricing-extra__card a {
-		color: var(--color-orchid);
-		font-weight: 600;
-	}
-
-	.pricing-extra__card a:hover {
-		color: var(--color-ink);
-	}
-
-	@media (max-width: 900px) {
-		.pricing-layout {
-			grid-template-columns: 1fr;
-			width: min(100%, 560px);
+	<section class="card-panel">
+		<h2>Pricing FAQ</h2>
+		{
+			pricingFaqs.map((item) => (
+				<>
+					<h3>{item.question}</h3>
+					<p>{item.answer}</p>
+				</>
+			))
 		}
+	</section>
 
-		.pricing-extra {
-			width: min(100%, 560px);
-		}
+	<section class="card-panel">
+		<h2>Before you buy</h2>
+		<ul>
+			<li><a href="/refund-policy/">Read the refund policy</a></li>
+			<li><a href="/terms/">Review the terms</a></li>
+			<li><a href="/updates/">Check the latest updates</a></li>
+			<li><a href="/blog/the-isle-cheat-price-guide/">Read the cheat price guide</a></li>
+			<li><a href="/blog/the-isle-monthly-vs-lifetime/">Compare monthly vs lifetime</a></li>
+		</ul>
+	</section>
 
-		.media-stage {
-			max-height: 240px;
-		}
-	}
-
-	@media (max-width: 640px) {
-		.price-pair {
-			grid-template-columns: 1fr;
-		}
-
-		.price-option {
-			border-right: 0;
-			border-bottom: 1px solid rgba(168, 85, 247, 0.16);
-		}
-
-		.price-option:last-child {
-			border-bottom: 0;
-		}
-
-		.pricing-extra {
-			grid-template-columns: 1fr;
-		}
-
-		.media-scroller__item {
-			flex-basis: 5rem;
-		}
-	}
-</style>
+	<InternalLinksPanel />
+</PageLayout>
