@@ -33,7 +33,7 @@ const relatedPosts = blogIdeas
 const toc = [
 	{ id: 'overview', label: 'Overview' },
 	{ id: 'key-takeaways', label: 'Key takeaways' },
-	{ id: 'faq', label: 'Common questions' },
+	{ id: 'faq', label: 'FAQ' },
 	{ id: 'related-articles', label: 'Related articles' },
 ];
 
@@ -134,7 +134,7 @@ const faqSchema = buildFaqSchema(postFaqs);
 	</section>
 
 	<section class="card-panel" id="faq">
-		<h2>Common questions</h2>
+		<h2>FAQ</h2>
 		{postFaqs.map((item) => (
 			<>
 				<h3>{item.question}</h3>

@@ -90,7 +90,7 @@ const en: HomeContent = {
 		'Delivery is digital after payment confirmation. Timing can vary by payment method and order review. After purchase, watch the Updates page for maintenance notes tied to The Isle patches, and contact support if license delivery or setup needs clarification. Platforms supported today: Windows PC. Market availability: Worldwide.',
 		'This site is designed for clear product research rather than vague claims. Each internal page has a focused job: ESP explains visibility hacks, Cheats explains movement and combat options, Features summarizes the full package, Pricing compares plan lengths, FAQ answers common purchase questions, and Support is the contact path when something needs a human reply.',
 	],
-	faqHeading: 'Common questions',
+	faqHeading: 'FAQ',
 	faqs: [
 		{
 			question: 'What is included with The Isle Cheats?',

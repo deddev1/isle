@@ -207,7 +207,7 @@ export const footerExplore = [
 	{ label: 'The Isle Blog', href: '/blog/' },
 	{ label: 'Plans and pricing', href: '/pricing/' },
 	{ label: 'Customer support hub', href: '/support/' },
-	{ label: 'Common questions hub', href: '/faq/' },
+	{ label: 'FAQ hub', href: '/faq/' },
 ] as const;
 
 export const homeFaqs = [
