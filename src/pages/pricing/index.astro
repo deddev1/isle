@@ -59,86 +59,129 @@ const webPageSchema = buildWebPageSchema({
 				<p class="pricing-banner__eyebrow">{siteConfig.name}</p>
 				<h1 class="pricing-banner__title">The Isle Cheats Pricing</h1>
 				<p class="pricing-banner__intro">
-					Packages are sold in USD and include The Isle Cheats Cloud-DMA, ESP, and Cheats product line.
+					Monthly or lifetime Cloud-DMA — ESP, combat hacks, and utilities for Windows PC.
 				</p>
 			</div>
 		</section>
 
-		<section class="shell pricing-layout" aria-label="Pricing and product preview">
+		<section class="shell pricing-layout" aria-label="Pricing and product preview" data-pricing-media>
 			<aside class="pricing-layout__prices">
 				<h2 class="pricing-layout__heading">Plans</h2>
 				<div class="price-pair" role="list">
 					{
 						plans.map((plan) => (
-							<a
+							<div
 								class:list={['price-option', { 'is-featured': plan.id === 'lifetime' }]}
-								href={siteConfig.checkoutUrl}
 								role="listitem"
 							>
 								<span class="price-option__label">{plan.label}</span>
 								<span class="price-option__price">${plan.price}</span>
 								<span class="price-option__meta">{productInfo.currency}</span>
-							</a>
+							</div>
 						))
 					}
 				</div>
 				<a class="pricing-layout__buy" href={siteConfig.checkoutUrl}>Get Access</a>
 				<p class="pricing-layout__note">
-					Same Cloud-DMA package on both plans — ESP, combat hacks, and utilities.
+					Same package on both plans — Visuals ESP, World ESP, combat hacks, and utilities.
 				</p>
 				<a class="pricing-layout__features" href="/features/">See features</a>
 			</aside>
 
 			<div class="pricing-layout__media">
-				<article class="pricing-video" data-pricing-video>
-					<button
-						type="button"
-						class="pricing-video__trigger"
-						data-video-trigger
-						aria-label={`Play ${homeVideo.title}`}
-					>
+				<div class="media-stage">
+					{/* Default: video */}
+					<div class="media-stage__panel is-active" data-stage="video">
+						<button
+							type="button"
+							class="media-stage__video-trigger"
+							data-video-trigger
+							aria-label={`Play ${homeVideo.title}`}
+						>
+							<img
+								src={homeVideo.thumbnail}
+								alt={homeVideo.thumbnailAlt}
+								width="1280"
+								height="720"
+								class="media-stage__poster"
+								loading="eager"
+								decoding="async"
+							/>
+							<span class="media-stage__veil" aria-hidden="true"></span>
+							<span class="media-stage__play" aria-hidden="true">
+								<svg viewBox="0 0 24 24" fill="currentColor" width="26" height="26">
+									<path d="M8 5.14v13.72L19 12 8 5.14z"></path>
+								</svg>
+							</span>
+							<span class="media-stage__badge">Watch demo</span>
+						</button>
+						<video
+							class="media-stage__player"
+							data-video-player
+							controls
+							playsinline
+							preload="none"
+							aria-label={homeVideo.title}
+							hidden
+						></video>
+					</div>
+
+					{/* Image view (swapped in when a thumb is clicked) */}
+					<figure class="media-stage__panel media-stage__image" data-stage="image" hidden>
 						<img
-							src={homeVideo.thumbnail}
-							alt={homeVideo.thumbnailAlt}
+							src={images[0].src}
+							alt={images[0].alt}
 							width="1280"
 							height="720"
-							class="pricing-video__poster"
-							loading="lazy"
+							data-stage-image
 							decoding="async"
 						/>
-						<span class="pricing-video__veil" aria-hidden="true"></span>
-						<span class="pricing-video__play" aria-hidden="true">
-							<svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
-								<path d="M8 5.14v13.72L19 12 8 5.14z"></path>
-							</svg>
-						</span>
-						<span class="pricing-video__label">Watch demo</span>
-					</button>
-					<video
-						class="pricing-video__player"
-						data-video-player
-						controls
-						playsinline
-						preload="none"
-						aria-label={homeVideo.title}
-						hidden
-					></video>
-				</article>
+					</figure>
+				</div>
 
-				<div class="pricing-scroller" aria-label="Product preview images">
-					<div class="pricing-scroller__track">
+				<div class="media-scroller" aria-label="Preview gallery">
+					<div class="media-scroller__track">
+						<button
+							type="button"
+							class="media-scroller__item is-active"
+							data-thumb="video"
+							aria-label="Show demo video"
+							aria-pressed="true"
+						>
+							<img
+								src={homeVideo.thumbnail}
+								alt=""
+								width="320"
+								height="180"
+								loading="lazy"
+								decoding="async"
+							/>
+							<span class="media-scroller__play" aria-hidden="true">
+								<svg viewBox="0 0 24 24" fill="currentColor" width="14" height="14">
+									<path d="M8 5.14v13.72L19 12 8 5.14z"></path>
+								</svg>
+							</span>
+						</button>
 						{
-							images.map((image) => (
-								<figure class="pricing-scroller__item">
+							images.map((image, index) => (
+								<button
+									type="button"
+									class="media-scroller__item"
+									data-thumb="image"
+									data-src={image.src}
+									data-alt={image.alt}
+									aria-label={`Show preview ${index + 1}`}
+									aria-pressed="false"
+								>
 									<img
 										src={image.src}
-										alt={image.alt}
-										width="480"
-										height="300"
+										alt=""
+										width="320"
+										height="180"
 										loading="lazy"
 										decoding="async"
 									/>
-								</figure>
+								</button>
 							))
 						}
 					</div>
@@ -150,19 +193,18 @@ const webPageSchema = buildWebPageSchema({
 			<article class="pricing-extra__card">
 				<h2>What each package includes</h2>
 				<p>
-					Each package includes access to The Isle Cheats feature set described on
-					<a href="/features/">Features</a>, including Cloud-DMA, Visuals ESP, World ESP, and Cheats. Delivery
-					method: {productInfo.delivery}.
+					Cloud-DMA with Visuals ESP, World ESP, combat hacks, and utility tools. Delivery:
+					{productInfo.delivery}. See the full list on <a href="/features/">Features</a>.
 				</p>
 			</article>
 			<article class="pricing-extra__card">
 				<h2>Before you buy</h2>
 				<ul>
-					<li><a href="/refund-policy/">Read the refund policy</a></li>
-					<li><a href="/terms/">Review the terms</a></li>
-					<li><a href="/updates/">Check the latest updates</a></li>
+					<li><a href="/refund-policy/">Refund policy</a></li>
+					<li><a href="/terms/">Terms of use</a></li>
+					<li><a href="/updates/">Latest updates</a></li>
 					<li>
-						<a href={`mailto:${siteConfig.supportEmail}`}>Email support</a> if you need order help
+						<a href={`mailto:${siteConfig.supportEmail}`}>Email support</a>
 					</li>
 				</ul>
 			</article>
@@ -172,24 +214,88 @@ const webPageSchema = buildWebPageSchema({
 </Layout>
 
 <script define:vars={{ videoSrc: homeVideo.src }}>
-	document.querySelectorAll('[data-pricing-video]').forEach((root) => {
+	document.querySelectorAll('[data-pricing-media]').forEach((root) => {
+		const videoPanel = root.querySelector('[data-stage="video"]');
+		const imagePanel = root.querySelector('[data-stage="image"]');
+		const stageImage = root.querySelector('[data-stage-image]');
 		const trigger = root.querySelector('[data-video-trigger]');
 		const player = root.querySelector('[data-video-player]');
+		const thumbs = Array.from(root.querySelectorAll('[data-thumb]'));
+
+		const pauseVideo = () => {
+			if (player instanceof HTMLVideoElement && !player.hidden) {
+				player.pause();
+			}
+		};
+
+		const showVideo = () => {
+			if (!(videoPanel instanceof HTMLElement) || !(imagePanel instanceof HTMLElement)) return;
+			imagePanel.hidden = true;
+			videoPanel.hidden = false;
+			videoPanel.classList.add('is-active');
+			thumbs.forEach((thumb) => {
+				const isVideo = thumb.getAttribute('data-thumb') === 'video';
+				thumb.classList.toggle('is-active', isVideo);
+				thumb.setAttribute('aria-pressed', String(isVideo));
+			});
+		};
+
+		const showImage = (src: string, alt: string, activeThumb: Element) => {
+			if (
+				!(videoPanel instanceof HTMLElement) ||
+				!(imagePanel instanceof HTMLElement) ||
+				!(stageImage instanceof HTMLImageElement)
+			) {
+				return;
+			}
+
+			pauseVideo();
+			if (player instanceof HTMLVideoElement) {
+				player.hidden = true;
+			}
+			if (trigger instanceof HTMLElement) {
+				trigger.hidden = false;
+			}
+			videoPanel.classList.remove('is-playing');
+			videoPanel.hidden = true;
+			videoPanel.classList.remove('is-active');
+
+			stageImage.src = src;
+			stageImage.alt = alt;
+			imagePanel.hidden = false;
+
+			thumbs.forEach((thumb) => {
+				const active = thumb === activeThumb;
+				thumb.classList.toggle('is-active', active);
+				thumb.setAttribute('aria-pressed', String(active));
+			});
+		};
 
 		trigger?.addEventListener('click', () => {
 			if (!(player instanceof HTMLVideoElement) || !(trigger instanceof HTMLElement)) return;
-
 			player.src = videoSrc;
 			player.hidden = false;
 			trigger.hidden = true;
-			root.classList.add('is-playing');
-
+			videoPanel?.classList.add('is-playing');
 			const playPromise = player.play();
 			if (playPromise) {
 				playPromise.catch(() => {
 					player.controls = true;
 				});
 			}
+		});
+
+		thumbs.forEach((thumb) => {
+			thumb.addEventListener('click', () => {
+				const kind = thumb.getAttribute('data-thumb');
+				if (kind === 'video') {
+					showVideo();
+					return;
+				}
+				const src = thumb.getAttribute('data-src') || '';
+				const alt = thumb.getAttribute('data-alt') || '';
+				if (src) showImage(src, alt, thumb);
+			});
 		});
 	});
 </script>
@@ -204,7 +310,7 @@ const webPageSchema = buildWebPageSchema({
 		position: relative;
 		isolation: isolate;
 		border-bottom: 1px solid rgba(168, 85, 247, 0.12);
-		margin-bottom: 1.1rem;
+		margin-bottom: 1.15rem;
 	}
 
 	.pricing-banner__media {
@@ -224,14 +330,14 @@ const webPageSchema = buildWebPageSchema({
 		position: absolute;
 		inset: 0;
 		background:
-			linear-gradient(180deg, rgba(10, 6, 18, 0.72) 0%, rgba(10, 6, 18, 0.9) 100%),
+			linear-gradient(180deg, rgba(10, 6, 18, 0.75) 0%, rgba(10, 6, 18, 0.92) 100%),
 			linear-gradient(90deg, rgba(10, 6, 18, 0.55), rgba(10, 6, 18, 0.35) 50%, rgba(10, 6, 18, 0.55));
 	}
 
 	.pricing-banner__content {
 		position: relative;
 		z-index: 1;
-		padding-block: 1.25rem 1.1rem;
+		padding-block: 1.2rem 1.05rem;
 		text-align: center;
 	}
 
@@ -239,7 +345,7 @@ const webPageSchema = buildWebPageSchema({
 		display: inline-flex;
 		align-items: center;
 		gap: 0.4rem;
-		margin-bottom: 0.55rem;
+		margin-bottom: 0.5rem;
 		color: var(--color-faint);
 		font-size: 0.75rem;
 		font-weight: 600;
@@ -276,10 +382,10 @@ const webPageSchema = buildWebPageSchema({
 
 	.pricing-layout {
 		display: grid;
-		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-		gap: 0.85rem;
+		grid-template-columns: minmax(240px, 0.85fr) minmax(0, 1.2fr);
+		gap: 1rem;
 		align-items: start;
-		width: min(100%, 920px);
+		width: min(100%, 960px);
 		margin-inline: auto;
 	}
 
@@ -298,31 +404,21 @@ const webPageSchema = buildWebPageSchema({
 	.price-pair {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0;
-		border: 1px solid rgba(168, 85, 247, 0.2);
+		border: 1px solid rgba(168, 85, 247, 0.22);
 		border-radius: 0.75rem;
 		overflow: hidden;
-		background: rgba(18, 16, 26, 0.85);
+		background: rgba(18, 16, 26, 0.9);
 	}
 
 	.price-option {
 		display: grid;
-		gap: 0.15rem;
-		justify-items: start;
-		padding: 0.85rem 0.95rem;
-		color: var(--color-ink);
-		text-decoration: none;
+		gap: 0.12rem;
+		padding: 0.9rem 1rem;
 		border-right: 1px solid rgba(168, 85, 247, 0.16);
-		transition: background 0.15s ease;
 	}
 
 	.price-option:last-child {
 		border-right: 0;
-	}
-
-	.price-option:hover {
-		background: rgba(124, 58, 237, 0.12);
-		color: var(--color-ink);
 	}
 
 	.price-option.is-featured {
@@ -330,9 +426,9 @@ const webPageSchema = buildWebPageSchema({
 	}
 
 	.price-option__label {
-		font-size: 0.72rem;
+		font-size: 0.7rem;
 		font-weight: 700;
-		letter-spacing: 0.06em;
+		letter-spacing: 0.08em;
 		text-transform: uppercase;
 		color: var(--color-muted);
 	}
@@ -343,9 +439,10 @@ const webPageSchema = buildWebPageSchema({
 
 	.price-option__price {
 		font-family: var(--font-display);
-		font-size: 1.55rem;
+		font-size: 1.65rem;
 		font-weight: 800;
 		line-height: 1.1;
+		color: var(--color-ink);
 	}
 
 	.price-option__meta {
@@ -358,15 +455,14 @@ const webPageSchema = buildWebPageSchema({
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		min-height: 2.4rem;
-		margin-top: 0.7rem;
+		min-height: 2.5rem;
+		margin-top: 0.75rem;
 		padding: 0.55rem 0.85rem;
 		border-radius: 0.65rem;
 		background: #7c3aed;
 		color: #fff;
-		font-size: 0.88rem;
+		font-size: 0.9rem;
 		font-weight: 800;
-		letter-spacing: 0.03em;
 		transition: background 0.2s ease;
 	}
 
@@ -384,7 +480,7 @@ const webPageSchema = buildWebPageSchema({
 
 	.pricing-layout__features {
 		display: inline-flex;
-		margin-top: 0.55rem;
+		margin-top: 0.5rem;
 		color: var(--color-orchid);
 		font-size: 0.8rem;
 		font-weight: 700;
@@ -396,82 +492,88 @@ const webPageSchema = buildWebPageSchema({
 
 	.pricing-layout__media {
 		display: grid;
-		gap: 0.5rem;
+		gap: 0.55rem;
 	}
 
-	.pricing-video {
+	.media-stage {
+		position: relative;
 		overflow: hidden;
-		border-radius: 0.8rem;
+		border-radius: 0.85rem;
 		border: 1px solid rgba(168, 85, 247, 0.18);
 		background: #0a0612;
-		box-shadow: 0 8px 18px rgba(0, 0, 0, 0.24);
-		max-height: 260px;
+		box-shadow: 0 10px 22px rgba(0, 0, 0, 0.26);
+		aspect-ratio: 16 / 9;
+		max-height: 280px;
 	}
 
-	.pricing-video__trigger {
+	.media-stage__panel {
+		position: absolute;
+		inset: 0;
+		margin: 0;
+	}
+
+	.media-stage__video-trigger {
 		position: relative;
 		display: grid;
 		place-items: center;
 		width: 100%;
 		height: 100%;
-		min-height: 200px;
-		max-height: 260px;
-		aspect-ratio: 16 / 9;
 		padding: 0;
 		border: 0;
 		cursor: pointer;
 		background: #0a0612;
 	}
 
-	.pricing-video__poster {
-		position: absolute;
-		inset: 0;
+	.media-stage__poster,
+	.media-stage__image img,
+	.media-stage__player {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
 	}
 
-	.pricing-video__veil {
+	.media-stage__player {
+		display: block;
+		background: #000;
+		object-fit: contain;
+	}
+
+	.media-stage__veil {
 		position: absolute;
 		inset: 0;
 		background:
-			linear-gradient(180deg, rgba(10, 6, 18, 0.12) 0%, rgba(10, 6, 18, 0.55) 100%),
-			radial-gradient(circle at center, rgba(124, 58, 237, 0.18), transparent 65%);
+			linear-gradient(180deg, rgba(10, 6, 18, 0.1) 0%, rgba(10, 6, 18, 0.5) 100%),
+			radial-gradient(circle at center, rgba(124, 58, 237, 0.16), transparent 65%);
 	}
 
-	.pricing-video__play {
+	.media-stage__play {
 		position: relative;
 		z-index: 1;
 		display: grid;
 		place-items: center;
-		width: 2.6rem;
-		height: 2.6rem;
+		width: 2.75rem;
+		height: 2.75rem;
 		border-radius: 999px;
 		border: 1px solid rgba(255, 255, 255, 0.28);
-		background: rgba(124, 58, 237, 0.92);
+		background: rgba(124, 58, 237, 0.94);
 		color: #fff;
-		box-shadow: 0 8px 16px rgba(0, 0, 0, 0.35);
+		box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
 		transition:
 			transform 0.2s ease,
 			background 0.2s ease;
 	}
 
-	.pricing-video__play svg {
-		width: 1.15rem;
-		height: 1.15rem;
-	}
-
-	.pricing-video__trigger:hover .pricing-video__play {
+	.media-stage__video-trigger:hover .media-stage__play {
 		transform: scale(1.05);
 		background: #8b5cf6;
 	}
 
-	.pricing-video__label {
+	.media-stage__badge {
 		position: absolute;
-		left: 0.6rem;
-		bottom: 0.6rem;
+		left: 0.65rem;
+		bottom: 0.65rem;
 		z-index: 1;
-		padding: 0.25rem 0.5rem;
+		padding: 0.28rem 0.55rem;
 		border-radius: 999px;
 		border: 1px solid rgba(192, 132, 252, 0.25);
 		background: rgba(10, 6, 18, 0.72);
@@ -482,27 +584,14 @@ const webPageSchema = buildWebPageSchema({
 		text-transform: uppercase;
 	}
 
-	.pricing-video__player {
-		display: block;
-		width: 100%;
-		max-height: 260px;
-		aspect-ratio: 16 / 9;
-		background: #000;
-		object-fit: contain;
-	}
-
-	.pricing-video.is-playing .pricing-video__player {
-		display: block;
-	}
-
-	.pricing-scroller {
+	.media-scroller {
 		overflow: hidden;
 		border-radius: 0.7rem;
 		border: 1px solid rgba(168, 85, 247, 0.14);
-		background: rgba(18, 16, 26, 0.75);
+		background: rgba(18, 16, 26, 0.8);
 	}
 
-	.pricing-scroller__track {
+	.media-scroller__track {
 		display: flex;
 		gap: 0.45rem;
 		padding: 0.45rem;
@@ -513,28 +602,51 @@ const webPageSchema = buildWebPageSchema({
 		-webkit-overflow-scrolling: touch;
 	}
 
-	.pricing-scroller__item {
-		flex: 0 0 min(42%, 8.5rem);
+	.media-scroller__item {
+		position: relative;
+		flex: 0 0 5.75rem;
+		aspect-ratio: 16 / 10;
 		margin: 0;
+		padding: 0;
 		overflow: hidden;
-		border-radius: 0.55rem;
-		border: 1px solid rgba(168, 85, 247, 0.14);
+		border-radius: 0.5rem;
+		border: 2px solid transparent;
 		background: #12081f;
-		aspect-ratio: 16 / 9;
+		cursor: pointer;
 		scroll-snap-align: start;
+		transition: border-color 0.15s ease;
 	}
 
-	.pricing-scroller__item img {
+	.media-scroller__item img {
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		display: block;
+	}
+
+	.media-scroller__item:hover {
+		border-color: rgba(192, 132, 252, 0.35);
+	}
+
+	.media-scroller__item.is-active {
+		border-color: var(--color-orchid);
+		box-shadow: 0 0 0 1px rgba(168, 85, 247, 0.25);
+	}
+
+	.media-scroller__play {
+		position: absolute;
+		inset: 0;
+		display: grid;
+		place-items: center;
+		background: rgba(10, 6, 18, 0.35);
+		color: #fff;
 	}
 
 	.pricing-extra {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
 		gap: 0.75rem;
-		width: min(100%, 920px);
+		width: min(100%, 960px);
 		margin: 1rem auto 0;
 	}
 
@@ -546,7 +658,7 @@ const webPageSchema = buildWebPageSchema({
 	}
 
 	.pricing-extra__card h2 {
-		margin: 0 0 0.45rem;
+		margin: 0 0 0.4rem;
 		font-family: var(--font-display);
 		font-size: 0.95rem;
 		font-weight: 800;
@@ -587,10 +699,8 @@ const webPageSchema = buildWebPageSchema({
 			width: min(100%, 560px);
 		}
 
-		.pricing-video,
-		.pricing-video__trigger,
-		.pricing-video__player {
-			max-height: 220px;
+		.media-stage {
+			max-height: 240px;
 		}
 	}
 
@@ -612,8 +722,8 @@ const webPageSchema = buildWebPageSchema({
 			grid-template-columns: 1fr;
 		}
 
-		.pricing-scroller__item {
-			flex-basis: min(55%, 9rem);
+		.media-scroller__item {
+			flex-basis: 5rem;
 		}
 	}
 </style>
