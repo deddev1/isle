@@ -1,17 +1,6 @@
 ---
-import type { LocaleCode } from '../data/i18n';
-import { getHomeContent } from '../data/i18n/home-content';
-import { siteConfig } from '../data/site';
 import { theIsleImages } from '../data/theisle';
-
-interface Props {
-	locale?: LocaleCode;
-}
-
-const { locale = 'en' } = Astro.props;
-const content = getHomeContent(locale);
-const buyHref = siteConfig.checkoutUrl;
-const featuresHref = '/features/';
+import { homeSeo, siteConfig } from '../data/site';
 ---
 
 <section class="hero" id="home" data-nav-section="home" aria-label="Hero">
@@ -31,13 +20,13 @@ const featuresHref = '/features/';
 
 	<div class="hero__inner">
 		<div class="hero__copy">
-			<p class="hero__eyebrow">{content.heroEyebrow}</p>
-			<h1 class="hero__title">{content.heroTitle}</h1>
-			<p class="hero__subtitle text-gradient">{content.heroSubtitle}</p>
-			<p class="hero__description">{content.heroDescription}</p>
+			<p class="hero__eyebrow">{siteConfig.name}</p>
+			<h1 class="hero__title">{homeSeo.heroTitle}</h1>
+			<p class="hero__subtitle text-gradient">{homeSeo.heroSubtitle}</p>
+			<p class="hero__desc">{homeSeo.heroDescription}</p>
 			<div class="hero__cta">
-				<a href={buyHref} class="hero__btn hero__btn--primary bg-brand">{content.heroCtaPrimary}</a>
-				<a href={featuresHref} class="hero__btn hero__btn--ghost">{content.heroCtaSecondary}</a>
+				<a href="/pricing/" class="hero__btn hero__btn--primary bg-brand">Get Access</a>
+				<a href="/features/" class="hero__btn hero__btn--ghost">Explore features</a>
 			</div>
 		</div>
 	</div>
@@ -110,10 +99,9 @@ const featuresHref = '/features/';
 
 	.hero__eyebrow {
 		margin: 0 0 0.85rem;
-		font-family: var(--font-display);
 		font-size: 0.78rem;
-		font-weight: 600;
-		letter-spacing: 0.16em;
+		font-weight: 700;
+		letter-spacing: 0.14em;
 		text-transform: uppercase;
 		color: var(--color-orchid);
 	}
@@ -122,25 +110,21 @@ const featuresHref = '/features/';
 		margin: 0;
 		font-family: var(--font-display);
 		font-size: clamp(1.85rem, 4.6vw, 3.75rem);
-		font-weight: 700;
-		line-height: 1.12;
-		letter-spacing: 0.04em;
-		text-transform: uppercase;
+		font-weight: 800;
+		line-height: 1.15;
+		letter-spacing: -0.03em;
 		text-shadow: 0 8px 32px rgba(10, 6, 18, 0.65);
-		text-wrap: balance;
-		overflow-wrap: break-word;
-		word-break: normal;
+		white-space: nowrap;
 		hyphens: none;
 	}
 
 	.hero__subtitle {
 		margin: 0.35em 0 0;
 		font-family: var(--font-display);
-		font-size: clamp(1.2rem, 2.8vw, 2rem);
-		font-weight: 600;
-		line-height: 1.25;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
+		font-size: clamp(1.35rem, 3.2vw, 2.35rem);
+		font-weight: 800;
+		line-height: 1.2;
+		letter-spacing: -0.02em;
 		background-size: 200% 100%;
 		animation:
 			rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both,
@@ -148,16 +132,13 @@ const featuresHref = '/features/';
 		text-wrap: balance;
 	}
 
-	.hero__description {
-		margin: 1rem 0 0;
-		max-width: 38rem;
-		font-family: var(--font-sans);
-		font-size: clamp(0.98rem, 1.8vw, 1.1rem);
-		font-weight: 400;
-		line-height: 1.7;
-		letter-spacing: 0.01em;
-		color: rgba(245, 243, 255, 0.88);
-		text-wrap: pretty;
+	.hero__desc {
+		margin: 0.75rem 0 0;
+		max-width: 28rem;
+		color: var(--color-muted);
+		font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+		font-weight: 500;
+		line-height: 1.55;
 		animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
 	}
 
@@ -173,17 +154,11 @@ const featuresHref = '/features/';
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		box-sizing: border-box;
-		min-height: 2.65rem;
-		min-width: 9.75rem;
-		padding: 0.62rem 1rem;
+		padding: 0.85rem 1.25rem;
 		border-radius: 0.8rem;
-		border: 1px solid transparent;
-		font-size: 0.9rem;
+		font-size: 0.95rem;
 		font-weight: 700;
-		line-height: 1.2;
 		text-align: center;
-		white-space: nowrap;
 		transition:
 			transform 0.2s ease,
 			filter 0.2s ease,
@@ -193,7 +168,7 @@ const featuresHref = '/features/';
 
 	.hero__btn--primary {
 		color: white;
-		box-shadow: 0 4px 14px rgba(76, 29, 149, 0.22);
+		box-shadow: 0 8px 18px rgba(0, 0, 0, 0.3);
 	}
 
 	.hero__btn--primary:hover {
@@ -258,7 +233,7 @@ const featuresHref = '/features/';
 		.hero__splash,
 		.hero__copy,
 		.hero__subtitle,
-		.hero__description,
+		.hero__desc,
 		.hero__cta,
 		.hero__accent {
 			animation: none;
@@ -299,7 +274,7 @@ const featuresHref = '/features/';
 		}
 
 		.hero__title {
-			font-size: clamp(1.5rem, 7.2vw, 2.1rem);
+			font-size: clamp(1.35rem, 7vw, 2.1rem);
 			line-height: 1.2;
 			letter-spacing: -0.025em;
 		}
@@ -310,10 +285,10 @@ const featuresHref = '/features/';
 			line-height: 1.22;
 		}
 
-		.hero__description {
-			margin-top: 0.85rem;
-			font-size: 0.92rem;
-			line-height: 1.6;
+		.hero__desc {
+			margin-top: 0.65rem;
+			font-size: 0.95rem;
+			max-width: none;
 		}
 
 		.hero__cta {
@@ -326,21 +301,20 @@ const featuresHref = '/features/';
 
 		.hero__btn {
 			width: 100%;
-			min-width: 0;
-			min-height: 2.75rem;
-			padding: 0.7rem 1rem;
-			font-size: 0.9rem;
+			min-height: 2.85rem;
+			padding: 0.8rem 1rem;
+			font-size: 0.92rem;
 		}
 	}
 
 	@media (max-width: 380px) {
 		.hero__title {
-			font-size: 1.4rem;
+			font-size: 1.25rem;
 			line-height: 1.22;
 		}
 
 		.hero__subtitle {
-			font-size: 1.1rem;
+			font-size: 1.05rem;
 		}
 	}
 </style>

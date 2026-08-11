@@ -19,8 +19,7 @@ export const homeSeo = {
 	heroEyebrow: 'Windows PC · Cloud-DMA',
 	heroTitle: 'The Isle Cheats',
 	heroSubtitle: 'ESP, World ESP & Dino Radar',
-	heroDescription:
-		'Compare Visuals ESP, World ESP, and combat hacks in one Cloud-DMA package. Review monthly and lifetime plans, feature lists, and setup guides before you buy.',
+	heroDescription: 'Cheats available — ESP, Aimbot & Wallhack for The Isle.',
 	featuresHeading: 'Compare Packages',
 	whyUsHeading: 'Why Choose Cloud-DMA for The Isle?',
 	whyUsIntro:
@@ -184,10 +183,9 @@ export const featureCategories = [
 
 export const mainNav = [
 	{ label: 'Home', href: '/#home', section: 'home' },
-	{ label: 'Why Us', href: '/#why-us', section: 'why-us' },
 	{ label: 'Features', href: '/#features', section: 'features' },
-	{ label: 'Demo', href: '/#demo', section: 'demo' },
-	{ label: 'FAQ', href: '/faq/', section: 'faq' },
+	{ label: 'Pricing', href: '/pricing/', section: 'pricing' },
+	{ label: 'FAQ', href: '/#faq', section: 'faq' },
 	{ label: 'Blog', href: '/blog/', section: 'blog' },
 ] as const;
 
