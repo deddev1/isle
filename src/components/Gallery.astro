@@ -32,47 +32,45 @@ const cheatHighlights = [
 	</header>
 
 	<div class="gallery__layout">
-		<div class="gallery__content">
-			<div class="gallery__summary">
-				<p class="gallery__lead">
-					Cloud-DMA combines Visuals ESP, World ESP, and combat hacks in one configurable package.
-				</p>
+		<div class="gallery__summary">
+			<p class="gallery__lead">
+				Cloud-DMA combines Visuals ESP, World ESP, and combat hacks in one configurable package.
+			</p>
 
-				<div class="gallery__highlights">
-					{
-						cheatHighlights.map((item) => (
-							<article class="gallery__info-card">
-								<h3>{item.title}</h3>
-								<p>{item.copy}</p>
-							</article>
-						))
-					}
-				</div>
+			<div class="gallery__highlights">
+				{
+					cheatHighlights.map((item) => (
+						<article class="gallery__info-card">
+							<h3>{item.title}</h3>
+							<p>{item.copy}</p>
+						</article>
+					))
+				}
 			</div>
+		</div>
 
-			<div class="gallery__media">
-				<figure class="gallery__featured media-frame">
-					<img
-						src={featured.src}
-						alt={featured.alt}
-						width="1400"
-						height="788"
-						loading="lazy"
-						decoding="async"
-					/>
-					<figcaption>{featured.alt}</figcaption>
-				</figure>
+		<div class="gallery__media">
+			<figure class="gallery__featured media-frame">
+				<img
+					src={featured.src}
+					alt={featured.alt}
+					width="1400"
+					height="788"
+					loading="lazy"
+					decoding="async"
+				/>
+				<figcaption>{featured.alt}</figcaption>
+			</figure>
 
-				<div class="gallery__grid">
-					{
-						tiles.map((image) => (
-							<figure class="gallery__item media-frame">
-								<img src={image.src} alt={image.alt} width="1280" height="720" loading="lazy" decoding="async" />
-								<figcaption>{image.alt}</figcaption>
-							</figure>
-						))
-					}
-				</div>
+			<div class="gallery__grid">
+				{
+					tiles.map((image) => (
+						<figure class="gallery__item media-frame">
+							<img src={image.src} alt={image.alt} width="1280" height="720" loading="lazy" decoding="async" />
+							<figcaption>{image.alt}</figcaption>
+						</figure>
+					))
+				}
 			</div>
 		</div>
 	</div>
@@ -80,16 +78,18 @@ const cheatHighlights = [
 
 <style>
 	.gallery {
+		--gallery-gap: 0.55rem;
+		--gallery-pad: 0.7rem;
 		width: 100%;
 	}
 
 	.gallery__head {
-		margin-bottom: 1.25rem;
+		margin-bottom: 0.75rem;
 	}
 
 	.gallery__eyebrow {
-		margin: 0 0 0.4rem;
-		font-size: 0.75rem;
+		margin: 0 0 0.25rem;
+		font-size: 0.7rem;
 		font-weight: 700;
 		letter-spacing: 0.14em;
 		text-transform: uppercase;
@@ -99,99 +99,110 @@ const cheatHighlights = [
 	.gallery__title {
 		margin: 0;
 		font-family: var(--font-display);
-		font-size: clamp(1.6rem, 3vw, 2.2rem);
+		font-size: clamp(1.35rem, 2.4vw, 1.85rem);
 		font-weight: 800;
 		letter-spacing: -0.03em;
+		line-height: 1.15;
 	}
 
 	.gallery__sub {
-		margin: 0.55rem 0 0;
+		margin: 0.35rem 0 0;
 		color: var(--color-muted);
-		max-width: 36rem;
-		line-height: 1.55;
+		max-width: 34rem;
+		font-size: 0.92rem;
+		line-height: 1.45;
 	}
 
 	.gallery__layout {
-		border: 1px solid rgba(168, 85, 247, 0.12);
-		border-radius: 1.1rem;
-		background: rgba(18, 16, 26, 0.46);
-		overflow: hidden;
-	}
-
-	.gallery__content {
 		display: grid;
-		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.35fr);
-		align-items: start;
-		gap: 1rem;
-		padding: 1rem;
+		grid-template-columns: minmax(0, 0.92fr) minmax(0, 1.28fr);
+		align-items: stretch;
+		gap: var(--gallery-gap);
+		padding: var(--gallery-pad);
+		border: 1px solid rgba(168, 85, 247, 0.12);
+		border-radius: 0.85rem;
+		background: rgba(18, 16, 26, 0.46);
 	}
 
 	.gallery__summary {
 		display: grid;
-		gap: 1rem;
-		align-content: start;
+		grid-template-rows: auto 1fr;
+		gap: var(--gallery-gap);
+		min-height: 0;
 	}
 
 	.gallery__lead {
 		margin: 0;
-		padding: 1rem 1.05rem;
-		border-radius: 0.95rem;
+		padding: 0.7rem 0.8rem;
+		border-radius: 0.65rem;
 		border: 1px solid rgba(168, 85, 247, 0.14);
 		background: rgba(26, 22, 38, 0.72);
 		color: #e2d9ef;
-		line-height: 1.7;
+		font-size: 0.9rem;
+		line-height: 1.5;
 	}
 
 	.gallery__highlights {
 		display: grid;
-		gap: 0.75rem;
+		grid-template-rows: repeat(3, minmax(0, 1fr));
+		gap: var(--gallery-gap);
+		min-height: 0;
 	}
 
 	.gallery__info-card {
-		padding: 0.95rem 1rem;
-		border-radius: 0.9rem;
+		display: grid;
+		align-content: start;
+		gap: 0.25rem;
+		padding: 0.65rem 0.75rem;
+		border-radius: 0.65rem;
 		border: 1px solid rgba(168, 85, 247, 0.14);
 		background: rgba(10, 6, 18, 0.34);
 	}
 
 	.gallery__info-card h3 {
 		margin: 0;
-		font-size: 0.98rem;
+		font-size: 0.88rem;
 		font-weight: 750;
+		line-height: 1.25;
 		color: var(--color-ink);
 	}
 
 	.gallery__info-card p {
-		margin: 0.45rem 0 0;
+		margin: 0;
 		color: var(--color-muted);
-		font-size: 0.92rem;
-		line-height: 1.6;
+		font-size: 0.82rem;
+		line-height: 1.45;
 	}
 
 	.gallery__media {
 		display: grid;
-		gap: 0.85rem;
+		grid-template-rows: auto 1fr;
+		gap: var(--gallery-gap);
+		min-height: 0;
 	}
 
 	.gallery__featured,
 	.gallery__item {
 		margin: 0;
+		min-width: 0;
 	}
 
 	.gallery__featured {
 		aspect-ratio: 16 / 9;
-		border: 1px solid rgba(192, 132, 252, 0.22);
-		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
+		border: 1px solid rgba(192, 132, 252, 0.2);
 	}
 
 	.gallery__grid {
 		display: grid;
 		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.85rem;
+		grid-template-rows: repeat(2, minmax(0, 1fr));
+		gap: var(--gallery-gap);
+		min-height: 0;
 	}
 
 	.gallery__item {
-		aspect-ratio: 16 / 11;
+		aspect-ratio: 16 / 9;
+		min-height: 0;
 	}
 
 	.gallery__featured img,
@@ -199,7 +210,7 @@ const cheatHighlights = [
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.45s ease;
+		transition: transform 0.4s ease;
 	}
 
 	.gallery__featured:hover img,
@@ -212,16 +223,17 @@ const cheatHighlights = [
 		position: absolute;
 		inset: auto 0 0;
 		z-index: 2;
-		padding: 1.6rem 0.95rem 0.8rem;
+		padding: 1.25rem 0.7rem 0.55rem;
 		background: linear-gradient(transparent, rgba(10, 6, 18, 0.92));
 		color: #ddd4ec;
-		font-size: 0.75rem;
+		font-size: 0.7rem;
 		font-weight: 600;
+		line-height: 1.3;
 		opacity: 0;
-		transform: translateY(6px);
+		transform: translateY(4px);
 		transition:
-			opacity 0.25s ease,
-			transform 0.25s ease;
+			opacity 0.22s ease,
+			transform 0.22s ease;
 	}
 
 	.gallery__featured:hover figcaption,
@@ -231,27 +243,55 @@ const cheatHighlights = [
 	}
 
 	@media (max-width: 900px) {
-		.gallery__content {
+		.gallery__layout {
+			grid-template-columns: 1fr;
+		}
+
+		.gallery__summary {
+			grid-template-rows: auto auto;
+		}
+
+		.gallery__highlights {
+			grid-template-rows: none;
+			grid-template-columns: repeat(3, minmax(0, 1fr));
+		}
+
+		.gallery__media {
+			grid-template-rows: auto auto;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.gallery {
+			--gallery-gap: 0.45rem;
+			--gallery-pad: 0.55rem;
+		}
+
+		.gallery__highlights {
 			grid-template-columns: 1fr;
 		}
 
 		.gallery__grid {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
+
+		.gallery__title {
+			font-size: 1.3rem;
+		}
+
+		.gallery__sub {
+			font-size: 0.88rem;
+		}
 	}
 
-	@media (max-width: 560px) {
-		.gallery__content {
-			padding: 0.8rem;
-		}
-
+	@media (max-width: 420px) {
 		.gallery__grid {
 			grid-template-columns: 1fr;
-			gap: 0.65rem;
+			grid-template-rows: none;
 		}
 
-		.gallery__featured {
-			aspect-ratio: 4 / 3;
+		.gallery__item {
+			aspect-ratio: 16 / 9;
 		}
 	}
 </style>
