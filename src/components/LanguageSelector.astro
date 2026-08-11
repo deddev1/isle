@@ -1,17 +1,32 @@
 ---
-import { defaultLocale, getLocaleFromPath, getLocalizedPath, locales } from '../data/i18n';
+import { getLocaleFromPath, getLocalizedPath, locales } from '../data/i18n';
 
 const currentPath = Astro.url.pathname;
 const activeLocale = getLocaleFromPath(currentPath);
+const active = locales.find((locale) => locale.code === activeLocale) ?? locales[0];
 ---
 
-<div class="lang-select" data-lang-select>
-	<p class="lang-select__label" id="lang-select-label">Language</p>
-	<div
-		class="lang-select__scroll"
-		role="group"
-		aria-labelledby="lang-select-label"
-		tabindex="0"
+<div class="lang-dropdown" data-lang-dropdown>
+	<button
+		type="button"
+		class="lang-dropdown__trigger"
+		aria-haspopup="listbox"
+		aria-expanded="false"
+		aria-controls="lang-dropdown-menu"
+		data-lang-trigger
+	>
+		<span class="lang-dropdown__emoji" aria-hidden="true">{active.flag}</span>
+		<span class="lang-dropdown__code">{active.code.toUpperCase()}</span>
+		<span class="lang-dropdown__chevron" aria-hidden="true"></span>
+	</button>
+
+	<ul
+		class="lang-dropdown__menu"
+		id="lang-dropdown-menu"
+		role="listbox"
+		aria-label="Choose language"
+		hidden
+		data-lang-menu
 	>
 		{
 			locales.map((locale) => {
@@ -19,169 +34,194 @@ const activeLocale = getLocaleFromPath(currentPath);
 				const isActive = locale.code === activeLocale;
 
 				return (
-					<a
-						href={href}
-						class:list={['lang-select__flag', { 'is-active': isActive }]}
-						aria-label={`${locale.label} (${locale.country})`}
-						aria-current={isActive ? 'true' : undefined}
-						hreflang={locale.hrefLang}
-						lang={locale.code}
-						title={`${locale.label} — ${locale.country}`}
-						data-lang={locale.code}
-					>
-						<span class="lang-select__emoji" aria-hidden="true">
-							{locale.flag}
-						</span>
-						<span class="lang-select__name">{locale.label}</span>
-					</a>
+					<li role="option" aria-selected={isActive ? 'true' : 'false'}>
+						<a
+							href={href}
+							class:list={['lang-dropdown__option', { 'is-active': isActive }]}
+							hreflang={locale.hrefLang}
+							lang={locale.code}
+							data-lang={locale.code}
+						>
+							<span class="lang-dropdown__emoji" aria-hidden="true">
+								{locale.flag}
+							</span>
+							<span class="lang-dropdown__name">{locale.label}</span>
+							<span class="lang-dropdown__code">{locale.code.toUpperCase()}</span>
+						</a>
+					</li>
 				);
 			})
 		}
-	</div>
+	</ul>
 </div>
 
 <script>
-	const scroll = document.querySelector('[data-lang-select] .lang-select__scroll');
-	const active = scroll?.querySelector('.lang-select__flag.is-active');
+	const root = document.querySelector('[data-lang-dropdown]');
+	const trigger = root?.querySelector('[data-lang-trigger]');
+	const menu = root?.querySelector('[data-lang-menu]');
 
-	if (scroll instanceof HTMLElement && active instanceof HTMLElement) {
-		const centerOffset = active.offsetLeft - (scroll.clientWidth - active.offsetWidth) / 2;
-		scroll.scrollLeft = Math.max(0, centerOffset);
+	if (root instanceof HTMLElement && trigger instanceof HTMLElement && menu instanceof HTMLElement) {
+		const setOpen = (open: boolean) => {
+			trigger.setAttribute('aria-expanded', String(open));
+			menu.hidden = !open;
+			root.classList.toggle('is-open', open);
+		};
+
+		trigger.addEventListener('click', (event) => {
+			event.stopPropagation();
+			setOpen(trigger.getAttribute('aria-expanded') !== 'true');
+		});
+
+		document.addEventListener('click', (event) => {
+			if (!root.contains(event.target as Node)) {
+				setOpen(false);
+			}
+		});
+
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape') {
+				setOpen(false);
+			}
+		});
 	}
 </script>
 
 <style>
-	.lang-select {
-		display: flex;
-		flex-direction: column;
-		gap: 0.2rem;
-		min-width: 0;
-		max-width: 100%;
+	.lang-dropdown {
+		position: relative;
+		flex-shrink: 0;
 	}
 
-	.lang-select__label {
-		position: absolute;
-		width: 1px;
-		height: 1px;
-		padding: 0;
-		margin: -1px;
-		overflow: hidden;
-		clip: rect(0, 0, 0, 0);
-		white-space: nowrap;
-		border: 0;
-	}
-
-	.lang-select__scroll {
-		display: flex;
-		align-items: center;
-		gap: 0.35rem;
-		padding: 0.2rem;
-		border-radius: 999px;
-		border: 1px solid rgba(129, 140, 248, 0.2);
-		background: rgba(99, 102, 241, 0.1);
-		overflow-x: auto;
-		overflow-y: hidden;
-		scroll-snap-type: x mandatory;
-		scroll-behavior: smooth;
-		scrollbar-width: none;
-		-ms-overflow-style: none;
-		-webkit-overflow-scrolling: touch;
-	}
-
-	.lang-select__scroll::-webkit-scrollbar {
-		display: none;
-		width: 0;
-		height: 0;
-	}
-
-	.lang-select__scroll:focus-visible {
-		outline: 2px solid rgba(167, 139, 250, 0.85);
-		outline-offset: 2px;
-	}
-
-	.lang-select__flag {
+	.lang-dropdown__trigger {
 		display: inline-flex;
 		align-items: center;
-		gap: 0.3rem;
-		flex: 0 0 auto;
-		min-width: 4.5rem;
-		padding: 0.28rem 0.5rem;
-		border-radius: 999px;
-		border: 1px solid transparent;
-		color: var(--color-muted);
-		font-size: 0.68rem;
+		gap: 0.35rem;
+		min-height: 2.35rem;
+		padding: 0.35rem 0.7rem;
+		border-radius: 0.7rem;
+		border: 1px solid rgba(129, 140, 248, 0.28);
+		background: rgba(18, 16, 26, 0.85);
+		color: var(--color-ink);
+		font-family: var(--font-display);
+		font-size: 0.78rem;
 		font-weight: 700;
-		letter-spacing: 0.06em;
-		text-transform: uppercase;
-		scroll-snap-align: center;
+		letter-spacing: 0.04em;
+		cursor: pointer;
 		transition:
-			color 0.25s ease,
-			background 0.25s ease,
-			border-color 0.25s ease,
-			box-shadow 0.25s ease,
-			transform 0.25s ease;
+			border-color 0.2s ease,
+			background 0.2s ease;
 	}
 
-	.lang-select__flag:hover {
-		color: #ede9fe;
-		background: rgba(99, 102, 241, 0.16);
-		border-color: rgba(167, 139, 250, 0.28);
-		transform: translateY(-1px);
+	.lang-dropdown__trigger:hover,
+	.lang-dropdown.is-open .lang-dropdown__trigger {
+		border-color: rgba(192, 132, 252, 0.45);
+		background: rgba(34, 28, 48, 0.95);
 	}
 
-	.lang-select__flag.is-active {
-		color: #f5f3ff;
-		background: rgba(76, 29, 149, 0.34);
-		border-color: rgba(192, 132, 252, 0.42);
-		box-shadow:
-			0 0 16px rgba(99, 102, 241, 0.28),
-			inset 0 0 10px rgba(124, 58, 237, 0.14);
-	}
-
-	.lang-select__emoji {
+	.lang-dropdown__emoji {
 		font-size: 1rem;
 		line-height: 1;
 	}
 
-	.lang-select__name {
-		line-height: 1;
-		font-size: 0.62rem;
-		letter-spacing: 0.02em;
-		text-transform: none;
+	.lang-dropdown__code {
+		font-size: 0.72rem;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	.lang-dropdown__chevron {
+		width: 0.4rem;
+		height: 0.4rem;
+		margin-left: 0.1rem;
+		border-right: 1.5px solid currentColor;
+		border-bottom: 1.5px solid currentColor;
+		transform: rotate(45deg) translateY(-1px);
+		opacity: 0.75;
+		transition: transform 0.2s ease;
+	}
+
+	.lang-dropdown.is-open .lang-dropdown__chevron {
+		transform: rotate(225deg) translateY(-1px);
+	}
+
+	.lang-dropdown__menu {
+		position: absolute;
+		top: calc(100% + 0.45rem);
+		right: 0;
+		z-index: 120;
+		display: grid;
+		gap: 0.2rem;
+		min-width: 11.5rem;
+		max-height: min(18rem, 60vh);
+		margin: 0;
+		padding: 0.4rem;
+		overflow-y: auto;
+		overscroll-behavior: contain;
+		list-style: none;
+		border-radius: 0.85rem;
+		border: 1px solid rgba(168, 85, 247, 0.22);
+		background: rgba(12, 8, 20, 0.97);
+		box-shadow: 0 14px 32px rgba(0, 0, 0, 0.4);
+		scrollbar-width: thin;
+	}
+
+	.lang-dropdown__menu[hidden] {
+		display: none;
+	}
+
+	.lang-dropdown__option {
+		display: grid;
+		grid-template-columns: auto 1fr auto;
+		align-items: center;
+		gap: 0.55rem;
+		min-height: 2.45rem;
+		padding: 0.45rem 0.65rem;
+		border-radius: 0.6rem;
+		color: var(--color-muted);
+		font-size: 0.84rem;
+		font-weight: 600;
+		transition:
+			background 0.15s ease,
+			color 0.15s ease;
+	}
+
+	.lang-dropdown__option:hover {
+		background: rgba(99, 102, 241, 0.16);
+		color: var(--color-ink);
+	}
+
+	.lang-dropdown__option.is-active {
+		background: rgba(76, 29, 149, 0.35);
+		color: #f5f3ff;
+	}
+
+	.lang-dropdown__name {
+		min-width: 0;
+		overflow: hidden;
+		text-overflow: ellipsis;
 		white-space: nowrap;
 	}
 
-	@media (max-width: 980px) {
-		.lang-select {
-			max-width: none;
-			width: 100%;
-		}
-
-		.lang-select__scroll {
-			width: 100%;
-			padding: 0.25rem;
-		}
-
-		.lang-select__flag {
-			flex: 1 1 0;
-			justify-content: center;
-			min-width: 0;
-			padding: 0.55rem 0.75rem;
-			font-size: 0.72rem;
-		}
-
-		.lang-select__emoji {
-			font-size: 1.15rem;
-		}
+	.lang-dropdown__option .lang-dropdown__code {
+		opacity: 0.7;
 	}
 
-	@media (prefers-reduced-motion: reduce) {
-		.lang-select__scroll {
-			scroll-behavior: auto;
+	@media (max-width: 980px) {
+		.lang-dropdown {
+			width: 100%;
 		}
 
-		.lang-select__flag {
-			transition-duration: 0.01ms;
+		.lang-dropdown__trigger {
+			width: 100%;
+			justify-content: center;
+			min-height: 2.75rem;
+		}
+
+		.lang-dropdown__menu {
+			left: 0;
+			right: 0;
+			min-width: 0;
+			max-height: min(14rem, 45vh);
 		}
 	}
 </style>

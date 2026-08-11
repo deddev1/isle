@@ -22,9 +22,10 @@ import { homeSeo, siteConfig } from '../data/site';
 		<div class="hero__copy">
 			<p class="hero__eyebrow">{siteConfig.name}</p>
 			<h1 class="hero__title">{homeSeo.heroTitle}</h1>
-			<h2 class="hero__subtitle text-gradient">{homeSeo.heroSubtitle}</h2>
+			<p class="hero__subtitle text-gradient">{homeSeo.heroSubtitle}</p>
+			<p class="hero__desc">{homeSeo.heroDescription}</p>
 			<div class="hero__cta">
-				<a href="/pricing/" class="hero__btn hero__btn--primary bg-brand">Compare packages</a>
+				<a href="/pricing/" class="hero__btn hero__btn--primary bg-brand">Get Access</a>
 				<a href="/features/" class="hero__btn hero__btn--ghost">Explore features</a>
 			</div>
 		</div>
@@ -113,9 +114,7 @@ import { homeSeo, siteConfig } from '../data/site';
 		line-height: 1.15;
 		letter-spacing: -0.03em;
 		text-shadow: 0 8px 32px rgba(10, 6, 18, 0.65);
-		text-wrap: balance;
-		overflow-wrap: break-word;
-		word-break: normal;
+		white-space: nowrap;
 		hyphens: none;
 	}
 
@@ -131,6 +130,16 @@ import { homeSeo, siteConfig } from '../data/site';
 			rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.1s both,
 			shimmer 4s ease-in-out infinite;
 		text-wrap: balance;
+	}
+
+	.hero__desc {
+		margin: 0.75rem 0 0;
+		max-width: 28rem;
+		color: var(--color-muted);
+		font-size: clamp(0.95rem, 1.6vw, 1.08rem);
+		font-weight: 500;
+		line-height: 1.55;
+		animation: rise-in 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.14s both;
 	}
 
 	.hero__cta {
@@ -224,6 +233,7 @@ import { homeSeo, siteConfig } from '../data/site';
 		.hero__splash,
 		.hero__copy,
 		.hero__subtitle,
+		.hero__desc,
 		.hero__cta,
 		.hero__accent {
 			animation: none;
@@ -264,7 +274,7 @@ import { homeSeo, siteConfig } from '../data/site';
 		}
 
 		.hero__title {
-			font-size: clamp(1.5rem, 7.2vw, 2.1rem);
+			font-size: clamp(1.35rem, 7vw, 2.1rem);
 			line-height: 1.2;
 			letter-spacing: -0.025em;
 		}
@@ -273,6 +283,12 @@ import { homeSeo, siteConfig } from '../data/site';
 			margin-top: 0.4rem;
 			font-size: clamp(1.15rem, 5.5vw, 1.65rem);
 			line-height: 1.22;
+		}
+
+		.hero__desc {
+			margin-top: 0.65rem;
+			font-size: 0.95rem;
+			max-width: none;
 		}
 
 		.hero__cta {
@@ -293,12 +309,12 @@ import { homeSeo, siteConfig } from '../data/site';
 
 	@media (max-width: 380px) {
 		.hero__title {
-			font-size: 1.4rem;
+			font-size: 1.25rem;
 			line-height: 1.22;
 		}
 
 		.hero__subtitle {
-			font-size: 1.1rem;
+			font-size: 1.05rem;
 		}
 	}
 </style>

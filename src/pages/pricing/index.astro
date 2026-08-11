@@ -1,62 +1,572 @@
 ---
-import PageLayout from '../../layouts/PageLayout.astro';
-import { productInfo, siteConfig } from '../../data/site';
+import Layout from '../../layouts/Layout.astro';
+import Navbar from '../../components/Navbar.astro';
+import SiteFooter from '../../components/SiteFooter.astro';
+import { homeVideo, productInfo, siteConfig } from '../../data/site';
 import { getPageSeo } from '../../data/seo/meta';
 import { theIsleImages } from '../../data/theisle';
+import { buildBreadcrumbSchema, buildWebPageSchema } from '../../data/seo/schema';
 
 const seo = getPageSeo('pricing');
+const plans = productInfo.plans;
+const images = theIsleImages.product;
+const breadcrumbSchema = buildBreadcrumbSchema([
+	{ name: 'Home', path: '/' },
+	{ name: 'Pricing', path: '/pricing/' },
+]);
+const webPageSchema = buildWebPageSchema({
+	title: seo.title,
+	description: seo.description,
+	path: '/pricing/',
+});
 ---
 
-<PageLayout
+<Layout
 	title={seo.title}
 	description={seo.description}
 	canonicalPath="/pricing/"
-	heading="The Isle Cheats Pricing"
-	intro="Packages are sold in USD and include The Isle Cheats Cloud-DMA, ESP, and Cheats product line."
-	heroImage={theIsleImages.cover}
-	heroAlt="The Isle Cheats pricing visual"
-	gallery={[theIsleImages.product[1], theIsleImages.product[3], theIsleImages.product[5]]}
-	ctaPrimary={{ href: '/#product', label: 'Open Product Card' }}
-	ctaSecondary={{ href: '/features/', label: 'See Features' }}
+	ogImage={theIsleImages.cover}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
 	ogDescription={seo.ogDescription}
 	twitterTitle={seo.twitterTitle}
 	twitterDescription={seo.twitterDescription}
+	preloadImage={theIsleImages.cover}
 >
-	<section class="card-panel">
-		<h2>Current packages</h2>
-		<div class="price-grid">
-			{
-				productInfo.plans.map((plan) => (
-					<article class:list={['price-card', { 'is-featured': plan.id === 'lifetime' }]}>
-						<span class="price-card__label">{plan.label}</span>
-						<span class="price-card__price">${plan.price}</span>
-						<span class="price-card__meta">{productInfo.currency} · Cloud-DMA · ESP</span>
-					</article>
-				))
+	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+	<script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
+	<Navbar />
+	<main class="pricing-page">
+		<section class="pricing-banner">
+			<div class="pricing-banner__media" aria-hidden="true">
+				<img
+					src={theIsleImages.cover}
+					alt=""
+					width="1600"
+					height="900"
+					class="pricing-banner__img"
+					decoding="async"
+					fetchpriority="high"
+				/>
+				<div class="pricing-banner__scrim"></div>
+			</div>
+			<div class="shell pricing-banner__content">
+				<nav class="pricing-banner__crumbs" aria-label="Breadcrumb">
+					<a href="/">Home</a>
+					<span aria-hidden="true">/</span>
+					<span aria-current="page">Pricing</span>
+				</nav>
+				<p class="pricing-banner__eyebrow">{siteConfig.name}</p>
+				<h1 class="pricing-banner__title">The Isle Cheats Pricing</h1>
+				<p class="pricing-banner__intro">
+					Packages are sold in USD and include The Isle Cheats Cloud-DMA, ESP, and Cheats product line.
+				</p>
+			</div>
+		</section>
+
+		<section class="shell pricing-layout" aria-label="Pricing and product preview">
+			<aside class="pricing-layout__prices">
+				<h2 class="pricing-layout__heading">Choose your plan</h2>
+				<div class="price-pair">
+					{
+						plans.map((plan) => (
+							<article class:list={['price-tile', { 'is-featured': plan.id === 'lifetime' }]}>
+								<span class="price-tile__label">{plan.label}</span>
+								<span class="price-tile__price">${plan.price}</span>
+								<span class="price-tile__meta">{productInfo.currency} · Cloud-DMA</span>
+								<a class="price-tile__cta" href={siteConfig.checkoutUrl}>
+									Get Access
+								</a>
+							</article>
+						))
+					}
+				</div>
+				<p class="pricing-layout__note">
+					Both plans include Visuals ESP, World ESP, combat hacks, and utility tools. Aimbot is optional and
+					not in the Cloud-DMA base package.
+				</p>
+				<a class="pricing-layout__features" href="/features/">See full feature list</a>
+			</aside>
+
+			<div class="pricing-layout__media">
+				<article class="pricing-video" data-pricing-video>
+					<button
+						type="button"
+						class="pricing-video__trigger"
+						data-video-trigger
+						aria-label={`Play ${homeVideo.title}`}
+					>
+						<img
+							src={homeVideo.thumbnail}
+							alt={homeVideo.thumbnailAlt}
+							width="1280"
+							height="720"
+							class="pricing-video__poster"
+							loading="lazy"
+							decoding="async"
+						/>
+						<span class="pricing-video__veil" aria-hidden="true"></span>
+						<span class="pricing-video__play" aria-hidden="true">
+							<svg viewBox="0 0 24 24" fill="currentColor" width="28" height="28">
+								<path d="M8 5.14v13.72L19 12 8 5.14z"></path>
+							</svg>
+						</span>
+						<span class="pricing-video__label">Watch demo</span>
+					</button>
+					<video
+						class="pricing-video__player"
+						data-video-player
+						controls
+						playsinline
+						preload="none"
+						aria-label={homeVideo.title}
+						hidden
+					></video>
+				</article>
+
+				<div class="pricing-scroller" aria-label="Product preview images">
+					<div class="pricing-scroller__track">
+						{
+							images.map((image) => (
+								<figure class="pricing-scroller__item">
+									<img
+										src={image.src}
+										alt={image.alt}
+										width="480"
+										height="300"
+										loading="lazy"
+										decoding="async"
+									/>
+								</figure>
+							))
+						}
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="shell pricing-extra">
+			<article class="pricing-extra__card">
+				<h2>What each package includes</h2>
+				<p>
+					Each package includes access to The Isle Cheats feature set described on
+					<a href="/features/">Features</a>, including Cloud-DMA, Visuals ESP, World ESP, and Cheats. Delivery
+					method: {productInfo.delivery}.
+				</p>
+			</article>
+			<article class="pricing-extra__card">
+				<h2>Before you buy</h2>
+				<ul>
+					<li><a href="/refund-policy/">Read the refund policy</a></li>
+					<li><a href="/terms/">Review the terms</a></li>
+					<li><a href="/updates/">Check the latest updates</a></li>
+					<li>
+						<a href={`mailto:${siteConfig.supportEmail}`}>Email support</a> if you need order help
+					</li>
+				</ul>
+			</article>
+		</section>
+	</main>
+	<SiteFooter />
+</Layout>
+
+<script define:vars={{ videoSrc: homeVideo.src }}>
+	document.querySelectorAll('[data-pricing-video]').forEach((root) => {
+		const trigger = root.querySelector('[data-video-trigger]');
+		const player = root.querySelector('[data-video-player]');
+
+		trigger?.addEventListener('click', () => {
+			if (!(player instanceof HTMLVideoElement) || !(trigger instanceof HTMLElement)) return;
+
+			player.src = videoSrc;
+			player.hidden = false;
+			trigger.hidden = true;
+			root.classList.add('is-playing');
+
+			const playPromise = player.play();
+			if (playPromise) {
+				playPromise.catch(() => {
+					player.controls = true;
+				});
 			}
-		</div>
-	</section>
+		});
+	});
+</script>
 
-	<section class="card-panel">
-		<h2>What each package includes</h2>
-		<p>
-			Each package includes access to The Isle Cheats feature set described on
-			<a href="/features/">Features</a>, including Cloud-DMA, Visuals ESP, World ESP, and Cheats. Delivery method:
-			{productInfo.delivery}.
-		</p>
-	</section>
+<style>
+	.pricing-page {
+		overflow-x: clip;
+		padding-bottom: calc(3rem + env(safe-area-inset-bottom, 0px));
+	}
 
-	<section class="card-panel">
-		<h2>Before you buy</h2>
-		<ul>
-			<li><a href="/refund-policy/">Read the refund policy</a></li>
-			<li><a href="/terms/">Review the terms</a></li>
-			<li><a href="/updates/">Check the latest updates</a></li>
-			<li>
-				<a href={`mailto:${siteConfig.supportEmail}`}>Email support</a> if you need order help
-			</li>
-		</ul>
-	</section>
-</PageLayout>
+	.pricing-banner {
+		position: relative;
+		isolation: isolate;
+		border-bottom: 1px solid rgba(168, 85, 247, 0.12);
+		margin-bottom: 1.75rem;
+	}
+
+	.pricing-banner__media {
+		position: absolute;
+		inset: 0;
+		z-index: 0;
+	}
+
+	.pricing-banner__img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center 30%;
+	}
+
+	.pricing-banner__scrim {
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(180deg, rgba(10, 6, 18, 0.72) 0%, rgba(10, 6, 18, 0.9) 100%),
+			linear-gradient(90deg, rgba(10, 6, 18, 0.55), rgba(10, 6, 18, 0.35) 50%, rgba(10, 6, 18, 0.55));
+	}
+
+	.pricing-banner__content {
+		position: relative;
+		z-index: 1;
+		padding-block: 2.5rem 2.25rem;
+		text-align: center;
+	}
+
+	.pricing-banner__crumbs {
+		display: inline-flex;
+		align-items: center;
+		gap: 0.45rem;
+		margin-bottom: 0.85rem;
+		color: var(--color-faint);
+		font-size: 0.82rem;
+		font-weight: 600;
+	}
+
+	.pricing-banner__crumbs a:hover {
+		color: var(--color-ink);
+	}
+
+	.pricing-banner__eyebrow {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		color: var(--color-orchid);
+	}
+
+	.pricing-banner__title {
+		margin: 0.45rem 0 0;
+		font-family: var(--font-display);
+		font-size: clamp(1.75rem, 4vw, 2.6rem);
+		font-weight: 800;
+		letter-spacing: -0.03em;
+	}
+
+	.pricing-banner__intro {
+		margin: 0.75rem auto 0;
+		max-width: 34rem;
+		color: #cfc3e3;
+		font-size: 1rem;
+		line-height: 1.6;
+	}
+
+	.pricing-layout {
+		display: grid;
+		grid-template-columns: minmax(0, 0.95fr) minmax(0, 1.15fr);
+		gap: 1.25rem;
+		align-items: start;
+	}
+
+	.pricing-layout__prices,
+	.pricing-layout__media {
+		min-width: 0;
+	}
+
+	.pricing-layout__heading {
+		margin: 0 0 0.9rem;
+		font-family: var(--font-display);
+		font-size: 1.15rem;
+		font-weight: 800;
+	}
+
+	.price-pair {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 0.75rem;
+	}
+
+	.price-tile {
+		display: grid;
+		gap: 0.35rem;
+		justify-items: center;
+		padding: 1.15rem 0.85rem 1rem;
+		border-radius: 0.95rem;
+		border: 1px solid rgba(168, 85, 247, 0.18);
+		background: rgba(22, 18, 32, 0.92);
+		text-align: center;
+	}
+
+	.price-tile.is-featured {
+		border-color: rgba(192, 132, 252, 0.4);
+		background: linear-gradient(180deg, rgba(76, 29, 149, 0.35) 0%, rgba(22, 18, 32, 0.95) 100%);
+	}
+
+	.price-tile__label {
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-orchid);
+	}
+
+	.price-tile__price {
+		font-family: var(--font-display);
+		font-size: clamp(1.8rem, 3vw, 2.25rem);
+		font-weight: 800;
+		line-height: 1;
+		color: var(--color-ink);
+	}
+
+	.price-tile__meta {
+		font-size: 0.78rem;
+		color: var(--color-muted);
+	}
+
+	.price-tile__cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		min-height: 2.55rem;
+		margin-top: 0.55rem;
+		padding: 0.55rem 0.75rem;
+		border-radius: 0.7rem;
+		background: #7c3aed;
+		color: #fff;
+		font-size: 0.86rem;
+		font-weight: 800;
+		letter-spacing: 0.04em;
+		transition: background 0.2s ease;
+	}
+
+	.price-tile__cta:hover {
+		background: #8b5cf6;
+		color: #fff;
+	}
+
+	.price-tile.is-featured .price-tile__cta {
+		background: linear-gradient(135deg, #7c3aed, #c026d3);
+	}
+
+	.pricing-layout__note {
+		margin: 1rem 0 0;
+		color: var(--color-muted);
+		font-size: 0.9rem;
+		line-height: 1.55;
+	}
+
+	.pricing-layout__features {
+		display: inline-flex;
+		margin-top: 0.85rem;
+		color: var(--color-orchid);
+		font-size: 0.9rem;
+		font-weight: 700;
+	}
+
+	.pricing-layout__features:hover {
+		color: var(--color-ink);
+	}
+
+	.pricing-layout__media {
+		display: grid;
+		gap: 0.75rem;
+	}
+
+	.pricing-video {
+		overflow: hidden;
+		border-radius: 1rem;
+		border: 1px solid rgba(168, 85, 247, 0.18);
+		background: #0a0612;
+		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.28);
+	}
+
+	.pricing-video__trigger {
+		position: relative;
+		display: grid;
+		place-items: center;
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		padding: 0;
+		border: 0;
+		cursor: pointer;
+		background: #0a0612;
+	}
+
+	.pricing-video__poster {
+		position: absolute;
+		inset: 0;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.pricing-video__veil {
+		position: absolute;
+		inset: 0;
+		background:
+			linear-gradient(180deg, rgba(10, 6, 18, 0.12) 0%, rgba(10, 6, 18, 0.55) 100%),
+			radial-gradient(circle at center, rgba(124, 58, 237, 0.18), transparent 65%);
+	}
+
+	.pricing-video__play {
+		position: relative;
+		z-index: 1;
+		display: grid;
+		place-items: center;
+		width: 3.75rem;
+		height: 3.75rem;
+		border-radius: 999px;
+		border: 1px solid rgba(255, 255, 255, 0.28);
+		background: rgba(124, 58, 237, 0.92);
+		color: #fff;
+		box-shadow: 0 10px 24px rgba(0, 0, 0, 0.35);
+		transition: transform 0.2s ease, background 0.2s ease;
+	}
+
+	.pricing-video__trigger:hover .pricing-video__play {
+		transform: scale(1.05);
+		background: #8b5cf6;
+	}
+
+	.pricing-video__label {
+		position: absolute;
+		left: 0.85rem;
+		bottom: 0.85rem;
+		z-index: 1;
+		padding: 0.35rem 0.65rem;
+		border-radius: 999px;
+		border: 1px solid rgba(192, 132, 252, 0.25);
+		background: rgba(10, 6, 18, 0.72);
+		color: #d8c9ef;
+		font-size: 0.72rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+	}
+
+	.pricing-video__player {
+		display: block;
+		width: 100%;
+		aspect-ratio: 16 / 10;
+		background: #000;
+		object-fit: contain;
+	}
+
+	.pricing-video.is-playing .pricing-video__player {
+		display: block;
+	}
+
+	.pricing-scroller {
+		overflow: hidden;
+		border-radius: 0.9rem;
+		border: 1px solid rgba(168, 85, 247, 0.14);
+		background: rgba(18, 16, 26, 0.75);
+	}
+
+	.pricing-scroller__track {
+		display: flex;
+		gap: 0.65rem;
+		padding: 0.65rem;
+		overflow-x: auto;
+		overscroll-behavior-x: contain;
+		scroll-snap-type: x mandatory;
+		scrollbar-width: thin;
+		-webkit-overflow-scrolling: touch;
+	}
+
+	.pricing-scroller__item {
+		flex: 0 0 min(68%, 14rem);
+		margin: 0;
+		overflow: hidden;
+		border-radius: 0.7rem;
+		border: 1px solid rgba(168, 85, 247, 0.14);
+		background: #12081f;
+		aspect-ratio: 16 / 10;
+		scroll-snap-align: start;
+	}
+
+	.pricing-scroller__item img {
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	.pricing-extra {
+		display: grid;
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+		margin-top: 1.5rem;
+	}
+
+	.pricing-extra__card {
+		padding: 1.2rem 1.25rem;
+		border-radius: 0.95rem;
+		border: 1px solid rgba(168, 85, 247, 0.14);
+		background: rgba(22, 18, 32, 0.9);
+	}
+
+	.pricing-extra__card h2 {
+		margin: 0 0 0.65rem;
+		font-family: var(--font-display);
+		font-size: 1.05rem;
+		font-weight: 800;
+	}
+
+	.pricing-extra__card p,
+	.pricing-extra__card li {
+		margin: 0;
+		color: var(--color-muted);
+		font-size: 0.92rem;
+		line-height: 1.6;
+	}
+
+	.pricing-extra__card ul {
+		margin: 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.45rem;
+	}
+
+	.pricing-extra__card a {
+		color: var(--color-orchid);
+		font-weight: 600;
+	}
+
+	.pricing-extra__card a:hover {
+		color: var(--color-ink);
+	}
+
+	@media (max-width: 900px) {
+		.pricing-layout {
+			grid-template-columns: 1fr;
+		}
+	}
+
+	@media (max-width: 640px) {
+		.price-pair {
+			grid-template-columns: 1fr;
+		}
+
+		.pricing-extra {
+			grid-template-columns: 1fr;
+		}
+
+		.pricing-scroller__item {
+			flex-basis: min(78%, 12.5rem);
+		}
+	}
+</style>
