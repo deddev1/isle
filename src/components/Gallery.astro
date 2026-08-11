@@ -116,7 +116,7 @@ const cheatHighlights = [
 	.gallery__layout {
 		display: grid;
 		grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.32fr);
-		align-items: stretch;
+		align-items: start;
 		gap: var(--gallery-gap);
 		padding: var(--gallery-pad);
 		border: 1px solid rgba(168, 85, 247, 0.12);
@@ -125,11 +125,9 @@ const cheatHighlights = [
 	}
 
 	.gallery__summary {
-		display: flex;
-		flex-direction: column;
-		gap: var(--gallery-gap);
-		min-height: 0;
-		padding: 0.55rem 0.65rem;
+		display: grid;
+		gap: 0;
+		padding: 0.5rem 0.6rem;
 		border-radius: 0.55rem;
 		border: 1px solid rgba(168, 85, 247, 0.14);
 		background: rgba(10, 6, 18, 0.34);
@@ -137,33 +135,28 @@ const cheatHighlights = [
 
 	.gallery__lead {
 		margin: 0;
-		padding-bottom: 0.5rem;
+		padding: 0 0 0.45rem;
 		border-bottom: 1px solid rgba(168, 85, 247, 0.14);
 		color: #e2d9ef;
 		font-size: 0.84rem;
-		line-height: 1.4;
+		line-height: 1.35;
 	}
 
 	.gallery__highlights {
-		flex: 1;
 		display: grid;
-		grid-template-rows: repeat(3, minmax(0, 1fr));
 		gap: 0;
-		min-height: 0;
 	}
 
 	.gallery__info-card {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		gap: 0.18rem;
-		padding: 0.45rem 0;
+		display: grid;
+		gap: 0.15rem;
+		padding: 0.4rem 0;
 		border-bottom: 1px solid rgba(168, 85, 247, 0.1);
 	}
 
 	.gallery__info-card:last-child {
 		border-bottom: 0;
-		padding-bottom: 0;
+		padding-bottom: 0.1rem;
 	}
 
 	.gallery__info-card h3 {
@@ -195,7 +188,7 @@ const cheatHighlights = [
 	}
 
 	.gallery__featured {
-		aspect-ratio: 16 / 9;
+		aspect-ratio: 16 / 10;
 		border: 1px solid rgba(192, 132, 252, 0.2);
 	}
 
@@ -206,7 +199,7 @@ const cheatHighlights = [
 	}
 
 	.gallery__item {
-		aspect-ratio: 16 / 9;
+		aspect-ratio: 16 / 10;
 	}
 
 	.gallery__featured img,
@@ -251,25 +244,18 @@ const cheatHighlights = [
 			grid-template-columns: 1fr;
 		}
 
-		.gallery__summary {
-			display: grid;
-		}
-
 		.gallery__highlights {
-			flex: initial;
-			grid-template-rows: none;
 			grid-template-columns: repeat(3, minmax(0, 1fr));
-			gap: var(--gallery-gap);
+			gap: 0.45rem;
 		}
 
 		.gallery__info-card {
-			justify-content: start;
 			padding: 0;
 			border-bottom: 0;
 		}
 
-		.gallery__lead {
-			padding-bottom: 0.45rem;
+		.gallery__info-card:last-child {
+			padding-bottom: 0;
 		}
 	}
 
