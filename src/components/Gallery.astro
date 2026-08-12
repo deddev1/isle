@@ -1,69 +1,20 @@
 ---
 import { theIsleImages } from '../data/theisle';
 
-const featured =
-	theIsleImages.gallery.find((image) => 'featured' in image && image.featured) ??
-	theIsleImages.gallery[0];
-const tiles = theIsleImages.gallery.filter((image) => image.src !== featured.src).slice(0, 4);
-
-const cheatHighlights = [
-	{
-		title: 'Visuals ESP (WH)',
-		copy: 'Track entities with boxes, snaplines, health, growth, stamina, and custom colors up to 2000 m.',
-	},
-	{
-		title: 'World ESP',
-		copy: 'See bodies, meat, fruits, herbs, mushrooms, and water sources across the map.',
-	},
-	{
-		title: 'Cheats',
-		copy: 'Instant Rotation, Auto-Attack, Omnimovement, and other movement and combat options.',
-	},
-] as const;
+const images = theIsleImages.gallery.slice(0, 4);
 ---
 
 <section class="gallery" id="gallery" aria-labelledby="gallery-title">
 	<header class="gallery__head">
-		<p class="gallery__eyebrow">Gameplay preview</p>
 		<h2 id="gallery-title" class="gallery__title">Feature gallery</h2>
-		<p class="gallery__sub">
-			Visual previews with short context for ESP overlays, combat hacks, and map awareness tools.
-		</p>
+		<p class="gallery__sub">ESP, combat, and map tools in action.</p>
 	</header>
-
-	<p class="gallery__lead">
-		Cloud-DMA combines Visuals ESP, World ESP, and combat hacks in one configurable package.
-	</p>
-
-	<div class="gallery__highlights" role="list">
-		{
-			cheatHighlights.map((item) => (
-				<article class="gallery__info-card" role="listitem">
-					<h3>{item.title}</h3>
-					<p>{item.copy}</p>
-				</article>
-			))
-		}
-	</div>
-
-	<figure class="gallery__featured media-frame">
-		<img
-			src={featured.src}
-			alt={featured.alt}
-			width="1400"
-			height="788"
-			loading="lazy"
-			decoding="async"
-		/>
-		<figcaption>{featured.alt}</figcaption>
-	</figure>
 
 	<div class="gallery__grid">
 		{
-			tiles.map((image) => (
-				<figure class="gallery__item media-frame">
-					<img src={image.src} alt={image.alt} width="1280" height="720" loading="lazy" decoding="async" />
-					<figcaption>{image.alt}</figcaption>
+			images.map((image) => (
+				<figure class="gallery__item">
+					<img src={image.src} alt={image.alt} width="640" height="400" loading="lazy" decoding="async" />
 				</figure>
 			))
 		}
@@ -72,165 +23,64 @@ const cheatHighlights = [
 
 <style>
 	.gallery {
-		--gallery-gap: 0.65rem;
 		width: 100%;
 		display: grid;
-		gap: var(--gallery-gap);
+		gap: 0.75rem;
 	}
 
 	.gallery__head {
 		display: grid;
-		gap: 0.35rem;
-	}
-
-	.gallery__eyebrow {
-		margin: 0;
-		font-size: 0.7rem;
-		font-weight: 700;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		color: var(--color-orchid);
+		gap: 0.25rem;
 	}
 
 	.gallery__title {
 		margin: 0;
 		font-family: var(--font-display);
-		font-size: clamp(1.45rem, 2.6vw, 2rem);
+		font-size: clamp(1.2rem, 2.2vw, 1.5rem);
 		font-weight: 800;
-		letter-spacing: -0.03em;
-		line-height: 1.1;
+		letter-spacing: -0.02em;
+		line-height: 1.15;
 	}
 
 	.gallery__sub {
 		margin: 0;
 		color: var(--color-muted);
-		max-width: 40rem;
-		font-size: 0.92rem;
-		line-height: 1.45;
-	}
-
-	.gallery__lead {
-		margin: 0;
-		color: #e2d9ef;
-		font-size: 0.9rem;
-		line-height: 1.45;
-		max-width: 44rem;
-	}
-
-	.gallery__highlights {
-		display: grid;
-		grid-template-columns: repeat(3, minmax(0, 1fr));
-		gap: var(--gallery-gap);
-	}
-
-	.gallery__info-card {
-		display: grid;
-		gap: 0.3rem;
-		padding: 0.75rem 0.85rem;
-		border-radius: 0.65rem;
-		border: 1px solid rgba(168, 85, 247, 0.14);
-		background: rgba(18, 16, 26, 0.5);
-	}
-
-	.gallery__info-card h3 {
-		margin: 0;
-		font-size: 0.9rem;
-		font-weight: 750;
-		line-height: 1.2;
-		color: var(--color-ink);
-	}
-
-	.gallery__info-card p {
-		margin: 0;
-		color: var(--color-muted);
-		font-size: 0.8rem;
+		font-size: 0.88rem;
 		line-height: 1.4;
-	}
-
-	.gallery__featured,
-	.gallery__item {
-		margin: 0;
-		min-width: 0;
-	}
-
-	.gallery__featured {
-		aspect-ratio: 21 / 9;
-		border: 1px solid rgba(192, 132, 252, 0.18);
 	}
 
 	.gallery__grid {
 		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: var(--gallery-gap);
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: 0.5rem;
 	}
 
 	.gallery__item {
+		margin: 0;
+		overflow: hidden;
+		border-radius: 0.55rem;
+		border: 1px solid rgba(168, 85, 247, 0.14);
+		background: #12081f;
 		aspect-ratio: 16 / 10;
 	}
 
-	.gallery__featured img,
 	.gallery__item img {
+		display: block;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.4s ease;
 	}
 
-	.gallery__featured:hover img,
-	.gallery__item:hover img {
-		transform: scale(1.03);
-	}
-
-	.gallery__featured figcaption,
-	.gallery__item figcaption {
-		position: absolute;
-		inset: auto 0 0;
-		z-index: 2;
-		padding: 1.2rem 0.75rem 0.55rem;
-		background: linear-gradient(transparent, rgba(10, 6, 18, 0.92));
-		color: #ddd4ec;
-		font-size: 0.7rem;
-		font-weight: 600;
-		line-height: 1.25;
-		opacity: 0;
-		transform: translateY(4px);
-		transition:
-			opacity 0.22s ease,
-			transform 0.22s ease;
-	}
-
-	.gallery__featured:hover figcaption,
-	.gallery__item:hover figcaption {
-		opacity: 1;
-		transform: translateY(0);
-	}
-
-	@media (max-width: 900px) {
-		.gallery__featured {
-			aspect-ratio: 16 / 9;
+	@media (max-width: 800px) {
+		.gallery__grid {
+			grid-template-columns: repeat(2, minmax(0, 1fr));
 		}
 	}
 
-	@media (max-width: 640px) {
-		.gallery {
-			--gallery-gap: 0.5rem;
-		}
-
-		.gallery__highlights {
-			grid-template-columns: 1fr;
-		}
-
-		.gallery__title {
-			font-size: 1.35rem;
-		}
-
-		.gallery__sub,
-		.gallery__lead {
-			font-size: 0.86rem;
-		}
-
-		.gallery__featured {
-			aspect-ratio: 16 / 10;
+	@media (max-width: 420px) {
+		.gallery__grid {
+			grid-template-columns: 1fr 1fr;
+			gap: 0.4rem;
 		}
 	}
 </style>
