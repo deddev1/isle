@@ -38,11 +38,11 @@ const resolveCtaHref = (href: string) => {
 
 		<p class="why-us__closing">{whyUs.closing}</p>
 
-		<div class="home-seo__share-row home-seo__cta-row">
+		<nav class="why-us__cta-row" aria-label="Why choose next steps">
 			{
 				whyUs.ctas.map((cta) => (
 					<a
-						class="share-link"
+						class="why-us__cta"
 						href={resolveCtaHref(cta.href)}
 						{...(cta.external ? { target: '_blank', rel: 'noopener noreferrer' } : {})}
 					>
@@ -50,7 +50,7 @@ const resolveCtaHref = (href: string) => {
 					</a>
 				))
 			}
-		</div>
+		</nav>
 		<p class="home-seo__footnote">{whyUs.footnote}</p>
 	</div>
 </div>
@@ -159,34 +159,47 @@ const resolveCtaHref = (href: string) => {
 		line-height: 1.5;
 	}
 
-	.home-seo__cta-row {
+	.why-us__cta-row {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 0.65rem;
+		align-items: baseline;
+		gap: 1rem 1.5rem;
 		margin-top: 1.15rem;
 	}
 
-	.share-link {
-		display: inline-flex;
-		align-items: center;
-		justify-content: center;
-		min-height: 2.5rem;
-		padding: 0.55rem 0.95rem;
-		border-radius: 0.7rem;
-		border: 1px solid rgba(192, 132, 252, 0.25);
-		background: rgba(34, 28, 48, 0.85);
+	.why-us__cta {
+		display: inline;
+		padding: 0;
+		border: 0;
+		border-radius: 0;
+		background: transparent;
+		box-shadow: none;
 		color: var(--color-ink);
-		font-size: 0.88rem;
+		font-size: 1rem;
 		font-weight: 700;
-		transition:
-			border-color 0.2s ease,
-			background 0.2s ease;
+		line-height: 1.4;
+		text-decoration: none;
+		transition: color 0.15s ease, font-weight 0.15s ease;
 	}
 
-	.share-link:hover {
-		border-color: rgba(192, 132, 252, 0.5);
-		background: rgba(48, 36, 72, 0.9);
-		color: var(--color-ink);
+	.why-us__cta:hover,
+	.why-us__cta:focus-visible {
+		color: #fff;
+		font-weight: 800;
+		text-decoration: underline;
+		text-underline-offset: 0.18em;
+		background: transparent;
+		border: 0;
+		outline: none;
+	}
+
+	.why-us__cta:active,
+	.why-us__cta:visited:active {
+		color: #fff;
+		font-weight: 900;
+		background: transparent;
+		border: 0;
+		box-shadow: none;
 	}
 
 	@media (max-width: 760px) {

@@ -63,10 +63,7 @@ const active = categories[0];
 							data-href={category.href}
 							aria-label={`Show ${category.title}`}
 						>
-							<span class="package-showcase__tab-thumb media-frame">
-								<img src={category.image.src} alt="" width="160" height="90" loading="lazy" decoding="async" />
-							</span>
-							<span class="package-showcase__tab-label">{category.title}</span>
+							{category.title}
 						</button>
 					))
 				}
@@ -237,62 +234,43 @@ const active = categories[0];
 	}
 
 	.package-showcase__tabs {
-		display: grid;
-		grid-template-columns: repeat(5, minmax(0, 1fr));
-		gap: 0.5rem;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.65rem 1.15rem;
 	}
 
 	.package-showcase__tab {
-		display: grid;
-		gap: 0.4rem;
-		align-content: start;
-		width: 100%;
-		padding: 0.45rem;
-		border-radius: 0.75rem;
-		border: 1px solid rgba(168, 85, 247, 0.14);
-		background: rgba(10, 6, 18, 0.35);
-		color: var(--color-ink);
-		text-align: center;
-		cursor: pointer;
-		transition:
-			border-color 0.2s ease,
-			background 0.2s ease,
-			transform 0.2s ease,
-			box-shadow 0.2s ease;
-	}
-
-	.package-showcase__tab:hover,
-	.package-showcase__tab.is-active {
-		border-color: rgba(192, 132, 252, 0.45);
-		background: rgba(48, 36, 72, 0.55);
-		transform: translateY(-1px);
-	}
-
-	.package-showcase__tab.is-active {
-		box-shadow: inset 0 -3px 0 var(--color-orchid);
-	}
-
-	.package-showcase__tab-thumb {
-		aspect-ratio: 16 / 9;
-		overflow: hidden;
-		border-radius: 0.55rem;
-	}
-
-	.package-showcase__tab-thumb img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	.package-showcase__tab-label {
-		font-size: 0.68rem;
-		font-weight: 700;
-		line-height: 1.25;
+		display: inline;
+		width: auto;
+		padding: 0.15rem 0;
+		border: 0;
+		border-radius: 0;
+		background: transparent;
+		box-shadow: none;
 		color: var(--color-muted);
+		font-size: 0.95rem;
+		font-weight: 600;
+		line-height: 1.35;
+		text-align: left;
+		cursor: pointer;
+		transition: color 0.15s ease, font-weight 0.15s ease;
 	}
 
-	.package-showcase__tab.is-active .package-showcase__tab-label {
+	.package-showcase__tab:hover {
 		color: var(--color-ink);
+		background: transparent;
+		transform: none;
+		box-shadow: none;
+	}
+
+	.package-showcase__tab.is-active {
+		color: #fff;
+		font-weight: 800;
+		background: transparent;
+		border: 0;
+		box-shadow: none;
+		transform: none;
 	}
 
 	.package-showcase__panel {
@@ -379,26 +357,13 @@ const active = categories[0];
 		}
 	}
 
-	@media (max-width: 959px) {
-		.package-showcase__tabs {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
-		}
-	}
-
 	@media (max-width: 520px) {
 		.package-showcase__tabs {
-			grid-template-columns: 1fr;
+			gap: 0.55rem 0.9rem;
 		}
 
 		.package-showcase__tab {
-			grid-template-columns: 4.5rem minmax(0, 1fr);
-			grid-template-rows: auto;
-			align-items: center;
-			text-align: left;
-		}
-
-		.package-showcase__tab-label {
-			font-size: 0.8rem;
+			font-size: 0.9rem;
 		}
 
 		.package-showcase__features {
