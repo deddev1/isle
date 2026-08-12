@@ -63,6 +63,7 @@ const images = theIsleImages.gallery.slice(0, 10);
 	}
 
 	.gallery__marquee {
+		container-type: inline-size;
 		overflow: hidden;
 		mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 		-webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
@@ -86,8 +87,10 @@ const images = theIsleImages.gallery.slice(0, 10);
 		gap: 0.5rem;
 	}
 
+	/* Same footprint as the old 4-up grid cells */
 	.gallery__item {
-		flex: 0 0 clamp(9.5rem, 18vw, 13.5rem);
+		flex: 0 0 calc((100cqi - 1.5rem) / 4);
+		width: calc((100cqi - 1.5rem) / 4);
 		margin: 0;
 		overflow: hidden;
 		border-radius: 0.55rem;
@@ -114,6 +117,13 @@ const images = theIsleImages.gallery.slice(0, 10);
 		}
 	}
 
+	@media (max-width: 800px) {
+		.gallery__item {
+			flex-basis: calc((100cqi - 0.5rem) / 2);
+			width: calc((100cqi - 0.5rem) / 2);
+		}
+	}
+
 	@media (prefers-reduced-motion: reduce) {
 		.gallery__track {
 			animation: none;
@@ -125,10 +135,6 @@ const images = theIsleImages.gallery.slice(0, 10);
 
 		.gallery__group[aria-hidden='true'] {
 			display: none;
-		}
-
-		.gallery__item {
-			flex-basis: 10rem;
 		}
 	}
 </style>
