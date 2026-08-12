@@ -1,9 +1,7 @@
 ---
 import { productInfo, siteConfig } from '../data/site';
-import { isleSceneImages } from '../data/theisle';
 
 const monthlyPlan = productInfo.plans.find((plan) => plan.id === 'monthly');
-const dinoImage = isleSceneImages.predatorStalk;
 ---
 
 <aside
@@ -13,30 +11,93 @@ const dinoImage = isleSceneImages.predatorStalk;
 	aria-live="polite"
 	aria-label="Limited offer"
 >
-	<div class="sale-popup__card">
+	<div class="sale-popup__scene">
 		<button type="button" class="sale-popup__close" data-sale-popup-close aria-label="Dismiss offer">
 			<span aria-hidden="true">&times;</span>
 		</button>
 
-		<div class="sale-popup__media">
-			<img
-				src={dinoImage.src}
-				alt={dinoImage.alt}
-				width="96"
-				height="96"
-				class="sale-popup__dino"
-				loading="lazy"
-				decoding="async"
-			/>
-		</div>
+		<div class="sale-popup__actor">
+			<div class="sale-popup__shadow" aria-hidden="true"></div>
 
-		<div class="sale-popup__body">
-			<p class="sale-popup__eyebrow">The Isle · Cloud-DMA</p>
-			<p class="sale-popup__title">ESP &amp; cheats on sale</p>
-			<p class="sale-popup__copy">
-				Full package from <strong>${monthlyPlan?.price ?? 35}/mo</strong> — ESP, radar, and combat tools.
-			</p>
-			<a href={siteConfig.checkoutUrl} class="sale-popup__cta">Buy now</a>
+			<svg
+				class="sale-popup__dino"
+				viewBox="0 0 220 240"
+				role="img"
+				aria-label="The Isle dinosaur mascot"
+				xmlns="http://www.w3.org/2000/svg"
+			>
+				<defs>
+					<linearGradient id="dino-body" x1="0%" y1="0%" x2="100%" y2="100%">
+						<stop offset="0%" stop-color="#6f9b63" />
+						<stop offset="55%" stop-color="#3f6138" />
+						<stop offset="100%" stop-color="#243521" />
+					</linearGradient>
+					<linearGradient id="dino-belly" x1="0%" y1="0%" x2="0%" y2="100%">
+						<stop offset="0%" stop-color="#8fbb82" />
+						<stop offset="100%" stop-color="#56784d" />
+					</linearGradient>
+					<linearGradient id="dino-head" x1="0%" y1="0%" x2="100%" y2="100%">
+						<stop offset="0%" stop-color="#7cab70" />
+						<stop offset="100%" stop-color="#35502f" />
+					</linearGradient>
+					<linearGradient id="dino-arm" x1="0%" y1="0%" x2="100%" y2="0%">
+						<stop offset="0%" stop-color="#4f7346" />
+						<stop offset="100%" stop-color="#2d4228" />
+					</linearGradient>
+					<filter id="dino-shadow" x="-20%" y="-20%" width="140%" height="140%">
+						<feDropShadow dx="0" dy="8" stdDeviation="6" flood-color="#000" flood-opacity="0.45" />
+					</filter>
+				</defs>
+
+				<g filter="url(#dino-shadow)">
+					<path
+						d="M28 188 C18 210 34 228 58 226 C82 224 92 206 88 186 C84 166 62 154 44 160 C30 165 24 176 28 188 Z"
+						fill="url(#dino-body)"></path>
+					<path
+						d="M46 118 C34 132 28 154 36 176 C44 198 66 210 92 206 C118 202 132 182 128 156 C124 130 104 108 78 104 C62 102 52 106 46 118 Z"
+						fill="url(#dino-body)"></path>
+					<ellipse cx="72" cy="156" rx="22" ry="30" fill="url(#dino-belly)" opacity="0.85"></ellipse>
+					<path
+						d="M34 92 C18 88 8 102 10 118 C12 134 28 146 48 144 C58 143 66 136 68 126 C70 112 48 96 34 92 Z"
+						fill="url(#dino-head)"></path>
+					<path d="M8 112 L0 108 L6 118 Z" fill="#2d4228"></path>
+					<path d="M8 118 L-2 122 L8 126 Z" fill="#2d4228"></path>
+					<circle cx="24" cy="108" r="3.5" fill="#101810"></circle>
+					<circle cx="25" cy="107" r="1.2" fill="#dff5d8"></circle>
+					<path
+						d="M92 132 C108 128 124 132 138 142 C152 152 160 166 156 178 C152 190 136 196 118 192"
+						fill="none"
+						stroke="url(#dino-arm)"
+						stroke-width="14"
+						stroke-linecap="round"></path>
+					<path
+						d="M118 192 C132 198 148 194 162 182"
+						fill="none"
+						stroke="url(#dino-arm)"
+						stroke-width="13"
+						stroke-linecap="round"></path>
+					<path d="M154 176 L166 170 L160 184 Z" fill="#314428"></path>
+					<path d="M160 184 L172 180 L166 192 Z" fill="#314428"></path>
+					<path d="M166 170 L178 168 L172 182 Z" fill="#243521"></path>
+					<path d="M172 182 L184 182 L178 194 Z" fill="#243521"></path>
+				</g>
+			</svg>
+
+			<div class="sale-popup__board">
+				<span class="sale-popup__grip sale-popup__grip--left" aria-hidden="true"></span>
+				<span class="sale-popup__grip sale-popup__grip--right" aria-hidden="true"></span>
+				<div class="sale-popup__board-face">
+					<p class="sale-popup__badge">Sale</p>
+					<p class="sale-popup__headline">The Isle Cheats</p>
+					<p class="sale-popup__price">
+						From <strong>${monthlyPlan?.price ?? 35}<span>/mo</span></strong>
+					</p>
+					<p class="sale-popup__sub">ESP · Radar · Combat tools</p>
+					<a href={siteConfig.checkoutUrl} class="sale-popup__cta">Buy now</a>
+				</div>
+				<span class="sale-popup__board-edge" aria-hidden="true"></span>
+				<span class="sale-popup__board-post" aria-hidden="true"></span>
+			</div>
 		</div>
 	</div>
 </aside>
@@ -54,7 +115,7 @@ const dinoImage = isleSceneImages.predatorStalk;
 			popup.classList.remove('is-visible');
 			window.setTimeout(() => {
 				popup.hidden = true;
-			}, 320);
+			}, 420);
 			if (persist) {
 				try {
 					localStorage.setItem(STORAGE_KEY, '1');
@@ -96,140 +157,251 @@ const dinoImage = isleSceneImages.predatorStalk;
 <style>
 	.sale-popup {
 		position: fixed;
-		right: max(0.85rem, env(safe-area-inset-right, 0px));
-		bottom: max(0.85rem, env(safe-area-inset-bottom, 0px));
+		right: max(0.5rem, env(safe-area-inset-right, 0px));
+		bottom: max(0.25rem, env(safe-area-inset-bottom, 0px));
 		z-index: 90;
-		width: min(17.5rem, calc(100vw - 1.5rem));
+		width: min(16.5rem, calc(100vw - 1rem));
 		pointer-events: none;
-		transform: translate3d(120%, 0, 0);
+		perspective: 980px;
+		transform: translate3d(120%, 28px, 0) rotateY(-18deg) scale(0.9);
 		opacity: 0;
 		transition:
-			transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
-			opacity 0.35s ease;
+			transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 0.4s ease;
 	}
 
 	.sale-popup.is-visible {
-		transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
 		opacity: 1;
 		pointer-events: auto;
 	}
 
-	.sale-popup__card {
+	.sale-popup__scene {
 		position: relative;
-		display: grid;
-		grid-template-columns: 4.5rem minmax(0, 1fr);
-		gap: 0.65rem;
-		align-items: center;
-		padding: 0.75rem 0.85rem 0.8rem 0.7rem;
-		border-radius: 1rem;
-		border: 1px solid rgba(192, 132, 252, 0.32);
-		background:
-			linear-gradient(145deg, rgba(18, 12, 32, 0.96), rgba(10, 6, 18, 0.94)),
-			radial-gradient(circle at 0% 100%, rgba(124, 58, 237, 0.22), transparent 55%);
-		box-shadow:
-			0 16px 40px rgba(0, 0, 0, 0.42),
-			0 0 0 1px rgba(99, 102, 241, 0.08),
-			inset 0 1px 0 rgba(255, 255, 255, 0.05);
-		backdrop-filter: blur(14px) saturate(1.2);
-		-webkit-backdrop-filter: blur(14px) saturate(1.2);
+		width: 100%;
+		min-height: 14rem;
+		transform-style: preserve-3d;
 	}
 
 	.sale-popup__close {
 		position: absolute;
-		top: 0.35rem;
-		right: 0.35rem;
+		top: 0.1rem;
+		right: 0.1rem;
+		z-index: 5;
 		display: grid;
 		place-items: center;
-		width: 1.55rem;
-		height: 1.55rem;
+		width: 1.65rem;
+		height: 1.65rem;
 		border: 0;
 		border-radius: 999px;
-		background: rgba(99, 102, 241, 0.14);
-		color: #d8cfea;
+		background: rgba(10, 6, 18, 0.78);
+		border: 1px solid rgba(192, 132, 252, 0.28);
+		color: #ede9fe;
 		font-size: 1rem;
 		line-height: 1;
 		cursor: pointer;
+		box-shadow: 0 4px 12px rgba(0, 0, 0, 0.35);
 		transition:
 			background 0.2s ease,
-			color 0.2s ease;
+			transform 0.2s ease;
 	}
 
 	.sale-popup__close:hover {
-		background: rgba(99, 102, 241, 0.28);
-		color: #fff;
+		background: rgba(76, 29, 149, 0.85);
+		transform: scale(1.05);
 	}
 
-	.sale-popup__media {
+	.sale-popup__actor {
 		position: relative;
-		width: 4.5rem;
-		height: 4.5rem;
-		border-radius: 0.85rem;
-		overflow: hidden;
-		border: 1px solid rgba(168, 85, 247, 0.28);
-		box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+		width: 100%;
+		height: 14rem;
+		transform-style: preserve-3d;
+	}
+
+	.sale-popup.is-visible .sale-popup__actor {
+		animation:
+			sale-dino-enter 0.7s cubic-bezier(0.22, 1, 0.36, 1) both,
+			sale-dino-idle 5s ease-in-out 0.7s infinite;
+	}
+
+	.sale-popup__shadow {
+		position: absolute;
+		left: 8%;
+		right: 6%;
+		bottom: 0.1rem;
+		height: 0.9rem;
+		border-radius: 999px;
+		background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.58), transparent 72%);
+		transform: translateZ(-48px) scaleX(0.92);
+		filter: blur(2px);
 	}
 
 	.sale-popup__dino {
-		display: block;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-		object-position: center 35%;
+		position: absolute;
+		left: -0.15rem;
+		bottom: 0.35rem;
+		width: 7.4rem;
+		height: auto;
+		transform: translate3d(0, 0, -24px) rotateY(18deg);
+		z-index: 1;
+		overflow: visible;
 	}
 
-	.sale-popup__body {
+	.sale-popup__board {
+		position: absolute;
+		right: 0.05rem;
+		bottom: 1.55rem;
+		width: min(11.75rem, 78%);
+		transform-style: preserve-3d;
+		transform: translate3d(0, 0, 36px) rotateY(-18deg) rotateX(9deg);
+		z-index: 2;
+	}
+
+	.sale-popup.is-visible .sale-popup__board {
+		animation: sale-board-sway 3.8s ease-in-out 0.7s infinite;
+	}
+
+	.sale-popup__grip {
+		position: absolute;
+		top: 2.15rem;
+		width: 0.72rem;
+		height: 0.72rem;
+		border-radius: 0.35rem 0.35rem 0.15rem 0.15rem;
+		background: linear-gradient(180deg, #56784d, #314428);
+		box-shadow:
+			inset 0 1px 0 rgba(255, 255, 255, 0.12),
+			0 3px 5px rgba(0, 0, 0, 0.35);
+		z-index: 4;
+	}
+
+	.sale-popup__grip--left {
+		left: -0.28rem;
+		transform: rotate(-14deg) translateZ(8px);
+	}
+
+	.sale-popup__grip--right {
+		right: -0.22rem;
+		transform: rotate(12deg) translateZ(10px);
+	}
+
+	.sale-popup__board-face {
+		position: relative;
 		display: grid;
-		gap: 0.28rem;
-		padding-right: 1.1rem;
+		gap: 0.22rem;
+		padding: 0.74rem 0.8rem 0.8rem;
+		border-radius: 0.55rem;
+		border: 2px solid #6b4a1f;
+		background:
+			repeating-linear-gradient(
+				90deg,
+				rgba(255, 255, 255, 0.03) 0,
+				rgba(255, 255, 255, 0.03) 2px,
+				transparent 2px,
+				transparent 8px
+			),
+			linear-gradient(165deg, #f3e2b8 0%, #d4b06a 38%, #b8893f 100%);
+		box-shadow:
+			0 18px 30px rgba(0, 0, 0, 0.4),
+			inset 0 1px 0 rgba(255, 255, 255, 0.45),
+			inset 0 -2px 0 rgba(92, 58, 16, 0.25);
+		transform: translateZ(3px);
 	}
 
-	.sale-popup__eyebrow {
+	.sale-popup__board-edge {
+		position: absolute;
+		inset: 0.35rem -0.3rem -0.38rem 0.38rem;
+		border-radius: 0.55rem;
+		background: linear-gradient(180deg, #7a5424, #4a3012);
+		transform: translateZ(-7px) rotateY(-4deg);
+		box-shadow: 0 10px 18px rgba(0, 0, 0, 0.35);
+	}
+
+	.sale-popup__board-post {
+		position: absolute;
+		left: 0.62rem;
+		bottom: -2.25rem;
+		width: 0.45rem;
+		height: 2.45rem;
+		border-radius: 0.2rem;
+		background: linear-gradient(90deg, #5c3d18, #8b5e2a 50%, #5c3d18);
+		transform: translateZ(-12px) rotateY(-10deg);
+		box-shadow: 2px 0 8px rgba(0, 0, 0, 0.28);
+	}
+
+	.sale-popup__badge {
+		position: absolute;
+		top: -0.58rem;
+		right: 0.55rem;
+		margin: 0;
+		padding: 0.18rem 0.48rem;
+		border-radius: 999px;
+		background: linear-gradient(135deg, #ef4444, #dc2626);
+		color: #fff;
+		font-size: 0.58rem;
+		font-weight: 900;
+		letter-spacing: 0.14em;
+		text-transform: uppercase;
+		box-shadow: 0 4px 10px rgba(220, 38, 38, 0.45);
+		transform: rotate(-8deg) translateZ(6px);
+	}
+
+	.sale-popup__headline {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: 0.9rem;
+		font-weight: 900;
+		line-height: 1.1;
+		letter-spacing: -0.02em;
+		color: #2b1808;
+		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.35);
+	}
+
+	.sale-popup__price {
+		margin: 0;
+		font-size: 0.72rem;
+		font-weight: 700;
+		color: #4a3012;
+	}
+
+	.sale-popup__price strong {
+		font-family: var(--font-display);
+		font-size: 1.18rem;
+		font-weight: 900;
+		color: #1f1207;
+	}
+
+	.sale-popup__price span {
+		font-size: 0.72rem;
+		font-weight: 800;
+	}
+
+	.sale-popup__sub {
 		margin: 0;
 		font-size: 0.62rem;
 		font-weight: 700;
-		letter-spacing: 0.12em;
+		letter-spacing: 0.04em;
 		text-transform: uppercase;
-		color: var(--color-orchid);
-	}
-
-	.sale-popup__title {
-		margin: 0;
-		font-family: var(--font-display);
-		font-size: 0.92rem;
-		font-weight: 800;
-		line-height: 1.15;
-		letter-spacing: -0.02em;
-		color: var(--color-ink);
-	}
-
-	.sale-popup__copy {
-		margin: 0;
-		font-size: 0.72rem;
-		line-height: 1.45;
-		color: var(--color-muted);
-	}
-
-	.sale-popup__copy strong {
-		color: #e9d5ff;
-		font-weight: 800;
+		color: #5c3d18;
 	}
 
 	.sale-popup__cta {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: fit-content;
-		min-height: 1.85rem;
+		width: 100%;
+		min-height: 2rem;
 		margin-top: 0.15rem;
-		padding: 0.35rem 0.75rem;
-		border-radius: 0.55rem;
-		background: var(--gradient-brand);
+		border-radius: 0.45rem;
+		border: 1px solid rgba(46, 24, 8, 0.35);
+		background: linear-gradient(180deg, #7c3aed 0%, #6d28d9 100%);
 		color: #fff;
 		font-size: 0.72rem;
-		font-weight: 800;
-		letter-spacing: 0.05em;
+		font-weight: 900;
+		letter-spacing: 0.08em;
 		text-transform: uppercase;
-		box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
+		box-shadow:
+			0 6px 14px rgba(76, 29, 149, 0.45),
+			inset 0 1px 0 rgba(255, 255, 255, 0.18);
 		transition:
 			transform 0.2s ease,
 			filter 0.2s ease;
@@ -247,24 +419,61 @@ const dinoImage = isleSceneImages.predatorStalk;
 		outline-offset: 2px;
 	}
 
+	@keyframes sale-dino-enter {
+		from {
+			transform: translate3d(48px, 36px, -80px) rotateY(24deg) scale(0.86);
+			opacity: 0.15;
+		}
+		to {
+			transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+			opacity: 1;
+		}
+	}
+
+	@keyframes sale-dino-idle {
+		0%,
+		100% {
+			transform: translate3d(0, 0, 0);
+		}
+		50% {
+			transform: translate3d(0, -5px, 0);
+		}
+	}
+
+	@keyframes sale-board-sway {
+		0%,
+		100% {
+			transform: translate3d(0, 0, 36px) rotateY(-18deg) rotateX(9deg);
+		}
+		50% {
+			transform: translate3d(0, -3px, 40px) rotateY(-14deg) rotateX(7deg);
+		}
+	}
+
 	@media (prefers-reduced-motion: reduce) {
-		.sale-popup {
+		.sale-popup,
+		.sale-popup__actor,
+		.sale-popup__board {
+			animation: none !important;
 			transition-duration: 0.01ms;
 		}
 	}
 
 	@media (max-width: 420px) {
 		.sale-popup {
-			width: min(16.5rem, calc(100vw - 1.25rem));
+			width: min(15rem, calc(100vw - 0.85rem));
 		}
 
-		.sale-popup__card {
-			grid-template-columns: 4rem minmax(0, 1fr);
+		.sale-popup__actor {
+			height: 13rem;
 		}
 
-		.sale-popup__media {
-			width: 4rem;
-			height: 4rem;
+		.sale-popup__dino {
+			width: 6.6rem;
+		}
+
+		.sale-popup__board {
+			width: min(10.75rem, 80%);
 		}
 	}
 </style>
