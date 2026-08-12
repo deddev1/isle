@@ -777,37 +777,13 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 
 	.product--gallery .product__thumbs {
 		flex-shrink: 0;
-		display: flex;
-		flex-wrap: nowrap;
+		display: grid;
+		grid-template-columns: repeat(6, minmax(0, 1fr));
 		gap: 0.45rem;
 		width: 100%;
-		overflow-x: auto;
-		overflow-y: hidden;
-		scroll-snap-type: x mandatory;
-		-webkit-overflow-scrolling: touch;
-		padding: 0.1rem 0.1rem 0.35rem;
-		scrollbar-width: thin;
-		scrollbar-color: rgba(192, 132, 252, 0.45) transparent;
-	}
-
-	.product--gallery .product__thumbs::-webkit-scrollbar {
-		height: 0.35rem;
-	}
-
-	.product--gallery .product__thumbs::-webkit-scrollbar-track {
-		background: transparent;
-	}
-
-	.product--gallery .product__thumbs::-webkit-scrollbar-thumb {
-		border-radius: 999px;
-		background: rgba(192, 132, 252, 0.4);
 	}
 
 	.product--gallery .product__thumb {
-		flex: 0 0 5.75rem;
-		width: 5.75rem;
-		aspect-ratio: 16 / 9;
-		scroll-snap-align: start;
 		cursor: pointer;
 	}
 
@@ -815,17 +791,11 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 		.product--gallery .product__figure {
 			aspect-ratio: unset;
 		}
-
-		.product--gallery .product__thumb {
-			flex-basis: 6.25rem;
-			width: 6.25rem;
-		}
 	}
 
 	@media (max-width: 959px) {
-		.product--gallery .product__thumb {
-			flex-basis: 5.25rem;
-			width: 5.25rem;
+		.product--gallery .product__thumbs {
+			grid-template-columns: repeat(3, minmax(0, 1fr));
 		}
 	}
 
