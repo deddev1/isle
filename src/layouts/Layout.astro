@@ -1,5 +1,6 @@
 ---
 import '../styles/global.css';
+import SalePopup from '../components/SalePopup.astro';
 import { getLocalizedPath, getOgLocale, getLocaleDir, getHreflangAlternates, getXDefaultPath, locales, type LocaleCode } from '../data/i18n';
 import { siteConfig } from '../data/site';
 import { organizationAlternateNames, organizationKnowsAbout } from '../data/seo/keywords';
@@ -178,5 +179,6 @@ const websiteLanguages = locales.map((entry) => entry.code);
 	</head>
 	<body>
 		<slot />
+		<SalePopup />
 	</body>
 </html>

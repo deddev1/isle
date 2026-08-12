@@ -1,0 +1,270 @@
+---
+import { productInfo, siteConfig } from '../data/site';
+import { isleSceneImages } from '../data/theisle';
+
+const monthlyPlan = productInfo.plans.find((plan) => plan.id === 'monthly');
+const dinoImage = isleSceneImages.predatorStalk;
+---
+
+<aside
+	class="sale-popup"
+	data-sale-popup
+	hidden
+	aria-live="polite"
+	aria-label="Limited offer"
+>
+	<div class="sale-popup__card">
+		<button type="button" class="sale-popup__close" data-sale-popup-close aria-label="Dismiss offer">
+			<span aria-hidden="true">&times;</span>
+		</button>
+
+		<div class="sale-popup__media">
+			<img
+				src={dinoImage.src}
+				alt={dinoImage.alt}
+				width="96"
+				height="96"
+				class="sale-popup__dino"
+				loading="lazy"
+				decoding="async"
+			/>
+		</div>
+
+		<div class="sale-popup__body">
+			<p class="sale-popup__eyebrow">The Isle · Cloud-DMA</p>
+			<p class="sale-popup__title">ESP &amp; cheats on sale</p>
+			<p class="sale-popup__copy">
+				Full package from <strong>${monthlyPlan?.price ?? 35}/mo</strong> — ESP, radar, and combat tools.
+			</p>
+			<a href={siteConfig.checkoutUrl} class="sale-popup__cta">Buy now</a>
+		</div>
+	</div>
+</aside>
+
+<script>
+	const STORAGE_KEY = 'isle-sale-popup-dismissed';
+	const SHOW_DELAY_MS = 2200;
+
+	const popup = document.querySelector('[data-sale-popup]');
+	if (popup instanceof HTMLElement) {
+		const closeBtn = popup.querySelector('[data-sale-popup-close]');
+		const checkoutLink = popup.querySelector('.sale-popup__cta');
+
+		const hide = (persist = false) => {
+			popup.classList.remove('is-visible');
+			window.setTimeout(() => {
+				popup.hidden = true;
+			}, 320);
+			if (persist) {
+				try {
+					localStorage.setItem(STORAGE_KEY, '1');
+				} catch {
+					/* ignore storage errors */
+				}
+			}
+		};
+
+		const show = () => {
+			popup.hidden = false;
+			window.requestAnimationFrame(() => {
+				popup.classList.add('is-visible');
+			});
+		};
+
+		let dismissed = false;
+		try {
+			dismissed = localStorage.getItem(STORAGE_KEY) === '1';
+		} catch {
+			dismissed = false;
+		}
+
+		if (!dismissed) {
+			window.setTimeout(show, SHOW_DELAY_MS);
+		}
+
+		closeBtn?.addEventListener('click', () => hide(true));
+		checkoutLink?.addEventListener('click', () => hide(true));
+
+		document.addEventListener('keydown', (event) => {
+			if (event.key === 'Escape' && popup.classList.contains('is-visible')) {
+				hide(true);
+			}
+		});
+	}
+</script>
+
+<style>
+	.sale-popup {
+		position: fixed;
+		right: max(0.85rem, env(safe-area-inset-right, 0px));
+		bottom: max(0.85rem, env(safe-area-inset-bottom, 0px));
+		z-index: 90;
+		width: min(17.5rem, calc(100vw - 1.5rem));
+		pointer-events: none;
+		transform: translate3d(120%, 0, 0);
+		opacity: 0;
+		transition:
+			transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 0.35s ease;
+	}
+
+	.sale-popup.is-visible {
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+		pointer-events: auto;
+	}
+
+	.sale-popup__card {
+		position: relative;
+		display: grid;
+		grid-template-columns: 4.5rem minmax(0, 1fr);
+		gap: 0.65rem;
+		align-items: center;
+		padding: 0.75rem 0.85rem 0.8rem 0.7rem;
+		border-radius: 1rem;
+		border: 1px solid rgba(192, 132, 252, 0.32);
+		background:
+			linear-gradient(145deg, rgba(18, 12, 32, 0.96), rgba(10, 6, 18, 0.94)),
+			radial-gradient(circle at 0% 100%, rgba(124, 58, 237, 0.22), transparent 55%);
+		box-shadow:
+			0 16px 40px rgba(0, 0, 0, 0.42),
+			0 0 0 1px rgba(99, 102, 241, 0.08),
+			inset 0 1px 0 rgba(255, 255, 255, 0.05);
+		backdrop-filter: blur(14px) saturate(1.2);
+		-webkit-backdrop-filter: blur(14px) saturate(1.2);
+	}
+
+	.sale-popup__close {
+		position: absolute;
+		top: 0.35rem;
+		right: 0.35rem;
+		display: grid;
+		place-items: center;
+		width: 1.55rem;
+		height: 1.55rem;
+		border: 0;
+		border-radius: 999px;
+		background: rgba(99, 102, 241, 0.14);
+		color: #d8cfea;
+		font-size: 1rem;
+		line-height: 1;
+		cursor: pointer;
+		transition:
+			background 0.2s ease,
+			color 0.2s ease;
+	}
+
+	.sale-popup__close:hover {
+		background: rgba(99, 102, 241, 0.28);
+		color: #fff;
+	}
+
+	.sale-popup__media {
+		position: relative;
+		width: 4.5rem;
+		height: 4.5rem;
+		border-radius: 0.85rem;
+		overflow: hidden;
+		border: 1px solid rgba(168, 85, 247, 0.28);
+		box-shadow: 0 8px 18px rgba(0, 0, 0, 0.35);
+	}
+
+	.sale-popup__dino {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+		object-position: center 35%;
+	}
+
+	.sale-popup__body {
+		display: grid;
+		gap: 0.28rem;
+		padding-right: 1.1rem;
+	}
+
+	.sale-popup__eyebrow {
+		margin: 0;
+		font-size: 0.62rem;
+		font-weight: 700;
+		letter-spacing: 0.12em;
+		text-transform: uppercase;
+		color: var(--color-orchid);
+	}
+
+	.sale-popup__title {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: 0.92rem;
+		font-weight: 800;
+		line-height: 1.15;
+		letter-spacing: -0.02em;
+		color: var(--color-ink);
+	}
+
+	.sale-popup__copy {
+		margin: 0;
+		font-size: 0.72rem;
+		line-height: 1.45;
+		color: var(--color-muted);
+	}
+
+	.sale-popup__copy strong {
+		color: #e9d5ff;
+		font-weight: 800;
+	}
+
+	.sale-popup__cta {
+		display: inline-flex;
+		align-items: center;
+		justify-content: center;
+		width: fit-content;
+		min-height: 1.85rem;
+		margin-top: 0.15rem;
+		padding: 0.35rem 0.75rem;
+		border-radius: 0.55rem;
+		background: var(--gradient-brand);
+		color: #fff;
+		font-size: 0.72rem;
+		font-weight: 800;
+		letter-spacing: 0.05em;
+		text-transform: uppercase;
+		box-shadow: 0 6px 14px rgba(0, 0, 0, 0.28);
+		transition:
+			transform 0.2s ease,
+			filter 0.2s ease;
+	}
+
+	.sale-popup__cta:hover {
+		transform: translateY(-1px);
+		filter: brightness(1.06);
+		color: #fff;
+	}
+
+	.sale-popup__close:focus-visible,
+	.sale-popup__cta:focus-visible {
+		outline: 2px solid rgba(167, 139, 250, 0.85);
+		outline-offset: 2px;
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.sale-popup {
+			transition-duration: 0.01ms;
+		}
+	}
+
+	@media (max-width: 420px) {
+		.sale-popup {
+			width: min(16.5rem, calc(100vw - 1.25rem));
+		}
+
+		.sale-popup__card {
+			grid-template-columns: 4rem minmax(0, 1fr);
+		}
+
+		.sale-popup__media {
+			width: 4rem;
+			height: 4rem;
+		}
+	}
+</style>
