@@ -785,7 +785,6 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 		overflow-y: hidden;
 		scroll-snap-type: x mandatory;
 		-webkit-overflow-scrolling: touch;
-		padding: 0.1rem 0.1rem 0.35rem;
 		scrollbar-width: thin;
 		scrollbar-color: rgba(192, 132, 252, 0.45) transparent;
 	}
@@ -803,10 +802,10 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 		background: rgba(192, 132, 252, 0.4);
 	}
 
+	/* Keep original 6-up size; overflow scrolls instead of growing thumbs */
 	.product--gallery .product__thumb {
-		flex: 0 0 5.75rem;
-		width: 5.75rem;
-		aspect-ratio: 16 / 9;
+		flex: 0 0 calc((100% - 5 * 0.45rem) / 6);
+		width: calc((100% - 5 * 0.45rem) / 6);
 		scroll-snap-align: start;
 		cursor: pointer;
 	}
@@ -815,17 +814,12 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 		.product--gallery .product__figure {
 			aspect-ratio: unset;
 		}
-
-		.product--gallery .product__thumb {
-			flex-basis: 6.25rem;
-			width: 6.25rem;
-		}
 	}
 
 	@media (max-width: 959px) {
 		.product--gallery .product__thumb {
-			flex-basis: 5.25rem;
-			width: 5.25rem;
+			flex-basis: calc((100% - 2 * 0.45rem) / 3);
+			width: calc((100% - 2 * 0.45rem) / 3);
 		}
 	}
 
