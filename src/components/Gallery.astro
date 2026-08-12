@@ -1,7 +1,7 @@
 ---
 import { theIsleImages } from '../data/theisle';
 
-const images = theIsleImages.gallery.slice(0, 10);
+const images = theIsleImages.gallery.slice(0, 8);
 ---
 
 <section class="gallery" id="gallery" aria-labelledby="gallery-title">
@@ -63,7 +63,9 @@ const images = theIsleImages.gallery.slice(0, 10);
 	}
 
 	.gallery__marquee {
-		container-type: inline-size;
+		--gallery-gap: 0.5rem;
+		/* Same width as the old 4-column grid cells */
+		--gallery-tile-w: calc((100% - (3 * var(--gallery-gap))) / 4);
 		overflow: hidden;
 		mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 		-webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
@@ -72,7 +74,7 @@ const images = theIsleImages.gallery.slice(0, 10);
 	.gallery__track {
 		display: flex;
 		flex-wrap: nowrap;
-		gap: 0.5rem;
+		gap: var(--gallery-gap);
 		width: max-content;
 		animation: gallery-marquee 40s linear infinite;
 	}
@@ -84,13 +86,12 @@ const images = theIsleImages.gallery.slice(0, 10);
 	.gallery__group {
 		display: flex;
 		flex-wrap: nowrap;
-		gap: 0.5rem;
+		gap: var(--gallery-gap);
 	}
 
-	/* Same footprint as the old 4-up grid cells */
 	.gallery__item {
-		flex: 0 0 calc((100cqi - 1.5rem) / 4);
-		width: calc((100cqi - 1.5rem) / 4);
+		flex: 0 0 var(--gallery-tile-w);
+		width: var(--gallery-tile-w);
 		margin: 0;
 		overflow: hidden;
 		border-radius: 0.55rem;
@@ -112,15 +113,7 @@ const images = theIsleImages.gallery.slice(0, 10);
 			transform: translateX(0);
 		}
 		to {
-			/* Move exactly one group + the gap between groups */
-			transform: translateX(calc(-50% - 0.25rem));
-		}
-	}
-
-	@media (max-width: 800px) {
-		.gallery__item {
-			flex-basis: calc((100cqi - 0.5rem) / 2);
-			width: calc((100cqi - 0.5rem) / 2);
+			transform: translateX(calc(-50% - (var(--gallery-gap) / 2)));
 		}
 	}
 
