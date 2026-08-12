@@ -1,7 +1,6 @@
 ---
 import { getWhyUsContent } from '../data/i18n/why-us-content';
 import { resolveLocalizedHref, type LocaleCode } from '../data/i18n';
-import { isleScreenshotImages } from '../data/theisle';
 
 interface Props {
 	locale?: LocaleCode;
@@ -9,12 +8,6 @@ interface Props {
 
 const { locale = 'en' } = Astro.props;
 const whyUs = getWhyUsContent(locale);
-const highlightImages = [
-	isleScreenshotImages.espBeachPlayerTags,
-	isleScreenshotImages.espBeachHealthBars,
-	isleScreenshotImages.combatLogTriceratopsFight,
-	isleScreenshotImages.espRadarMinimapCombat,
-] as const;
 const resolveCtaHref = (href: string) => {
 	if (href.startsWith('/')) return resolveLocalizedHref(href, locale);
 	return href;
@@ -29,23 +22,17 @@ const resolveCtaHref = (href: string) => {
 
 		<div class="why-us__grid">
 			{
-				whyUs.highlights.map((item, index) => {
-					const image = highlightImages[index] ?? highlightImages[0];
-					return (
-						<article class="why-us__card">
-							<figure class="why-us__media">
-								<img src={image.src} alt={image.alt} width="640" height="360" loading="lazy" decoding="async" />
-							</figure>
-							<h3>{item.title}</h3>
-							<p class="why-us__lead">{item.lead}</p>
-							<ul class="home-seo__bullets">
-								{item.bullets.map((bullet) => (
-									<li>{bullet}</li>
-								))}
-							</ul>
-						</article>
-					);
-				})
+				whyUs.highlights.map((item) => (
+					<article class="why-us__card">
+						<h3>{item.title}</h3>
+						<p class="why-us__lead">{item.lead}</p>
+						<ul class="home-seo__bullets">
+							{item.bullets.map((bullet) => (
+								<li>{bullet}</li>
+							))}
+						</ul>
+					</article>
+				))
 			}
 		</div>
 
@@ -116,23 +103,6 @@ const resolveCtaHref = (href: string) => {
 		border-radius: 0.85rem;
 		border: 1px solid rgba(168, 85, 247, 0.14);
 		background: rgba(10, 6, 18, 0.35);
-		display: grid;
-		gap: 0.55rem;
-	}
-
-	.why-us__media {
-		margin: 0;
-		overflow: hidden;
-		border-radius: 0.55rem;
-		aspect-ratio: 16 / 9;
-		background: #12081f;
-	}
-
-	.why-us__media img {
-		display: block;
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
 	}
 
 	.why-us__card h3 {
