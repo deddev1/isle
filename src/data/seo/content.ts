@@ -140,27 +140,47 @@ export const extendedFaqs = [
 	{
 		question: 'Is The Isle Cheats compatible with Windows 11?',
 		answer:
-			'The Isle Cheats is built for Windows PC, including Windows 10 and Windows 11. Check the Updates page after major OS or game patches for compatibility notices.',
+			'Yes. The Isle Cheats targets Windows PC, including Windows 10 and Windows 11. After major OS or game patches, check the Updates page for compatibility notices.',
 	},
 	{
-		question: 'What dinosaurs does The Isle ESP show?',
+		question: 'What dinosaurs and info does The Isle ESP show?',
 		answer:
-			'Visuals ESP displays all entities in range with classname, health, growth, weight, stamina, and blood levels. World ESP shows environmental resources separately.',
+			'Visuals ESP can show entities in range with names, health, growth, weight, stamina, blood, and distance. Filters and colors help you keep the overlay readable during fights and growth.',
 	},
 	{
-		question: 'How much does The Isle Cheats cost?',
+		question: 'Can World ESP help me grow faster?',
 		answer:
-			'Monthly packages start at $35 USD and lifetime packages at $150 USD. See the Pricing page for current plan details and Cloud-DMA inclusions.',
+			'Yes. World ESP highlights meat, bodies, fruits, herbs, mushrooms, and water so you spend less time searching and more time growing or repositioning safely.',
+	},
+	{
+		question: 'Which combat hacks are in the package?',
+		answer:
+			'Cloud-DMA combat tools include Instant Rotation, Auto-Attack, Omnimovement, No Cooldown Attack, and related movement helpers. Review the Cheats and Features pages for the current list.',
+	},
+	{
+		question: 'How do I choose monthly vs lifetime?',
+		answer:
+			'Choose monthly ($35) if you want to test the setup for a shorter period. Choose lifetime ($150) if you play often and prefer one payment with no renewals. Feature access is the same on both plans.',
+	},
+	{
+		question: 'What should I do if my license email does not arrive?',
+		answer:
+			'First check spam and promotions folders, then confirm the payment went through. If you still do not see delivery, contact Support with your order ID, payment confirmation, and the email used at checkout.',
+	},
+	{
+		question: 'Where can I get help after buying?',
+		answer:
+			'Use the Support page for setup, billing, and delivery questions. The FAQ hub, Updates page, and refund policy cover common cases before you open a ticket.',
+	},
+	{
+		question: 'Are refunds available?',
+		answer:
+			'Refund eligibility depends on the conditions published on the Refund Policy page. Read that page before purchasing so you understand what qualifies and what does not.',
 	},
 	{
 		question: 'How often are The Isle cheats updated?',
 		answer:
-			'Updates are published when The Isle game patches require maintenance. Check the Updates page and blog for the latest compatibility notices.',
-	},
-	{
-		question: 'What is the difference between Visuals ESP and World ESP?',
-		answer:
-			'Visuals ESP tracks living entities with health, growth, and combat data. World ESP tracks map resources like bodies, meat, fruits, herbs, mushrooms, and water.',
+			'Maintenance releases are published when The Isle patches require them. Check the Updates page after each game update for the latest compatibility notes.',
 	},
 ];
 

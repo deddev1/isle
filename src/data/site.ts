@@ -214,21 +214,41 @@ export const homeFaqs = [
 	{
 		question: 'What is included with The Isle Cheats?',
 		answer:
-			'The Isle Cheats includes Visuals ESP, World ESP, Cheats, and Other utility hacks. The Cloud-DMA option covers ESP, World ESP, Cheats, and Other features without Aimbot. Full packages can include the complete feature list on the Features page, including optional Aimbot controls for buyers who need them.',
+			'The Isle Cheats includes Visuals ESP, World ESP, combat hacks, and utility tools for Windows PC. The Cloud-DMA package covers ESP, World ESP, Cheats, and Other features without Aimbot. See the Features page for the full checklist before you buy.',
 	},
 	{
 		question: 'What is the Cloud-DMA option?',
 		answer:
-			'Cloud-DMA is the package option focused on ESP, World ESP, Cheats, and Other hacks such as Instant Rotation, Radar, and FOV Changer. Aimbot is not included in the Cloud-DMA option.',
+			'Cloud-DMA is the hardware-based package for The Isle on Windows PC. It focuses on Visuals ESP, World ESP, combat tools like Instant Rotation and Auto-Attack, plus utilities such as Radar and FOV Changer. Aimbot is not included in the base Cloud-DMA option.',
+	},
+	{
+		question: 'How much do monthly and lifetime plans cost?',
+		answer:
+			'Current pricing is $35 USD for monthly and $150 USD for lifetime. Both plans include the same Cloud-DMA feature set. Compare options on the Pricing page before checkout.',
 	},
 	{
 		question: 'How are licenses delivered?',
 		answer:
-			'After payment is confirmed, license details are delivered digitally. Delivery timing can vary by payment method and order review. Keep your order confirmation available when contacting support so the team can locate your purchase quickly.',
+			'After payment is confirmed, license details are delivered digitally. Timing can vary by payment method and order review. Keep your order confirmation ready if you contact support so the team can find your purchase quickly.',
 	},
-		{
-			question: 'Where can I check product updates?',
-			answer:
-				'Product maintenance notes are published on the Updates page whenever a new build or compatibility notice is available. Checking that page after The Isle patches is the fastest way to confirm whether a maintenance release has been posted.',
-		},
+	{
+		question: 'Does The Isle Cheats work after game updates?',
+		answer:
+			'When The Isle or Evrima patches, check the Updates page for maintenance notes. Compatibility notices are published there so you can confirm whether a new build is available after a game update.',
+	},
+	{
+		question: 'Is Aimbot included in the base package?',
+		answer:
+			'No. The Cloud-DMA base package includes Visuals ESP, World ESP, combat hacks, and utilities without Aimbot. Aimbot-related options are documented separately and are not part of the standard Cloud-DMA inclusion.',
+	},
+	{
+		question: 'What is the difference between Visuals ESP and World ESP?',
+		answer:
+			'Visuals ESP tracks living entities with boxes, snaplines, health, growth, stamina, and distance. World ESP highlights map resources such as bodies, meat, fruits, herbs, mushrooms, and water so you can farm and survive faster.',
+	},
+	{
+		question: 'Which platforms are supported?',
+		answer:
+			'The Isle Cheats is built for Windows PC (Windows 10 and Windows 11). It is sold as a digital license for worldwide buyers. Console or other platforms are not supported.',
+	},
 ] as const;
