@@ -22,7 +22,7 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+the-isle-screenshots-for-cursor.zip
 
-# wrangler
 .wrangler
 .dev.vars*

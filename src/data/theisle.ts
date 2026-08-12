@@ -5,7 +5,73 @@ export type IsleImage = {
 	alt: string;
 };
 
-/** Self-hosted The Isle screenshots — each file has a unique crawlable URL on islecheats.net */
+const screenshotBase = '/images/the-isle';
+
+/** Real The Isle cheat/ESP gameplay screenshots — PNG originals plus WebP copies in /images/the-isle/ */
+export const isleScreenshotImages = {
+	aimbotAllosaurusDamageLog: {
+		src: `${screenshotBase}/isle-aimbot-allosaurus-damage-log.webp`,
+		alt: 'The Isle aimbot and Allosaurus headshot damage log overlay during combat',
+	},
+	espRadarMinimapCombat: {
+		src: `${screenshotBase}/isle-esp-radar-minimap-combat.webp`,
+		alt: 'The Isle ESP radar minimap with entity tags and combat targeting overlay',
+	},
+	combatLogTyrannosaurusHead: {
+		src: `${screenshotBase}/isle-combat-log-tyrannosaurus-head.webp`,
+		alt: 'The Isle combat log showing repeated Tyrannosaurus head damage entries',
+	},
+	espBeachSkeletonAimbot: {
+		src: `${screenshotBase}/isle-esp-beach-skeleton-aimbot.webp`,
+		alt: 'The Isle beach ESP with skeleton wireframes and aimbot distance tags on Tyrannosaurus',
+	},
+	combatLogCeratosaurusHead: {
+		src: `${screenshotBase}/isle-combat-log-ceratosaurus-head.webp`,
+		alt: 'The Isle combat log with Ceratosaurus headshot damage on a beach encounter',
+	},
+	espRadarGlowJungle: {
+		src: `${screenshotBase}/isle-esp-radar-glow-jungle.webp`,
+		alt: 'The Isle jungle ESP glow highlight with radar range and entity health bars',
+	},
+	combatLogBoneEspForest: {
+		src: `${screenshotBase}/isle-combat-log-bone-esp-forest.webp`,
+		alt: 'The Isle forest bone ESP and combat log during Tyrannosaurus head damage',
+	},
+	combatLogTriceratopsFight: {
+		src: `${screenshotBase}/isle-combat-log-triceratops-fight.webp`,
+		alt: 'The Isle Triceratops versus Tyrannosaurus fight with headshot combat log',
+	},
+	combatLogBeachTyrannosaurus: {
+		src: `${screenshotBase}/isle-combat-log-beach-tyrannosaurus.webp`,
+		alt: 'The Isle beach Tyrannosaurus ESP health bars and headshot combat log',
+	},
+	aimbotHeadshotSkeleton: {
+		src: `${screenshotBase}/isle-aimbot-headshot-skeleton.webp`,
+		alt: 'The Isle aimbot always-headshot mode with skeleton ESP and radar minimap',
+	},
+	espBeachPlayerTags: {
+		src: `${screenshotBase}/isle-esp-beach-player-tags.webp`,
+		alt: 'The Isle beach player ESP with snaplines, health, and distance tags',
+	},
+	espBeachCarnotaurus: {
+		src: `${screenshotBase}/isle-esp-beach-carnotaurus.webp`,
+		alt: 'The Isle beach Carnotaurus ESP entity tags and health overlays',
+	},
+	espBeachHealthBars: {
+		src: `${screenshotBase}/isle-esp-beach-health-bars.webp`,
+		alt: 'The Isle beach ESP health and blood percentage bars on nearby dinosaurs',
+	},
+	espRadarDeinosuchus: {
+		src: `${screenshotBase}/isle-esp-radar-deinosuchus.webp`,
+		alt: 'The Isle Deinosuchus combat scene with radar minimap and growth ESP',
+	},
+	espRadarTopdown: {
+		src: `${screenshotBase}/isle-esp-radar-topdown.webp`,
+		alt: 'The Isle top-down radar ESP with FOV arc and player entity tracking',
+	},
+} as const satisfies Record<string, IsleImage>;
+
+/** Legacy scenic The Isle environment shots — kept for non-feature pages */
 export const isleSceneImages = {
 	hero: {
 		src: '/images/the-isle-hero-dinosaur-survival.webp',
@@ -50,60 +116,67 @@ export const isleSceneImages = {
 } as const satisfies Record<string, IsleImage>;
 
 export const theIsleImages = {
-	hero: isleSceneImages.hero.src,
-	cover: isleSceneImages.herdPlains.src,
+	hero: isleScreenshotImages.espBeachPlayerTags.src,
+	cover: isleScreenshotImages.espRadarMinimapCombat.src,
 	logo: siteConfig.logo,
 	product: [
-		isleSceneImages.herdPlains,
-		isleSceneImages.carnivoreCombat,
-		isleSceneImages.swampEnvironment,
-		isleSceneImages.predatorStalk,
-		isleSceneImages.nightHunt,
-		isleSceneImages.packEncounter,
+		isleScreenshotImages.espBeachPlayerTags,
+		isleScreenshotImages.combatLogTriceratopsFight,
+		isleScreenshotImages.aimbotHeadshotSkeleton,
+		isleScreenshotImages.espRadarGlowJungle,
+		isleScreenshotImages.combatLogBoneEspForest,
+		isleScreenshotImages.espRadarDeinosuchus,
 	],
 	gallery: [
-		{ ...isleSceneImages.hero, featured: true as const },
-		isleSceneImages.tyrannosaurForest,
-		isleSceneImages.carnivoreCombat,
-		isleSceneImages.swampEnvironment,
-		isleSceneImages.predatorStalk,
-		isleSceneImages.packEncounter,
-		isleSceneImages.riversideDrink,
+		{ ...isleScreenshotImages.espBeachPlayerTags, featured: true as const },
+		isleScreenshotImages.espRadarMinimapCombat,
+		isleScreenshotImages.combatLogTriceratopsFight,
+		isleScreenshotImages.aimbotHeadshotSkeleton,
+		isleScreenshotImages.espBeachCarnotaurus,
+		isleScreenshotImages.combatLogBoneEspForest,
+		isleScreenshotImages.espRadarDeinosuchus,
 	],
 	pageHeroes: {
-		home: isleSceneImages.hero,
-		cheats: isleSceneImages.carnivoreCombat,
-		theisleEsp: isleSceneImages.tyrannosaurForest,
-		theIsleCheats: isleSceneImages.herdPlains,
-		theIsleEsp: isleSceneImages.predatorStalk,
+		home: isleScreenshotImages.espBeachPlayerTags,
+		cheats: isleScreenshotImages.aimbotAllosaurusDamageLog,
+		theisleEsp: isleScreenshotImages.espBeachHealthBars,
+		theIsleCheats: isleScreenshotImages.espRadarMinimapCombat,
+		theIsleEsp: isleScreenshotImages.espBeachPlayerTags,
 		theIsleGuide: isleSceneImages.riversideDrink,
-		theIsleFeatures: isleSceneImages.hero,
+		theIsleFeatures: isleScreenshotImages.combatLogBoneEspForest,
 		theIsleFaq: isleSceneImages.nightHunt,
 		theIsleSettings: isleSceneImages.aerialLandscape,
 		theIslePerformance: isleSceneImages.aerialLandscape,
 		theIsleGrowthGuide: isleSceneImages.herdPlains,
 		theIsleSurvivalGuide: isleSceneImages.riversideDrink,
-		theIsleUpdates: isleSceneImages.packEncounter,
+		theIsleUpdates: isleScreenshotImages.combatLogBeachTyrannosaurus,
 		theIsleDinosaurGuide: isleSceneImages.tyrannosaurForest,
-		features: isleSceneImages.swampEnvironment,
+		features: isleScreenshotImages.espRadarTopdown,
 		pricing: isleSceneImages.herdPlains,
 		faq: isleSceneImages.nightHunt,
 		support: isleSceneImages.riversideDrink,
-		updates: isleSceneImages.packEncounter,
+		updates: isleScreenshotImages.combatLogCeratosaurusHead,
 		terms: isleSceneImages.aerialLandscape,
 		privacyPolicy: isleSceneImages.swampEnvironment,
 		refundPolicy: isleSceneImages.herdPlains,
-		blog: isleSceneImages.tyrannosaurForest,
+		blog: isleScreenshotImages.espRadarGlowJungle,
 		notFound: isleSceneImages.nightHunt,
 	},
 } as const;
 
 export type PageHeroKey = keyof typeof theIsleImages.pageHeroes;
+export type IsleScreenshotKey = keyof typeof isleScreenshotImages;
+export type IsleSceneKey = keyof typeof isleSceneImages;
 
 export function getPageHero(key: PageHeroKey): IsleImage {
 	return theIsleImages.pageHeroes[key];
 }
 
-export function getPageGallery(...keys: Array<keyof typeof isleSceneImages>): IsleImage[] {
-	return keys.map((key) => isleSceneImages[key]);
+export function getPageGallery(...keys: Array<IsleScreenshotKey | IsleSceneKey>): IsleImage[] {
+	return keys.map((key) => {
+		if (key in isleScreenshotImages) {
+			return isleScreenshotImages[key as IsleScreenshotKey];
+		}
+		return isleSceneImages[key as IsleSceneKey];
+	});
 }

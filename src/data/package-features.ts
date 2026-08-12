@@ -1,4 +1,4 @@
-import { isleSceneImages } from './theisle';
+import { isleScreenshotImages } from './theisle';
 import { productInfo } from './site';
 
 export type PackageFeatureCategory = {
@@ -16,7 +16,7 @@ export const packageFeatureCategories: PackageFeatureCategory[] = [
 		id: 'visuals-esp',
 		title: 'Visuals ESP',
 		summary: 'Track dinosaurs, health, growth, and threats through terrain in real time.',
-		image: isleSceneImages.predatorStalk,
+		image: isleScreenshotImages.espBeachPlayerTags,
 		features: productInfo.features.visualsEsp.slice(0, 8),
 		href: '/theisle-esp/',
 	},
@@ -24,7 +24,7 @@ export const packageFeatureCategories: PackageFeatureCategory[] = [
 		id: 'world-esp',
 		title: 'World ESP',
 		summary: 'Highlight meat, water, herbs, mushrooms, and bodies across the map.',
-		image: isleSceneImages.swampEnvironment,
+		image: isleScreenshotImages.espBeachHealthBars,
 		features: productInfo.features.worldEsp,
 		href: '/theisle-esp/#world-esp',
 	},
@@ -32,7 +32,7 @@ export const packageFeatureCategories: PackageFeatureCategory[] = [
 		id: 'combat',
 		title: 'Combat Hacks',
 		summary: 'Instant Rotation, Auto-Attack, Omnimovement, and faster strike timing.',
-		image: isleSceneImages.carnivoreCombat,
+		image: isleScreenshotImages.aimbotAllosaurusDamageLog,
 		features: productInfo.features.cheats,
 		href: '/cheats/',
 	},
@@ -40,7 +40,7 @@ export const packageFeatureCategories: PackageFeatureCategory[] = [
 		id: 'utilities',
 		title: 'Utility Tools',
 		summary: 'Radar, FOV Changer, fog removal, crosshair, and config profiles.',
-		image: isleSceneImages.nightHunt,
+		image: isleScreenshotImages.espRadarTopdown,
 		features: productInfo.features.other.slice(0, 8),
 		href: '/features/#other',
 	},
@@ -48,7 +48,7 @@ export const packageFeatureCategories: PackageFeatureCategory[] = [
 		id: 'package',
 		title: 'Cloud-DMA Package',
 		summary: 'Monthly or lifetime license with digital delivery and update notices.',
-		image: isleSceneImages.herdPlains,
+		image: isleScreenshotImages.espRadarMinimapCombat,
 		features: productInfo.features.general,
 		href: '/pricing/',
 	},
