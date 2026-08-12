@@ -23,6 +23,8 @@ interface Props {
 	heroImage?: string;
 	heroAlt?: string;
 	gallery?: ReadonlyArray<{ src: string; alt: string }>;
+	/** Optional horizontal image strip rendered under the main preview */
+	previewScroll?: ReadonlyArray<{ src: string; alt: string }>;
 	ctaPrimary?: { href: string; label: string };
 	ctaSecondary?: { href: string; label: string };
 	locale?: LocaleCode;
@@ -52,6 +54,7 @@ const {
 	heroImage = theIsleImages.cover,
 	heroAlt = `${siteConfig.name} page visual`,
 	gallery = theIsleImages.product.slice(0, 6),
+	previewScroll = [],
 	ctaPrimary,
 	ctaSecondary,
 	locale = 'en',
@@ -164,6 +167,26 @@ const webPageSchema = buildWebPageSchema({
 						fetchpriority={preloadHero ? 'high' : 'auto'}
 					/>
 				</figure>
+				{
+					previewScroll.length > 0 && (
+						<div class="showcase__scroll" aria-label="Gameplay preview images">
+							<div class="showcase__scroll-track" role="list">
+								{previewScroll.map((image) => (
+									<figure class="showcase__scroll-item" role="listitem">
+										<img
+											src={image.src}
+											alt={image.alt}
+											width="320"
+											height="180"
+											loading="lazy"
+											decoding="async"
+										/>
+									</figure>
+								))}
+							</div>
+						</div>
+					)
+				}
 			</section>
 
 			<article class="article">
@@ -339,6 +362,8 @@ const webPageSchema = buildWebPageSchema({
 
 	.showcase {
 		width: min(100%, 960px);
+		display: grid;
+		gap: 0.65rem;
 	}
 
 	.showcase__frame {
@@ -356,6 +381,69 @@ const webPageSchema = buildWebPageSchema({
 		height: 100%;
 		object-fit: cover;
 		object-position: center;
+	}
+
+	.showcase__scroll {
+		min-width: 0;
+		border-radius: 0.75rem;
+		border: 1px solid rgba(168, 85, 247, 0.14);
+		background: rgba(10, 6, 18, 0.35);
+		padding: 0.45rem;
+	}
+
+	.showcase__scroll-track {
+		display: flex;
+		gap: 0.45rem;
+		overflow-x: auto;
+		overflow-y: hidden;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+		scrollbar-color: rgba(168, 85, 247, 0.45) transparent;
+		padding-bottom: 0.15rem;
+	}
+
+	.showcase__scroll-track::-webkit-scrollbar {
+		height: 5px;
+	}
+
+	.showcase__scroll-track::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.showcase__scroll-track::-webkit-scrollbar-thumb {
+		background: rgba(168, 85, 247, 0.4);
+		border-radius: 999px;
+	}
+
+	.showcase__scroll-item {
+		flex: 0 0 8.5rem;
+		margin: 0;
+		overflow: hidden;
+		border-radius: 0.5rem;
+		border: 1px solid rgba(168, 85, 247, 0.16);
+		background: #12081f;
+		aspect-ratio: 16 / 10;
+		scroll-snap-align: start;
+	}
+
+	.showcase__scroll-item img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@media (min-width: 960px) {
+		.showcase__scroll-item {
+			flex-basis: 9.25rem;
+		}
+	}
+
+	@media (max-width: 959px) {
+		.showcase__scroll-item {
+			flex-basis: 7.5rem;
+		}
 	}
 
 	.article {
