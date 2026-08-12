@@ -3,61 +3,37 @@ import { productInfo, siteConfig } from '../data/site';
 import { isleSceneImages } from '../data/theisle';
 
 const monthlyPlan = productInfo.plans.find((plan) => plan.id === 'monthly');
-const dinoImage = isleSceneImages.predatorStalk;
+const dinoImage = isleSceneImages.tyrannosaurForest;
 ---
 
-<aside
-	class="sale-popup"
-	data-sale-popup
-	hidden
-	aria-live="polite"
-	aria-label="Limited offer"
->
-	<div class="sale-popup__scene">
-		<button type="button" class="sale-popup__close" data-sale-popup-close aria-label="Dismiss offer">
+<aside class="sale-popup" data-sale-popup hidden aria-live="polite" aria-label="Buy offer">
+	<div class="sale-popup__stage">
+		<button type="button" class="sale-popup__close" data-sale-popup-close aria-label="Dismiss">
 			<span aria-hidden="true">&times;</span>
 		</button>
 
-		<div class="sale-popup__actor">
-			<div class="sale-popup__shadow" aria-hidden="true"></div>
-			<div class="sale-popup__mist" aria-hidden="true"></div>
-
+		<div class="sale-popup__character">
 			<div class="sale-popup__dino">
-				<div class="sale-popup__dino-body">
-					<img
-						src={dinoImage.src}
-						alt={dinoImage.alt}
-						width="220"
-						height="280"
-						class="sale-popup__dino-img"
-						loading="lazy"
-						decoding="async"
-					/>
-					<span class="sale-popup__dino-rim" aria-hidden="true"></span>
-					<span class="sale-popup__dino-eye sale-popup__dino-eye--left" aria-hidden="true"></span>
-					<span class="sale-popup__dino-eye sale-popup__dino-eye--right" aria-hidden="true"></span>
-					<span class="sale-popup__dino-breath" aria-hidden="true"></span>
-				</div>
-
-				<span class="sale-popup__claw sale-popup__claw--upper" aria-hidden="true"></span>
-				<span class="sale-popup__claw sale-popup__claw--lower" aria-hidden="true"></span>
-				<span class="sale-popup__arm sale-popup__arm--reach" aria-hidden="true"></span>
+				<img
+					src={dinoImage.src}
+					alt={dinoImage.alt}
+					width="200"
+					height="260"
+					class="sale-popup__dino-img"
+					loading="lazy"
+					decoding="async"
+				/>
+				<span class="sale-popup__hand sale-popup__hand--left" aria-hidden="true"></span>
+				<span class="sale-popup__hand sale-popup__hand--right" aria-hidden="true"></span>
 			</div>
 
-			<div class="sale-popup__board">
-				<span class="sale-popup__grip sale-popup__grip--left" aria-hidden="true"></span>
-				<span class="sale-popup__grip sale-popup__grip--right" aria-hidden="true"></span>
-				<div class="sale-popup__board-face">
-					<p class="sale-popup__badge">Sale</p>
-					<p class="sale-popup__headline">The Isle Cheats</p>
-					<p class="sale-popup__price">
-						From <strong>${monthlyPlan?.price ?? 35}<span>/mo</span></strong>
-					</p>
-					<p class="sale-popup__sub">ESP · Radar · Combat tools</p>
-					<a href={siteConfig.checkoutUrl} class="sale-popup__cta">Buy now</a>
+			<div class="sale-popup__banner">
+				<div class="sale-popup__banner-inner">
+					<p class="sale-popup__label">The Isle Cheats</p>
+					<p class="sale-popup__price">${monthlyPlan?.price ?? 35}<span>/mo</span></p>
+					<a href={siteConfig.checkoutUrl} class="sale-popup__buy">Buy</a>
 				</div>
-				<span class="sale-popup__board-edge" aria-hidden="true"></span>
-				<span class="sale-popup__board-post" aria-hidden="true"></span>
+				<span class="sale-popup__banner-pole" aria-hidden="true"></span>
 			</div>
 		</div>
 	</div>
@@ -70,27 +46,25 @@ const dinoImage = isleSceneImages.predatorStalk;
 	const popup = document.querySelector('[data-sale-popup]');
 	if (popup instanceof HTMLElement) {
 		const closeBtn = popup.querySelector('[data-sale-popup-close]');
-		const checkoutLink = popup.querySelector('.sale-popup__cta');
+		const buyLink = popup.querySelector('.sale-popup__buy');
 
 		const hide = (persist = false) => {
 			popup.classList.remove('is-visible');
 			window.setTimeout(() => {
 				popup.hidden = true;
-			}, 480);
+			}, 360);
 			if (persist) {
 				try {
 					localStorage.setItem(STORAGE_KEY, '1');
 				} catch {
-					/* ignore storage errors */
+					/* ignore */
 				}
 			}
 		};
 
 		const show = () => {
 			popup.hidden = false;
-			window.requestAnimationFrame(() => {
-				popup.classList.add('is-visible');
-			});
+			window.requestAnimationFrame(() => popup.classList.add('is-visible'));
 		};
 
 		let dismissed = false;
@@ -100,17 +74,12 @@ const dinoImage = isleSceneImages.predatorStalk;
 			dismissed = false;
 		}
 
-		if (!dismissed) {
-			window.setTimeout(show, SHOW_DELAY_MS);
-		}
+		if (!dismissed) window.setTimeout(show, SHOW_DELAY_MS);
 
 		closeBtn?.addEventListener('click', () => hide(true));
-		checkoutLink?.addEventListener('click', () => hide(true));
-
+		buyLink?.addEventListener('click', () => hide(true));
 		document.addEventListener('keydown', (event) => {
-			if (event.key === 'Escape' && popup.classList.contains('is-visible')) {
-				hide(true);
-			}
+			if (event.key === 'Escape' && popup.classList.contains('is-visible')) hide(true);
 		});
 	}
 </script>
@@ -118,466 +87,243 @@ const dinoImage = isleSceneImages.predatorStalk;
 <style>
 	.sale-popup {
 		position: fixed;
-		right: max(0.35rem, env(safe-area-inset-right, 0px));
-		bottom: max(0.15rem, env(safe-area-inset-bottom, 0px));
+		right: max(0.75rem, env(safe-area-inset-right, 0px));
+		bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
 		z-index: 90;
-		width: min(17.25rem, calc(100vw - 0.85rem));
+		width: min(14rem, calc(100vw - 1.25rem));
 		pointer-events: none;
-		perspective: 1100px;
-		transform: translate3d(130%, 36px, -80px) rotateY(-22deg) scale(0.86);
+		perspective: 800px;
+		transform: translate3d(110%, 0, 0);
 		opacity: 0;
 		transition:
-			transform 0.72s cubic-bezier(0.22, 1, 0.36, 1),
-			opacity 0.45s ease;
+			transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 0.35s ease;
 	}
 
 	.sale-popup.is-visible {
-		transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+		transform: translate3d(0, 0, 0);
 		opacity: 1;
 		pointer-events: auto;
 	}
 
-	.sale-popup__scene {
+	.sale-popup__stage {
 		position: relative;
-		width: 100%;
-		min-height: 15rem;
+		height: 12.5rem;
 		transform-style: preserve-3d;
 	}
 
 	.sale-popup__close {
 		position: absolute;
-		top: 0.05rem;
-		right: 0.05rem;
-		z-index: 6;
+		top: 0;
+		right: 0;
+		z-index: 4;
 		display: grid;
 		place-items: center;
-		width: 1.7rem;
-		height: 1.7rem;
+		width: 1.5rem;
+		height: 1.5rem;
 		border: 0;
 		border-radius: 999px;
-		background: rgba(8, 4, 12, 0.88);
-		border: 1px solid rgba(220, 38, 38, 0.35);
-		color: #fecaca;
-		font-size: 1rem;
-		line-height: 1;
+		background: rgba(10, 6, 18, 0.82);
+		border: 1px solid rgba(168, 85, 247, 0.28);
+		color: #ede9fe;
+		font-size: 0.95rem;
 		cursor: pointer;
-		box-shadow: 0 4px 14px rgba(0, 0, 0, 0.45);
-		transition:
-			background 0.2s ease,
-			transform 0.2s ease,
-			border-color 0.2s ease;
 	}
 
 	.sale-popup__close:hover {
-		background: rgba(127, 29, 29, 0.92);
-		border-color: rgba(248, 113, 113, 0.55);
-		transform: scale(1.06);
+		background: rgba(76, 29, 149, 0.88);
 	}
 
-	.sale-popup__actor {
+	.sale-popup__character {
 		position: relative;
 		width: 100%;
-		height: 15rem;
+		height: 100%;
 		transform-style: preserve-3d;
+		animation: sale-idle 4.5s ease-in-out infinite;
 	}
 
-	.sale-popup.is-visible .sale-popup__actor {
+	.sale-popup.is-visible .sale-popup__character {
 		animation:
-			sale-dino-enter 0.82s cubic-bezier(0.22, 1, 0.36, 1) both,
-			sale-dino-idle 6.2s ease-in-out 0.82s infinite;
-	}
-
-	.sale-popup__shadow {
-		position: absolute;
-		left: 4%;
-		right: 2%;
-		bottom: 0;
-		height: 1.1rem;
-		border-radius: 999px;
-		background: radial-gradient(ellipse at center, rgba(0, 0, 0, 0.72), transparent 70%);
-		transform: translateZ(-56px) scaleX(1.05);
-		filter: blur(3px);
-	}
-
-	.sale-popup__mist {
-		position: absolute;
-		left: -0.5rem;
-		right: -0.25rem;
-		bottom: 0.35rem;
-		height: 3.5rem;
-		background: linear-gradient(to top, rgba(10, 6, 18, 0.92), transparent);
-		transform: translateZ(-8px);
-		pointer-events: none;
+			sale-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both,
+			sale-idle 4.5s ease-in-out 0.55s infinite;
 	}
 
 	.sale-popup__dino {
 		position: absolute;
-		left: -1.1rem;
-		bottom: 0.15rem;
-		width: 8.6rem;
-		height: 11.5rem;
+		left: 0;
+		bottom: 0;
+		width: 6.5rem;
+		height: 9.5rem;
+		transform: translate3d(0, 0, 0) rotateY(12deg);
 		transform-style: preserve-3d;
-		transform: translate3d(0, 0, -28px) rotateY(16deg) rotateX(4deg);
-		z-index: 1;
-	}
-
-	.sale-popup__dino-body {
-		position: relative;
-		width: 100%;
-		height: 100%;
-		overflow: hidden;
-		border-radius: 1.2rem 1.2rem 0.4rem 0.55rem;
-		transform-style: preserve-3d;
-		box-shadow:
-			0 22px 34px rgba(0, 0, 0, 0.62),
-			0 0 28px rgba(220, 38, 38, 0.12);
+		filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.45));
 	}
 
 	.sale-popup__dino-img {
 		display: block;
-		width: 138%;
-		height: 118%;
-		margin-left: -24%;
-		margin-top: -6%;
+		width: 155%;
+		height: 115%;
+		margin-left: -28%;
+		margin-top: -8%;
 		object-fit: cover;
-		object-position: 42% 22%;
-		filter:
-			saturate(0.82)
-			contrast(1.18)
-			brightness(0.72)
-			drop-shadow(0 16px 22px rgba(0, 0, 0, 0.65));
-		transform: translateZ(0) scale(1.02);
+		object-position: 50% 18%;
+		-webkit-mask-image: linear-gradient(to top, transparent 2%, #000 18%, #000 92%, transparent 100%);
+		mask-image: linear-gradient(to top, transparent 2%, #000 18%, #000 92%, transparent 100%);
 	}
 
-	.sale-popup__dino-rim {
+	.sale-popup__hand {
 		position: absolute;
-		inset: 0;
-		background:
-			linear-gradient(145deg, rgba(220, 38, 38, 0.22), transparent 38%),
-			linear-gradient(to top, rgba(10, 6, 18, 0.95) 0%, transparent 42%),
-			linear-gradient(to right, rgba(10, 6, 18, 0.55), transparent 35%);
-		mix-blend-mode: multiply;
-		pointer-events: none;
-	}
-
-	.sale-popup__dino-eye {
-		position: absolute;
-		width: 0.42rem;
-		height: 0.42rem;
+		height: 0.38rem;
 		border-radius: 999px;
-		background: #ff2d2d;
-		box-shadow:
-			0 0 8px rgba(255, 45, 45, 0.95),
-			0 0 16px rgba(255, 45, 45, 0.55);
-		animation: sale-eye-pulse 2.4s ease-in-out infinite;
+		background: linear-gradient(90deg, #3a2a1c, #5c4330);
+		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
+		transform-origin: left center;
 	}
 
-	.sale-popup__dino-eye--left {
-		top: 2.15rem;
-		left: 1.55rem;
-	}
-
-	.sale-popup__dino-eye--right {
-		top: 2.05rem;
-		left: 2.15rem;
-		width: 0.34rem;
-		height: 0.34rem;
-		opacity: 0.85;
-	}
-
-	.sale-popup__dino-breath {
-		position: absolute;
-		top: 3.1rem;
-		left: 1.15rem;
+	.sale-popup__hand--left {
+		top: 3.6rem;
+		left: 3.8rem;
 		width: 2.4rem;
-		height: 1.2rem;
-		background: radial-gradient(ellipse at center, rgba(255, 120, 80, 0.18), transparent 72%);
-		filter: blur(2px);
-		animation: sale-breath 3.6s ease-in-out infinite;
+		transform: rotate(-8deg);
 	}
 
-	.sale-popup__arm--reach {
-		position: absolute;
-		top: 4.8rem;
-		right: -0.55rem;
-		width: 2.8rem;
-		height: 0.55rem;
-		border-radius: 999px;
-		background: linear-gradient(90deg, #1f1510, #3d2a1c 55%, #241812);
-		box-shadow:
-			inset 0 1px 0 rgba(255, 255, 255, 0.06),
-			0 4px 8px rgba(0, 0, 0, 0.45);
-		transform: rotate(-10deg) translateZ(10px);
-	}
-
-	.sale-popup__claw {
-		position: absolute;
-		width: 0.85rem;
-		height: 1rem;
-		background: linear-gradient(180deg, #4a3428 0%, #1a100c 100%);
-		clip-path: polygon(18% 0%, 82% 0%, 100% 100%, 0% 100%);
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.45);
-		z-index: 3;
-	}
-
-	.sale-popup__claw--upper {
+	.sale-popup__hand--right {
 		top: 4.35rem;
-		right: -0.15rem;
-		transform: rotate(18deg) translateZ(18px);
+		left: 4rem;
+		width: 2rem;
+		transform: rotate(4deg);
 	}
 
-	.sale-popup__claw--lower {
-		top: 5.35rem;
-		right: 0.15rem;
-		width: 0.72rem;
-		height: 0.88rem;
-		transform: rotate(8deg) translateZ(22px);
-	}
-
-	.sale-popup__board {
+	.sale-popup__banner {
 		position: absolute;
-		right: 0;
-		bottom: 1.45rem;
-		width: min(12rem, 79%);
+		right: 0.1rem;
+		bottom: 2.4rem;
+		width: 9.25rem;
 		transform-style: preserve-3d;
-		transform: translate3d(0, 0, 42px) rotateY(-20deg) rotateX(10deg);
-		z-index: 2;
+		transform: translate3d(0, 0, 36px) rotateY(-14deg) rotateX(6deg);
 	}
 
-	.sale-popup.is-visible .sale-popup__board {
-		animation: sale-board-sway 4.2s ease-in-out 0.82s infinite;
-	}
-
-	.sale-popup__grip {
-		position: absolute;
-		top: 2.05rem;
-		width: 0.78rem;
-		height: 0.95rem;
-		background: linear-gradient(180deg, #4a3428, #1a100c);
-		clip-path: polygon(20% 0%, 80% 0%, 100% 100%, 0% 100%);
-		box-shadow: 0 4px 8px rgba(0, 0, 0, 0.45);
-		z-index: 4;
-	}
-
-	.sale-popup__grip--left {
-		left: -0.32rem;
-		transform: rotate(-16deg) translateZ(10px);
-	}
-
-	.sale-popup__grip--right {
-		right: -0.24rem;
-		transform: rotate(14deg) translateZ(12px);
-	}
-
-	.sale-popup__board-face {
+	.sale-popup__banner-inner {
 		position: relative;
 		display: grid;
-		gap: 0.22rem;
-		padding: 0.76rem 0.82rem 0.82rem;
-		border-radius: 0.55rem;
-		border: 2px solid #5a3a14;
-		background:
-			repeating-linear-gradient(
-				90deg,
-				rgba(0, 0, 0, 0.04) 0,
-				rgba(0, 0, 0, 0.04) 2px,
-				transparent 2px,
-				transparent 8px
-			),
-			linear-gradient(165deg, #e8d4a4 0%, #c9984d 42%, #9a682e 100%);
+		gap: 0.15rem;
+		padding: 0.65rem 0.7rem 0.7rem;
+		border-radius: 0.5rem;
+		border: 2px solid rgba(124, 58, 237, 0.45);
+		background: linear-gradient(160deg, rgba(22, 14, 38, 0.96), rgba(10, 6, 18, 0.98));
 		box-shadow:
-			0 20px 34px rgba(0, 0, 0, 0.48),
-			inset 0 1px 0 rgba(255, 255, 255, 0.35),
-			inset 0 -2px 0 rgba(58, 34, 10, 0.35);
-		transform: translateZ(4px);
+			0 14px 28px rgba(0, 0, 0, 0.4),
+			inset 0 1px 0 rgba(255, 255, 255, 0.06);
 	}
 
-	.sale-popup__board-edge {
+	.sale-popup__banner-inner::before,
+	.sale-popup__banner-inner::after {
+		content: '';
 		position: absolute;
-		inset: 0.38rem -0.32rem -0.4rem 0.4rem;
-		border-radius: 0.55rem;
-		background: linear-gradient(180deg, #68441a, #3a240c);
-		transform: translateZ(-8px) rotateY(-5deg);
-		box-shadow: 0 12px 20px rgba(0, 0, 0, 0.42);
-	}
-
-	.sale-popup__board-post {
-		position: absolute;
-		left: 0.68rem;
-		bottom: -2.35rem;
-		width: 0.48rem;
-		height: 2.55rem;
-		border-radius: 0.2rem;
-		background: linear-gradient(90deg, #4a3012, #7a5424 50%, #4a3012);
-		transform: translateZ(-14px) rotateY(-12deg);
-		box-shadow: 2px 0 10px rgba(0, 0, 0, 0.35);
-	}
-
-	.sale-popup__badge {
-		position: absolute;
-		top: -0.6rem;
-		right: 0.5rem;
-		margin: 0;
-		padding: 0.2rem 0.5rem;
+		top: 0.55rem;
+		width: 0.55rem;
+		height: 0.55rem;
 		border-radius: 999px;
-		background: linear-gradient(135deg, #ff3b3b, #b91c1c);
-		color: #fff;
-		font-size: 0.58rem;
-		font-weight: 900;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		box-shadow:
-			0 4px 12px rgba(220, 38, 38, 0.55),
-			0 0 18px rgba(255, 59, 59, 0.35);
-		transform: rotate(-8deg) translateZ(8px);
+		background: #3d2914;
+		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
 	}
 
-	.sale-popup__headline {
+	.sale-popup__banner-inner::before {
+		left: -0.35rem;
+	}
+
+	.sale-popup__banner-inner::after {
+		right: -0.35rem;
+	}
+
+	.sale-popup__banner-pole {
+		position: absolute;
+		left: 0.45rem;
+		bottom: -1.85rem;
+		width: 0.35rem;
+		height: 2rem;
+		border-radius: 0.15rem;
+		background: linear-gradient(90deg, #4a3012, #7a5424);
+		transform: translateZ(-8px);
+	}
+
+	.sale-popup__label {
 		margin: 0;
-		font-family: var(--font-display);
-		font-size: 0.92rem;
-		font-weight: 900;
-		line-height: 1.1;
-		letter-spacing: -0.02em;
-		color: #241207;
-		text-shadow: 0 1px 0 rgba(255, 255, 255, 0.28);
+		font-size: 0.62rem;
+		font-weight: 700;
+		letter-spacing: 0.1em;
+		text-transform: uppercase;
+		color: var(--color-orchid);
 	}
 
 	.sale-popup__price {
 		margin: 0;
-		font-size: 0.72rem;
-		font-weight: 700;
-		color: #4a3012;
-	}
-
-	.sale-popup__price strong {
 		font-family: var(--font-display);
-		font-size: 1.2rem;
+		font-size: 1.35rem;
 		font-weight: 900;
-		color: #140a04;
+		line-height: 1;
+		color: var(--color-ink);
 	}
 
 	.sale-popup__price span {
 		font-size: 0.72rem;
-		font-weight: 800;
-	}
-
-	.sale-popup__sub {
-		margin: 0;
-		font-size: 0.62rem;
 		font-weight: 700;
-		letter-spacing: 0.04em;
-		text-transform: uppercase;
-		color: #5c3d18;
+		color: var(--color-muted);
 	}
 
-	.sale-popup__cta {
+	.sale-popup__buy {
 		display: inline-flex;
 		align-items: center;
 		justify-content: center;
-		width: 100%;
-		min-height: 2.05rem;
-		margin-top: 0.15rem;
+		min-height: 1.85rem;
+		margin-top: 0.2rem;
 		border-radius: 0.45rem;
-		border: 1px solid rgba(76, 29, 149, 0.45);
-		background: linear-gradient(180deg, #7c3aed 0%, #5b21b6 100%);
+		background: var(--gradient-brand);
 		color: #fff;
 		font-size: 0.72rem;
-		font-weight: 900;
+		font-weight: 800;
 		letter-spacing: 0.08em;
 		text-transform: uppercase;
-		box-shadow:
-			0 8px 18px rgba(76, 29, 149, 0.5),
-			inset 0 1px 0 rgba(255, 255, 255, 0.16);
-		transition:
-			transform 0.2s ease,
-			filter 0.2s ease;
+		box-shadow: 0 6px 14px rgba(76, 29, 149, 0.4);
+		transition: transform 0.2s ease, filter 0.2s ease;
 	}
 
-	.sale-popup__cta:hover {
+	.sale-popup__buy:hover {
 		transform: translateY(-1px);
-		filter: brightness(1.08);
+		filter: brightness(1.06);
 		color: #fff;
 	}
 
 	.sale-popup__close:focus-visible,
-	.sale-popup__cta:focus-visible {
-		outline: 2px solid rgba(248, 113, 113, 0.85);
+	.sale-popup__buy:focus-visible {
+		outline: 2px solid rgba(167, 139, 250, 0.85);
 		outline-offset: 2px;
 	}
 
-	@keyframes sale-dino-enter {
+	@keyframes sale-enter {
 		from {
-			transform: translate3d(56px, 42px, -120px) rotateY(28deg) scale(0.82);
-			opacity: 0.08;
-		}
-		65% {
-			transform: translate3d(-4px, -2px, 8px) rotateY(-2deg) scale(1.02);
-			opacity: 1;
+			transform: translate3d(40px, 20px, -40px) rotateY(18deg);
+			opacity: 0.2;
 		}
 		to {
-			transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
+			transform: translate3d(0, 0, 0) rotateY(0deg);
 			opacity: 1;
 		}
 	}
 
-	@keyframes sale-dino-idle {
+	@keyframes sale-idle {
 		0%,
 		100% {
 			transform: translate3d(0, 0, 0);
 		}
-		35% {
-			transform: translate3d(0, -3px, 2px) rotateZ(-0.4deg);
-		}
-		70% {
-			transform: translate3d(0, -6px, 0) rotateZ(0.35deg);
-		}
-	}
-
-	@keyframes sale-board-sway {
-		0%,
-		100% {
-			transform: translate3d(0, 0, 42px) rotateY(-20deg) rotateX(10deg);
-		}
 		50% {
-			transform: translate3d(0, -3px, 46px) rotateY(-16deg) rotateX(8deg);
-		}
-	}
-
-	@keyframes sale-eye-pulse {
-		0%,
-		100% {
-			opacity: 0.75;
-			box-shadow:
-				0 0 6px rgba(255, 45, 45, 0.75),
-				0 0 12px rgba(255, 45, 45, 0.4);
-		}
-		50% {
-			opacity: 1;
-			box-shadow:
-				0 0 10px rgba(255, 45, 45, 1),
-				0 0 22px rgba(255, 45, 45, 0.65);
-		}
-	}
-
-	@keyframes sale-breath {
-		0%,
-		100% {
-			opacity: 0.35;
-			transform: scale(0.95);
-		}
-		50% {
-			opacity: 0.7;
-			transform: scale(1.05);
+			transform: translate3d(0, -4px, 0);
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.sale-popup,
-		.sale-popup__actor,
-		.sale-popup__board,
-		.sale-popup__dino-eye,
-		.sale-popup__dino-breath {
+		.sale-popup__character {
 			animation: none !important;
 			transition-duration: 0.01ms;
 		}
@@ -585,21 +331,21 @@ const dinoImage = isleSceneImages.predatorStalk;
 
 	@media (max-width: 420px) {
 		.sale-popup {
-			width: min(15.5rem, calc(100vw - 0.75rem));
+			width: min(13rem, calc(100vw - 1rem));
 		}
 
-		.sale-popup__actor {
-			height: 14rem;
+		.sale-popup__stage {
+			height: 11.5rem;
 		}
 
 		.sale-popup__dino {
-			width: 7.6rem;
-			height: 10.5rem;
-			left: -0.85rem;
+			width: 5.8rem;
+			height: 8.5rem;
 		}
 
-		.sale-popup__board {
-			width: min(11rem, 81%);
+		.sale-popup__banner {
+			width: 8.5rem;
+			bottom: 2.1rem;
 		}
 	}
 </style>
