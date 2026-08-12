@@ -7,7 +7,7 @@ import { buildArticleSchema, buildFaqSchema } from '../../data/seo/schema';
 import { estimateReadingTime, formatDate } from '../../data/seo/helpers';
 import { getLocaleFromPath } from '../../data/i18n';
 import { siteConfig } from '../../data/site';
-import { isleSceneImages } from '../../data/theisle';
+import { allIsleScreenshots } from '../../data/theisle';
 
 export function getStaticPaths() {
 	return blogIdeas.map((idea, index) => ({
@@ -17,8 +17,7 @@ export function getStaticPaths() {
 }
 
 const { idea, index } = Astro.props;
-const sceneKeys = Object.keys(isleSceneImages) as Array<keyof typeof isleSceneImages>;
-const postHero = isleSceneImages[sceneKeys[index % sceneKeys.length]];
+const postHero = allIsleScreenshots[index % allIsleScreenshots.length];
 const locale = getLocaleFromPath(Astro.url.pathname);
 const seo = getBlogPostSeo(idea);
 const canonicalPath = `/blog/${idea.slug}/`;

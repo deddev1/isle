@@ -26,7 +26,7 @@ const en: PricingContent = {
 		{ href: '/terms/', label: 'Review the terms' },
 		{ href: '/updates/', label: 'Check the latest updates' },
 	],
-	ctaPrimary: { href: '/#product', label: 'Open Product Card' },
+	ctaPrimary: { href: '/#features', label: 'Open Product Card' },
 	ctaSecondary: { href: '/features/', label: 'See Features' },
 	breadcrumbLabel: 'Pricing',
 };
@@ -44,7 +44,7 @@ const de: PricingContent = {
 		{ href: '/terms/', label: 'Nutzungsbedingungen prüfen' },
 		{ href: '/updates/', label: 'Aktuelle Updates ansehen' },
 	],
-	ctaPrimary: { href: '/#product', label: 'Produktkarte öffnen' },
+	ctaPrimary: { href: '/#features', label: 'Produktkarte öffnen' },
 	ctaSecondary: { href: '/features/', label: 'Funktionen ansehen' },
 	breadcrumbLabel: 'Preise',
 };
@@ -62,7 +62,7 @@ const fr: PricingContent = {
 		{ href: '/terms/', label: 'Consulter les conditions' },
 		{ href: '/updates/', label: 'Voir les dernières mises à jour' },
 	],
-	ctaPrimary: { href: '/#product', label: 'Ouvrir la fiche produit' },
+	ctaPrimary: { href: '/#features', label: 'Ouvrir la fiche produit' },
 	ctaSecondary: { href: '/features/', label: 'Voir les fonctionnalités' },
 	breadcrumbLabel: 'Tarifs',
 };
@@ -80,7 +80,7 @@ const es: PricingContent = {
 		{ href: '/terms/', label: 'Revisar los términos' },
 		{ href: '/updates/', label: 'Consultar las últimas actualizaciones' },
 	],
-	ctaPrimary: { href: '/#product', label: 'Abrir ficha de producto' },
+	ctaPrimary: { href: '/#features', label: 'Abrir ficha de producto' },
 	ctaSecondary: { href: '/features/', label: 'Ver funciones' },
 	breadcrumbLabel: 'Precios',
 };
@@ -98,7 +98,7 @@ const tr: PricingContent = {
 		{ href: '/terms/', label: 'Şartları inceleyin' },
 		{ href: '/updates/', label: 'Son güncellemeleri kontrol edin' },
 	],
-	ctaPrimary: { href: '/#product', label: 'Ürün kartını aç' },
+	ctaPrimary: { href: '/#features', label: 'Ürün kartını aç' },
 	ctaSecondary: { href: '/features/', label: 'Özellikleri gör' },
 	breadcrumbLabel: 'Fiyatlandırma',
 };
@@ -116,7 +116,7 @@ const ar: PricingContent = {
 		{ href: '/terms/', label: 'راجع الشروط' },
 		{ href: '/updates/', label: 'اطلع على آخر التحديثات' },
 	],
-	ctaPrimary: { href: '/#product', label: 'افتح بطاقة المنتج' },
+	ctaPrimary: { href: '/#features', label: 'افتح بطاقة المنتج' },
 	ctaSecondary: { href: '/features/', label: 'عرض الميزات' },
 	breadcrumbLabel: 'الأسعار',
 };
@@ -134,7 +134,7 @@ const ru: PricingContent = {
 		{ href: '/terms/', label: 'Ознакомиться с условиями' },
 		{ href: '/updates/', label: 'Проверить последние обновления' },
 	],
-	ctaPrimary: { href: '/#product', label: 'Открыть карточку продукта' },
+	ctaPrimary: { href: '/#features', label: 'Открыть карточку продукта' },
 	ctaSecondary: { href: '/features/', label: 'Смотреть функции' },
 	breadcrumbLabel: 'Цены',
 };

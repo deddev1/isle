@@ -4,7 +4,7 @@ import { productInfo, siteConfig } from '../data/site';
 import { getPageSeo } from '../data/seo/meta';
 import { getPricingContent } from '../data/i18n/pricing-content';
 import { getPageHero, getPageGallery } from '../data/theisle';
-import { getLocalizedPath, type LocaleCode } from '../data/i18n';
+import { getLocalizedPath, resolveLocalizedHref, type LocaleCode } from '../data/i18n';
 
 interface Props {
 	locale: LocaleCode;
@@ -14,8 +14,19 @@ const { locale } = Astro.props;
 const seo = getPageSeo('pricing', locale);
 const content = getPricingContent(locale);
 const canonicalPath = getLocalizedPath('/pricing/', locale);
+const homePath = getLocalizedPath('/', locale);
 const pageHero = getPageHero('pricing');
 const beforeBuyItems = content.beforeBuyItems;
+const ctaPrimary = {
+	...content.ctaPrimary,
+	href: content.ctaPrimary.href.startsWith('/#')
+		? `${homePath}${content.ctaPrimary.href.slice(1)}`
+		: resolveLocalizedHref(content.ctaPrimary.href, locale),
+};
+const ctaSecondary = {
+	...content.ctaSecondary,
+	href: resolveLocalizedHref(content.ctaSecondary.href, locale),
+};
 ---
 
 <PageLayout
@@ -26,9 +37,9 @@ const beforeBuyItems = content.beforeBuyItems;
 	intro={content.intro}
 	heroImage={pageHero.src}
 	heroAlt={pageHero.alt}
-	gallery={getPageGallery('herdPlains', 'carnivoreCombat', 'packEncounter')}
-	ctaPrimary={content.ctaPrimary}
-	ctaSecondary={content.ctaSecondary}
+	gallery={getPageGallery('espRadarMinimapCombat', 'espBeachPlayerTags', 'combatLogTriceratopsFight')}
+	ctaPrimary={ctaPrimary}
+	ctaSecondary={ctaSecondary}
 	keywords={seo.keywords}
 	ogTitle={seo.ogTitle}
 	ogDescription={seo.ogDescription}

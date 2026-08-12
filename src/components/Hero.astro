@@ -1,7 +1,7 @@
 ---
 import type { LocaleCode } from '../data/i18n';
+import { resolveLocalizedHref } from '../data/i18n';
 import { getHomeContent } from '../data/i18n/home-content';
-import { siteConfig } from '../data/site';
 import { theIsleImages } from '../data/theisle';
 
 interface Props {
@@ -10,7 +10,7 @@ interface Props {
 
 const { locale = 'en' } = Astro.props;
 const content = getHomeContent(locale);
-const primaryHref = '/pricing/';
+const primaryHref = resolveLocalizedHref('/pricing/', locale);
 const featuresHref = '/features/';
 ---
 

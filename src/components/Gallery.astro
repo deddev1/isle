@@ -1,7 +1,7 @@
 ---
 import { theIsleImages } from '../data/theisle';
 
-const images = theIsleImages.gallery.slice(0, 4);
+const images = theIsleImages.gallery.slice(0, 8);
 ---
 
 <section class="gallery" id="gallery" aria-labelledby="gallery-title">
@@ -74,13 +74,6 @@ const images = theIsleImages.gallery.slice(0, 4);
 	@media (max-width: 800px) {
 		.gallery__grid {
 			grid-template-columns: repeat(2, minmax(0, 1fr));
-		}
-	}
-
-	@media (max-width: 420px) {
-		.gallery__grid {
-			grid-template-columns: 1fr 1fr;
-			gap: 0.4rem;
 		}
 	}
 </style>

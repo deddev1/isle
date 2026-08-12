@@ -2,14 +2,26 @@
 import LanguageSelector from './LanguageSelector.astro';
 import { theIsleImages } from '../data/theisle';
 import { mainNav, siteConfig } from '../data/site';
+import { getLocaleFromPath, getLocalizedPath, resolveLocalizedHref, stripLocalePrefix } from '../data/i18n';
 
 const currentPath = Astro.url.pathname;
 const currentHash = Astro.url.hash.replace('#', '');
+const locale = getLocaleFromPath(currentPath);
+const homePath = getLocalizedPath('/', locale);
+const navLinks = mainNav.map((link) => {
+	const href = link.href.startsWith('/#')
+		? `${homePath}${link.href.slice(1)}`
+		: resolveLocalizedHref(link.href, locale);
+
+	return { ...link, href };
+});
+const brandHref = `${homePath}#home`;
+const basePath = stripLocalePrefix(currentPath);
 ---
 
-<header class="nav" data-nav>
+<header class="nav" data-nav data-home-path={homePath}>
 	<div class="nav__bar">
-		<a href="/#home" class="nav__brand" aria-label={`${siteConfig.name} home page`}>
+		<a href={brandHref} class="nav__brand" aria-label={`${siteConfig.name} home page`}>
 			<img
 				src={theIsleImages.logo}
 				alt={siteConfig.name}
@@ -26,14 +38,14 @@ const currentHash = Astro.url.hash.replace('#', '');
 		<nav class="nav__center" id="nav-panel" data-nav-panel aria-label="Primary">
 			<ul class="nav__list" role="list">
 				{
-					mainNav.map((link) => (
+					navLinks.map((link) => (
 						<li>
 							<a
 								href={link.href}
 								class="nav__link"
 								data-nav-link
 								data-section={link.section}
-								aria-current={currentPath === '/' && currentHash === link.section ? 'page' : undefined}
+								aria-current={basePath === '/' && currentHash === link.section ? 'page' : undefined}
 							>
 								{link.label}
 							</a>
@@ -68,8 +80,27 @@ const currentHash = Astro.url.hash.replace('#', '');
 		const panel = nav.querySelector('[data-nav-panel]');
 		const links = Array.from(nav.querySelectorAll('[data-nav-link]'));
 		const sections = Array.from(document.querySelectorAll('[data-nav-section]'));
-		const isHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
+		const homePath = nav.getAttribute('data-home-path') || '/';
+		const localePrefixMatch = window.location.pathname.match(/^\/(de|fr|es|tr|ar|ru)(?=\/|$)/);
+		const localePrefix = localePrefixMatch ? `/${localePrefixMatch[1]}` : '';
+
+		const stripLocale = (path: string) => {
+			const cleaned = path.replace(/^\/(de|fr|es|tr|ar|ru)(?=\/|$)/, '') || '/';
+			return cleaned.endsWith('/') || cleaned.includes('.') ? cleaned : `${cleaned}/`;
+		};
+
+		const isHomePath = (path: string) => {
+			const normalized = path.replace(/\/index\.html$/, '/') || '/';
+			return (
+				normalized === '/' ||
+				normalized === homePath ||
+				normalized === `${localePrefix}/` ||
+				normalized === localePrefix
+			);
+		};
+
 		let clickedSection: string | null = null;
+		const isHome = isHomePath(window.location.pathname);
 
 		const setOpen = (open: boolean) => {
 			toggle?.setAttribute('aria-expanded', String(open));
@@ -80,23 +111,32 @@ const currentHash = Astro.url.hash.replace('#', '');
 
 		const setActive = (sectionId: string) => {
 			const path = window.location.pathname;
-			const onHome = path === '/' || path === '/index.html';
+			const onHome = isHomePath(path);
+			const base = stripLocale(path);
 
 			links.forEach((link) => {
 				const href = link.getAttribute('href') || '';
 				const section = link.getAttribute('data-section') || '';
 				let isActive = false;
 
-				if (href.startsWith('/#') || href.startsWith('#')) {
+				if (href.includes('#')) {
 					if (onHome) {
 						isActive = section === sectionId;
 					} else if (section === 'features') {
-						isActive = path.startsWith('/features');
+						isActive =
+							base.startsWith('/features') ||
+							base.startsWith('/theisle-esp') ||
+							base.startsWith('/cheats') ||
+							base.startsWith('/the-isle-features') ||
+							base.startsWith('/the-isle-esp');
 					} else if (section === 'faq') {
-						isActive = path.startsWith('/faq');
+						isActive = base.startsWith('/faq') || base.startsWith('/the-isle-faq');
+					} else if (section === 'home') {
+						isActive = false;
 					}
 				} else if (href.startsWith('/')) {
-					isActive = path === href || path.startsWith(href);
+					const hrefBase = stripLocale(href.split('#')[0] || href);
+					isActive = base === hrefBase || (hrefBase !== '/' && base.startsWith(hrefBase));
 				}
 
 				link.classList.toggle('is-active', isActive);
@@ -116,13 +156,14 @@ const currentHash = Astro.url.hash.replace('#', '');
 			link.addEventListener('click', (event) => {
 				const href = link.getAttribute('href') || '';
 				const sectionId = link.getAttribute('data-section') || '';
-				const onHome = window.location.pathname === '/' || window.location.pathname === '/index.html';
+				const onHome = isHomePath(window.location.pathname);
+				const hash = href.includes('#') ? href.split('#')[1] : '';
 
-				if ((href.startsWith('/#') || href.startsWith('#')) && onHome) {
+				if (hash && onHome && document.getElementById(hash)) {
 					event.preventDefault();
-					clickedSection = sectionId;
-					setActive(sectionId);
-					scrollToSection(sectionId);
+					clickedSection = sectionId || hash;
+					setActive(sectionId || hash);
+					scrollToSection(hash);
 					setOpen(false);
 					window.setTimeout(() => {
 						clickedSection = null;
@@ -194,6 +235,7 @@ const currentHash = Astro.url.hash.replace('#', '');
 				const hash = window.location.hash.replace('#', '');
 				if (document.getElementById(hash)) {
 					setActive(hash);
+					window.setTimeout(() => scrollToSection(hash), 50);
 				}
 			} else {
 				setActive('home');
@@ -201,12 +243,19 @@ const currentHash = Astro.url.hash.replace('#', '');
 
 			updateActiveFromScroll();
 		} else {
-			const path = window.location.pathname;
-			if (path.startsWith('/pricing')) setActive('pricing');
-			else if (path.startsWith('/blog')) setActive('blog');
-			else if (path.startsWith('/faq')) setActive('faq');
-			else if (path.startsWith('/features')) setActive('features');
-			else setActive('home');
+			const base = stripLocale(window.location.pathname);
+			if (base.startsWith('/pricing')) setActive('pricing');
+			else if (base.startsWith('/blog')) setActive('blog');
+			else if (base.startsWith('/faq') || base.startsWith('/the-isle-faq')) setActive('faq');
+			else if (
+				base.startsWith('/features') ||
+				base.startsWith('/theisle-esp') ||
+				base.startsWith('/cheats') ||
+				base.startsWith('/the-isle-features') ||
+				base.startsWith('/the-isle-esp')
+			) {
+				setActive('features');
+			} else setActive('home');
 		}
 	}
 </script>

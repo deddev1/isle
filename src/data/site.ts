@@ -38,8 +38,8 @@ export const homeSeo = {
 
 export const homeVideo = {
 	src: 'https://ooszazcwzmwhitdxwtom.supabase.co/storage/v1/object/public/ef/0605.mp4',
-	thumbnail: '/images/the-isle-hero-dinosaur-survival.webp',
-	thumbnailAlt: 'The Isle Cheats demo video thumbnail',
+	thumbnail: '/images/the-isle/isle-esp-radar-minimap-combat.webp',
+	thumbnailAlt: 'The Isle Cheats demo video thumbnail — ESP radar gameplay',
 	title: 'The Isle Cheats demo video',
 } as const;
 
