@@ -106,12 +106,12 @@ const websiteLanguages = locales.map((entry) => entry.code);
 					rel="preload"
 					as="image"
 					href={preloadImage.startsWith('http') ? preloadImage : preloadImage}
-					{...(preloadImage.includes('the-isle-hero-dinosaur-survival')
+					{...(preloadImage.includes('the-isle-hero')
 						? {
 								imagesrcset:
-									'/images/the-isle-hero-dinosaur-survival-800.webp 800w, /images/the-isle-hero-dinosaur-survival-1280.webp 1280w, /images/the-isle-hero-dinosaur-survival-1600.webp 1600w, /images/the-isle-hero-dinosaur-survival.webp 1920w',
+									'/images/the-isle-hero-800.webp 800w, /images/the-isle-hero-1280.webp 1280w, /images/the-isle-hero-1600.webp 1600w, /images/the-isle-hero.webp 1920w',
 								imagesizes: '100vw',
-								href: '/images/the-isle-hero-dinosaur-survival-1280.webp',
+								href: '/images/the-isle-hero-1280.webp',
 							}
 						: {})}
 					fetchpriority="high"

@@ -5,79 +5,79 @@ export type IsleImage = {
 	alt: string;
 };
 
-const screenshotBase = '/images/the-isle';
-const screenshotThumbBase = '/images/the-isle/thumbs';
+/** Flat public image URLs — short, descriptive paths for crawlers */
+const img = (name: string) => `/images/${name}.webp`;
 
-/** Lightweight 480w WebP for strips, thumbs, and marquees */
+/** Lightweight small variants use a simple `-sm` suffix */
 export function toIsleThumb(src: string): string {
-	if (!src.startsWith(`${screenshotBase}/`) || src.includes('/thumbs/')) return src;
-	return src.replace(`${screenshotBase}/`, `${screenshotThumbBase}/`);
+	if (!src.startsWith('/images/') || src.endsWith('-sm.webp')) return src;
+	return src.replace(/\.webp$/, '-sm.webp');
 }
 
 export function withIsleThumb(image: IsleImage): IsleImage & { thumb: string } {
 	return { ...image, thumb: toIsleThumb(image.src) };
 }
 
-/** Real The Isle cheat/ESP gameplay screenshots — PNG originals plus WebP copies in /images/the-isle/ */
+/** Real The Isle cheat/ESP gameplay screenshots */
 export const isleScreenshotImages = {
 	aimbotAllosaurusDamageLog: {
-		src: `${screenshotBase}/isle-aimbot-allosaurus-damage-log.webp`,
+		src: img('the-isle-aimbot-allosaurus'),
 		alt: 'The Isle aimbot and Allosaurus headshot damage log overlay during combat',
 	},
 	espRadarMinimapCombat: {
-		src: `${screenshotBase}/isle-esp-radar-minimap-combat.webp`,
+		src: img('the-isle-esp-radar-minimap'),
 		alt: 'The Isle ESP radar minimap with entity tags and combat targeting overlay',
 	},
 	combatLogTyrannosaurusHead: {
-		src: `${screenshotBase}/isle-combat-log-tyrannosaurus-head.webp`,
+		src: img('the-isle-combat-tyrannosaurus-head'),
 		alt: 'The Isle combat log showing repeated Tyrannosaurus head damage entries',
 	},
 	espBeachSkeletonAimbot: {
-		src: `${screenshotBase}/isle-esp-beach-skeleton-aimbot.webp`,
+		src: img('the-isle-esp-skeleton-aimbot'),
 		alt: 'The Isle beach ESP with skeleton wireframes and aimbot distance tags on Tyrannosaurus',
 	},
 	combatLogCeratosaurusHead: {
-		src: `${screenshotBase}/isle-combat-log-ceratosaurus-head.webp`,
+		src: img('the-isle-combat-ceratosaurus'),
 		alt: 'The Isle combat log with Ceratosaurus headshot damage on a beach encounter',
 	},
 	espRadarGlowJungle: {
-		src: `${screenshotBase}/isle-esp-radar-glow-jungle.webp`,
+		src: img('the-isle-esp-radar-jungle'),
 		alt: 'The Isle jungle ESP glow highlight with radar range and entity health bars',
 	},
 	combatLogBoneEspForest: {
-		src: `${screenshotBase}/isle-combat-log-bone-esp-forest.webp`,
+		src: img('the-isle-combat-bone-esp'),
 		alt: 'The Isle forest bone ESP and combat log during Tyrannosaurus head damage',
 	},
 	combatLogTriceratopsFight: {
-		src: `${screenshotBase}/isle-combat-log-triceratops-fight.webp`,
+		src: img('the-isle-combat-triceratops'),
 		alt: 'The Isle Triceratops versus Tyrannosaurus fight with headshot combat log',
 	},
 	combatLogBeachTyrannosaurus: {
-		src: `${screenshotBase}/isle-combat-log-beach-tyrannosaurus.webp`,
+		src: img('the-isle-combat-tyrannosaurus'),
 		alt: 'The Isle beach Tyrannosaurus ESP health bars and headshot combat log',
 	},
 	aimbotHeadshotSkeleton: {
-		src: `${screenshotBase}/isle-aimbot-headshot-skeleton.webp`,
+		src: img('the-isle-aimbot-headshot'),
 		alt: 'The Isle aimbot always-headshot mode with skeleton ESP and radar minimap',
 	},
 	espBeachPlayerTags: {
-		src: `${screenshotBase}/isle-esp-beach-player-tags.webp`,
+		src: img('the-isle-esp-player-tags'),
 		alt: 'The Isle beach player ESP with snaplines, health, and distance tags',
 	},
 	espBeachCarnotaurus: {
-		src: `${screenshotBase}/isle-esp-beach-carnotaurus.webp`,
+		src: img('the-isle-esp-carnotaurus'),
 		alt: 'The Isle beach Carnotaurus ESP entity tags and health overlays',
 	},
 	espBeachHealthBars: {
-		src: `${screenshotBase}/isle-esp-beach-health-bars.webp`,
+		src: img('the-isle-esp-health-bars'),
 		alt: 'The Isle beach ESP health and blood percentage bars on nearby dinosaurs',
 	},
 	espRadarDeinosuchus: {
-		src: `${screenshotBase}/isle-esp-radar-deinosuchus.webp`,
+		src: img('the-isle-esp-radar-deinosuchus'),
 		alt: 'The Isle Deinosuchus combat scene with radar minimap and growth ESP',
 	},
 	espRadarTopdown: {
-		src: `${screenshotBase}/isle-esp-radar-topdown.webp`,
+		src: img('the-isle-esp-radar-topdown'),
 		alt: 'The Isle top-down radar ESP with FOV arc and player entity tracking',
 	},
 } as const satisfies Record<string, IsleImage>;
@@ -85,43 +85,43 @@ export const isleScreenshotImages = {
 /** Legacy scenic The Isle environment shots — kept for non-feature pages */
 export const isleSceneImages = {
 	hero: {
-		src: '/images/the-isle-hero-dinosaur-survival.webp',
+		src: img('the-isle-hero'),
 		alt: 'The Isle dinosaur survival landscape — homepage hero for The Isle Cheats',
 	},
 	tyrannosaurForest: {
-		src: '/images/the-isle-tyrannosaur-forest.webp',
+		src: img('the-isle-tyrannosaur-forest'),
 		alt: 'Tyrannosaur moving through forest in The Isle — Visuals ESP threat tracking scene',
 	},
 	carnivoreCombat: {
-		src: '/images/the-isle-carnivore-combat.webp',
+		src: img('the-isle-carnivore-combat'),
 		alt: 'Carnivore combat encounter in The Isle — cheat and movement hack gameplay context',
 	},
 	herdPlains: {
-		src: '/images/the-isle-herd-open-plains.webp',
+		src: img('the-isle-herd-open-plains'),
 		alt: 'Dinosaur herd crossing open plains in The Isle — package cover and pricing visual',
 	},
 	swampEnvironment: {
-		src: '/images/the-isle-swamp-environment.webp',
+		src: img('the-isle-swamp-environment'),
 		alt: 'Swamp environment in The Isle — World ESP map and resource awareness preview',
 	},
 	nightHunt: {
-		src: '/images/the-isle-night-hunt.webp',
+		src: img('the-isle-night-hunt'),
 		alt: 'Night hunt scene in The Isle — radar hack and low-light ESP context',
 	},
 	riversideDrink: {
-		src: '/images/the-isle-riverside-drink.webp',
+		src: img('the-isle-riverside-drink'),
 		alt: 'Dinosaur drinking at a riverside in The Isle — survival and water resource ESP scene',
 	},
 	packEncounter: {
-		src: '/images/the-isle-pack-encounter.webp',
+		src: img('the-isle-pack-encounter'),
 		alt: 'Pack encounter in The Isle — Instant Rotation and combat cheats preview',
 	},
 	aerialLandscape: {
-		src: '/images/the-isle-aerial-landscape.webp',
+		src: img('the-isle-aerial-landscape'),
 		alt: 'Aerial landscape view in The Isle — graphics and performance settings guide visual',
 	},
 	predatorStalk: {
-		src: '/images/the-isle-predator-stalk.webp',
+		src: img('the-isle-predator-stalk'),
 		alt: 'Predator stalking prey in The Isle — ESP snaplines and targeting context',
 	},
 } as const satisfies Record<string, IsleImage>;

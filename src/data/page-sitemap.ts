@@ -37,12 +37,12 @@ const img = (path: string, title: string, caption: string): SitemapImage => ({
 });
 
 const defaultImages = [
-	img('/images/the-isle-hero-dinosaur-survival.webp', 'The Isle Cheats hero', 'Homepage banner for The Isle Cheats'),
+	img('/images/the-isle-hero.webp', 'The Isle Cheats hero', 'Homepage banner for The Isle Cheats'),
 	img('/images/the-isle-herd-open-plains.webp', 'The Isle Cheats cover', 'Cover visual used across The Isle Cheats pages'),
 ];
 
 const scene = {
-	hero: img('/images/the-isle-hero-dinosaur-survival.webp', 'The Isle survival hero', 'Dinosaur survival landscape banner'),
+	hero: img('/images/the-isle-hero.webp', 'The Isle survival hero', 'Dinosaur survival landscape banner'),
 	tyrannosaur: img('/images/the-isle-tyrannosaur-forest.webp', 'The Isle tyrannosaur forest', 'Forest stalking scene for ESP guides'),
 	combat: img('/images/the-isle-carnivore-combat.webp', 'The Isle carnivore combat', 'Combat encounter for cheat guides'),
 	herd: img('/images/the-isle-herd-open-plains.webp', 'The Isle dinosaur herd', 'Herd on open plains for pricing pages'),

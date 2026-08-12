@@ -7,7 +7,7 @@ export const siteConfig = {
 	supportUrl: '/go/support/',
 	logo: '/images/navbar-logo.png',
 	checkoutUrl: '/go/checkout/',
-	defaultOgImage: '/images/the-isle-hero-dinosaur-survival.webp',
+	defaultOgImage: '/images/the-isle-hero.webp',
 	metaDescription:
 		'Buy The Isle Cheats for Windows PC. Isle Cheats with ESP, Cloud-DMA hacks, monthly and lifetime plans, features, guides, and support at islecheats.net.',
 	keywords:
@@ -38,7 +38,7 @@ export const homeSeo = {
 
 export const homeVideo = {
 	src: 'https://ooszazcwzmwhitdxwtom.supabase.co/storage/v1/object/public/ef/0605.mp4',
-	thumbnail: '/images/the-isle-hero-dinosaur-survival.webp',
+	thumbnail: '/images/the-isle-hero.webp',
 	thumbnailAlt: 'The Isle Cheats demo video thumbnail',
 	title: 'The Isle Cheats demo video',
 } as const;
