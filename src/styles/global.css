@@ -1,6 +1,5 @@
 @import "tailwindcss";
-@import "@fontsource-variable/oxanium";
-@import "@fontsource-variable/exo-2";
+@import "./fonts.css";
 
 @theme {
 	--font-display: "Oxanium Variable", "Oxanium", sans-serif;

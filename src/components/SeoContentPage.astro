@@ -1,7 +1,7 @@
 ---
 import PageLayout from '../layouts/PageLayout.astro';
 import { getPageSeo, type PageSeoKey } from '../data/seo/meta';
-import { buildBreadcrumbSchema, buildFaqSchema } from '../data/seo/schema';
+import { buildFaqSchema } from '../data/seo/schema';
 import InternalLinksPanel from './InternalLinksPanel.astro';
 import { getLocaleFromPath } from '../data/i18n';
 import { theIsleImages } from '../data/theisle';
@@ -39,15 +39,6 @@ const {
 
 const locale = getLocaleFromPath(Astro.url.pathname);
 const seo = getPageSeo(seoKey, locale);
-
-const breadcrumbSchema = buildBreadcrumbSchema(
-	[
-		{ name: 'Home', path: '/' },
-		{ name: breadcrumbLabel ?? heading, path: canonicalPath },
-	],
-	locale,
-);
-
 const faqSchema = faqs.length > 0 ? buildFaqSchema(faqs) : null;
 ---
 
@@ -69,8 +60,7 @@ const faqSchema = faqs.length > 0 ? buildFaqSchema(faqs) : null;
 	twitterDescription={seo.twitterDescription}
 	breadcrumbLabel={breadcrumbLabel ?? heading}
 >
-	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 	{faqSchema && <script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />}
 	<slot />
-	<InternalLinksPanel />
+	<InternalLinksPanel currentPath={canonicalPath} />
 </PageLayout>

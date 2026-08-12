@@ -1,28 +1,61 @@
 ---
-/** Standard internal linking block for topical authority — uses existing card-panel styles. */
+/** Contextual internal linking for topical authority — uses existing card-panel styles. */
+
+interface Props {
+	currentPath?: string;
+}
+
+const { currentPath = '/' } = Astro.props;
+
+const normalize = (path: string) => {
+	if (!path) return '/';
+	return path.endsWith('/') ? path : `${path}/`;
+};
+
+const current = normalize(currentPath);
+
+const primaryLinks = [
+	{ href: '/', label: 'The Isle Cheats homepage' },
+	{ href: '/pricing/', label: 'The Isle Cheat Price and packages' },
+	{ href: '/the-isle-cheats/', label: 'The Isle Cheats product hub' },
+	{ href: '/the-isle-faq/', label: 'The Isle FAQ' },
+	{ href: '/the-isle-features/', label: 'The Isle Features' },
+	{ href: '/blog/', label: 'The Isle Blog — guides and articles' },
+].filter((link) => normalize(link.href) !== current);
+
+const guideLinks = [
+	{ href: '/the-isle-esp/', label: 'The Isle ESP and Isle ESP overlays' },
+	{ href: '/theisle-esp/', label: 'Visuals ESP product page' },
+	{ href: '/the-isle-guide/', label: 'The Isle Guide' },
+	{ href: '/the-isle-survival-guide/', label: 'The Isle Survival Guide' },
+	{ href: '/the-isle-growth-guide/', label: 'The Isle Growth Guide' },
+	{ href: '/the-isle-settings/', label: 'The Isle Settings' },
+	{ href: '/the-isle-performance/', label: 'The Isle Performance Guide' },
+	{ href: '/the-isle-updates/', label: 'The Isle Updates' },
+	{ href: '/features/', label: 'The Isle Cheats package checklist' },
+	{ href: '/cheats/', label: 'The Isle Hack combat tools' },
+	{ href: '/support/', label: 'The Isle Cheats support' },
+].filter((link) => normalize(link.href) !== current);
 ---
 
 <section class="card-panel">
 	<h2>Explore The Isle Cheats</h2>
 	<ul>
-		<li><a href="/">The Isle Cheats homepage</a></li>
-		<li><a href="/pricing/">The Isle Cheat Price and packages</a></li>
-		<li><a href="/the-isle-faq/">The Isle FAQ</a></li>
-		<li><a href="/the-isle-features/">The Isle Features</a></li>
-		<li><a href="/blog/">The Isle Blog — guides and articles</a></li>
+		{primaryLinks.slice(0, 5).map((link) => (
+			<li>
+				<a href={link.href}>{link.label}</a>
+			</li>
+		))}
 	</ul>
 </section>
 
 <section class="card-panel">
 	<h2>Related guides</h2>
 	<ul>
-		<li><a href="/the-isle-cheats/">The Isle Cheats product hub</a></li>
-		<li><a href="/the-isle-esp/">The Isle ESP and Isle ESP overlays</a></li>
-		<li><a href="/the-isle-guide/">The Isle Guide</a></li>
-		<li><a href="/the-isle-survival-guide/">The Isle Survival Guide</a></li>
-		<li><a href="/the-isle-growth-guide/">The Isle Growth Guide</a></li>
-		<li><a href="/the-isle-settings/">The Isle Settings</a></li>
-		<li><a href="/the-isle-performance/">The Isle Performance Guide</a></li>
-		<li><a href="/the-isle-updates/">The Isle Updates</a></li>
+		{guideLinks.slice(0, 8).map((link) => (
+			<li>
+				<a href={link.href}>{link.label}</a>
+			</li>
+		))}
 	</ul>
 </section>

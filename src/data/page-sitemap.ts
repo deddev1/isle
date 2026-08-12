@@ -1,6 +1,15 @@
 import { siteConfig } from './site';
 import { prefixedLocales } from './i18n';
 import { blogIdeas } from './seo/blog-ideas';
+import { getBlogPostDates } from './seo/blog-meta';
+
+/** Blog posts that canonicalize to silo pages — omit from sitemap to avoid soft duplicates. */
+const blogSitemapExclusions = new Set([
+	'the-isle-survival-guide',
+	'the-isle-growth-guide',
+	'the-isle-dinosaur-guide',
+	'the-isle-faq',
+]);
 
 export type SitemapImage = {
 	url: string;
@@ -15,6 +24,8 @@ export type PageSitemapEntry = {
 	images: SitemapImage[];
 	/** Include localized alternates in sitemap */
 	localized?: boolean;
+	/** Stable ISO date (YYYY-MM-DD) when available */
+	lastmod?: string;
 };
 
 const abs = (path: string) => new URL(path, siteConfig.url).href;
@@ -192,14 +203,18 @@ export const pageSitemapEntries: PageSitemapEntry[] = [
 		changefreq: 'monthly',
 		images: [scene.aerial, scene.herd],
 	},
-	...blogIdeas.map(
-		(idea, index): PageSitemapEntry => ({
-			path: `/blog/${idea.slug}/`,
-			priority: 0.65,
-			changefreq: 'monthly',
-			images: [Object.values(scene)[index % Object.values(scene).length]],
+	...blogIdeas
+		.filter((idea) => !blogSitemapExclusions.has(idea.slug))
+		.map((idea, index): PageSitemapEntry => {
+			const dates = getBlogPostDates(idea.slug);
+			return {
+				path: `/blog/${idea.slug}/`,
+				priority: 0.65,
+				changefreq: 'monthly',
+				lastmod: dates.modified,
+				images: [Object.values(scene)[index % Object.values(scene).length]],
+			};
 		}),
-	),
 ];
 
 /** Localized homepage paths for sitemap */

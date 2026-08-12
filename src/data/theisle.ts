@@ -6,6 +6,17 @@ export type IsleImage = {
 };
 
 const screenshotBase = '/images/the-isle';
+const screenshotThumbBase = '/images/the-isle/thumbs';
+
+/** Lightweight 480w WebP for strips, thumbs, and marquees */
+export function toIsleThumb(src: string): string {
+	if (!src.startsWith(`${screenshotBase}/`) || src.includes('/thumbs/')) return src;
+	return src.replace(`${screenshotBase}/`, `${screenshotThumbBase}/`);
+}
+
+export function withIsleThumb(image: IsleImage): IsleImage & { thumb: string } {
+	return { ...image, thumb: toIsleThumb(image.src) };
+}
 
 /** Real The Isle cheat/ESP gameplay screenshots — PNG originals plus WebP copies in /images/the-isle/ */
 export const isleScreenshotImages = {

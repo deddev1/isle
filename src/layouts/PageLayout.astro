@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { getLocalizedPath, type LocaleCode } from '../data/i18n';
 import { siteConfig } from '../data/site';
-import { theIsleImages } from '../data/theisle';
+import { theIsleImages, toIsleThumb } from '../data/theisle';
 import { buildBreadcrumbSchema } from '../data/seo/schema';
 import { buildWebPageSchema } from '../data/seo/schema';
 
@@ -42,7 +42,7 @@ interface Props {
 const {
 	title,
 	description,
-	canonicalPath = '/',
+	canonicalPath = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`,
 	ogTitle,
 	ogDescription,
 	twitterTitle,
@@ -68,10 +68,21 @@ const {
 	compact = false,
 } = Astro.props;
 
+const homeLabelByLocale: Record<string, string> = {
+	en: 'Home',
+	de: 'Startseite',
+	fr: 'Accueil',
+	es: 'Inicio',
+	tr: 'Ana sayfa',
+	ar: 'الرئيسية',
+	ru: 'Главная',
+};
+
 const homeHref = getLocalizedPath('/', locale);
+const homeLabel = homeLabelByLocale[locale] ?? 'Home';
 const breadcrumbSchema = buildBreadcrumbSchema(
 	[
-		{ name: 'Home', path: '/' },
+		{ name: homeLabel, path: '/' },
 		{ name: breadcrumbLabel ?? heading, path: canonicalPath },
 	],
 	locale,
@@ -121,7 +132,7 @@ const webPageSchema = buildWebPageSchema({
 			</div>
 			<div class="shell banner__content">
 				<nav class="banner__crumbs" aria-label="Breadcrumb">
-					<a href={homeHref}>Home</a>
+					<a href={homeHref}>{homeLabel}</a>
 					<span aria-hidden="true">/</span>
 					<span aria-current="page">{breadcrumbLabel ?? heading}</span>
 				</nav>
@@ -164,7 +175,8 @@ const webPageSchema = buildWebPageSchema({
 						width="1400"
 						height="788"
 						decoding="async"
-						fetchpriority={preloadHero ? 'high' : 'auto'}
+						loading="lazy"
+						fetchpriority="low"
 					/>
 				</figure>
 				{
@@ -174,7 +186,7 @@ const webPageSchema = buildWebPageSchema({
 								{previewScroll.map((image) => (
 									<figure class="showcase__scroll-item" role="listitem">
 										<img
-											src={image.src}
+											src={toIsleThumb(image.src)}
 											alt={image.alt}
 											width="320"
 											height="180"

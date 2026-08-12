@@ -17,7 +17,9 @@ const featuresHref = '/features/';
 <section class="hero" id="home" data-nav-section="home" aria-label="Hero">
 	<div class="hero__media">
 		<img
-			src={theIsleImages.hero}
+			src="/images/the-isle-hero-dinosaur-survival-1280.webp"
+			srcset="/images/the-isle-hero-dinosaur-survival-800.webp 800w, /images/the-isle-hero-dinosaur-survival-1280.webp 1280w, /images/the-isle-hero-dinosaur-survival-1600.webp 1600w, /images/the-isle-hero-dinosaur-survival.webp 1920w"
+			sizes="100vw"
 			alt="The Isle Cheats hero banner — ESP, Cloud-DMA hacks, and dinosaur survival on Windows PC"
 			class="hero__bg"
 			width="1400"
@@ -65,9 +67,9 @@ const featuresHref = '/features/';
 		object-fit: cover;
 		object-position: 70% 40%;
 		transform: translateZ(0) scale(1.03);
-		will-change: transform;
 		backface-visibility: hidden;
-		animation: kenburns 18s ease-in-out infinite alternate;
+		/* Delay motion until after LCP settle */
+		animation: kenburns 18s ease-in-out 2.5s infinite alternate;
 	}
 
 	.hero__splash {

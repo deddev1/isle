@@ -3,11 +3,19 @@ import PageLayout from '../../layouts/PageLayout.astro';
 import InternalLinksPanel from '../../components/InternalLinksPanel.astro';
 import { getBlogPostSeo } from '../../data/seo/blog-meta';
 import { blogIdeas } from '../../data/seo/blog-ideas';
-import { buildArticleSchema, buildFaqSchema } from '../../data/seo/schema';
+import { buildArticleSchema } from '../../data/seo/schema';
 import { estimateReadingTime, formatDate } from '../../data/seo/helpers';
 import { getLocaleFromPath } from '../../data/i18n';
 import { siteConfig } from '../../data/site';
 import { allIsleScreenshots } from '../../data/theisle';
+
+/** Blog slugs that collide with evergreen silo pages — canonicalize to the silo. */
+const siloCanonicalBySlug: Record<string, string> = {
+	'the-isle-survival-guide': '/the-isle-survival-guide/',
+	'the-isle-growth-guide': '/the-isle-growth-guide/',
+	'the-isle-dinosaur-guide': '/the-isle-dinosaur-guide/',
+	'the-isle-faq': '/the-isle-faq/',
+};
 
 export function getStaticPaths() {
 	return blogIdeas.map((idea, index) => ({
@@ -20,7 +28,10 @@ const { idea, index } = Astro.props;
 const postHero = allIsleScreenshots[index % allIsleScreenshots.length];
 const locale = getLocaleFromPath(Astro.url.pathname);
 const seo = getBlogPostSeo(idea);
-const canonicalPath = `/blog/${idea.slug}/`;
+const blogPath = `/blog/${idea.slug}/`;
+const siloCanonical = siloCanonicalBySlug[idea.slug];
+const canonicalPath = siloCanonical ?? blogPath;
+const isSiloDuplicate = Boolean(siloCanonical);
 
 const prevPost = index > 0 ? blogIdeas[index - 1] : null;
 const nextPost = index < blogIdeas.length - 1 ? blogIdeas[index + 1] : null;
@@ -37,39 +48,40 @@ const toc = [
 ];
 
 const overviewText = `This article covers ${idea.title.toLowerCase()} for players researching The Isle cheats, ESP overlays, and survival strategies on Windows PC.`;
-const wordCount = 320 + idea.title.split(/\s+/).length * 8;
-const readingMinutes = estimateReadingTime(wordCount);
+const takeawayText =
+	'Understand how this topic relates to The Isle Cheats and Isle Cheats packages. Compare features on the The Isle Features page, review The Isle FAQ for delivery answers, check The Isle Updates after game patches, and review Pricing for monthly and lifetime packages.';
+const faqOne = `What does this ${idea.category} article explain about ${idea.title.replace(/ — .+$/, '')}?`;
+const faqOneAnswer = `${idea.title} is written for Windows PC players researching ${idea.category} topics in The Isle. It connects ${idea.intent} intent with Cloud-DMA, ESP overlays, and practical package context.`;
+const faqTwo = `Where should I go next after reading about ${idea.category}?`;
+const faqTwoAnswer =
+	'Compare monthly and lifetime plans on Pricing, review the package checklist on Features, open The Isle FAQ for delivery questions, and contact support if you need order help.';
+const bodyText = [overviewText, takeawayText, faqOne, faqOneAnswer, faqTwo, faqTwoAnswer].join(' ');
+const wordCount = bodyText.trim().split(/\s+/).filter(Boolean).length;
+const readingMinutes = estimateReadingTime(Math.max(wordCount, 180));
 
 const postFaqs = [
-	{
-		question: `Who is this ${idea.category} guide for?`,
-		answer:
-			'This guide is for The Isle players on Windows PC who want clear context on cheats, ESP overlays, survival mechanics, or package options before making a decision.',
-	},
-	{
-		question: 'Where can I compare The Isle Cheats packages?',
-		answer:
-			'Visit the Pricing page for monthly and lifetime plans, the Features page for a full breakdown, the FAQ hub for delivery and compatibility answers, and customer support for order help.',
-	},
+	{ question: faqOne, answer: faqOneAnswer },
+	{ question: faqTwo, answer: faqTwoAnswer },
 ];
 
 const articleSchema = buildArticleSchema({
 	title: seo.ogTitle,
 	description: seo.description,
-	path: canonicalPath,
+	path: blogPath,
 	locale,
 	datePublished: seo.published,
 	dateModified: seo.modified,
 	wordCount,
+	image: postHero.src,
+	imageAlt: `${idea.title} — ${postHero.alt}`,
 });
-
-const faqSchema = buildFaqSchema(postFaqs);
 ---
 
 <PageLayout
 	title={seo.title}
 	description={seo.description}
 	canonicalPath={canonicalPath}
+	noindex={isSiloDuplicate}
 	heading={idea.title}
 	intro={`An in-depth ${idea.intent} guide covering ${idea.category} topics for The Isle players on Windows PC.`}
 	heroImage={postHero.src}
@@ -89,8 +101,7 @@ const faqSchema = buildFaqSchema(postFaqs);
 	breadcrumbLabel={idea.title}
 	preloadHero={true}
 >
-	<script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
-	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
+	{!isSiloDuplicate && <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />}
 
 	<section class="card-panel">
 		<p>
@@ -183,5 +194,5 @@ const faqSchema = buildFaqSchema(postFaqs);
 		</ul>
 	</nav>
 
-	<InternalLinksPanel />
+	<InternalLinksPanel currentPath={blogPath} />
 </PageLayout>
