@@ -20,6 +20,21 @@ const productSchema = buildSoftwareApplicationSchema({
 	alternateName: ['Isle Cheats', 'The Isle Hack'],
 	keywords: seo.keywords,
 });
+
+const planBullets = {
+	monthly: [
+		'30-day license',
+		'Lowest upfront cost',
+		'Same Cloud-DMA features as lifetime',
+		'Renew only when you still need access',
+	],
+	lifetime: [
+		'One-time payment',
+		'No renewal billing',
+		'Same Cloud-DMA features as monthly',
+		'Best for frequent players',
+	],
+} as const;
 ---
 
 <PageLayout
@@ -27,7 +42,7 @@ const productSchema = buildSoftwareApplicationSchema({
 	description={seo.description}
 	canonicalPath="/pricing/"
 	heading="The Isle Cheats Pricing"
-	intro="Packages are sold in USD and include The Isle Cheats Cloud-DMA, ESP, and Cheats product line."
+	intro="Simple USD pricing for Cloud-DMA on Windows PC. Compare monthly and lifetime plans, then see what is included before you buy."
 	heroImage={pageHero.src}
 	heroAlt={pageHero.alt}
 	previewScroll={previewScroll}
@@ -46,6 +61,9 @@ const productSchema = buildSoftwareApplicationSchema({
 
 	<section class="card-panel">
 		<h2>Current packages</h2>
+		<p>
+			Both plans include the same Cloud-DMA tools. Choose the license length that matches how often you play.
+		</p>
 		<div class="price-grid">
 			{
 				productInfo.plans.map((plan) => (
@@ -53,6 +71,11 @@ const productSchema = buildSoftwareApplicationSchema({
 						<span class="price-card__label">{plan.label}</span>
 						<span class="price-card__price">${plan.price}</span>
 						<span class="price-card__meta">{productInfo.currency} · Cloud-DMA · ESP</span>
+						<ul class="price-card__list">
+							{(planBullets[plan.id as keyof typeof planBullets] ?? []).map((item) => (
+								<li>{item}</li>
+							))}
+						</ul>
 					</article>
 				))
 			}
@@ -63,8 +86,24 @@ const productSchema = buildSoftwareApplicationSchema({
 		pricingSections.map((section) => (
 			<section class="card-panel" id={section.id}>
 				<h2>{section.heading}</h2>
-				{section.paragraphs.map((paragraph) => (
+				{section.lead && <p class="price-lead">{section.lead}</p>}
+				{section.paragraphs?.map((paragraph) => (
 					<p>{paragraph}</p>
+				))}
+				{section.subsections?.map((sub) => (
+					<>
+						<h3>{sub.heading}</h3>
+						{sub.paragraphs?.map((paragraph) => (
+							<p>{paragraph}</p>
+						))}
+						{sub.bullets && (
+							<ul>
+								{sub.bullets.map((item) => (
+									<li>{item}</li>
+								))}
+							</ul>
+						)}
+					</>
 				))}
 				{section.bullets && (
 					<ul>
@@ -79,6 +118,7 @@ const productSchema = buildSoftwareApplicationSchema({
 
 	<section class="card-panel">
 		<h2>Pricing FAQ</h2>
+		<p>Short answers to the questions buyers ask most before checkout.</p>
 		{
 			pricingFaqs.map((item) => (
 				<>
@@ -91,6 +131,7 @@ const productSchema = buildSoftwareApplicationSchema({
 
 	<section class="card-panel">
 		<h2>Before you buy</h2>
+		<p>Read these pages if you want more detail on policies, updates, or plan choice.</p>
 		<ul>
 			<li><a href="/refund-policy/">Read the refund policy</a></li>
 			<li><a href="/terms/">Review the terms</a></li>
@@ -102,3 +143,54 @@ const productSchema = buildSoftwareApplicationSchema({
 
 	<InternalLinksPanel currentPath="/pricing/" />
 </PageLayout>
+
+<style>
+	.price-lead {
+		margin: 0.35rem 0 0.75rem;
+		color: #d4cae6;
+		line-height: 1.6;
+	}
+
+	.price-card__list {
+		margin: 0.75rem 0 0;
+		padding: 0;
+		list-style: none;
+		display: grid;
+		gap: 0.35rem;
+		width: 100%;
+		text-align: left;
+	}
+
+	.price-card__list li {
+		position: relative;
+		padding: 0.35rem 0.5rem 0.35rem 1.35rem;
+		border-radius: 0.45rem;
+		background: rgba(10, 6, 18, 0.35);
+		border: 1px solid rgba(168, 85, 247, 0.1);
+		color: #d4cae6;
+		font-size: 0.82rem;
+		line-height: 1.4;
+	}
+
+	.price-card__list li::before {
+		content: '';
+		position: absolute;
+		left: 0.55rem;
+		top: 50%;
+		width: 0.3rem;
+		height: 0.3rem;
+		border-radius: 999px;
+		background: var(--color-orchid);
+		transform: translateY(-50%);
+	}
+
+	.price-card.is-featured .price-card__list li {
+		background: rgba(255, 255, 255, 0.1);
+		border-color: rgba(255, 255, 255, 0.16);
+		color: rgba(255, 255, 255, 0.94);
+	}
+
+	.price-card.is-featured .price-card__list li::before {
+		background: #fff;
+	}
+</style>
