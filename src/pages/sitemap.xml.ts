@@ -14,11 +14,12 @@ function escapeXml(value: string): string {
 export const prerender = true;
 
 export const GET: APIRoute = () => {
-	const lastmod = new Date().toISOString().slice(0, 10);
+	const fallbackLastmod = '2026-08-12';
 
 	const urls = pageSitemapEntries
 		.flatMap((entry) => {
 			const paths = getLocalizedSitemapPaths(entry);
+			const lastmod = entry.lastmod ?? fallbackLastmod;
 
 			return paths.map((path) => {
 				const images = entry.images

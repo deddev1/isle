@@ -4,7 +4,7 @@ import Navbar from '../components/Navbar.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { getLocalizedPath, type LocaleCode } from '../data/i18n';
 import { siteConfig } from '../data/site';
-import { theIsleImages } from '../data/theisle';
+import { theIsleImages, toIsleThumb } from '../data/theisle';
 import { buildBreadcrumbSchema } from '../data/seo/schema';
 import { buildWebPageSchema } from '../data/seo/schema';
 
@@ -23,6 +23,8 @@ interface Props {
 	heroImage?: string;
 	heroAlt?: string;
 	gallery?: ReadonlyArray<{ src: string; alt: string }>;
+	/** Optional horizontal image strip rendered under the main preview */
+	previewScroll?: ReadonlyArray<{ src: string; alt: string }>;
 	ctaPrimary?: { href: string; label: string };
 	ctaSecondary?: { href: string; label: string };
 	locale?: LocaleCode;
@@ -33,12 +35,14 @@ interface Props {
 	preloadHero?: boolean;
 	articlePublished?: string;
 	articleModified?: string;
+	/** Tighter spacing for denser pages like pricing */
+	compact?: boolean;
 }
 
 const {
 	title,
 	description,
-	canonicalPath = '/',
+	canonicalPath = Astro.url.pathname.endsWith('/') ? Astro.url.pathname : `${Astro.url.pathname}/`,
 	ogTitle,
 	ogDescription,
 	twitterTitle,
@@ -47,9 +51,10 @@ const {
 	heading,
 	intro,
 	eyebrow = siteConfig.name,
-	heroImage = theIsleImages.hero,
+	heroImage = theIsleImages.cover,
 	heroAlt = `${siteConfig.name} page visual`,
-	gallery = theIsleImages.product.slice(0, 3),
+	gallery = theIsleImages.product.slice(0, 6),
+	previewScroll = [],
 	ctaPrimary,
 	ctaSecondary,
 	locale = 'en',
@@ -60,12 +65,24 @@ const {
 	preloadHero = true,
 	articlePublished,
 	articleModified,
+	compact = false,
 } = Astro.props;
 
+const homeLabelByLocale: Record<string, string> = {
+	en: 'Home',
+	de: 'Startseite',
+	fr: 'Accueil',
+	es: 'Inicio',
+	tr: 'Ana sayfa',
+	ar: 'الرئيسية',
+	ru: 'Главная',
+};
+
 const homeHref = getLocalizedPath('/', locale);
+const homeLabel = homeLabelByLocale[locale] ?? 'Home';
 const breadcrumbSchema = buildBreadcrumbSchema(
 	[
-		{ name: 'Home', path: '/' },
+		{ name: homeLabel, path: '/' },
 		{ name: breadcrumbLabel ?? heading, path: canonicalPath },
 	],
 	locale,
@@ -99,7 +116,7 @@ const webPageSchema = buildWebPageSchema({
 	<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
 	<script type="application/ld+json" set:html={JSON.stringify(webPageSchema)} />
 	<Navbar />
-	<main class="page">
+	<main class:list={['page', { 'page--compact': compact }]}>
 		<section class="banner">
 			<div class="banner__media">
 				<img
@@ -115,7 +132,7 @@ const webPageSchema = buildWebPageSchema({
 			</div>
 			<div class="shell banner__content">
 				<nav class="banner__crumbs" aria-label="Breadcrumb">
-					<a href={homeHref}>Home</a>
+					<a href={homeHref}>{homeLabel}</a>
 					<span aria-hidden="true">/</span>
 					<span aria-current="page">{breadcrumbLabel ?? heading}</span>
 				</nav>
@@ -158,9 +175,30 @@ const webPageSchema = buildWebPageSchema({
 						width="1400"
 						height="788"
 						decoding="async"
-						fetchpriority={preloadHero ? 'high' : 'auto'}
+						loading="lazy"
+						fetchpriority="low"
 					/>
 				</figure>
+				{
+					previewScroll.length > 0 && (
+						<div class="showcase__scroll" aria-label="Gameplay preview images">
+							<div class="showcase__scroll-track" role="list">
+								{previewScroll.map((image) => (
+									<figure class="showcase__scroll-item" role="listitem">
+										<img
+											src={toIsleThumb(image.src)}
+											alt={image.alt}
+											width="320"
+											height="180"
+											loading="lazy"
+											decoding="async"
+										/>
+									</figure>
+								))}
+							</div>
+						</div>
+					)
+				}
 			</section>
 
 			<article class="article">
@@ -336,6 +374,8 @@ const webPageSchema = buildWebPageSchema({
 
 	.showcase {
 		width: min(100%, 960px);
+		display: grid;
+		gap: 0.65rem;
 	}
 
 	.showcase__frame {
@@ -353,6 +393,69 @@ const webPageSchema = buildWebPageSchema({
 		height: 100%;
 		object-fit: cover;
 		object-position: center;
+	}
+
+	.showcase__scroll {
+		min-width: 0;
+		border-radius: 0.75rem;
+		border: 1px solid rgba(168, 85, 247, 0.14);
+		background: rgba(10, 6, 18, 0.35);
+		padding: 0.45rem;
+	}
+
+	.showcase__scroll-track {
+		display: flex;
+		gap: 0.45rem;
+		overflow-x: auto;
+		overflow-y: hidden;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+		scrollbar-color: rgba(168, 85, 247, 0.45) transparent;
+		padding-bottom: 0.15rem;
+	}
+
+	.showcase__scroll-track::-webkit-scrollbar {
+		height: 5px;
+	}
+
+	.showcase__scroll-track::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.showcase__scroll-track::-webkit-scrollbar-thumb {
+		background: rgba(168, 85, 247, 0.4);
+		border-radius: 999px;
+	}
+
+	.showcase__scroll-item {
+		flex: 0 0 8.5rem;
+		margin: 0;
+		overflow: hidden;
+		border-radius: 0.5rem;
+		border: 1px solid rgba(168, 85, 247, 0.16);
+		background: #12081f;
+		aspect-ratio: 16 / 10;
+		scroll-snap-align: start;
+	}
+
+	.showcase__scroll-item img {
+		display: block;
+		width: 100%;
+		height: 100%;
+		object-fit: cover;
+	}
+
+	@media (min-width: 960px) {
+		.showcase__scroll-item {
+			flex-basis: 9.25rem;
+		}
+	}
+
+	@media (max-width: 959px) {
+		.showcase__scroll-item {
+			flex-basis: 7.5rem;
+		}
 	}
 
 	.article {
@@ -624,5 +727,133 @@ const webPageSchema = buildWebPageSchema({
 		.article :global(.card-panel) {
 			padding: 1.15rem 1.1rem;
 		}
+	}
+
+	/* Compact mode — same UI, tighter spacing (pricing) */
+	.page--compact {
+		padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+	}
+
+	.page--compact .banner {
+		margin-bottom: 1.15rem;
+	}
+
+	.page--compact .banner__content {
+		padding: 1.35rem 0 1.2rem;
+	}
+
+	.page--compact .banner__crumbs {
+		margin-bottom: 0.55rem;
+		font-size: 0.75rem;
+	}
+
+	.page--compact .banner__title {
+		font-size: clamp(1.4rem, 3.2vw, 1.95rem);
+	}
+
+	.page--compact .banner__intro {
+		margin-top: 0.55rem;
+		font-size: 0.9rem;
+		line-height: 1.5;
+		max-width: 32rem;
+	}
+
+	.page--compact .banner__actions {
+		margin-top: 0.9rem;
+		gap: 0.5rem;
+	}
+
+	.page--compact .btn {
+		min-height: 2.35rem;
+		padding: 0.55rem 0.95rem;
+		font-size: 0.86rem;
+	}
+
+	.page--compact .page__wrap {
+		gap: 1.15rem;
+	}
+
+	.page--compact .showcase {
+		width: min(100%, 720px);
+	}
+
+	.page--compact .showcase__frame {
+		aspect-ratio: 21 / 8;
+		border-radius: 0.85rem;
+		box-shadow: 0 10px 22px rgba(0, 0, 0, 0.24);
+	}
+
+	.page--compact .article {
+		width: min(100%, 640px);
+		gap: 0.75rem;
+	}
+
+	.page--compact .article :global(.card-panel) {
+		padding: 0.95rem 1rem;
+		border-radius: 0.8rem;
+		gap: 0.55rem;
+	}
+
+	.page--compact .article :global(h2) {
+		font-size: 1.05rem;
+	}
+
+	.page--compact .article :global(h3) {
+		font-size: 0.92rem;
+	}
+
+	.page--compact .article :global(p),
+	.page--compact .article :global(li) {
+		font-size: 0.88rem;
+		line-height: 1.55;
+	}
+
+	.page--compact .article :global(li) {
+		padding: 0.4rem 0.65rem 0.4rem 1.75rem;
+	}
+
+	.page--compact .article :global(.price-grid) {
+		gap: 0.55rem;
+	}
+
+	.page--compact .article :global(.price-card) {
+		padding: 0.85rem 0.7rem;
+		border-radius: 0.7rem;
+		gap: 0.2rem;
+	}
+
+	.page--compact .article :global(.price-card__label) {
+		font-size: 0.7rem;
+	}
+
+	.page--compact .article :global(.price-card__price) {
+		font-size: 1.45rem;
+	}
+
+	.page--compact .article :global(.price-card__meta) {
+		font-size: 0.72rem;
+	}
+
+	.page--compact .gallery-block {
+		width: min(100%, 720px);
+		gap: 0.65rem;
+	}
+
+	.page--compact .gallery-block__title {
+		font-size: 1.1rem;
+	}
+
+	.page--compact .gallery-block__grid {
+		gap: 0.55rem;
+	}
+
+	.page--compact .gallery-block__item {
+		border-radius: 0.7rem;
+		aspect-ratio: 16 / 10;
+	}
+
+	.page--compact .gallery-block__item figcaption {
+		padding: 1rem 0.55rem 0.45rem;
+		font-size: 0.65rem;
 	}
 </style>

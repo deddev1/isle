@@ -1,6 +1,5 @@
 @import "tailwindcss";
-@import "@fontsource-variable/oxanium";
-@import "@fontsource-variable/exo-2";
+@import "./fonts.css";
 
 @theme {
 	--font-display: "Oxanium Variable", "Oxanium", sans-serif;
@@ -27,11 +26,11 @@
 	--gradient-brand: linear-gradient(135deg, #7c3aed 0%, #a855f7 45%, #d946ef 100%);
 	--gradient-brand-x: linear-gradient(90deg, #8b5cf6 0%, #c026d3 100%);
 
-	--page-max: 1180px;
-	--page-gutter: 1.5rem;
-	--section-space: 2rem;
-	--radius-media: 1rem;
-	--radius-card: 1.25rem;
+	--page-max: 1080px;
+	--page-gutter: 1.25rem;
+	--section-space: 1.5rem;
+	--radius-media: 0.9rem;
+	--radius-card: 1rem;
 }
 
 @layer base {

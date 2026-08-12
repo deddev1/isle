@@ -9,9 +9,9 @@ import WhyUsSection from '../components/WhyUsSection.astro';
 import SiteFooter from '../components/SiteFooter.astro';
 import { productInfo, siteConfig } from '../data/site';
 import { getPageSeo } from '../data/seo/meta';
-import { getHomeMetaKeywords, getRelatedSearchTerms } from '../data/i18n/search-terms';
+import { getHomeMetaKeywords } from '../data/i18n/search-terms';
 import { organizationAlternateNames } from '../data/seo/keywords';
-import { buildFaqSchema, buildRelatedSearchesSchema, buildSoftwareApplicationSchema } from '../data/seo/schema';
+import { buildFaqSchema, buildSoftwareApplicationSchema } from '../data/seo/schema';
 import { getHomeContent } from '../data/i18n/home-content';
 import { getLocalizedPath } from '../data/i18n';
 import type { LocaleCode } from '../data/i18n';
@@ -36,7 +36,6 @@ const productSchema = buildSoftwareApplicationSchema({
 });
 
 const faqSchema = buildFaqSchema(homeContent.faqs);
-const relatedSearchesSchema = buildRelatedSearchesSchema(getRelatedSearchTerms(locale), locale);
 const canonicalPath = getLocalizedPath('/', locale);
 ---
 
@@ -44,8 +43,8 @@ const canonicalPath = getLocalizedPath('/', locale);
 	title={seo.title}
 	description={seo.description}
 	canonicalPath={canonicalPath}
-	ogImage="/images/the-isle-hero-dinosaur-survival.webp"
-	preloadImage="/images/the-isle-hero-dinosaur-survival.webp"
+	ogImage="/images/the-isle-hero.webp"
+	preloadImage="/images/the-isle-hero-1280.webp"
 	locale={locale}
 	keywords={getHomeMetaKeywords(locale)}
 	ogTitle={seo.ogTitle}
@@ -55,7 +54,6 @@ const canonicalPath = getLocalizedPath('/', locale);
 >
 	<script type="application/ld+json" set:html={JSON.stringify(productSchema)} />
 	<script type="application/ld+json" set:html={JSON.stringify(faqSchema)} />
-	<script type="application/ld+json" set:html={JSON.stringify(relatedSearchesSchema)} />
 	<Navbar />
 	<main class="site">
 		<Hero locale={locale} />
@@ -64,13 +62,13 @@ const canonicalPath = getLocalizedPath('/', locale);
 				<ProductShowcase />
 			</div>
 		</section>
-		<section class="site__section site__section--seo" id="why-us" data-nav-section="why-us" aria-labelledby="why-us-title">
+		<section class="site__section site__section--seo site__section--defer" id="why-us" data-nav-section="why-us" aria-labelledby="why-us-title">
 			<WhyUsSection locale={locale} />
 		</section>
-		<section class="site__section site__section--seo" aria-label="Package details and FAQ">
+		<section class="site__section site__section--seo site__section--defer" aria-label="Package details and FAQ">
 			<HomeSeo locale={locale} />
 		</section>
-		<section class="site__section site__section--gallery" id="demo" data-nav-section="demo">
+		<section class="site__section site__section--gallery site__section--defer" id="demo" data-nav-section="demo">
 			<div class="shell">
 				<Gallery />
 			</div>
@@ -93,7 +91,12 @@ const canonicalPath = getLocalizedPath('/', locale);
 	}
 
 	.site__section--gallery {
-		padding-top: 0.5rem;
-		padding-bottom: 2rem;
+		padding-top: 0.15rem;
+		padding-bottom: 1rem;
+	}
+
+	.site__section--defer {
+		content-visibility: auto;
+		contain-intrinsic-size: 1px 720px;
 	}
 </style>

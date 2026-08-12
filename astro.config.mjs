@@ -7,6 +7,10 @@ export default defineConfig({
 	site: 'https://islecheats.net',
 	trailingSlash: 'always',
 	compressHTML: true,
+	prefetch: {
+		prefetchAll: false,
+		defaultStrategy: 'hover',
+	},
 	server: {
 		host: true,
 		port: 3000,

@@ -68,7 +68,7 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 	home: {
 		title: 'The Isle Cheats — ESP, Hacks & Guides | islecheats',
 		description:
-			'Compare Visuals ESP, World ESP, and Cloud-DMA hacks for Windows PC. Review features, pricing, and survival guides at islecheats.net.',
+			'Buy The Isle Cheats for Windows PC with Visuals ESP, World ESP, and Cloud-DMA combat hacks. Compare features, monthly or lifetime pricing, and survival guides at islecheats.net.',
 		ogTitle: 'The Isle Cheats — ESP, Cloud-DMA & Survival Hacks',
 		ogDescription:
 			'Official hub for ESP overlays, combat hacks, package pricing, and dinosaur survival guides on Windows PC.',
@@ -80,7 +80,7 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 	cheats: {
 		title: 'The Isle Hack — Combat & Movement Cheats | islecheats',
 		description:
-			'Explore The Isle Hack options: Instant Rotation, Auto-Attack, Omnimovement, and No Cooldown Attack. All included in Cloud-DMA — see the full cheat list today.',
+			'Product page for The Isle Hack combat tools: Instant Rotation, Auto-Attack, Omnimovement, and No Cooldown Attack in the Cloud-DMA package for Windows PC.',
 		ogTitle: 'The Isle Cheats — Combat & Movement Hacks',
 		ogDescription:
 			'Explore The Isle hack options including Instant Rotation, Auto-Attack, Omnimovement, and No Cooldown Attack for Windows PC.',
@@ -89,26 +89,26 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Cheats, The Isle Hack, Isle Hacks, The Isle instant rotation, The Isle omnimovement',
 	},
 	theisleEsp: {
-		title: 'The Isle ESP — Visuals & World Overlay | islecheats',
+		title: 'Theisle ESP — Product Overlay Toolkit | islecheats',
 		description:
-			'The Isle ESP and Isle ESP overlays track dinosaurs, health, growth, and map resources. Configurable range, colors, and snaplines — read the full ESP guide now.',
-		ogTitle: 'The Isle ESP — Visuals & World Overlay',
+			'Product overview of Theisle ESP overlays for Windows PC: entity boxes, health, growth tags, and World ESP resource tracking in the Cloud-DMA toolkit.',
+		ogTitle: 'Theisle ESP — Product Overlay Toolkit',
 		ogDescription:
-			'The Isle ESP guide: entity boxes, health, growth, snaplines, resource tracking, and World ESP for survival awareness.',
-		twitterTitle: 'The Isle ESP — Overlay Features',
-		twitterDescription: 'Visuals ESP and World ESP features for The Isle dinosaur survival.',
-		keywords: 'The Isle ESP, Isle ESP, The Isle wallhack, The Isle overlay, The Isle visuals ESP, The Isle world ESP',
+			'Theisle ESP product page covering Visuals ESP, World ESP, snaplines, and map awareness tools for The Isle.',
+		twitterTitle: 'Theisle ESP — Product Toolkit',
+		twitterDescription: 'Visuals ESP and World ESP product toolkit for The Isle on Windows PC.',
+		keywords: 'Theisle ESP, The Isle ESP, Isle ESP, The Isle wallhack, The Isle overlay, The Isle visuals ESP',
 	},
 	features: {
-		title: 'The Isle Features — ESP, Cheats & Utilities | islecheats',
+		title: 'The Isle Cheats Features — Package Checklist | islecheats',
 		description:
-			'Full The Isle Features list: Visuals ESP, World ESP, Cheats, Radar, FOV Changer, and Cloud-DMA options. Compare every package inclusion — view features now.',
-		ogTitle: 'The Isle Features — Complete Package Breakdown',
+			'Transactional feature checklist for The Isle Cheats packages: Visuals ESP, World ESP, combat hacks, Radar, FOV Changer, and Cloud-DMA inclusions for Windows PC.',
+		ogTitle: 'The Isle Cheats Features — Package Checklist',
 		ogDescription:
-			'Compare every The Isle Cheats feature: ESP categories, cheat options, utility hacks, and Cloud-DMA inclusions.',
-		twitterTitle: 'The Isle Features Explained',
-		twitterDescription: 'Full feature breakdown for The Isle Cheats packages.',
-		keywords: 'The Isle Features, The Isle ESP features, The Isle cheat features, The Isle menu, The Isle radar',
+			'Compare every The Isle Cheats package inclusion: ESP categories, cheat options, utility tools, and Cloud-DMA coverage.',
+		twitterTitle: 'The Isle Cheats Features Checklist',
+		twitterDescription: 'Package checklist for The Isle Cheats ESP, hacks, and utilities.',
+		keywords: 'The Isle Features, The Isle Cheats features, The Isle ESP features, The Isle menu, The Isle radar',
 	},
 	pricing: {
 		title: 'The Isle Cheat Price — Monthly & Lifetime | islecheats',
@@ -122,24 +122,24 @@ const en: Record<PageSeoKey, PageSeoMeta> = {
 		keywords: 'The Isle Cheat Price, The Isle Cheat Cost, Buy The Isle Cheats, The Isle cheats monthly, The Isle cheats lifetime',
 	},
 	updates: {
-		title: 'The Isle Updates — Patches & Compatibility | islecheats',
+		title: 'The Isle Cheats Updates — Product Changelog | islecheats',
 		description:
-			'Track The Isle Updates, Evrima patch notes, and cheat compatibility maintenance. Stay informed after every game update — check the latest release notes now.',
-		ogTitle: 'The Isle Updates — Product Changelog',
-		ogDescription: 'Track The Isle Cheats updates, compatibility notices, and maintenance releases.',
-		twitterTitle: 'The Isle Update Guide',
-		twitterDescription: 'Product updates and compatibility notices for The Isle Cheats.',
-		keywords: 'The Isle Update Guide, The Isle patch notes, The Isle cheats updates, The Isle compatibility',
+			'Product changelog for The Isle Cheats: Cloud-DMA maintenance notes, Windows compatibility after Evrima patches, and release notices for ESP and combat tools.',
+		ogTitle: 'The Isle Cheats Updates — Product Changelog',
+		ogDescription: 'Track The Isle Cheats product updates, compatibility notices, and maintenance releases.',
+		twitterTitle: 'The Isle Cheats Product Updates',
+		twitterDescription: 'Product changelog and compatibility notices for The Isle Cheats.',
+		keywords: 'The Isle Cheats updates, The Isle patch notes, The Isle cheats updates, The Isle compatibility',
 	},
 	faq: {
-		title: 'The Isle FAQ — Cheats, ESP & Support Hub | islecheats',
+		title: 'The Isle Cheats FAQ — Delivery & Support | islecheats',
 		description:
-			'The Isle FAQ answers questions about Cloud-DMA, ESP overlays, delivery, Windows compatibility, and refunds. Get clear buyer answers — read the FAQ hub now.',
-		ogTitle: 'The Isle FAQ — Common Questions',
-		ogDescription: 'Answers to frequently asked questions about The Isle Cheats, ESP, pricing, and support.',
-		twitterTitle: 'The Isle FAQ',
-		twitterDescription: 'FAQ hub for The Isle Cheats buyers and players.',
-		keywords: 'The Isle FAQ, The Isle Cheats FAQ, The Isle ESP FAQ, The Isle compatibility',
+			'Support FAQ for The Isle Cheats buyers: Cloud-DMA delivery, Windows PC setup, ESP package questions, refunds, and order help before and after purchase.',
+		ogTitle: 'The Isle Cheats FAQ — Delivery & Support',
+		ogDescription: 'Buyer support answers for The Isle Cheats delivery, compatibility, refunds, and ESP package questions.',
+		twitterTitle: 'The Isle Cheats Support FAQ',
+		twitterDescription: 'Delivery and support FAQ for The Isle Cheats buyers.',
+		keywords: 'The Isle Cheats FAQ, The Isle support FAQ, The Isle delivery FAQ, The Isle refund FAQ',
 	},
 	support: {
 		title: 'The Isle Cheats Support — Setup & Billing | islecheats',

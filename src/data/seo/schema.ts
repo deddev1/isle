@@ -43,9 +43,22 @@ export function buildArticleSchema(opts: {
 	datePublished?: string;
 	dateModified?: string;
 	wordCount?: number;
+	image?: string;
+	imageAlt?: string;
 }) {
-	const { title, description, path, locale = 'en', datePublished, dateModified, wordCount } = opts;
+	const {
+		title,
+		description,
+		path,
+		locale = 'en',
+		datePublished,
+		dateModified,
+		wordCount,
+		image,
+		imageAlt,
+	} = opts;
 	const url = new URL(resolveLocalizedHref(path, locale), siteConfig.url).href;
+	const imageUrl = image ? new URL(image, siteConfig.url).href : undefined;
 	return {
 		'@context': 'https://schema.org',
 		'@type': 'Article',
@@ -54,9 +67,18 @@ export function buildArticleSchema(opts: {
 		description,
 		url,
 		mainEntityOfPage: { '@type': 'WebPage', '@id': url },
-		datePublished: datePublished ?? new Date().toISOString().slice(0, 10),
-		dateModified: dateModified ?? new Date().toISOString().slice(0, 10),
+		...(datePublished ? { datePublished } : {}),
+		...(dateModified ? { dateModified } : datePublished ? { dateModified: datePublished } : {}),
 		...(wordCount ? { wordCount } : {}),
+		...(imageUrl
+			? {
+					image: {
+						'@type': 'ImageObject',
+						url: imageUrl,
+						...(imageAlt ? { caption: imageAlt } : {}),
+					},
+				}
+			: {}),
 		author: {
 			'@type': 'Organization',
 			'@id': `${siteConfig.url}/#organization`,
@@ -130,9 +152,13 @@ export function buildSoftwareApplicationSchema(opts: {
 		name: opts.name,
 		...(opts.alternateName?.length ? { alternateName: [...opts.alternateName] } : {}),
 		...(opts.keywords ? { keywords: opts.keywords } : {}),
-		applicationCategory: 'GameApplication',
+		applicationCategory: 'UtilitiesApplication',
 		operatingSystem: 'Windows',
 		description: opts.description,
+		areaServed: {
+			'@type': 'Place',
+			name: 'Worldwide',
+		},
 		offers: opts.plans.map((plan) => ({
 			'@type': 'Offer',
 			name: `${opts.name} ${plan.label}`,
@@ -140,6 +166,14 @@ export function buildSoftwareApplicationSchema(opts: {
 			priceCurrency: opts.currency,
 			availability: 'https://schema.org/InStock',
 			url: opts.pricingUrl,
+			areaServed: {
+				'@type': 'Place',
+				name: 'Worldwide',
+			},
+			eligibleRegion: {
+				'@type': 'Place',
+				name: 'Worldwide',
+			},
 		})),
 	};
 }

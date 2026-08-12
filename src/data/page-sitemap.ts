@@ -1,6 +1,15 @@
 import { siteConfig } from './site';
 import { prefixedLocales } from './i18n';
 import { blogIdeas } from './seo/blog-ideas';
+import { getBlogPostDates } from './seo/blog-meta';
+
+/** Blog posts that canonicalize to silo pages — omit from sitemap to avoid soft duplicates. */
+const blogSitemapExclusions = new Set([
+	'the-isle-survival-guide',
+	'the-isle-growth-guide',
+	'the-isle-dinosaur-guide',
+	'the-isle-faq',
+]);
 
 export type SitemapImage = {
 	url: string;
@@ -15,6 +24,8 @@ export type PageSitemapEntry = {
 	images: SitemapImage[];
 	/** Include localized alternates in sitemap */
 	localized?: boolean;
+	/** Stable ISO date (YYYY-MM-DD) when available */
+	lastmod?: string;
 };
 
 const abs = (path: string) => new URL(path, siteConfig.url).href;
@@ -26,12 +37,12 @@ const img = (path: string, title: string, caption: string): SitemapImage => ({
 });
 
 const defaultImages = [
-	img('/images/the-isle-hero-dinosaur-survival.webp', 'The Isle Cheats hero', 'Homepage banner for The Isle Cheats'),
+	img('/images/the-isle-hero.webp', 'The Isle Cheats hero', 'Homepage banner for The Isle Cheats'),
 	img('/images/the-isle-herd-open-plains.webp', 'The Isle Cheats cover', 'Cover visual used across The Isle Cheats pages'),
 ];
 
 const scene = {
-	hero: img('/images/the-isle-hero-dinosaur-survival.webp', 'The Isle survival hero', 'Dinosaur survival landscape banner'),
+	hero: img('/images/the-isle-hero.webp', 'The Isle survival hero', 'Dinosaur survival landscape banner'),
 	tyrannosaur: img('/images/the-isle-tyrannosaur-forest.webp', 'The Isle tyrannosaur forest', 'Forest stalking scene for ESP guides'),
 	combat: img('/images/the-isle-carnivore-combat.webp', 'The Isle carnivore combat', 'Combat encounter for cheat guides'),
 	herd: img('/images/the-isle-herd-open-plains.webp', 'The Isle dinosaur herd', 'Herd on open plains for pricing pages'),
@@ -192,14 +203,18 @@ export const pageSitemapEntries: PageSitemapEntry[] = [
 		changefreq: 'monthly',
 		images: [scene.aerial, scene.herd],
 	},
-	...blogIdeas.map(
-		(idea, index): PageSitemapEntry => ({
-			path: `/blog/${idea.slug}/`,
-			priority: 0.65,
-			changefreq: 'monthly',
-			images: [Object.values(scene)[index % Object.values(scene).length]],
+	...blogIdeas
+		.filter((idea) => !blogSitemapExclusions.has(idea.slug))
+		.map((idea, index): PageSitemapEntry => {
+			const dates = getBlogPostDates(idea.slug);
+			return {
+				path: `/blog/${idea.slug}/`,
+				priority: 0.65,
+				changefreq: 'monthly',
+				lastmod: dates.modified,
+				images: [Object.values(scene)[index % Object.values(scene).length]],
+			};
 		}),
-	),
 ];
 
 /** Localized homepage paths for sitemap */

@@ -1,78 +1,37 @@
 ---
-import { theIsleImages } from '../data/theisle';
+import { theIsleImages, toIsleThumb } from '../data/theisle';
 
-const featured =
-	theIsleImages.gallery.find((image) => 'featured' in image && image.featured) ??
-	theIsleImages.gallery[0];
-const tiles = theIsleImages.gallery.filter((image) => image.src !== featured.src).slice(0, 4);
-
-const cheatHighlights = [
-	{
-		title: 'Visuals ESP (WH)',
-		copy: 'Track entities with boxes, snaplines, health, growth, stamina, and custom colors up to 2000 m.',
-	},
-	{
-		title: 'World ESP',
-		copy: 'See bodies, meat, fruits, herbs, mushrooms, and water sources across the map.',
-	},
-	{
-		title: 'Cheats',
-		copy: 'Instant Rotation, Auto-Attack, Omnimovement, and other movement and combat options.',
-	},
-] as const;
+const images = theIsleImages.gallery.slice(0, 8).map((image) => ({
+	...image,
+	thumb: toIsleThumb(image.src),
+}));
 ---
 
 <section class="gallery" id="gallery" aria-labelledby="gallery-title">
 	<header class="gallery__head">
-		<p class="gallery__eyebrow">Gameplay preview</p>
 		<h2 id="gallery-title" class="gallery__title">Feature gallery</h2>
-		<p class="gallery__sub">
-			Visual previews with short context for ESP overlays, combat hacks, and map awareness tools.
-		</p>
+		<p class="gallery__sub">ESP, combat, and map tools in action.</p>
 	</header>
 
-	<div class="gallery__layout">
-		<div class="gallery__content">
-			<div class="gallery__summary">
-				<p class="gallery__lead">
-					Cloud-DMA combines Visuals ESP, World ESP, and combat hacks in one configurable package.
-				</p>
-
-				<div class="gallery__highlights">
-					{
-						cheatHighlights.map((item) => (
-							<article class="gallery__info-card">
-								<h3>{item.title}</h3>
-								<p>{item.copy}</p>
-							</article>
-						))
-					}
-				</div>
+	<div class="gallery__marquee" aria-label="Feature gallery image scroller">
+		<div class="gallery__track">
+			<div class="gallery__group">
+				{
+					images.map((image) => (
+						<figure class="gallery__item">
+							<img src={image.thumb} alt={image.alt} width="480" height="300" loading="lazy" decoding="async" />
+						</figure>
+					))
+				}
 			</div>
-
-			<div class="gallery__media">
-				<figure class="gallery__featured media-frame">
-					<img
-						src={featured.src}
-						alt={featured.alt}
-						width="1400"
-						height="788"
-						loading="lazy"
-						decoding="async"
-					/>
-					<figcaption>{featured.alt}</figcaption>
-				</figure>
-
-				<div class="gallery__grid">
-					{
-						tiles.map((image) => (
-							<figure class="gallery__item media-frame">
-								<img src={image.src} alt={image.alt} width="1280" height="720" loading="lazy" decoding="async" />
-								<figcaption>{image.alt}</figcaption>
-							</figure>
-						))
-					}
-				</div>
+			<div class="gallery__group" aria-hidden="true">
+				{
+					images.map((image) => (
+						<figure class="gallery__item">
+							<img src={image.thumb} alt="" width="480" height="300" loading="lazy" decoding="async" />
+						</figure>
+					))
+				}
 			</div>
 		</div>
 	</div>
@@ -81,177 +40,106 @@ const cheatHighlights = [
 <style>
 	.gallery {
 		width: 100%;
+		display: grid;
+		gap: 0.75rem;
+		content-visibility: auto;
+		contain-intrinsic-size: 220px;
 	}
 
 	.gallery__head {
-		margin-bottom: 1.25rem;
-	}
-
-	.gallery__eyebrow {
-		margin: 0 0 0.4rem;
-		font-size: 0.75rem;
-		font-weight: 700;
-		letter-spacing: 0.14em;
-		text-transform: uppercase;
-		color: var(--color-orchid);
+		display: grid;
+		gap: 0.25rem;
 	}
 
 	.gallery__title {
 		margin: 0;
 		font-family: var(--font-display);
-		font-size: clamp(1.6rem, 3vw, 2.2rem);
+		font-size: clamp(1.2rem, 2.2vw, 1.5rem);
 		font-weight: 800;
-		letter-spacing: -0.03em;
+		letter-spacing: -0.02em;
+		line-height: 1.15;
 	}
 
 	.gallery__sub {
-		margin: 0.55rem 0 0;
+		margin: 0;
 		color: var(--color-muted);
-		max-width: 36rem;
-		line-height: 1.55;
+		font-size: 0.88rem;
+		line-height: 1.4;
 	}
 
-	.gallery__layout {
-		border: 1px solid rgba(168, 85, 247, 0.12);
-		border-radius: 1.1rem;
-		background: rgba(18, 16, 26, 0.46);
+	.gallery__marquee {
+		--gallery-gap: 0.5rem;
+		container-type: inline-size;
 		overflow: hidden;
+		mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+		-webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
 	}
 
-	.gallery__content {
-		display: grid;
-		grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.35fr);
-		align-items: start;
-		gap: 1rem;
-		padding: 1rem;
+	.gallery__track {
+		display: flex;
+		flex-wrap: nowrap;
+		gap: var(--gallery-gap);
+		width: max-content;
+		animation: gallery-marquee 40s linear infinite;
 	}
 
-	.gallery__summary {
-		display: grid;
-		gap: 1rem;
-		align-content: start;
+	.gallery__marquee:hover .gallery__track {
+		animation-play-state: paused;
 	}
 
-	.gallery__lead {
-		margin: 0;
-		padding: 1rem 1.05rem;
-		border-radius: 0.95rem;
-		border: 1px solid rgba(168, 85, 247, 0.14);
-		background: rgba(26, 22, 38, 0.72);
-		color: #e2d9ef;
-		line-height: 1.7;
-	}
-
-	.gallery__highlights {
-		display: grid;
-		gap: 0.75rem;
-	}
-
-	.gallery__info-card {
-		padding: 0.95rem 1rem;
-		border-radius: 0.9rem;
-		border: 1px solid rgba(168, 85, 247, 0.14);
-		background: rgba(10, 6, 18, 0.34);
-	}
-
-	.gallery__info-card h3 {
-		margin: 0;
-		font-size: 0.98rem;
-		font-weight: 750;
-		color: var(--color-ink);
-	}
-
-	.gallery__info-card p {
-		margin: 0.45rem 0 0;
-		color: var(--color-muted);
-		font-size: 0.92rem;
-		line-height: 1.6;
-	}
-
-	.gallery__media {
-		display: grid;
-		gap: 0.85rem;
-	}
-
-	.gallery__featured,
-	.gallery__item {
-		margin: 0;
-	}
-
-	.gallery__featured {
-		aspect-ratio: 16 / 9;
-		border: 1px solid rgba(192, 132, 252, 0.22);
-		box-shadow: 0 12px 28px rgba(0, 0, 0, 0.26);
-	}
-
-	.gallery__grid {
-		display: grid;
-		grid-template-columns: repeat(2, minmax(0, 1fr));
-		gap: 0.85rem;
+	.gallery__group {
+		display: flex;
+		flex-wrap: nowrap;
+		gap: var(--gallery-gap);
 	}
 
 	.gallery__item {
-		aspect-ratio: 16 / 11;
+		/* Match original 4-up grid cell size (not the larger 2-up mobile grid) */
+		flex: 0 0 calc((min(100vw - (var(--page-gutter) * 2), var(--page-max)) - (3 * var(--gallery-gap))) / 4);
+		width: calc((min(100vw - (var(--page-gutter) * 2), var(--page-max)) - (3 * var(--gallery-gap))) / 4);
+		margin: 0;
+		overflow: hidden;
+		border-radius: 0.55rem;
+		border: 1px solid rgba(168, 85, 247, 0.14);
+		background: #12081f;
+		aspect-ratio: 16 / 10;
 	}
 
-	.gallery__featured img,
+	@supports (width: 1cqi) {
+		.gallery__item {
+			flex-basis: calc((100cqi - (3 * var(--gallery-gap))) / 4);
+			width: calc((100cqi - (3 * var(--gallery-gap))) / 4);
+		}
+	}
+
 	.gallery__item img {
+		display: block;
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
-		transition: transform 0.45s ease;
+		pointer-events: none;
 	}
 
-	.gallery__featured:hover img,
-	.gallery__item:hover img {
-		transform: scale(1.03);
-	}
-
-	.gallery__featured figcaption,
-	.gallery__item figcaption {
-		position: absolute;
-		inset: auto 0 0;
-		z-index: 2;
-		padding: 1.6rem 0.95rem 0.8rem;
-		background: linear-gradient(transparent, rgba(10, 6, 18, 0.92));
-		color: #ddd4ec;
-		font-size: 0.75rem;
-		font-weight: 600;
-		opacity: 0;
-		transform: translateY(6px);
-		transition:
-			opacity 0.25s ease,
-			transform 0.25s ease;
-	}
-
-	.gallery__featured:hover figcaption,
-	.gallery__item:hover figcaption {
-		opacity: 1;
-		transform: translateY(0);
-	}
-
-	@media (max-width: 900px) {
-		.gallery__content {
-			grid-template-columns: 1fr;
+	@keyframes gallery-marquee {
+		from {
+			transform: translateX(0);
 		}
-
-		.gallery__grid {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
+		to {
+			transform: translateX(calc(-50% - (var(--gallery-gap) / 2)));
 		}
 	}
 
-	@media (max-width: 560px) {
-		.gallery__content {
-			padding: 0.8rem;
+	@media (prefers-reduced-motion: reduce) {
+		.gallery__track {
+			animation: none;
+			max-width: 100%;
+			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
+			scrollbar-width: thin;
 		}
 
-		.gallery__grid {
-			grid-template-columns: 1fr;
-			gap: 0.65rem;
-		}
-
-		.gallery__featured {
-			aspect-ratio: 4 / 3;
+		.gallery__group[aria-hidden='true'] {
+			display: none;
 		}
 	}
 </style>

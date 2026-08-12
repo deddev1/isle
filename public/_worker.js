@@ -25,6 +25,10 @@ const PATH_REDIRECTS = {
 	'/theisle-cheats/': '/the-isle-cheats/',
 	'/theisle-guide': '/the-isle-guide/',
 	'/theisle-guide/': '/the-isle-guide/',
+	'/go/support': 'https://zadeyo.com/support',
+	'/go/support/': 'https://zadeyo.com/support',
+	'/go/checkout': 'https://zadeyo.com/go/QRH?to=%2Fproducts%2Fthe-isle-novaxware',
+	'/go/checkout/': 'https://zadeyo.com/go/QRH?to=%2Fproducts%2Fthe-isle-novaxware',
 };
 
 const SECURITY_HEADERS = {
@@ -112,6 +116,16 @@ function withSecurityHeaders(response) {
 	});
 }
 
+function redirectResponse(location, status = 301) {
+	return new Response(null, {
+		status,
+		headers: {
+			Location: location,
+			...SECURITY_HEADERS,
+		},
+	});
+}
+
 function resolvePathRedirect(pathname) {
 	if (PATH_REDIRECTS[pathname]) {
 		return PATH_REDIRECTS[pathname];
@@ -140,6 +154,9 @@ export default {
 
 		const pathRedirect = resolvePathRedirect(url.pathname);
 		if (pathRedirect) {
+			if (pathRedirect.startsWith('http')) {
+				return redirectResponse(pathRedirect, 302);
+			}
 			return redirectToCanonical(new URL(pathRedirect + url.search, CANONICAL_ORIGIN));
 		}
 

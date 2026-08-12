@@ -1,5 +1,5 @@
 ---
-import { theIsleImages } from '../data/theisle';
+import { theIsleImages, toIsleThumb } from '../data/theisle';
 import { homeSeo, productInfo, siteConfig } from '../data/site';
 
 interface Plan {
@@ -62,6 +62,8 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 					height="720"
 					class="product__image"
 					data-main-image
+					loading="eager"
+					fetchpriority="low"
 					decoding="async"
 				/>
 				<span class="product__credit">Preview</span>
@@ -78,7 +80,14 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 							data-src={image.src}
 							data-alt={image.alt}
 						>
-							<img src={image.src} alt={image.alt} width="320" height="180" loading="lazy" decoding="async" />
+							<img
+								src={toIsleThumb(image.src)}
+								alt={image.alt}
+								width="320"
+								height="180"
+								loading="lazy"
+								decoding="async"
+							/>
 						</button>
 					))
 				}
@@ -777,13 +786,36 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 
 	.product--gallery .product__thumbs {
 		flex-shrink: 0;
-		display: grid;
-		grid-template-columns: repeat(6, minmax(0, 1fr));
+		display: flex;
+		flex-wrap: nowrap;
 		gap: 0.45rem;
 		width: 100%;
+		overflow-x: auto;
+		overflow-y: hidden;
+		scroll-snap-type: x mandatory;
+		-webkit-overflow-scrolling: touch;
+		scrollbar-width: thin;
+		scrollbar-color: rgba(192, 132, 252, 0.45) transparent;
 	}
 
+	.product--gallery .product__thumbs::-webkit-scrollbar {
+		height: 0.35rem;
+	}
+
+	.product--gallery .product__thumbs::-webkit-scrollbar-track {
+		background: transparent;
+	}
+
+	.product--gallery .product__thumbs::-webkit-scrollbar-thumb {
+		border-radius: 999px;
+		background: rgba(192, 132, 252, 0.4);
+	}
+
+	/* Keep original 6-up size; overflow scrolls instead of growing thumbs */
 	.product--gallery .product__thumb {
+		flex: 0 0 calc((100% - 5 * 0.45rem) / 6);
+		width: calc((100% - 5 * 0.45rem) / 6);
+		scroll-snap-align: start;
 		cursor: pointer;
 	}
 
@@ -794,8 +826,9 @@ const active = plans.find((plan) => plan.id === defaultPlan) ?? plans[0];
 	}
 
 	@media (max-width: 959px) {
-		.product--gallery .product__thumbs {
-			grid-template-columns: repeat(3, minmax(0, 1fr));
+		.product--gallery .product__thumb {
+			flex-basis: calc((100% - 2 * 0.45rem) / 3);
+			width: calc((100% - 2 * 0.45rem) / 3);
 		}
 	}
 

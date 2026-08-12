@@ -29,21 +29,21 @@ const active = categories[0];
 	<p class="package-showcase__intro">{intro}</p>
 
 	<div class="package-showcase__layout">
-		<figure class="package-showcase__preview media-frame">
-			<img
-				src={active.image.src}
-				alt={active.image.alt}
-				width="1280"
-				height="720"
-				class="package-showcase__image"
-				data-package-preview
-				decoding="async"
-				loading="lazy"
-			/>
-			<figcaption class="package-showcase__caption" data-package-caption>{active.title}</figcaption>
-		</figure>
+		<div class="package-showcase__media">
+			<figure class="package-showcase__preview media-frame">
+				<img
+					src={active.image.src}
+					alt={active.image.alt}
+					width="1280"
+					height="720"
+					class="package-showcase__image"
+					data-package-preview
+					decoding="async"
+					loading="lazy"
+				/>
+				<figcaption class="package-showcase__caption" data-package-caption>{active.title}</figcaption>
+			</figure>
 
-		<div class="package-showcase__sidebar">
 			<div class="package-showcase__tabs" role="tablist" aria-label="Package feature categories">
 				{
 					categories.map((category, index) => (
@@ -61,35 +61,31 @@ const active = categories[0];
 							data-title={category.title}
 							data-summary={category.summary}
 							data-href={category.href}
+							aria-label={`Show ${category.title}`}
 						>
-							<span class="package-showcase__tab-thumb media-frame">
-								<img src={category.image.src} alt="" width="160" height="90" loading="lazy" decoding="async" />
-							</span>
-							<span class="package-showcase__tab-text">
-								<strong>{category.title}</strong>
-								<small>{category.summary}</small>
-							</span>
+							{category.title}
 						</button>
 					))
 				}
 			</div>
-
-			<div
-				class="package-showcase__panel"
-				id="package-feature-panel"
-				role="tabpanel"
-				aria-labelledby={`package-tab-${active.id}`}
-				data-package-panel
-			>
-				<p class="package-showcase__summary" data-package-summary>{active.summary}</p>
-				<ul class="package-showcase__features" data-package-features>
-					{active.features.map((feature) => <li>{feature}</li>)}
-				</ul>
-				<a class="package-showcase__link" href={active.href} data-package-link>
-					Explore {active.title}
-				</a>
-			</div>
 		</div>
+
+		<aside
+			class="package-showcase__panel"
+			id="package-feature-panel"
+			role="tabpanel"
+			aria-labelledby={`package-tab-${active.id}`}
+			data-package-panel
+		>
+			<h3 class="package-showcase__panel-title" data-package-title>{active.title}</h3>
+			<p class="package-showcase__summary" data-package-summary>{active.summary}</p>
+			<ul class="package-showcase__features" data-package-features>
+				{active.features.map((feature) => <li>{feature}</li>)}
+			</ul>
+			<a class="package-showcase__link" href={active.href} data-package-link>
+				Explore {active.title}
+			</a>
+		</aside>
 	</div>
 
 	<p class="package-showcase__outro">{outro}</p>
@@ -101,6 +97,7 @@ const active = categories[0];
 	roots.forEach((root) => {
 		const preview = root.querySelector('[data-package-preview]');
 		const caption = root.querySelector('[data-package-caption]');
+		const title = root.querySelector('[data-package-title]');
 		const summary = root.querySelector('[data-package-summary]');
 		const features = root.querySelector('[data-package-features]');
 		const link = root.querySelector('[data-package-link]');
@@ -131,6 +128,7 @@ const active = categories[0];
 				}
 
 				if (caption) caption.textContent = category.title;
+				if (title) title.textContent = category.title;
 				if (summary) summary.textContent = category.summary;
 				if (link instanceof HTMLAnchorElement) {
 					link.href = category.href;
@@ -189,9 +187,20 @@ const active = categories[0];
 
 	.package-showcase__layout {
 		display: grid;
-		grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+		grid-template-columns: 1fr;
 		gap: 1rem;
 		margin-top: 1.15rem;
+		align-items: stretch;
+	}
+
+	.package-showcase__media,
+	.package-showcase__panel {
+		min-width: 0;
+	}
+
+	.package-showcase__media {
+		display: grid;
+		gap: 0.65rem;
 	}
 
 	.package-showcase__preview {
@@ -224,81 +233,61 @@ const active = categories[0];
 		text-transform: uppercase;
 	}
 
-	.package-showcase__sidebar {
-		display: grid;
-		gap: 0.75rem;
-		min-width: 0;
-	}
-
 	.package-showcase__tabs {
-		display: grid;
-		gap: 0.45rem;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: baseline;
+		gap: 0.65rem 1.15rem;
 	}
 
 	.package-showcase__tab {
-		display: grid;
-		grid-template-columns: 4.5rem minmax(0, 1fr);
-		gap: 0.65rem;
-		align-items: center;
-		width: 100%;
-		padding: 0.5rem;
-		border-radius: 0.75rem;
-		border: 1px solid rgba(168, 85, 247, 0.14);
-		background: rgba(10, 6, 18, 0.35);
-		color: var(--color-ink);
+		display: inline;
+		width: auto;
+		padding: 0.15rem 0;
+		border: 0;
+		border-radius: 0;
+		background: transparent;
+		box-shadow: none;
+		color: var(--color-muted);
+		font-size: 0.95rem;
+		font-weight: 600;
+		line-height: 1.35;
 		text-align: left;
 		cursor: pointer;
-		transition:
-			border-color 0.2s ease,
-			background 0.2s ease,
-			transform 0.2s ease;
+		transition: color 0.15s ease, font-weight 0.15s ease;
 	}
 
-	.package-showcase__tab:hover,
-	.package-showcase__tab.is-active {
-		border-color: rgba(192, 132, 252, 0.45);
-		background: rgba(48, 36, 72, 0.55);
-		transform: translateY(-1px);
+	.package-showcase__tab:hover {
+		color: var(--color-ink);
+		background: transparent;
+		transform: none;
+		box-shadow: none;
 	}
 
 	.package-showcase__tab.is-active {
-		box-shadow: inset 3px 0 0 var(--color-orchid);
-	}
-
-	.package-showcase__tab-thumb {
-		aspect-ratio: 16 / 9;
-		overflow: hidden;
-		border-radius: 0.55rem;
-	}
-
-	.package-showcase__tab-thumb img {
-		width: 100%;
-		height: 100%;
-		object-fit: cover;
-	}
-
-	.package-showcase__tab-text {
-		display: grid;
-		gap: 0.2rem;
-		min-width: 0;
-	}
-
-	.package-showcase__tab-text strong {
-		font-size: 0.86rem;
+		color: #fff;
 		font-weight: 800;
-	}
-
-	.package-showcase__tab-text small {
-		color: var(--color-muted);
-		font-size: 0.72rem;
-		line-height: 1.35;
+		background: transparent;
+		border: 0;
+		box-shadow: none;
+		transform: none;
 	}
 
 	.package-showcase__panel {
-		padding: 0.9rem 1rem;
+		display: grid;
+		align-content: start;
+		gap: 0.75rem;
+		padding: 1rem 1.05rem;
 		border-radius: 0.85rem;
 		border: 1px solid rgba(168, 85, 247, 0.14);
 		background: rgba(10, 6, 18, 0.35);
+	}
+
+	.package-showcase__panel-title {
+		margin: 0;
+		font-family: var(--font-display);
+		font-size: 1.05rem;
+		font-weight: 800;
 	}
 
 	.package-showcase__summary {
@@ -309,12 +298,12 @@ const active = categories[0];
 	}
 
 	.package-showcase__features {
-		margin: 0.75rem 0 0;
+		margin: 0;
 		padding: 0;
 		list-style: none;
 		display: grid;
 		gap: 0.4rem;
-		max-height: 11rem;
+		max-height: 14rem;
 		overflow: auto;
 	}
 
@@ -343,7 +332,7 @@ const active = categories[0];
 
 	.package-showcase__link {
 		display: inline-flex;
-		margin-top: 0.8rem;
+		margin-top: 0.15rem;
 		color: var(--color-orchid);
 		font-size: 0.86rem;
 		font-weight: 700;
@@ -353,9 +342,28 @@ const active = categories[0];
 		color: var(--color-ink);
 	}
 
-	@media (max-width: 900px) {
+	@media (min-width: 960px) {
 		.package-showcase__layout {
-			grid-template-columns: 1fr;
+			grid-template-columns: minmax(0, 1.1fr) minmax(0, 0.9fr);
+			gap: 1.35rem;
+		}
+
+		.package-showcase__media {
+			align-self: stretch;
+		}
+
+		.package-showcase__panel {
+			min-height: 100%;
+		}
+	}
+
+	@media (max-width: 520px) {
+		.package-showcase__tabs {
+			gap: 0.55rem 0.9rem;
+		}
+
+		.package-showcase__tab {
+			font-size: 0.9rem;
 		}
 
 		.package-showcase__features {

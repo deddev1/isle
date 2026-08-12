@@ -18,7 +18,7 @@ const pageHero = getPageHero('terms');
 	eyebrow="Legal"
 	heroImage={pageHero.src}
 	heroAlt={pageHero.alt}
-	gallery={getPageGallery('aerialLandscape', 'swampEnvironment', 'herdPlains')}
+	gallery={getPageGallery('espRadarTopdown', 'espBeachCarnotaurus', 'espRadarMinimapCombat')}
 	ctaPrimary={{ href: '/pricing/', label: 'View Pricing' }}
 	ctaSecondary={{ href: '/privacy-policy/', label: 'Privacy Policy' }}
 	keywords={seo.keywords}
@@ -47,10 +47,9 @@ const pageHero = getPageHero('terms');
 	<section class="card-panel">
 		<h2>Contact</h2>
 		<p>
-			Questions about these terms can be sent to
-			<a href={siteConfig.supportUrl} target="_blank" rel="noopener noreferrer">Open support</a>.
+			Questions about these terms can be sent to {siteConfig.supportEmail}.
 		</p>
 	</section>
 
-	<InternalLinksPanel />
+	<InternalLinksPanel currentPath="/terms/" />
 </PageLayout>

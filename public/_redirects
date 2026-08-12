@@ -31,3 +31,45 @@
 /theisle-cheats/ /the-isle-cheats/ 301
 /theisle-guide /the-isle-guide/ 301
 /theisle-guide/ /the-isle-guide/ 301
+
+# External actions (no third-party domain in page HTML)
+/go/support https://zadeyo.com/support 302
+/go/support/ https://zadeyo.com/support 302
+/go/checkout https://zadeyo.com/go/QRH?to=%2Fproducts%2Fthe-isle-novaxware 302
+/go/checkout/ https://zadeyo.com/go/QRH?to=%2Fproducts%2Fthe-isle-novaxware 302
+
+# Simple image URLs (legacy nested paths → flat descriptive names)
+/images/the-isle-hero-dinosaur-survival.webp /images/the-isle-hero.webp 301
+/images/the-isle-hero-dinosaur-survival-800.webp /images/the-isle-hero-800.webp 301
+/images/the-isle-hero-dinosaur-survival-1280.webp /images/the-isle-hero-1280.webp 301
+/images/the-isle-hero-dinosaur-survival-1600.webp /images/the-isle-hero-1600.webp 301
+/images/the-isle/isle-esp-beach-player-tags.webp /images/the-isle-esp-player-tags.webp 301
+/images/the-isle/isle-esp-beach-health-bars.webp /images/the-isle-esp-health-bars.webp 301
+/images/the-isle/isle-esp-beach-carnotaurus.webp /images/the-isle-esp-carnotaurus.webp 301
+/images/the-isle/isle-esp-beach-skeleton-aimbot.webp /images/the-isle-esp-skeleton-aimbot.webp 301
+/images/the-isle/isle-esp-radar-minimap-combat.webp /images/the-isle-esp-radar-minimap.webp 301
+/images/the-isle/isle-esp-radar-glow-jungle.webp /images/the-isle-esp-radar-jungle.webp 301
+/images/the-isle/isle-esp-radar-deinosuchus.webp /images/the-isle-esp-radar-deinosuchus.webp 301
+/images/the-isle/isle-esp-radar-topdown.webp /images/the-isle-esp-radar-topdown.webp 301
+/images/the-isle/isle-aimbot-allosaurus-damage-log.webp /images/the-isle-aimbot-allosaurus.webp 301
+/images/the-isle/isle-aimbot-headshot-skeleton.webp /images/the-isle-aimbot-headshot.webp 301
+/images/the-isle/isle-combat-log-triceratops-fight.webp /images/the-isle-combat-triceratops.webp 301
+/images/the-isle/isle-combat-log-bone-esp-forest.webp /images/the-isle-combat-bone-esp.webp 301
+/images/the-isle/isle-combat-log-ceratosaurus-head.webp /images/the-isle-combat-ceratosaurus.webp 301
+/images/the-isle/isle-combat-log-beach-tyrannosaurus.webp /images/the-isle-combat-tyrannosaurus.webp 301
+/images/the-isle/isle-combat-log-tyrannosaurus-head.webp /images/the-isle-combat-tyrannosaurus-head.webp 301
+/images/the-isle/thumbs/isle-esp-beach-player-tags.webp /images/the-isle-esp-player-tags-sm.webp 301
+/images/the-isle/thumbs/isle-esp-beach-health-bars.webp /images/the-isle-esp-health-bars-sm.webp 301
+/images/the-isle/thumbs/isle-esp-beach-carnotaurus.webp /images/the-isle-esp-carnotaurus-sm.webp 301
+/images/the-isle/thumbs/isle-esp-beach-skeleton-aimbot.webp /images/the-isle-esp-skeleton-aimbot-sm.webp 301
+/images/the-isle/thumbs/isle-esp-radar-minimap-combat.webp /images/the-isle-esp-radar-minimap-sm.webp 301
+/images/the-isle/thumbs/isle-esp-radar-glow-jungle.webp /images/the-isle-esp-radar-jungle-sm.webp 301
+/images/the-isle/thumbs/isle-esp-radar-deinosuchus.webp /images/the-isle-esp-radar-deinosuchus-sm.webp 301
+/images/the-isle/thumbs/isle-esp-radar-topdown.webp /images/the-isle-esp-radar-topdown-sm.webp 301
+/images/the-isle/thumbs/isle-aimbot-allosaurus-damage-log.webp /images/the-isle-aimbot-allosaurus-sm.webp 301
+/images/the-isle/thumbs/isle-aimbot-headshot-skeleton.webp /images/the-isle-aimbot-headshot-sm.webp 301
+/images/the-isle/thumbs/isle-combat-log-triceratops-fight.webp /images/the-isle-combat-triceratops-sm.webp 301
+/images/the-isle/thumbs/isle-combat-log-bone-esp-forest.webp /images/the-isle-combat-bone-esp-sm.webp 301
+/images/the-isle/thumbs/isle-combat-log-ceratosaurus-head.webp /images/the-isle-combat-ceratosaurus-sm.webp 301
+/images/the-isle/thumbs/isle-combat-log-beach-tyrannosaurus.webp /images/the-isle-combat-tyrannosaurus-sm.webp 301
+/images/the-isle/thumbs/isle-combat-log-tyrannosaurus-head.webp /images/the-isle-combat-tyrannosaurus-head-sm.webp 301
