@@ -230,7 +230,7 @@ const currentHash = Astro.url.hash.replace('#', '');
 	.nav__bar {
 		position: relative;
 		display: grid;
-		grid-template-columns: minmax(0, 1fr) auto minmax(0, 1fr);
+		grid-template-columns: auto minmax(0, 1fr) auto;
 		align-items: center;
 		gap: 0.75rem;
 		width: min(100%, var(--page-max));
@@ -504,11 +504,14 @@ const currentHash = Astro.url.hash.replace('#', '');
 
 	@media (max-width: 980px) {
 		.nav__bar {
-			grid-template-columns: 1fr auto;
+			grid-template-columns: 1fr auto auto;
 		}
 
-		.nav__center,
-		.nav__actions {
+		.nav__center {
+			display: none;
+		}
+
+		.nav__actions :global(.lang-dropdown) {
 			display: none;
 		}
 
@@ -517,9 +520,12 @@ const currentHash = Astro.url.hash.replace('#', '');
 			justify-self: end;
 		}
 
-		.nav.is-open .nav__center,
-		.nav.is-open .nav__actions {
+		.nav.is-open .nav__center {
 			display: flex;
+		}
+
+		.nav.is-open .nav__actions :global(.lang-dropdown) {
+			display: block;
 		}
 
 		.nav.is-open .nav__bar {
