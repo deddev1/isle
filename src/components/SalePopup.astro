@@ -2,11 +2,9 @@
 import { productInfo, siteConfig } from '../data/site';
 
 const monthlyPlan = productInfo.plans.find((plan) => plan.id === 'monthly');
-const isLocalDev = import.meta.env.DEV;
 ---
 
-{isLocalDev && (
-	<aside class="sale-popup sale-popup--closed" data-sale-popup aria-live="polite" aria-label="Buy offer">
+<aside class="sale-popup sale-popup--closed" data-sale-popup aria-live="polite" aria-label="Buy offer">
 		<div class="sale-popup__stage" data-sale-popup-drag>
 			<button type="button" class="sale-popup__close" data-sale-popup-close aria-label="Close">
 				<svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true">
@@ -167,12 +165,10 @@ const isLocalDev = import.meta.env.DEV;
 			<p class="sale-popup__hint" aria-hidden="true">Swipe to dismiss</p>
 		</div>
 	</aside>
-)}
 
-{isLocalDev && (
-	<script is:inline>
+<script is:inline>
 		(function () {
-			var STORAGE_KEY = 'isle-cartoon-popup-local';
+			var STORAGE_KEY = 'isle-cartoon-popup-v2';
 			var SHOW_DELAY_MS = 800;
 			var SWIPE_DISMISS_PX = 72;
 
@@ -286,8 +282,7 @@ const isLocalDev = import.meta.env.DEV;
 				initSalePopup();
 			}
 		})();
-	</script>
-)}
+</script>
 
 <style>
 	.sale-popup {
