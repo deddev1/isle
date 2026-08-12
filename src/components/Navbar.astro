@@ -237,13 +237,11 @@ const currentHash = Astro.url.hash.replace('#', '');
 		margin: 0 auto;
 		padding: 0.45rem 0.85rem;
 		border-radius: 1rem;
-		border: 1px solid rgba(129, 140, 248, 0.18);
-		background: rgba(10, 8, 20, 0.68);
-		backdrop-filter: blur(18px) saturate(1.35);
-		-webkit-backdrop-filter: blur(18px) saturate(1.35);
-		box-shadow:
-			0 8px 32px rgba(0, 0, 0, 0.28),
-			inset 0 1px 0 rgba(255, 255, 255, 0.04);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		background: rgba(10, 8, 20, 0.82);
+		backdrop-filter: blur(14px);
+		-webkit-backdrop-filter: blur(14px);
+		box-shadow: 0 6px 18px rgba(0, 0, 0, 0.22);
 		pointer-events: auto;
 		overflow: visible;
 		transition:
@@ -253,12 +251,9 @@ const currentHash = Astro.url.hash.replace('#', '');
 	}
 
 	.nav.is-scrolled .nav__bar {
-		background: rgba(8, 6, 16, 0.92);
-		border-color: rgba(147, 51, 234, 0.28);
-		box-shadow:
-			0 12px 36px rgba(0, 0, 0, 0.38),
-			0 0 0 1px rgba(99, 102, 241, 0.08),
-			inset 0 1px 0 rgba(255, 255, 255, 0.05);
+		background: rgba(8, 6, 16, 0.94);
+		border-color: rgba(255, 255, 255, 0.12);
+		box-shadow: 0 8px 20px rgba(0, 0, 0, 0.28);
 	}
 
 	.nav__brand {
@@ -281,9 +276,9 @@ const currentHash = Astro.url.hash.replace('#', '');
 		height: 2.35rem;
 		object-fit: contain;
 		border-radius: 0.65rem;
-		background: rgba(168, 85, 247, 0.14);
-		border: 1px solid rgba(192, 132, 252, 0.28);
-		box-shadow: 0 0 18px rgba(124, 58, 237, 0.22);
+		background: rgba(255, 255, 255, 0.04);
+		border: 1px solid rgba(255, 255, 255, 0.1);
+		box-shadow: none;
 		padding: 0.2rem;
 	}
 
@@ -326,10 +321,8 @@ const currentHash = Astro.url.hash.replace('#', '');
 		letter-spacing: 0.02em;
 		white-space: nowrap;
 		transition:
-			color 0.3s ease,
-			background 0.3s ease,
-			box-shadow 0.3s ease,
-			text-shadow 0.3s ease;
+			color 0.2s ease,
+			background 0.2s ease;
 	}
 
 	.nav__link::after {
@@ -340,33 +333,29 @@ const currentHash = Astro.url.hash.replace('#', '');
 		bottom: 0.28rem;
 		height: 2px;
 		border-radius: 999px;
-		background: linear-gradient(90deg, #3b82f6 0%, #8b5cf6 50%, #c084fc 100%);
-		box-shadow: 0 0 10px rgba(139, 92, 246, 0.65);
+		background: rgba(192, 132, 252, 0.85);
+		box-shadow: none;
 		transform: scaleX(0);
 		transform-origin: center;
 		opacity: 0;
 		transition:
-			transform 0.32s cubic-bezier(0.22, 1, 0.36, 1),
-			opacity 0.3s ease;
+			transform 0.25s ease,
+			opacity 0.2s ease;
 	}
 
 	.nav__link:hover {
 		color: #ede9fe;
-		background: rgba(99, 102, 241, 0.08);
-		box-shadow: 0 0 18px rgba(99, 102, 241, 0.16);
-		text-shadow: 0 0 12px rgba(129, 140, 248, 0.35);
+		background: rgba(255, 255, 255, 0.05);
+		box-shadow: none;
+		text-shadow: none;
 	}
 
 	.nav__link.is-active {
 		color: #f5f3ff;
-		background: rgba(76, 29, 149, 0.22);
-		box-shadow:
-			0 0 22px rgba(59, 130, 246, 0.28),
-			0 0 34px rgba(168, 85, 247, 0.22),
-			inset 0 0 18px rgba(99, 102, 241, 0.12);
-		text-shadow:
-			0 0 10px rgba(96, 165, 250, 0.75),
-			0 0 22px rgba(168, 85, 247, 0.55);
+		background: rgba(255, 255, 255, 0.06);
+		box-shadow: none;
+		text-shadow: none;
+		font-weight: 700;
 	}
 
 	.nav__link.is-active::after {
@@ -431,19 +420,19 @@ const currentHash = Astro.url.hash.replace('#', '');
 		width: 2.35rem;
 		height: 2.35rem;
 		flex-shrink: 0;
-		border: 1px solid rgba(129, 140, 248, 0.2);
+		border: 1px solid rgba(255, 255, 255, 0.12);
 		border-radius: 0.75rem;
-		background: rgba(99, 102, 241, 0.12);
+		background: rgba(255, 255, 255, 0.05);
 		color: var(--color-ink);
 		cursor: pointer;
 		transition:
-			background 0.3s ease,
-			border-color 0.3s ease;
+			background 0.2s ease,
+			border-color 0.2s ease;
 	}
 
 	.nav__toggle:hover {
-		background: rgba(99, 102, 241, 0.2);
-		border-color: rgba(167, 139, 250, 0.35);
+		background: rgba(255, 255, 255, 0.08);
+		border-color: rgba(255, 255, 255, 0.18);
 	}
 
 	.nav__toggle-icon,
