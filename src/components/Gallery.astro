@@ -1,7 +1,7 @@
 ---
 import { theIsleImages } from '../data/theisle';
 
-const images = theIsleImages.gallery.slice(0, 8);
+const images = theIsleImages.gallery.slice(0, 10);
 ---
 
 <section class="gallery" id="gallery" aria-labelledby="gallery-title">
@@ -10,14 +10,27 @@ const images = theIsleImages.gallery.slice(0, 8);
 		<p class="gallery__sub">ESP, combat, and map tools in action.</p>
 	</header>
 
-	<div class="gallery__grid">
-		{
-			images.map((image) => (
-				<figure class="gallery__item">
-					<img src={image.src} alt={image.alt} width="640" height="400" loading="lazy" decoding="async" />
-				</figure>
-			))
-		}
+	<div class="gallery__marquee" aria-label="Feature gallery image scroller">
+		<div class="gallery__track">
+			<div class="gallery__group">
+				{
+					images.map((image) => (
+						<figure class="gallery__item">
+							<img src={image.src} alt={image.alt} width="640" height="400" loading="lazy" decoding="async" />
+						</figure>
+					))
+				}
+			</div>
+			<div class="gallery__group" aria-hidden="true">
+				{
+					images.map((image) => (
+						<figure class="gallery__item">
+							<img src={image.src} alt="" width="640" height="400" loading="lazy" decoding="async" />
+						</figure>
+					))
+				}
+			</div>
+		</div>
 	</div>
 </section>
 
@@ -49,13 +62,32 @@ const images = theIsleImages.gallery.slice(0, 8);
 		line-height: 1.4;
 	}
 
-	.gallery__grid {
-		display: grid;
-		grid-template-columns: repeat(4, minmax(0, 1fr));
+	.gallery__marquee {
+		overflow: hidden;
+		mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+		-webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+	}
+
+	.gallery__track {
+		display: flex;
+		flex-wrap: nowrap;
+		gap: 0.5rem;
+		width: max-content;
+		animation: gallery-marquee 40s linear infinite;
+	}
+
+	.gallery__marquee:hover .gallery__track {
+		animation-play-state: paused;
+	}
+
+	.gallery__group {
+		display: flex;
+		flex-wrap: nowrap;
 		gap: 0.5rem;
 	}
 
 	.gallery__item {
+		flex: 0 0 clamp(9.5rem, 18vw, 13.5rem);
 		margin: 0;
 		overflow: hidden;
 		border-radius: 0.55rem;
@@ -69,11 +101,34 @@ const images = theIsleImages.gallery.slice(0, 8);
 		width: 100%;
 		height: 100%;
 		object-fit: cover;
+		pointer-events: none;
 	}
 
-	@media (max-width: 800px) {
-		.gallery__grid {
-			grid-template-columns: repeat(2, minmax(0, 1fr));
+	@keyframes gallery-marquee {
+		from {
+			transform: translateX(0);
+		}
+		to {
+			/* Move exactly one group + the gap between groups */
+			transform: translateX(calc(-50% - 0.25rem));
+		}
+	}
+
+	@media (prefers-reduced-motion: reduce) {
+		.gallery__track {
+			animation: none;
+			max-width: 100%;
+			overflow-x: auto;
+			-webkit-overflow-scrolling: touch;
+			scrollbar-width: thin;
+		}
+
+		.gallery__group[aria-hidden='true'] {
+			display: none;
+		}
+
+		.gallery__item {
+			flex-basis: 10rem;
 		}
 	}
 </style>
