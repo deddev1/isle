@@ -7,82 +7,151 @@ const isLocalDev = import.meta.env.DEV;
 
 {isLocalDev && (
 	<aside class="sale-popup sale-popup--closed" data-sale-popup aria-live="polite" aria-label="Buy offer">
-		<div class="sale-popup__stage">
-			<button type="button" class="sale-popup__close" data-sale-popup-close aria-label="Dismiss">
-				<span aria-hidden="true">&times;</span>
+		<div class="sale-popup__stage" data-sale-popup-drag>
+			<button type="button" class="sale-popup__close" data-sale-popup-close aria-label="Close">
+				<svg viewBox="0 0 16 16" width="10" height="10" aria-hidden="true">
+					<path
+						d="M3.5 3.5l9 9M12.5 3.5l-9 9"
+						fill="none"
+						stroke="currentColor"
+						stroke-width="2"
+						stroke-linecap="round"
+					></path>
+				</svg>
 			</button>
 
 			<div class="sale-popup__character">
 				<svg
 					class="sale-popup__dino"
-					viewBox="0 0 200 220"
+					viewBox="0 0 240 220"
 					role="img"
-					aria-label="Cute cartoon dinosaur"
+					aria-label="Cute cartoon T-rex dinosaur"
 					xmlns="http://www.w3.org/2000/svg"
 				>
 					<defs>
-						<linearGradient id="cartoon-body" x1="0%" y1="0%" x2="100%" y2="100%">
+						<linearGradient id="dino-skin" x1="10%" y1="0%" x2="90%" y2="100%">
 							<stop offset="0%" stop-color="#86efac" />
-							<stop offset="100%" stop-color="#4ade80" />
+							<stop offset="55%" stop-color="#4ade80" />
+							<stop offset="100%" stop-color="#22c55e" />
 						</linearGradient>
-						<linearGradient id="cartoon-belly" x1="0%" y1="0%" x2="0%" y2="100%">
-							<stop offset="0%" stop-color="#bbf7d0" />
-							<stop offset="100%" stop-color="#86efac" />
-						</linearGradient>
-						<linearGradient id="cartoon-spots" x1="0%" y1="0%" x2="100%" y2="100%">
-							<stop offset="0%" stop-color="#22c55e" />
-							<stop offset="100%" stop-color="#16a34a" />
+						<linearGradient id="dino-belly" x1="0%" y1="0%" x2="0%" y2="100%">
+							<stop offset="0%" stop-color="#dcfce7" />
+							<stop offset="100%" stop-color="#bbf7d0" />
 						</linearGradient>
 					</defs>
 
-					<ellipse cx="78" cy="188" rx="34" ry="8" fill="rgba(0,0,0,0.18)" />
+					<!-- ground shadow -->
+					<ellipse cx="108" cy="205" rx="58" ry="9" fill="rgba(0,0,0,0.16)" />
 
+					<!-- long dinosaur tail -->
 					<path
-						d="M38 170 C28 188 40 204 64 202 C88 200 98 182 94 162 C90 142 68 132 50 138 C36 143 30 154 38 170 Z"
-						fill="url(#cartoon-body)"
+						d="M118 148
+							C150 142 178 138 198 148
+							C214 156 222 170 218 182
+							C214 192 200 196 186 190
+							C168 182 148 176 128 172
+							C118 170 112 160 118 148 Z"
+						fill="url(#dino-skin)"
 						stroke="#15803d"
-						stroke-width="2"
+						stroke-width="2.2"
 					/>
-					<ellipse cx="62" cy="168" rx="18" ry="22" fill="url(#cartoon-belly)" />
+					<path d="M176 154 L182 146 L186 156 Z" fill="#16a34a" />
+					<path d="M194 160 L200 152 L204 162 Z" fill="#16a34a" />
+					<path d="M206 168 L212 160 L214 172 Z" fill="#16a34a" />
 
+					<!-- thick back leg -->
 					<path
-						d="M44 118 C32 128 26 148 34 168 C42 188 64 198 88 194 C112 190 126 170 122 144 C118 118 98 98 72 94 C56 92 48 104 44 118 Z"
-						fill="url(#cartoon-body)"
+						d="M92 156 C88 176 86 190 90 200 C96 206 108 206 114 200 C118 192 116 176 112 160 Z"
+						fill="url(#dino-skin)"
 						stroke="#15803d"
-						stroke-width="2"
+						stroke-width="2.2"
 					/>
-					<circle cx="58" cy="132" r="5" fill="url(#cartoon-spots)" opacity="0.55" />
-					<circle cx="82" cy="148" r="4" fill="url(#cartoon-spots)" opacity="0.45" />
-
+					<!-- front leg -->
 					<path
-						d="M30 96 C14 92 4 106 6 122 C8 138 24 150 44 148 C54 147 62 140 64 130 C66 116 44 100 30 96 Z"
-						fill="url(#cartoon-body)"
+						d="M68 160 C64 178 62 190 66 200 C72 206 84 206 88 198 C90 188 88 172 84 160 Z"
+						fill="url(#dino-skin)"
 						stroke="#15803d"
-						stroke-width="2"
+						stroke-width="2.2"
 					/>
-					<circle cx="22" cy="112" r="5.5" fill="#fff" />
-					<circle cx="23" cy="112" r="2.8" fill="#1e293b" />
-					<circle cx="24.5" cy="110.5" r="1" fill="#fff" />
-					<path d="M10 124 C14 128 18 128 22 126" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" />
-					<path d="M8 118 L2 116 L8 122 Z" fill="#15803d" />
-					<path d="M8 124 L0 126 L8 128 Z" fill="#15803d" />
+					<!-- feet -->
+					<path d="M88 198 L78 206 L92 206 L100 200 Z" fill="#15803d" />
+					<path d="M108 198 L100 206 L118 206 L120 200 Z" fill="#15803d" />
 
+					<!-- big body -->
 					<path
-						d="M88 136 C102 132 118 136 132 146"
+						d="M52 118
+							C42 128 40 150 48 168
+							C56 186 78 196 106 192
+							C134 188 150 170 148 144
+							C146 118 124 100 94 96
+							C74 94 58 104 52 118 Z"
+						fill="url(#dino-skin)"
+						stroke="#15803d"
+						stroke-width="2.2"
+					/>
+					<!-- pale belly -->
+					<path
+						d="M74 128
+							C68 140 68 158 76 172
+							C84 182 102 186 114 178
+							C122 170 124 152 118 138
+							C112 124 90 118 74 128 Z"
+						fill="url(#dino-belly)"
+					/>
+					<!-- back spikes -->
+					<path d="M96 104 L102 88 L110 104 Z" fill="#16a34a" stroke="#15803d" stroke-width="1.2" />
+					<path d="M112 100 L120 82 L128 102 Z" fill="#16a34a" stroke="#15803d" stroke-width="1.2" />
+					<path d="M130 108 L138 90 L144 112 Z" fill="#16a34a" stroke="#15803d" stroke-width="1.2" />
+
+					<!-- short T-rex arms holding banner -->
+					<path
+						d="M108 132 C120 128 136 130 150 138"
 						fill="none"
 						stroke="#15803d"
-						stroke-width="10"
+						stroke-width="8"
 						stroke-linecap="round"
 					/>
 					<path
-						d="M118 146 C132 152 146 148 158 136"
+						d="M108 144 C122 142 138 146 152 152"
 						fill="none"
 						stroke="#15803d"
-						stroke-width="9"
+						stroke-width="7"
 						stroke-linecap="round"
 					/>
-					<circle cx="134" cy="142" r="5" fill="#86efac" stroke="#15803d" stroke-width="1.5" />
-					<circle cx="152" cy="138" r="4.5" fill="#86efac" stroke="#15803d" stroke-width="1.5" />
+					<!-- tiny claws -->
+					<path d="M148 136 L160 130" stroke="#15803d" stroke-width="2.4" stroke-linecap="round" />
+					<path d="M150 140 L162 138" stroke="#15803d" stroke-width="2.4" stroke-linecap="round" />
+					<path d="M150 150 L162 154" stroke="#15803d" stroke-width="2.4" stroke-linecap="round" />
+					<path d="M152 156 L162 162" stroke="#15803d" stroke-width="2.4" stroke-linecap="round" />
+
+					<!-- long T-rex head / snout -->
+					<path
+						d="M48 88
+							C36 84 18 90 12 104
+							C8 116 12 130 28 136
+							C40 140 56 138 66 128
+							C72 120 72 104 64 94
+							C60 90 54 88 48 88 Z"
+						fill="url(#dino-skin)"
+						stroke="#15803d"
+						stroke-width="2.2"
+					/>
+					<!-- jaw line -->
+					<path d="M18 118 C30 124 44 124 56 120" fill="none" stroke="#15803d" stroke-width="1.8" stroke-linecap="round" />
+					<!-- cute teeth -->
+					<path d="M22 120 L24 126 L26 120 Z" fill="#fff" stroke="#15803d" stroke-width="0.8" />
+					<path d="M30 121 L32 127 L34 121 Z" fill="#fff" stroke="#15803d" stroke-width="0.8" />
+					<path d="M38 121 L40 126 L42 121 Z" fill="#fff" stroke="#15803d" stroke-width="0.8" />
+					<!-- nostril -->
+					<ellipse cx="16" cy="108" rx="2.2" ry="1.5" fill="#15803d" />
+					<!-- big cute eye -->
+					<circle cx="46" cy="104" r="8" fill="#fff" stroke="#15803d" stroke-width="1.6" />
+					<circle cx="47.5" cy="104" r="4.2" fill="#1e293b" />
+					<circle cx="49" cy="102.5" r="1.4" fill="#fff" />
+					<!-- brow ridge -->
+					<path d="M36 96 C42 92 52 92 58 96" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" />
+					<!-- cheek blush -->
+					<circle cx="56" cy="116" r="3.5" fill="#fda4af" opacity="0.7" />
 				</svg>
 
 				<div class="sale-popup__banner">
@@ -94,6 +163,8 @@ const isLocalDev = import.meta.env.DEV;
 					<span class="sale-popup__pole" aria-hidden="true"></span>
 				</div>
 			</div>
+
+			<p class="sale-popup__hint" aria-hidden="true">Swipe to dismiss</p>
 		</div>
 	</aside>
 )}
@@ -103,17 +174,29 @@ const isLocalDev = import.meta.env.DEV;
 		(function () {
 			var STORAGE_KEY = 'isle-cartoon-popup-local';
 			var SHOW_DELAY_MS = 800;
+			var SWIPE_DISMISS_PX = 72;
 
 			function initSalePopup() {
 				var popup = document.querySelector('[data-sale-popup]');
 				if (!(popup instanceof HTMLElement)) return;
 
+				var stage = popup.querySelector('[data-sale-popup-drag]');
 				var closeBtn = popup.querySelector('[data-sale-popup-close]');
 				var buyLink = popup.querySelector('.sale-popup__buy');
+				var dragStartX = 0;
+				var dragDeltaX = 0;
+				var dragging = false;
 
-				function hidePopup(persist) {
+				function hidePopup(persist, direction) {
 					popup.classList.remove('is-visible');
-					popup.classList.add('sale-popup--closed');
+					popup.classList.remove('is-dragging');
+					popup.style.transform = '';
+					popup.style.opacity = '';
+					popup.classList.add(direction === 'left' ? 'sale-popup--swipe-left' : 'sale-popup--closed');
+					window.setTimeout(function () {
+						popup.classList.add('sale-popup--closed');
+						popup.classList.remove('sale-popup--swipe-left');
+					}, 280);
 					if (persist) {
 						try {
 							sessionStorage.setItem(STORAGE_KEY, '1');
@@ -125,11 +208,50 @@ const isLocalDev = import.meta.env.DEV;
 
 				function showPopup() {
 					popup.classList.remove('sale-popup--closed');
+					popup.classList.remove('sale-popup--swipe-left');
 					window.requestAnimationFrame(function () {
 						window.requestAnimationFrame(function () {
 							popup.classList.add('is-visible');
 						});
 					});
+				}
+
+				function onPointerDown(event) {
+					if (!(event.target instanceof Element)) return;
+					if (event.target.closest('.sale-popup__buy') || event.target.closest('.sale-popup__close')) return;
+					dragging = true;
+					dragStartX = event.clientX;
+					dragDeltaX = 0;
+					popup.classList.add('is-dragging');
+					popup.classList.remove('is-visible');
+					if (stage && stage.setPointerCapture) {
+						try {
+							stage.setPointerCapture(event.pointerId);
+						} catch (err) {
+							/* ignore */
+						}
+					}
+				}
+
+				function onPointerMove(event) {
+					if (!dragging) return;
+					dragDeltaX = event.clientX - dragStartX;
+					var opacity = Math.max(0.35, 1 - Math.abs(dragDeltaX) / 180);
+					popup.style.transform = 'translate3d(' + dragDeltaX + 'px, 0, 0)';
+					popup.style.opacity = String(opacity);
+				}
+
+				function onPointerUp() {
+					if (!dragging) return;
+					dragging = false;
+					popup.classList.remove('is-dragging');
+					if (Math.abs(dragDeltaX) >= SWIPE_DISMISS_PX) {
+						hidePopup(true, dragDeltaX < 0 ? 'left' : 'right');
+						return;
+					}
+					popup.style.transform = '';
+					popup.style.opacity = '';
+					popup.classList.add('is-visible');
 				}
 
 				var dismissed = false;
@@ -141,10 +263,20 @@ const isLocalDev = import.meta.env.DEV;
 
 				if (!dismissed) window.setTimeout(showPopup, SHOW_DELAY_MS);
 
-				if (closeBtn) closeBtn.addEventListener('click', function () { hidePopup(true); });
-				if (buyLink) buyLink.addEventListener('click', function () { hidePopup(true); });
+				if (closeBtn) closeBtn.addEventListener('click', function () { hidePopup(true, 'right'); });
+				if (buyLink) buyLink.addEventListener('click', function () { hidePopup(true, 'right'); });
+
+				if (stage) {
+					stage.addEventListener('pointerdown', onPointerDown);
+					stage.addEventListener('pointermove', onPointerMove);
+					stage.addEventListener('pointerup', onPointerUp);
+					stage.addEventListener('pointercancel', onPointerUp);
+				}
+
 				document.addEventListener('keydown', function (event) {
-					if (event.key === 'Escape' && popup.classList.contains('is-visible')) hidePopup(true);
+					if (event.key === 'Escape' && !popup.classList.contains('sale-popup--closed')) {
+						hidePopup(true, 'right');
+					}
 				});
 			}
 
@@ -163,21 +295,30 @@ const isLocalDev = import.meta.env.DEV;
 		right: max(0.75rem, env(safe-area-inset-right, 0px));
 		bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
 		z-index: 9999;
-		width: min(15rem, calc(100vw - 1.25rem));
+		width: min(15.5rem, calc(100vw - 1.25rem));
 		pointer-events: auto;
 		perspective: 820px;
+		touch-action: pan-y;
+		user-select: none;
 		transform: translate3d(0, 0, 0);
 		opacity: 1;
 		visibility: visible;
 		transition:
-			transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
-			opacity 0.35s ease,
-			visibility 0.35s ease;
+			transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+			opacity 0.3s ease,
+			visibility 0.3s ease;
 	}
 
 	.sale-popup--closed {
 		pointer-events: none;
 		transform: translate3d(115%, 12px, 0) scale(0.92);
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.sale-popup--swipe-left {
+		pointer-events: none;
+		transform: translate3d(-120%, 0, 0) scale(0.94);
 		opacity: 0;
 		visibility: hidden;
 	}
@@ -189,32 +330,42 @@ const isLocalDev = import.meta.env.DEV;
 		pointer-events: auto;
 	}
 
+	.sale-popup.is-dragging {
+		transition: none;
+		cursor: grabbing;
+	}
+
 	.sale-popup__stage {
 		position: relative;
-		height: 13rem;
+		height: 13.5rem;
 		transform-style: preserve-3d;
+		cursor: grab;
 	}
 
 	.sale-popup__close {
 		position: absolute;
-		top: 0;
-		right: 0;
-		z-index: 4;
+		top: 0.05rem;
+		right: 0.05rem;
+		z-index: 5;
 		display: grid;
 		place-items: center;
-		width: 1.5rem;
-		height: 1.5rem;
-		border: 0;
+		width: 1.35rem;
+		height: 1.35rem;
+		padding: 0;
+		border: 1px solid rgba(255, 255, 255, 0.18);
 		border-radius: 999px;
-		background: rgba(10, 6, 18, 0.82);
-		border: 1px solid rgba(168, 85, 247, 0.28);
-		color: #ede9fe;
-		font-size: 0.95rem;
+		background: rgba(15, 10, 24, 0.88);
+		color: #f5f3ff;
 		cursor: pointer;
+		box-shadow: 0 4px 10px rgba(0, 0, 0, 0.35);
+		transition:
+			background 0.2s ease,
+			transform 0.2s ease;
 	}
 
 	.sale-popup__close:hover {
-		background: rgba(76, 29, 149, 0.88);
+		background: rgba(76, 29, 149, 0.95);
+		transform: scale(1.06);
 	}
 
 	.sale-popup__character {
@@ -222,6 +373,7 @@ const isLocalDev = import.meta.env.DEV;
 		width: 100%;
 		height: 100%;
 		transform-style: preserve-3d;
+		pointer-events: none;
 	}
 
 	.sale-popup.is-visible .sale-popup__character {
@@ -232,21 +384,23 @@ const isLocalDev = import.meta.env.DEV;
 
 	.sale-popup__dino {
 		position: absolute;
-		left: -0.25rem;
-		bottom: 0.2rem;
-		width: 7rem;
+		left: -0.55rem;
+		bottom: 0.15rem;
+		width: 8.4rem;
 		height: auto;
-		transform: translate3d(0, 0, 0) rotateY(10deg);
+		transform: translate3d(0, 0, 0) rotateY(8deg);
 		filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.28));
+		overflow: visible;
 	}
 
 	.sale-popup__banner {
 		position: absolute;
 		right: 0;
-		bottom: 2.35rem;
-		width: 9.5rem;
+		bottom: 2.5rem;
+		width: 9.4rem;
 		transform-style: preserve-3d;
 		transform: translate3d(0, 0, 32px) rotateY(-12deg) rotateX(8deg);
+		pointer-events: auto;
 	}
 
 	.sale-popup.is-visible .sale-popup__banner {
@@ -316,12 +470,28 @@ const isLocalDev = import.meta.env.DEV;
 		text-transform: uppercase;
 		box-shadow: 0 6px 14px rgba(76, 29, 149, 0.4);
 		transition: transform 0.2s ease, filter 0.2s ease;
+		cursor: pointer;
 	}
 
 	.sale-popup__buy:hover {
 		transform: translateY(-1px);
 		filter: brightness(1.06);
 		color: #fff;
+	}
+
+	.sale-popup__hint {
+		position: absolute;
+		left: 0;
+		right: 0;
+		bottom: 0.1rem;
+		margin: 0;
+		text-align: center;
+		font-size: 0.58rem;
+		font-weight: 700;
+		letter-spacing: 0.06em;
+		text-transform: uppercase;
+		color: rgba(233, 213, 255, 0.55);
+		pointer-events: none;
 	}
 
 	.sale-popup__close:focus-visible,
@@ -372,20 +542,20 @@ const isLocalDev = import.meta.env.DEV;
 
 	@media (max-width: 420px) {
 		.sale-popup {
-			width: min(13.5rem, calc(100vw - 1rem));
+			width: min(14rem, calc(100vw - 1rem));
 		}
 
 		.sale-popup__stage {
-			height: 12rem;
+			height: 12.5rem;
 		}
 
 		.sale-popup__dino {
-			width: 6.2rem;
+			width: 7.4rem;
 		}
 
 		.sale-popup__banner {
 			width: 8.75rem;
-			bottom: 2.1rem;
+			bottom: 2.25rem;
 		}
 	}
 </style>
