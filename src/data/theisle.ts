@@ -116,7 +116,7 @@ export const isleSceneImages = {
 } as const satisfies Record<string, IsleImage>;
 
 export const theIsleImages = {
-	hero: isleScreenshotImages.espBeachPlayerTags.src,
+	hero: isleSceneImages.hero.src,
 	cover: isleScreenshotImages.espRadarMinimapCombat.src,
 	logo: siteConfig.logo,
 	product: [
@@ -137,7 +137,7 @@ export const theIsleImages = {
 		isleScreenshotImages.espRadarDeinosuchus,
 	],
 	pageHeroes: {
-		home: isleScreenshotImages.espBeachPlayerTags,
+		home: isleSceneImages.hero,
 		cheats: isleScreenshotImages.aimbotAllosaurusDamageLog,
 		theisleEsp: isleScreenshotImages.espBeachHealthBars,
 		theIsleCheats: isleScreenshotImages.espRadarMinimapCombat,
