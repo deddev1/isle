@@ -1,102 +1,161 @@
 ---
 import { productInfo, siteConfig } from '../data/site';
-import { isleSceneImages } from '../data/theisle';
 
 const monthlyPlan = productInfo.plans.find((plan) => plan.id === 'monthly');
-const dinoImage = isleSceneImages.tyrannosaurForest;
+const isLocalDev = import.meta.env.DEV;
 ---
 
-<aside class="sale-popup sale-popup--closed" data-sale-popup aria-live="polite" aria-label="Buy offer">
-	<div class="sale-popup__stage">
-		<button type="button" class="sale-popup__close" data-sale-popup-close aria-label="Dismiss">
-			<span aria-hidden="true">&times;</span>
-		</button>
+{isLocalDev && (
+	<aside class="sale-popup sale-popup--closed" data-sale-popup aria-live="polite" aria-label="Buy offer">
+		<div class="sale-popup__stage">
+			<button type="button" class="sale-popup__close" data-sale-popup-close aria-label="Dismiss">
+				<span aria-hidden="true">&times;</span>
+			</button>
 
-		<div class="sale-popup__character">
-			<div class="sale-popup__dino">
-				<img
-					src={dinoImage.src}
-					alt={dinoImage.alt}
-					width="200"
-					height="260"
-					class="sale-popup__dino-img"
-					loading="eager"
-					decoding="async"
-				/>
-				<span class="sale-popup__hand sale-popup__hand--left" aria-hidden="true"></span>
-				<span class="sale-popup__hand sale-popup__hand--right" aria-hidden="true"></span>
-			</div>
+			<div class="sale-popup__character">
+				<svg
+					class="sale-popup__dino"
+					viewBox="0 0 200 220"
+					role="img"
+					aria-label="Cute cartoon dinosaur"
+					xmlns="http://www.w3.org/2000/svg"
+				>
+					<defs>
+						<linearGradient id="cartoon-body" x1="0%" y1="0%" x2="100%" y2="100%">
+							<stop offset="0%" stop-color="#86efac" />
+							<stop offset="100%" stop-color="#4ade80" />
+						</linearGradient>
+						<linearGradient id="cartoon-belly" x1="0%" y1="0%" x2="0%" y2="100%">
+							<stop offset="0%" stop-color="#bbf7d0" />
+							<stop offset="100%" stop-color="#86efac" />
+						</linearGradient>
+						<linearGradient id="cartoon-spots" x1="0%" y1="0%" x2="100%" y2="100%">
+							<stop offset="0%" stop-color="#22c55e" />
+							<stop offset="100%" stop-color="#16a34a" />
+						</linearGradient>
+					</defs>
 
-			<div class="sale-popup__banner">
-				<div class="sale-popup__banner-inner">
-					<p class="sale-popup__label">The Isle Cheats</p>
-					<p class="sale-popup__price">${monthlyPlan?.price ?? 35}<span>/mo</span></p>
-					<a href={siteConfig.checkoutUrl} class="sale-popup__buy">Buy</a>
+					<ellipse cx="78" cy="188" rx="34" ry="8" fill="rgba(0,0,0,0.18)" />
+
+					<path
+						d="M38 170 C28 188 40 204 64 202 C88 200 98 182 94 162 C90 142 68 132 50 138 C36 143 30 154 38 170 Z"
+						fill="url(#cartoon-body)"
+						stroke="#15803d"
+						stroke-width="2"
+					/>
+					<ellipse cx="62" cy="168" rx="18" ry="22" fill="url(#cartoon-belly)" />
+
+					<path
+						d="M44 118 C32 128 26 148 34 168 C42 188 64 198 88 194 C112 190 126 170 122 144 C118 118 98 98 72 94 C56 92 48 104 44 118 Z"
+						fill="url(#cartoon-body)"
+						stroke="#15803d"
+						stroke-width="2"
+					/>
+					<circle cx="58" cy="132" r="5" fill="url(#cartoon-spots)" opacity="0.55" />
+					<circle cx="82" cy="148" r="4" fill="url(#cartoon-spots)" opacity="0.45" />
+
+					<path
+						d="M30 96 C14 92 4 106 6 122 C8 138 24 150 44 148 C54 147 62 140 64 130 C66 116 44 100 30 96 Z"
+						fill="url(#cartoon-body)"
+						stroke="#15803d"
+						stroke-width="2"
+					/>
+					<circle cx="22" cy="112" r="5.5" fill="#fff" />
+					<circle cx="23" cy="112" r="2.8" fill="#1e293b" />
+					<circle cx="24.5" cy="110.5" r="1" fill="#fff" />
+					<path d="M10 124 C14 128 18 128 22 126" fill="none" stroke="#15803d" stroke-width="2" stroke-linecap="round" />
+					<path d="M8 118 L2 116 L8 122 Z" fill="#15803d" />
+					<path d="M8 124 L0 126 L8 128 Z" fill="#15803d" />
+
+					<path
+						d="M88 136 C102 132 118 136 132 146"
+						fill="none"
+						stroke="#15803d"
+						stroke-width="10"
+						stroke-linecap="round"
+					/>
+					<path
+						d="M118 146 C132 152 146 148 158 136"
+						fill="none"
+						stroke="#15803d"
+						stroke-width="9"
+						stroke-linecap="round"
+					/>
+					<circle cx="134" cy="142" r="5" fill="#86efac" stroke="#15803d" stroke-width="1.5" />
+					<circle cx="152" cy="138" r="4.5" fill="#86efac" stroke="#15803d" stroke-width="1.5" />
+				</svg>
+
+				<div class="sale-popup__banner">
+					<div class="sale-popup__banner-face">
+						<p class="sale-popup__title">The Isle Cheats</p>
+						<p class="sale-popup__price">${monthlyPlan?.price ?? 35}<span>/mo</span></p>
+						<a href={siteConfig.checkoutUrl} class="sale-popup__buy">Buy</a>
+					</div>
+					<span class="sale-popup__pole" aria-hidden="true"></span>
 				</div>
-				<span class="sale-popup__banner-pole" aria-hidden="true"></span>
 			</div>
 		</div>
-	</div>
-</aside>
+	</aside>
+)}
 
-<script is:inline>
-	(function () {
-		var STORAGE_KEY = 'isle-buy-popup-v2';
-		var SHOW_DELAY_MS = 900;
+{isLocalDev && (
+	<script is:inline>
+		(function () {
+			var STORAGE_KEY = 'isle-cartoon-popup-local';
+			var SHOW_DELAY_MS = 800;
 
-		function initSalePopup() {
-			var popup = document.querySelector('[data-sale-popup]');
-			if (!(popup instanceof HTMLElement)) return;
+			function initSalePopup() {
+				var popup = document.querySelector('[data-sale-popup]');
+				if (!(popup instanceof HTMLElement)) return;
 
-			var closeBtn = popup.querySelector('[data-sale-popup-close]');
-			var buyLink = popup.querySelector('.sale-popup__buy');
+				var closeBtn = popup.querySelector('[data-sale-popup-close]');
+				var buyLink = popup.querySelector('.sale-popup__buy');
 
-			function hidePopup(persist) {
-				popup.classList.remove('is-visible');
-				popup.classList.add('sale-popup--closed');
-				if (persist) {
-					try {
-						sessionStorage.setItem(STORAGE_KEY, '1');
-					} catch (err) {
-						/* ignore */
+				function hidePopup(persist) {
+					popup.classList.remove('is-visible');
+					popup.classList.add('sale-popup--closed');
+					if (persist) {
+						try {
+							sessionStorage.setItem(STORAGE_KEY, '1');
+						} catch (err) {
+							/* ignore */
+						}
 					}
 				}
-			}
 
-			function showPopup() {
-				popup.classList.remove('sale-popup--closed');
-				window.requestAnimationFrame(function () {
+				function showPopup() {
+					popup.classList.remove('sale-popup--closed');
 					window.requestAnimationFrame(function () {
-						popup.classList.add('is-visible');
+						window.requestAnimationFrame(function () {
+							popup.classList.add('is-visible');
+						});
 					});
+				}
+
+				var dismissed = false;
+				try {
+					dismissed = sessionStorage.getItem(STORAGE_KEY) === '1';
+				} catch (err) {
+					dismissed = false;
+				}
+
+				if (!dismissed) window.setTimeout(showPopup, SHOW_DELAY_MS);
+
+				if (closeBtn) closeBtn.addEventListener('click', function () { hidePopup(true); });
+				if (buyLink) buyLink.addEventListener('click', function () { hidePopup(true); });
+				document.addEventListener('keydown', function (event) {
+					if (event.key === 'Escape' && popup.classList.contains('is-visible')) hidePopup(true);
 				});
 			}
 
-			var dismissed = false;
-			try {
-				dismissed = sessionStorage.getItem(STORAGE_KEY) === '1';
-			} catch (err) {
-				dismissed = false;
+			if (document.readyState === 'loading') {
+				document.addEventListener('DOMContentLoaded', initSalePopup);
+			} else {
+				initSalePopup();
 			}
-
-			if (!dismissed) {
-				window.setTimeout(showPopup, SHOW_DELAY_MS);
-			}
-
-			if (closeBtn) closeBtn.addEventListener('click', function () { hidePopup(true); });
-			if (buyLink) buyLink.addEventListener('click', function () { hidePopup(true); });
-			document.addEventListener('keydown', function (event) {
-				if (event.key === 'Escape' && popup.classList.contains('is-visible')) hidePopup(true);
-			});
-		}
-
-		if (document.readyState === 'loading') {
-			document.addEventListener('DOMContentLoaded', initSalePopup);
-		} else {
-			initSalePopup();
-		}
-	})();
-</script>
+		})();
+	</script>
+)}
 
 <style>
 	.sale-popup {
@@ -104,31 +163,27 @@ const dinoImage = isleSceneImages.tyrannosaurForest;
 		right: max(0.75rem, env(safe-area-inset-right, 0px));
 		bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
 		z-index: 9999;
-		width: min(14rem, calc(100vw - 1.25rem));
+		width: min(15rem, calc(100vw - 1.25rem));
 		pointer-events: auto;
-		perspective: 800px;
+		perspective: 820px;
 		transform: translate3d(0, 0, 0);
 		opacity: 1;
 		visibility: visible;
 		transition:
-			transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+			transform 0.55s cubic-bezier(0.22, 1, 0.36, 1),
 			opacity 0.35s ease,
 			visibility 0.35s ease;
 	}
 
 	.sale-popup--closed {
 		pointer-events: none;
-		transform: translate3d(110%, 0, 0);
+		transform: translate3d(115%, 12px, 0) scale(0.92);
 		opacity: 0;
 		visibility: hidden;
 	}
 
-	.sale-popup--closed:not(.is-visible) {
-		pointer-events: none;
-	}
-
 	.sale-popup.is-visible {
-		transform: translate3d(0, 0, 0);
+		transform: translate3d(0, 0, 0) scale(1);
 		opacity: 1;
 		visibility: visible;
 		pointer-events: auto;
@@ -136,7 +191,7 @@ const dinoImage = isleSceneImages.tyrannosaurForest;
 
 	.sale-popup__stage {
 		position: relative;
-		height: 12.5rem;
+		height: 13rem;
 		transform-style: preserve-3d;
 	}
 
@@ -171,131 +226,79 @@ const dinoImage = isleSceneImages.tyrannosaurForest;
 
 	.sale-popup.is-visible .sale-popup__character {
 		animation:
-			sale-enter 0.55s cubic-bezier(0.22, 1, 0.36, 1) both,
-			sale-idle 4.5s ease-in-out 0.55s infinite;
+			sale-pop-in 0.6s cubic-bezier(0.22, 1, 0.36, 1) both,
+			sale-bob 4.2s ease-in-out 0.6s infinite;
 	}
 
 	.sale-popup__dino {
 		position: absolute;
-		left: 0;
-		bottom: 0;
-		width: 6.5rem;
-		height: 9.5rem;
-		transform: translate3d(0, 0, 0) rotateY(12deg);
-		transform-style: preserve-3d;
-		filter: drop-shadow(0 14px 18px rgba(0, 0, 0, 0.45));
-	}
-
-	.sale-popup__dino-img {
-		display: block;
-		width: 155%;
-		height: 115%;
-		margin-left: -28%;
-		margin-top: -8%;
-		object-fit: cover;
-		object-position: 50% 18%;
-		-webkit-mask-image: linear-gradient(to top, transparent 2%, #000 18%, #000 92%, transparent 100%);
-		mask-image: linear-gradient(to top, transparent 2%, #000 18%, #000 92%, transparent 100%);
-	}
-
-	.sale-popup__hand {
-		position: absolute;
-		height: 0.38rem;
-		border-radius: 999px;
-		background: linear-gradient(90deg, #3a2a1c, #5c4330);
-		box-shadow: 0 2px 4px rgba(0, 0, 0, 0.35);
-		transform-origin: left center;
-	}
-
-	.sale-popup__hand--left {
-		top: 3.6rem;
-		left: 3.8rem;
-		width: 2.4rem;
-		transform: rotate(-8deg);
-	}
-
-	.sale-popup__hand--right {
-		top: 4.35rem;
-		left: 4rem;
-		width: 2rem;
-		transform: rotate(4deg);
+		left: -0.25rem;
+		bottom: 0.2rem;
+		width: 7rem;
+		height: auto;
+		transform: translate3d(0, 0, 0) rotateY(10deg);
+		filter: drop-shadow(0 12px 16px rgba(0, 0, 0, 0.28));
 	}
 
 	.sale-popup__banner {
 		position: absolute;
-		right: 0.1rem;
-		bottom: 2.4rem;
-		width: 9.25rem;
+		right: 0;
+		bottom: 2.35rem;
+		width: 9.5rem;
 		transform-style: preserve-3d;
-		transform: translate3d(0, 0, 36px) rotateY(-14deg) rotateX(6deg);
+		transform: translate3d(0, 0, 32px) rotateY(-12deg) rotateX(8deg);
 	}
 
-	.sale-popup__banner-inner {
+	.sale-popup.is-visible .sale-popup__banner {
+		animation: sale-banner-sway 3.8s ease-in-out 0.6s infinite;
+	}
+
+	.sale-popup__banner-face {
 		position: relative;
 		display: grid;
-		gap: 0.15rem;
-		padding: 0.65rem 0.7rem 0.7rem;
-		border-radius: 0.5rem;
-		border: 2px solid rgba(124, 58, 237, 0.45);
-		background: linear-gradient(160deg, rgba(22, 14, 38, 0.96), rgba(10, 6, 18, 0.98));
+		gap: 0.18rem;
+		padding: 0.7rem 0.75rem 0.75rem;
+		border-radius: 0.55rem;
+		border: 2px solid #fcd34d;
+		background: linear-gradient(165deg, #fff7d6 0%, #fde68a 55%, #fbbf24 100%);
 		box-shadow:
-			0 14px 28px rgba(0, 0, 0, 0.4),
-			inset 0 1px 0 rgba(255, 255, 255, 0.06);
+			0 14px 26px rgba(0, 0, 0, 0.28),
+			inset 0 1px 0 rgba(255, 255, 255, 0.65);
 	}
 
-	.sale-popup__banner-inner::before,
-	.sale-popup__banner-inner::after {
-		content: '';
+	.sale-popup__pole {
 		position: absolute;
-		top: 0.55rem;
-		width: 0.55rem;
-		height: 0.55rem;
-		border-radius: 999px;
-		background: #3d2914;
-		box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.08);
-	}
-
-	.sale-popup__banner-inner::before {
-		left: -0.35rem;
-	}
-
-	.sale-popup__banner-inner::after {
-		right: -0.35rem;
-	}
-
-	.sale-popup__banner-pole {
-		position: absolute;
-		left: 0.45rem;
-		bottom: -1.85rem;
-		width: 0.35rem;
-		height: 2rem;
+		left: 0.5rem;
+		bottom: -1.75rem;
+		width: 0.32rem;
+		height: 1.9rem;
 		border-radius: 0.15rem;
-		background: linear-gradient(90deg, #4a3012, #7a5424);
-		transform: translateZ(-8px);
+		background: linear-gradient(90deg, #92400e, #d97706);
+		transform: translateZ(-6px);
 	}
 
-	.sale-popup__label {
+	.sale-popup__title {
 		margin: 0;
-		font-size: 0.62rem;
-		font-weight: 700;
-		letter-spacing: 0.1em;
-		text-transform: uppercase;
-		color: var(--color-orchid);
+		font-family: var(--font-display);
+		font-size: 0.78rem;
+		font-weight: 900;
+		line-height: 1.1;
+		color: #422006;
 	}
 
 	.sale-popup__price {
 		margin: 0;
 		font-family: var(--font-display);
-		font-size: 1.35rem;
+		font-size: 1.25rem;
 		font-weight: 900;
 		line-height: 1;
-		color: var(--color-ink);
+		color: #1c0f02;
 	}
 
 	.sale-popup__price span {
-		font-size: 0.72rem;
-		font-weight: 700;
-		color: var(--color-muted);
+		font-size: 0.7rem;
+		font-weight: 800;
+		color: #78350f;
 	}
 
 	.sale-popup__buy {
@@ -303,7 +306,7 @@ const dinoImage = isleSceneImages.tyrannosaurForest;
 		align-items: center;
 		justify-content: center;
 		min-height: 1.85rem;
-		margin-top: 0.2rem;
+		margin-top: 0.15rem;
 		border-radius: 0.45rem;
 		background: var(--gradient-brand);
 		color: #fff;
@@ -327,30 +330,41 @@ const dinoImage = isleSceneImages.tyrannosaurForest;
 		outline-offset: 2px;
 	}
 
-	@keyframes sale-enter {
+	@keyframes sale-pop-in {
 		from {
-			transform: translate3d(40px, 20px, -40px) rotateY(18deg);
-			opacity: 0.2;
+			transform: translate3d(36px, 24px, -30px) rotateY(16deg) scale(0.88);
+			opacity: 0.15;
 		}
 		to {
-			transform: translate3d(0, 0, 0) rotateY(0deg);
+			transform: translate3d(0, 0, 0) rotateY(0deg) scale(1);
 			opacity: 1;
 		}
 	}
 
-	@keyframes sale-idle {
+	@keyframes sale-bob {
 		0%,
 		100% {
 			transform: translate3d(0, 0, 0);
 		}
 		50% {
-			transform: translate3d(0, -4px, 0);
+			transform: translate3d(0, -5px, 0);
+		}
+	}
+
+	@keyframes sale-banner-sway {
+		0%,
+		100% {
+			transform: translate3d(0, 0, 32px) rotateY(-12deg) rotateX(8deg);
+		}
+		50% {
+			transform: translate3d(0, -2px, 36px) rotateY(-9deg) rotateX(6deg);
 		}
 	}
 
 	@media (prefers-reduced-motion: reduce) {
 		.sale-popup,
-		.sale-popup__character {
+		.sale-popup__character,
+		.sale-popup__banner {
 			animation: none !important;
 			transition-duration: 0.01ms;
 		}
@@ -358,20 +372,19 @@ const dinoImage = isleSceneImages.tyrannosaurForest;
 
 	@media (max-width: 420px) {
 		.sale-popup {
-			width: min(13rem, calc(100vw - 1rem));
+			width: min(13.5rem, calc(100vw - 1rem));
 		}
 
 		.sale-popup__stage {
-			height: 11.5rem;
+			height: 12rem;
 		}
 
 		.sale-popup__dino {
-			width: 5.8rem;
-			height: 8.5rem;
+			width: 6.2rem;
 		}
 
 		.sale-popup__banner {
-			width: 8.5rem;
+			width: 8.75rem;
 			bottom: 2.1rem;
 		}
 	}
