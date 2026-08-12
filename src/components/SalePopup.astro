@@ -6,7 +6,7 @@ const monthlyPlan = productInfo.plans.find((plan) => plan.id === 'monthly');
 const dinoImage = isleSceneImages.tyrannosaurForest;
 ---
 
-<aside class="sale-popup" data-sale-popup hidden aria-live="polite" aria-label="Buy offer">
+<aside class="sale-popup sale-popup--closed" data-sale-popup aria-live="polite" aria-label="Buy offer">
 	<div class="sale-popup__stage">
 		<button type="button" class="sale-popup__close" data-sale-popup-close aria-label="Dismiss">
 			<span aria-hidden="true">&times;</span>
@@ -20,7 +20,7 @@ const dinoImage = isleSceneImages.tyrannosaurForest;
 					width="200"
 					height="260"
 					class="sale-popup__dino-img"
-					loading="lazy"
+					loading="eager"
 					decoding="async"
 				/>
 				<span class="sale-popup__hand sale-popup__hand--left" aria-hidden="true"></span>
@@ -39,49 +39,63 @@ const dinoImage = isleSceneImages.tyrannosaurForest;
 	</div>
 </aside>
 
-<script>
-	const STORAGE_KEY = 'isle-sale-popup-dismissed';
-	const SHOW_DELAY_MS = 2200;
+<script is:inline>
+	(function () {
+		var STORAGE_KEY = 'isle-buy-popup-v2';
+		var SHOW_DELAY_MS = 900;
 
-	const popup = document.querySelector('[data-sale-popup]');
-	if (popup instanceof HTMLElement) {
-		const closeBtn = popup.querySelector('[data-sale-popup-close]');
-		const buyLink = popup.querySelector('.sale-popup__buy');
+		function initSalePopup() {
+			var popup = document.querySelector('[data-sale-popup]');
+			if (!(popup instanceof HTMLElement)) return;
 
-		const hide = (persist = false) => {
-			popup.classList.remove('is-visible');
-			window.setTimeout(() => {
-				popup.hidden = true;
-			}, 360);
-			if (persist) {
-				try {
-					localStorage.setItem(STORAGE_KEY, '1');
-				} catch {
-					/* ignore */
+			var closeBtn = popup.querySelector('[data-sale-popup-close]');
+			var buyLink = popup.querySelector('.sale-popup__buy');
+
+			function hidePopup(persist) {
+				popup.classList.remove('is-visible');
+				popup.classList.add('sale-popup--closed');
+				if (persist) {
+					try {
+						sessionStorage.setItem(STORAGE_KEY, '1');
+					} catch (err) {
+						/* ignore */
+					}
 				}
 			}
-		};
 
-		const show = () => {
-			popup.hidden = false;
-			window.requestAnimationFrame(() => popup.classList.add('is-visible'));
-		};
+			function showPopup() {
+				popup.classList.remove('sale-popup--closed');
+				window.requestAnimationFrame(function () {
+					window.requestAnimationFrame(function () {
+						popup.classList.add('is-visible');
+					});
+				});
+			}
 
-		let dismissed = false;
-		try {
-			dismissed = localStorage.getItem(STORAGE_KEY) === '1';
-		} catch {
-			dismissed = false;
+			var dismissed = false;
+			try {
+				dismissed = sessionStorage.getItem(STORAGE_KEY) === '1';
+			} catch (err) {
+				dismissed = false;
+			}
+
+			if (!dismissed) {
+				window.setTimeout(showPopup, SHOW_DELAY_MS);
+			}
+
+			if (closeBtn) closeBtn.addEventListener('click', function () { hidePopup(true); });
+			if (buyLink) buyLink.addEventListener('click', function () { hidePopup(true); });
+			document.addEventListener('keydown', function (event) {
+				if (event.key === 'Escape' && popup.classList.contains('is-visible')) hidePopup(true);
+			});
 		}
 
-		if (!dismissed) window.setTimeout(show, SHOW_DELAY_MS);
-
-		closeBtn?.addEventListener('click', () => hide(true));
-		buyLink?.addEventListener('click', () => hide(true));
-		document.addEventListener('keydown', (event) => {
-			if (event.key === 'Escape' && popup.classList.contains('is-visible')) hide(true);
-		});
-	}
+		if (document.readyState === 'loading') {
+			document.addEventListener('DOMContentLoaded', initSalePopup);
+		} else {
+			initSalePopup();
+		}
+	})();
 </script>
 
 <style>
@@ -89,20 +103,34 @@ const dinoImage = isleSceneImages.tyrannosaurForest;
 		position: fixed;
 		right: max(0.75rem, env(safe-area-inset-right, 0px));
 		bottom: max(0.5rem, env(safe-area-inset-bottom, 0px));
-		z-index: 90;
+		z-index: 9999;
 		width: min(14rem, calc(100vw - 1.25rem));
-		pointer-events: none;
+		pointer-events: auto;
 		perspective: 800px;
-		transform: translate3d(110%, 0, 0);
-		opacity: 0;
+		transform: translate3d(0, 0, 0);
+		opacity: 1;
+		visibility: visible;
 		transition:
 			transform 0.5s cubic-bezier(0.22, 1, 0.36, 1),
-			opacity 0.35s ease;
+			opacity 0.35s ease,
+			visibility 0.35s ease;
+	}
+
+	.sale-popup--closed {
+		pointer-events: none;
+		transform: translate3d(110%, 0, 0);
+		opacity: 0;
+		visibility: hidden;
+	}
+
+	.sale-popup--closed:not(.is-visible) {
+		pointer-events: none;
 	}
 
 	.sale-popup.is-visible {
 		transform: translate3d(0, 0, 0);
 		opacity: 1;
+		visibility: visible;
 		pointer-events: auto;
 	}
 
@@ -139,7 +167,6 @@ const dinoImage = isleSceneImages.tyrannosaurForest;
 		width: 100%;
 		height: 100%;
 		transform-style: preserve-3d;
-		animation: sale-idle 4.5s ease-in-out infinite;
 	}
 
 	.sale-popup.is-visible .sale-popup__character {
