@@ -5,10 +5,11 @@ import { productInfo, siteConfig } from '../../data/site';
 import { getPageSeo } from '../../data/seo/meta';
 import { pricingFaqs, pricingSections } from '../../data/seo/pricing-content';
 import { buildFaqSchema, buildSoftwareApplicationSchema } from '../../data/seo/schema';
-import { getPageHero, getPageGallery } from '../../data/theisle';
+import { getPageHero, getPageGallery, theIsleImages } from '../../data/theisle';
 
 const seo = getPageSeo('pricing');
 const pageHero = getPageHero('pricing');
+const previewScroll = theIsleImages.product;
 const faqSchema = buildFaqSchema(pricingFaqs);
 const productSchema = buildSoftwareApplicationSchema({
 	name: productInfo.name,
@@ -29,6 +30,7 @@ const productSchema = buildSoftwareApplicationSchema({
 	intro="Packages are sold in USD and include The Isle Cheats Cloud-DMA, ESP, and Cheats product line."
 	heroImage={pageHero.src}
 	heroAlt={pageHero.alt}
+	previewScroll={previewScroll}
 	gallery={getPageGallery('espRadarMinimapCombat', 'espBeachPlayerTags', 'combatLogTriceratopsFight')}
 	ctaPrimary={{ href: '/#features', label: 'Open Product Card' }}
 	ctaSecondary={{ href: '/features/', label: 'See Features' }}
