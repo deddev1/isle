@@ -112,6 +112,34 @@ function withSecurityHeaders(response) {
 	});
 }
 
+const PREFIXED_LOCALES = 'de|fr|es|tr|ar|ru';
+const ENGLISH_ONLY_ROUTES = 'blog|faq|cheats|privacy-policy|terms';
+const englishOnlyLocalePattern = new RegExp(
+	`^/(${PREFIXED_LOCALES})/(${ENGLISH_ONLY_ROUTES})(?=/|$)`,
+);
+
+function withTrailingSlash(pathname) {
+	if (pathname.endsWith('/') || pathname.includes('.')) {
+		return pathname;
+	}
+
+	return `${pathname}/`;
+}
+
+/**
+ * /{de|fr|es|tr|ar|ru}/(blog|faq|cheats|privacy-policy|terms)[/*] → English path.
+ * Does not touch valid localized routes: /{locale}/ or /{locale}/pricing/.
+ * /en/* is handled separately below and is not part of this pattern.
+ */
+function resolveEnglishOnlyLocaleRedirect(pathname) {
+	if (!englishOnlyLocalePattern.test(pathname)) {
+		return null;
+	}
+
+	const stripped = pathname.replace(new RegExp(`^/(${PREFIXED_LOCALES})`), '') || '/';
+	return withTrailingSlash(stripped);
+}
+
 function resolvePathRedirect(pathname) {
 	if (PATH_REDIRECTS[pathname]) {
 		return PATH_REDIRECTS[pathname];
@@ -120,7 +148,12 @@ function resolvePathRedirect(pathname) {
 	// /en/* → /* (English at root, not /en/)
 	if (pathname === '/en' || pathname.startsWith('/en/')) {
 		const stripped = pathname.replace(/^\/en/, '') || '/';
-		return stripped.endsWith('/') ? stripped : `${stripped}/`;
+		return withTrailingSlash(stripped);
+	}
+
+	const englishOnlyLocaleRedirect = resolveEnglishOnlyLocaleRedirect(pathname);
+	if (englishOnlyLocaleRedirect) {
+		return englishOnlyLocaleRedirect;
 	}
 
 	return null;
